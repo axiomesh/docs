@@ -46,6 +46,25 @@
   ],
   "navigation": [
     {
+      "group": "Overview",
+      "pages": [
+        {
+          "group": "Getting Started",
+          "version": "v2",
+          "pages": [
+            "documentation/getting-started/introduction"
+          ]
+        },
+        {
+          "group": "Guides",
+          "version": "v1",
+          "pages": [
+            "documentation/guides/introduction"
+          ]
+        }
+      ]
+    },
+    {
       "version": "v2",
       "group": "基础主题",
       "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
@@ -67,7 +86,7 @@
     },
     {
       "group": "文档站",
-      "pages": ["documents/authentication"]
+      "pages": ["documents/authentication", "documents/code", "documents/web"]
     },
     {
       "group": "API Documentation",
@@ -79,6 +98,10 @@
         "api-reference/endpoint/echo-get",
         "api-reference/endpoint/echo-post"
       ]
+    },
+    {
+      "group": "new模块",
+      "pages": ["new/code"]
     }
   ],
   "footerSocials": {
