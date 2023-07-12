@@ -1,0 +1,297 @@
+## 基于前端国际化组件调研
+
+## 1、lingui.js
+
+**1.安装lingui**
+
+```text
+yarn add --dev @lingui/cli @lingui/macro
+yarn add @lingui/react
+yarn add --dev @lingui/cli
+yarn add @lingui/macro @lingui/react
+```
+
+## 2、**配置locale文件夹**
+
+在src下新建一个locales文件夹，放置`en_US.js`和`zh_TW.js`文件，分别为英文和中文的配置包。
+
+在index中加载文件
+
+```text
+import { i18n } from '@lingui/core'
+import { I18nProvider } from '@lingui/react'
+import { messages } from './locales/en/messages'
+import Inner from './Inner'
+
+i18n.load('en', messages)
+i18n.activate('en')
+```
+
+3、**配置locales文件夹**
+
+4、**配置lingui.config.js及package.json**
+
+```javascript
+// lingui.config.js
+module.exports = {
+   locales: ["en", "cs", "fr"],
+   sourceLocale: "en",
+   catalogs: [{
+      path: "src/locales/{locale}/messages",
+      include: ["src"]
+   }],
+   format: "po"
+}
+
+// package.json
+{
+   "scripts": {
+      "extract": "lingui extract",
+      "compile": "lingui compile"
+   }
+}
+```
+
+**5、项目中使用**
+
+```javascript
+import { Trans } from '@lingui/macro'
+import './App.css';
+
+export default function Inner() {
+  const messages = [{}, {}]
+  const messagesCount = messages.length
+  const lastLogin = new Date()
+  const markAsRead = () => { alert('Marked as read.') }
+
+  return (
+    <div>
+      <h1>Message Inbo22222x</h1>
+      <h1><Trans>Message Inbox</Trans></h1>
+      <h2><Trans id="HOME_PAGE" /></h2>
+      <Trans id="Hello {name}" values={{ name: 'lingui' }} />
+    </div>
+  )
+}
+```
+
+
+
+### 2、React-intl（format.js）
+
+**1.安装react-intl**
+
+```text
+npm install react-intl --save
+```
+
+2、**配置locale文件夹**
+
+在src下新建一个locales文件夹，放置`en_US.js`和`zh_TW.js`文件，分别为英文和中文的配置包。
+
+en_US:
+
+```text
+export default {
+  HOME_PAGE: 'Home page',
+  PAGE_NOT_FOUND: 'Page not found',
+  SUPER_HELLO:"hello，{ someone } !"
+};
+```
+
+zh_CN:
+
+```text
+export default {
+  HOME_PAGE: '首页',
+  PAGE_NOT_FOUND: '页面不可见',
+  SUPER_HELLO:"你好，{ someone } !"
+};
+```
+
+**3.引入react-intl**
+
+由于`IntlProvider`包裹一次即可生效，把它包裹在系统根组件最外层即可。
+
+`locale`用于国际化数字、日期等，默认为`en`，这里设置成浏览器语言；
+
+`messages`接受的是一个对象，即引入的语言包。
+
+```text
+const handleMessages = lang => {
+    let res = null;
+    switch (lang) {
+      case "zhTW":
+        res = zhCN;
+        break;
+      case "enUS":
+        res = enJS;
+        break;
+      default:
+        res = zhCN;
+    }
+    return res;
+  }
+
+  return (
+    <div className={styles.navs}>
+      <IntlProvider locale={navigator.language}  messages={handleMessages()}>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            {/*<Link to="/docs">{formatMessage({ id: 'HOME_PAGE' })}</Link>*/}
+          </li>
+          <li>
+            <a href="https://github.com/umijs/umi">Github</a>
+          </li>
+        </ul>
+        <Outlet />
+      </IntlProvider>
+    </div>
+  );
+
+```
+
+**4.配置多语言字符串**
+
+在需要国际化的地方引入`FormattedMessage`，传入对应的id：
+
+```text
+return (
+    <div>
+      <h2>Yay! Welcome to umi!</h2>
+      <p>
+        <img src={yayJpg} width="388" />
+      </p>
+      <p>
+        To get started, edit <code>pages/index.tsx</code> and save to reload.
+      </p>
+
+      <FormattedMessage id="HOME_PAGE" />
+    </div>
+  );
+
+```
+
+`FormattedMessage`也可以传入参数，写法如下：
+
+```text
+<FormattedMessage
+   id='SUPER_HELLO'
+   values={{ someone: 'react'}}
+/>
+```
+
+## 组件底层原理
+
+```javascript
+// 处理数据传参数，
+export function interpolate(translation,locale,locales,localeData) {
+  return (values, formats)=> {
+    const ctx = context(locale, locales, values, formats, localeData)
+
+    const formatMessage = (message)=> {
+      if (!Array.isArray(message)) return message
+
+      return message.reduce((message, token) => {
+        if (isString(token)) return message + token
+        const [name, type, format] = token
+
+        let interpolatedFormat = {}
+        if (format != null && !isString(format)) {
+          Object.keys(format).forEach((key) => {
+            interpolatedFormat[key] = formatMessage(format[key])
+          })
+        } else {
+          interpolatedFormat = format
+        }
+
+        const value = ctx(name, type, interpolatedFormat)
+        if (value == null) return message
+        return message + value
+      }, "")
+    }
+
+    const result = formatMessage(translation)
+    if (isString(result) && UNICODE_REGEX.test(result))
+      return JSON.parse(`"${result.trim()}"`)
+    if (isString(result)) return result.trim()
+    return result
+  }
+}
+
+
+
+// 根据不同语言将所有对象中所有数据合成一个对象赋值给_message全局变量
+// React-intl 是放在props中
+_load(locale: Locale, messages) {
+    if (this._messages[locale] == null) {
+      this._messages[locale] = messages
+    } else {
+      Object.assign(this._messages[locale], messages)
+    }
+  }
+
+// 从_message中取值
+this.messages[id]
+
+
+```
+
+## 前端文案配置的实现技术方案
+
+**1、确定公司性质（金融、医疗等）**
+
+可以在登录入口处选择or登录后后端接口直接返回公司性质， 登录后不能切换配置
+
+**2、根据公司性质在locales中配置不同的文件**
+
+配置`default.js`&`finance.js`和`medical.js`文件，放置对应的文案配置包。
+
+**3、根据选择或者配置的性质加载不同js中的文案信息，存在前端缓存中**
+
+```javascript
+import { inite } from './locales/default'
+import { finance } from './locales/finance'
+import { medical } from './locales/medical'
+
+const handleMessages = type => {
+    let res = null;
+    switch (type) {
+      case "finance":
+        res = finance;
+        break;
+      case "medical":
+        res = medical;
+        break;
+      default:
+        res = inite;
+    }
+    return res;
+  }
+
+dispatch({
+  type: 'global/message',
+  payload: { i18nMeaage: handleMessages(type) }, // 选择或者后端返回的type
+});
+
+```
+
+**4、使用i18n方法加载数据**
+
+```javascript
+const { i18nMeaage } = props;
+
+// i18n 方法 (没有参数配置的情况，实际开发中考虑带参数的场景)
+const i18n = (message = {}, key) => {
+ if(key) return message[key];
+ return ''
+}
+
+// 调用
+
+i18n(i18nMeaage, 'HOME_PAGE')
+```
+
