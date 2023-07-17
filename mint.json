@@ -15,89 +15,126 @@
   "primaryTab": {
     "name": "首页"
   },
-  "versions": ["v2", "v1"],
+  "versions": ["v1"],
   "anchors": [
     {
-      "name": "基础主题",
-      "icon": "shield-halved",
-      "url": "essentials"
-    },
-    {
-      "name": "堆栈",
-      "icon": "code",
-      "url": "base"
-    },
-    {
-      "name": "文档站",
-      "icon": "puzzle-piece",
-      "url": "documents"
-    },
-    {
-      "name": "api",
+      "name": "API Reference",
       "icon": "newspaper",
       "url": "api-reference"
+    },
+    {
+      "name": "SDKS",
+      "icon": "shield-halved",
+      "url": "sdks"
+    },
+    {
+      "name": "Changelog",
+      "icon": "puzzle-piece",
+      "url": "changelog"
     }
   ],
   "navigation": [
     {
-      "group": "Overview",
+      "group": "Getting Started",
       "pages": [
+        "documentation/getting-started/overview",
+        "documentation/getting-started/introduction/document",
         {
-          "group": "Getting Started",
-          "version": "v2",
+          "group": "Quick Start",
           "pages": [
-            "documentation/getting-started/introduction"
+            "documentation/getting-started/quick-start/wallet-configuration",
+            "documentation/getting-started/quick-start/generating",
+            "documentation/getting-started/quick-start/minting-coin",
+            "documentation/getting-started/quick-start/transferring-coin",
+            "documentation/getting-started/quick-start/using",
+            "documentation/getting-started/quick-start/testing",
+            "documentation/getting-started/quick-start/dapp"
           ]
         },
+        "documentation/getting-started/faqs/document",
+        "documentation/getting-started/glossary/document"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "documentation/core-concepts/accounts",
+        "documentation/core-concepts/transactions",
+        "documentation/core-concepts/blocks",
+        "documentation/core-concepts/staking"
+      ]
+    },
+    {
+      "group": "System Design",
+      "pages": [
+        "documentation/system-design/architecture",
+        "documentation/system-design/virtual-machine",
+        "documentation/system-design/transaction-flow",
+        "documentation/system-design/consensus",
+        "documentation/system-design/crossChain"
+      ]
+    },
+    {
+      "group": "Governance",
+      "pages": [
+        "documentation/governance/overview",
+        "documentation/governance/submitting-proposals"
+      ]
+    },
+    {
+      "group": "Economics",
+      "pages": [
+        "documentation/economics/overview",
+        "documentation/economics/gas",
+        "documentation/economics/rewards",
         {
-          "group": "Guides",
-          "version": "v1",
+          "group": "Tokenomics",
           "pages": [
-            "documentation/guides/introduction"
+            "documentation/economics/tokenomics/token-allocations",
+            "documentation/economics/tokenomics/inflation-deflation"
           ]
         }
       ]
     },
     {
-      "version": "v2",
-      "group": "基础主题",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
-    },
-    {
-      "version": "v1",
-      "group": "v1主题",
-      "pages": ["essentials/markdown", "essentials/code"]
-    },
-    {
-      "group": "堆栈",
-      "pages": ["base/markdown",{
-        "group": "智能合约",
-        "pages": ["base/code", {
-          "group": "合约库",
-          "pages": ["base/images", "base/settings", "base/navigation"]
-        }]
-      }]
-    },
-    {
-      "group": "文档站",
-      "pages": ["documents/authentication", "documents/code", "documents/web"]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
+      "group": "Nodes",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "documentation/nodes/about",
+        "documentation/economics/environment",
+        "documentation/economics/run-node",
+        "documentation/economics/run-validator"
       ]
     },
     {
-      "group": "new模块",
-      "pages": ["new/code"]
+      "group": "Overview",
+      "pages": [
+        "api-reference/introduction",
+        {
+          "group": "Example",
+          "pages": [
+            "api-reference/endpoint/echo-get",
+            "api-reference/endpoint/echo-post"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Overview",
+      "pages": [
+        "sdks/introduction"
+      ]
+    },
+    {
+      "group": "SDKs",
+      "pages": [
+        "sdks/sdks/java-sdk"
+      ]
+    },
+    {
+      "group": "Overview",
+      "pages": [
+        "changelog/introduction"
+      ]
     }
   ],
   "footerSocials": {
