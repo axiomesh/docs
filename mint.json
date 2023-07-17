@@ -19,7 +19,7 @@
   "anchors": [
     {
       "name": "API Reference",
-      "icon": "newspaper",
+      "icon": "code",
       "url": "api-reference"
     },
     {
@@ -31,6 +31,11 @@
       "name": "Changelog",
       "icon": "puzzle-piece",
       "url": "changelog"
+    },
+    {
+      "name": "Example",
+      "icon": "newspaper",
+      "url": "content"
     }
   ],
   "navigation": [
@@ -100,9 +105,9 @@
       "group": "Nodes",
       "pages": [
         "documentation/nodes/about",
-        "documentation/economics/environment",
-        "documentation/economics/run-node",
-        "documentation/economics/run-validator"
+        "documentation/nodes/environment",
+        "documentation/nodes/run-node",
+        "documentation/nodes/run-validator"
       ]
     },
     {
@@ -134,6 +139,44 @@
       "group": "Overview",
       "pages": [
         "changelog/introduction"
+      ]
+    },
+    {
+      "group": "Writing Content",
+      "pages": [
+        "content/component-library",
+        "content/text",
+        "content/image-embeds",
+        "content/list-table",
+        "content/code",
+        "content/reusable-snippets"
+      ]
+    },
+    {
+      "group": "Organization Components",
+      "pages": [
+        "content/components/accordion",
+        "content/components/accordion-group",
+        "content/components/card",
+        "content/components/card-group",
+        "content/components/tabs"
+      ]
+    },
+    {
+      "group": "Context Components",
+      "pages": [
+        "content/components/callouts",
+        "content/components/code",
+        "content/components/code-group",
+        "content/components/frame",
+        "content/components/tooltip",
+        "content/api-components"
+      ]
+    },
+    {
+      "group": "API Components",
+      "pages": [
+        "content/api/configuration"
       ]
     }
   ],
