@@ -3,7 +3,7 @@
   "name": "OpenHub",
   "api": {
     "baseUrl": [
-      "http://172.16.13.130:9901",
+      "http://127.0.0.1:8881",
       "https://172.16.13.130:9902"
     ]
   },
@@ -124,7 +124,8 @@
           "group": "Example",
           "pages": [
             "api-reference/endpoint/echo-get",
-            "api-reference/endpoint/echo-post"
+            "api-reference/endpoint/echo-post",
+            "api-reference/endpoint/test-get"
           ]
         }
       ]
