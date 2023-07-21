@@ -1,0 +1,146 @@
+---
+title: "eth_getTransactionReceipt"
+api: "POST /"
+---
+
+Returns the receipt of a transaction by transaction hash
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getTransactionReceipt">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+  <Expandable title="parms">
+
+     <ParamField body="TRANSACTION HASH" type="string">
+        a string representing the hash (32 bytes) of a transaction
+     </ParamField>
+
+  </Expandable>
+
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  returns unique identifier for the request 
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="TRANSACTION RECEIPT" type="object">
+  A transaction receipt object, or null when no receipt was found
+ 
+  <Expandable title="RECEIPT object">
+    <ResponseField name="blockHash" type="string">
+        32 Bytes - hash of the block including this transaction. null when it's pending
+    </ResponseField>
+
+    <ResponseField name="blockNumber" type="string">
+        number of the block including this transaction. null when it's pending
+    </ResponseField>
+
+     <ResponseField name="cumulativeGasUsed" type="string">
+        the total amount of gas used when this transaction was executed in the block
+    </ResponseField>
+
+    <ResponseField name="from" type="string">
+        20 Bytes - address of the sender
+    </ResponseField>
+
+    <ResponseField name="gasUsed" type="string">
+        the amount of gas used by this specific transaction alone
+    </ResponseField>
+
+    <ResponseField name="logs" type="array">
+        Array of log objects, which this transaction generated
+    </ResponseField>
+
+    <ResponseField name="logsBloom" type="string">
+         256 Bytes - Bloom filter for light clients to quickly retrieve related logs
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+        either 1 (success) or 0 (failure)
+    </ResponseField>
+
+    <ResponseField name="to" type="string">
+        20 Bytes - address of the receiver. null when the transaction is a contract creation transaction
+    </ResponseField>
+
+    <ResponseField name="transactionHash" type="string">
+       32 Bytes - hash of the transaction
+    </ResponseField>
+
+    <ResponseField name="transactionIndex" type="string">
+        hexadecimal of the transaction's index position in the block
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+        the transaction type.
+    </ResponseField>
+
+  
+
+  </Expandable>
+
+
+
+</ResponseField>
+
+
+
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getTransactionReceipt",
+    "params": ["0x04307b5f0882c6665a847b87bba2ea65e002dc7e0fcc62dfba49c4c7b7f15b62"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "blockHash": "0xf5abf88eca668507fbf7d65ef76bebcb30fb4354943682d8a0e97c9da2275a11",
+        "blockNumber": "0x3",
+        "cumulativeGasUsed": "0xac4c",
+        "from": "0xc7f999b83af6df9e67d0a37ee7e900bf38b3d013",
+        "gasUsed": "0xac4c",
+        "logs": [],
+        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "status": "0x1",
+        "to": "0x4cd8ee4fc57c51d8af5b6b6a08cc441f2b4fcbfe",
+        "transactionHash": "0x04307b5f0882c6665a847b87bba2ea65e002dc7e0fcc62dfba49c4c7b7f15b62",
+        "transactionIndex": "0x0",
+        "type": "0x0"
+    }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,175 @@
+---
+title: "eth_getBlockByHash"
+api: "POST /"
+---
+
+Returns information about a block by block number
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getBlockByHash">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+
+  <Expandable title="parms">
+     <ParamField body="BLOCK HASH" type="string">
+        a string representing the hash (32 bytes) of a block
+     </ParamField>
+
+     <ParamField body="TRANSACTION DETAILS FLAG" type="bool">
+        If true it returns the full transaction objects,if false only the hashes of the transactions
+     </ParamField>
+
+  </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  returns unique identifier for the request 
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="result" type="object">
+  A block object
+
+  <Expandable title="Block object">
+
+    <ResponseField name="number" type="string">
+        the block number. Null when the returned block is the pending block
+    </ResponseField>
+
+    <ResponseField name="hash" type="string">
+        32 Bytes - hash of the block. Null when the returned block is the pending block
+    </ResponseField>
+
+    <ResponseField name="parentHash" type="string">
+       32 Bytes - hash of the parent block.
+    </ResponseField>
+
+     <ResponseField name="nonce" type="string">
+       8 Bytes - hash of the generated proof-of-work. Null when the returned block is the pending block
+    </ResponseField>
+
+    <ResponseField name="logsBloom" type="string">
+       256 Bytes - the bloom filter for the logs of the block. Null when the returned block is the pending block
+    </ResponseField>
+
+    <ResponseField name="transactionsRoot" type="string">
+       32 Bytes - the root of the transaction trie of the block
+    </ResponseField>
+
+    <ResponseField name="stateRoot" type="string">
+       32 Bytes - the root of the final state trie of the block
+    </ResponseField>
+
+    <ResponseField name="miner" type="string">
+       20 Bytes - the address of the beneficiary to whom the mining rewards were given
+    </ResponseField>
+
+    <ResponseField name="mixHash" type="string">
+       a field in the block head, which is used to prove that the miner has completed the Proof of work (PoW) in the mining process
+    </ResponseField>
+
+    <ResponseField name="difficulty" type="string">
+      hexadecimal of the difficulty for this block
+    </ResponseField>
+
+    <ResponseField name="totalDifficulty" type="string">
+      hexadecimal of the total difficulty of the chain until this block
+    </ResponseField>
+
+    <ResponseField name="extraData" type="string">
+      the "extra data" field of this block
+    </ResponseField>
+
+    <ResponseField name="size" type="string">
+      hexadecimal the size of this block in bytes
+    </ResponseField>
+
+     <ResponseField name="gasLimit" type="string">
+      the maximum gas allowed in this block
+     </ResponseField>
+
+
+     <ResponseField name="gasUsed" type="string">
+      the total used gas by all transactions in this block
+     </ResponseField>
+
+     <ResponseField name="timestamp" type="string">
+      the unix timestamp for when the block was collated
+     </ResponseField>
+
+     <ResponseField name="transactions" type="Array">
+      Array of transaction objects, or 32 Bytes transaction hashes
+     </ResponseField>
+
+     <ResponseField name="receiptsRoot" type="string">
+      32 Bytes - the root of the receipts trie of the block
+     </ResponseField>
+
+
+    </Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getBlockByHash",
+    "params": ["0xfB041b3D98d317C209d9782e97E873B24f42c3D0C93B24feDA94f6A244e73fEb",false],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "difficulty": "0x0",
+        "extraData": "",
+        "gasLimit": "0x5f5e100",
+        "gasUsed": "0x0",
+        "hash": "0xfB041b3D98d317C209d9782e97E873B24f42c3D0C93B24feDA94f6A244e73fEb",
+        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "miner": "0x0000000000000000000000000000000000000000",
+        "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x0000000000000000",
+        "number": "0x1",
+        "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "receiptsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "size": "0x1fd",
+        "stateRoot": "0xaa3ac2e5127e4F3aCAC9d2fceE82f3A621c15b673849BCedFbBd359C3B00052c",
+        "timestamp": "0x64b8d101",
+        "totalDifficulty": "0x0",
+        "transactions": [],
+        "transactionsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    }
+}
+```
+
+</ResponseExample>

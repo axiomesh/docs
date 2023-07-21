@@ -1,0 +1,76 @@
+---
+title: "eth_sendRawTransaction"
+api: "POST /"
+---
+
+Submits a pre-signed transaction for broadcast to the Ethereum network
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_sendRawTransaction">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method 
+  <Expandable title="parms">
+
+     <ParamField body="TRANSACTION DATA" type="string">
+        The signed transaction data.
+     </ParamField>
+
+  </Expandable>
+
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  returns unique identifier for the request 
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  returns the version of JSON-RPC being used
+</ResponseField>
+
+
+<ResponseField name="TRANSACTION HASH" type="string">
+  32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_sendRawTransaction",
+    "params": ["0xf8700582c350825208942299e9b1a4e08b5d67017e19d75d3a24bb1074df8d0c9f2c9cd04674edea4000000080820abca0ca99eb4e5a825b8bc9ac4e6cc973c0e43a8c2632257313f1ff100407470ea79aa058e89b16ad22c4b8677cdefa10c9fc04b08a45bae9389062faed7ec659d08bc7"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0xe81ddc36ff71b2e6e08ef7e912d05fe3549757a030a3476eb5c5bf0570286c32"
+}
+```
+
+</ResponseExample>
