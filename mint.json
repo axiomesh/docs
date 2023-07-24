@@ -3,7 +3,7 @@
   "name": "OpenHub",
   "api": {
     "baseUrl": [
-      "http://172.16.13.130:9901",
+      "http://10.1.40.26:8881",
       "https://172.16.13.130:9902"
     ]
   },
@@ -125,6 +125,37 @@
           "pages": [
             "api-reference/endpoint/echo-get",
             "api-reference/endpoint/echo-post"
+          ]
+        },
+        {
+          "group": "JsonRPC",
+          "pages": [
+            "api-reference/jsonrpc/chainId",
+            "api-reference/jsonrpc/blockNumber",
+            "api-reference/jsonrpc/getBalance",
+            "api-reference/jsonrpc/getBlockByNumber",
+            "api-reference/jsonrpc/getBlockByHash",
+            "api-reference/jsonrpc/getCode",
+            "api-reference/jsonrpc/getStorageAt",
+            "api-reference/jsonrpc/call",
+            "api-reference/jsonrpc/estimateGas",
+            "api-reference/jsonrpc/gasPrice",
+            "api-reference/jsonrpc/syncing",
+            "api-reference/jsonrpc/getBlockTransactionCountByNumber",
+            "api-reference/jsonrpc/getBlockTransactionCountByHash",
+            "api-reference/jsonrpc/getTransactionByBlockNumberAndIndex",
+            "api-reference/jsonrpc/getTransactionByBlockHashAndIndex",
+            "api-reference/jsonrpc/getTransactionCount",
+            "api-reference/jsonrpc/getTransactionByHash",
+            "api-reference/jsonrpc/getTransactionReceipt",
+            "api-reference/jsonrpc/sendRawTransaction",
+            "api-reference/jsonrpc/newPendingTransactionFilter",
+            "api-reference/jsonrpc/newBlockFilter",
+            "api-reference/jsonrpc/newFilter",
+            "api-reference/jsonrpc/getLogs",
+            "api-reference/jsonrpc/uninstallFilter",
+            "api-reference/jsonrpc/getFilterLogs",
+            "api-reference/jsonrpc/getFilterChanges"
           ]
         }
       ]
