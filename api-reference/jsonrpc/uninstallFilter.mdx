@@ -3,7 +3,7 @@ title: "eth_uninstallFilter"
 api: "POST /"
 ---
 
-Returns an array of all logs matching filter with given id.
+Uninstalls a filter with given id. Should always be called when watch is no longer needed. Additionally Filters timeout when they aren't requested with eth_getFilterChanges for a period of time.
 
 ### Body
 
