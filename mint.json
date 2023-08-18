@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "OpenHub",
+  "name": "Axiomesh",
   "api": {
     "baseUrl": [
       "http://10.1.40.26:8881",
@@ -72,7 +72,9 @@
       "pages": [
         "documentation/core-concepts/accounts",
         "documentation/core-concepts/transactions",
-        "documentation/core-concepts/blocks"
+        "documentation/core-concepts/blocks",
+        "documentation/core-concepts/system-contract.en",
+        "documentation/core-concepts/upgrade.en"
       ]
     },
     {
@@ -80,6 +82,7 @@
       "pages": [
         "documentation/system-design/architecture",
         "documentation/system-design/architecture-en",
+        "documentation/system-design/virtual-machine.en",
         "documentation/system-design/transaction-flow",
         "documentation/system-design/transaction-flow-en",
         "documentation/system-design/virtual-machine",
@@ -90,8 +93,9 @@
     {
       "group": "Governance",
       "pages": [
-        "documentation/governance/overview",
-        "documentation/governance/submitting-proposals"
+        "documentation/governance/committee.en",
+        "documentation/governance/post-proposals.en",
+        "documentation/governance/vote-proposals.en"
       ]
     },
     {
