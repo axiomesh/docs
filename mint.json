@@ -50,7 +50,7 @@
       "group": "Getting Started",
       "pages": [
         "documentation/getting-started/overview",
-        "documentation/getting-started/introduction/document",
+        "documentation/getting-started/introduction/document.en",
         {
           "group": "Quick Start",
           "pages": [
@@ -95,9 +95,9 @@
     {
       "group": "Economics",
       "pages": [
-        "documentation/economics/overview",
-        "documentation/economics/gas",
-        "documentation/economics/stablecoin"
+        "documentation/economics/overview.en",
+        "documentation/economics/gas.en",
+        "documentation/economics/stablecoin.en"
       ]
     },
     {
@@ -163,7 +163,7 @@
       "group": "SDKs",
       "pages": [
         "sdks/sdks/java-sdk",
-        "sdks/sdks/js-sdk"
+        "sdks/sdks/js-sdk.en"
       ]
     },
     {
