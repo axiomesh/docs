@@ -79,8 +79,8 @@
       "group": "System Design",
       "pages": [
         "documentation/system-design/architecture",
-        "documentation/system-design/virtual-machine",
         "documentation/system-design/transaction-flow",
+        "documentation/system-design/virtual-machine",
         "documentation/system-design/consensus",
         "documentation/system-design/crossChain"
       ]
