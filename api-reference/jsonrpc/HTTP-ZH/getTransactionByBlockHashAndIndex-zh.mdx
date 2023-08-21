@@ -1,0 +1,176 @@
+---
+title: "eth_getTransactionByBlockHashAndIndex"
+api: "POST /"
+---
+
+
+按块哈希和事务索引位置返回有关交易的信息
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getTransactionByBlockHashAndIndex">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+  <Expandable title="params">
+
+     <ParamField body="BLOCK HASH" type="string">
+        表示块的哈希（32字节）的字符串
+     </ParamField>
+
+     <ParamField body="TRANSACTION INDEX" type="string">
+        表示块中交易位置的整数的十六进制
+     </ParamField>
+
+  </Expandable>
+
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+ 返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="TRANSACTION" type="object">
+  交易对象，或未找到交易时为null
+ 
+  <Expandable title="TRANSACTION object">
+    <ResponseField name="blockHash" type="string">
+        32字节-包括此交易的块的哈希。待定时为null
+    </ResponseField>
+
+    <ResponseField name="blockNumber" type="string">
+        包括此交易的块的编号。待定时为null
+    </ResponseField>
+
+    <ResponseField name="from" type="string">
+       20字节-发送者地址
+    </ResponseField>
+
+    <ResponseField name="gas" type="string">
+        发送者提供的气体
+    </ResponseField>
+
+    <ResponseField name="gasPrice" type="string">
+        发送者在wei提供的gas价格
+    </ResponseField>
+
+    <ResponseField name="gasFeeCap" type="string">
+        maxFeePerGas，最高费用，以wei为单位，发送者愿意支付高于基本费用的gas
+    </ResponseField>
+
+    <ResponseField name="gasTipCap" type="string">
+        maxPriorityFeePerGas，最高总费用（基本费用+优先费用），以Wei为单位，发送方愿意支付每份gas
+    </ResponseField>
+
+    <ResponseField name="hash" type="string">
+        32字节-交易的哈希
+    </ResponseField>
+
+    <ResponseField name="input" type="string">
+        随交易一起发送的数据
+    </ResponseField>
+
+    <ResponseField name="nonce" type="string">
+        发件人在此之前进行的交易数
+    </ResponseField>
+
+    <ResponseField name="to" type="string">
+        20字节-接收者的地址。当是合约创建交易时为null
+    </ResponseField>
+
+    <ResponseField name="transactionIndex" type="string">
+        块中交易索引位置的整数。待定时为null
+    </ResponseField>
+
+    <ResponseField name="value" type="string">
+        以wei为单位的价值转入
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+        交易类型
+    </ResponseField>
+
+    <ResponseField name="Accesses" type="array">
+        交易计划访问的地址和存储密钥列表
+    </ResponseField>
+
+    <ResponseField name="chainID" type="string">
+        指定网络的链ID。仅针对EIP-1559交易返回
+    </ResponseField>
+
+    <ResponseField name="v" type="string">
+        ECDSA恢复ID
+    </ResponseField>
+
+    <ResponseField name="r" type="string">
+        32字节-ECDSA签名R
+    </ResponseField>
+
+    <ResponseField name="s" type="string">
+        32字节-ECDSA签名S
+    </ResponseField>
+
+
+  </Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getTransactionByBlockHashAndIndex",
+    "params": ["0xF5Abf88ecA668507FbF7D65Ef76bebCB30fb4354943682D8a0E97C9dA2275a11","0x0"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "blockHash": "0xf5abf88eca668507fbf7d65ef76bebcb30fb4354943682d8a0e97c9da2275a11",
+        "blockNumber": "0x3",
+        "from": "0xc7f999b83af6df9e67d0a37ee7e900bf38b3d013",
+        "gas": "0xac4c",
+        "gasPrice": "0x2540be400",
+        "hash": "0x04307b5f0882c6665a847b87bba2ea65e002dc7e0fcc62dfba49c4c7b7f15b62",
+        "input": "0x4000e4f645700000000000000000000000000000000000000000000000000000000000004570000000000000000000000000000000000000000000000000000000000001",
+        "nonce": "0x1",
+        "to": "0x4cd8ee4fc57c51d8af5b6b6a08cc441f2b4fcbfe",
+        "transactionIndex": "0x0",
+        "value": "0x0",
+        "type": "0x0",
+        "v": "0xabc",
+        "r": "0x4264bb2e2eb36452a36b5de83a7bab9a3133d1196590477ebad98cf57669cb6b",
+        "s": "0x29903c1cea0b97f663909cfe5c0f09ef40dba6a4c69b6aa34a89acd7d936a96"
+    }
+}
+```
+
+</ResponseExample>

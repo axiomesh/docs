@@ -1,0 +1,99 @@
+---
+title: "eth_call"
+api: "POST /"
+---
+
+立即执行消息调用，而不在区块链上创建交易
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_call">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+
+  <Expandable title="TRANSACTION CALL ARGS">
+     <ParamField body="from" type="string">
+        20 字节 - 发送交易的地址
+     </ParamField>
+
+     <ParamField body="to" type="string">
+        20 字节 - 交易指向的地址
+     </ParamField>
+
+     <ParamField body="gas" type="string">
+       为交易执行提供gas(十六进制)
+     </ParamField>
+
+     <ParamField body="gasPrice" type="string">
+        每一份gas所需要支付的gas价格(十六进制)
+     </ParamField>
+
+     <ParamField body="value" type="string">
+        交易携带的值(十六进制)
+     </ParamField>
+
+     <ParamField body="data" type="string">
+        方法签名和编码参数的哈希
+     </ParamField>
+
+  </Expandable>
+
+   <Expandable title="Block">
+        <ParamField body="Block" type="string">
+        十六进制块号，或字符串的“latest”、“earliest”、“pending”或块的哈希（32字节）
+     </ParamField>
+   </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="Return VALUE" type="string">
+  返回合约方法的执行结果
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [{"from": "0x2299E9B1a4e08b5d67017E19d75d3a24bb1074Df","to": "0xc7f999b83af6df9e67d0a37ee7e900bf38b3d013","value": "0x5f5e100"}, "latest"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x"
+}
+```
+
+</ResponseExample>   

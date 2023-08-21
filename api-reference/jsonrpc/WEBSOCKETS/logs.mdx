@@ -1,0 +1,177 @@
+---
+title: "logs"
+---
+
+The logs subscription type emits logs that match a specified topic filter and are included in newly added blocks
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_subscribe">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+
+  <Expandable title="params">
+     Represents the method and parameters for initiating subscriptions
+     <ParamField body="subscribe methods" type="string" placeholder="logs">
+        logs subscribe returns logs that are included in new imported blocks and match the given filter criteria
+     </ParamField>
+
+    <Expandable title="logs params">
+        <ParamField body="logs subscribe address" type="string">
+            Singular address or array of addresses. Only logs created from one of these addresses will be emitted.
+        </ParamField>
+
+        <ParamField body="logs subscribe topics" type="array">
+            an array of topic specifiers
+        </ParamField>
+    </Expandable>
+
+
+  </Expandable>
+  
+</ParamField>
+
+
+
+### Response
+
+<ResponseField name="jsonrpc" type="string">
+  returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="method" type="string">
+  returns the method of JSON-RPC call
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  subscription result
+
+  <Expandable title="subscription result">
+
+    <ResponseField name="subscription" type="string">
+      subscription id
+    </ResponseField>
+
+    <Expandable title="result">
+        <ResponseField name="address" type="string">
+            The address property specifies the address from which this log originated.
+        </ResponseField>
+
+        <ResponseField name="blockHash" type="string">
+            The blockHash property specifies the hash of the block in which the transaction was included.
+        </ResponseField>
+
+        <ResponseField name="blockNumber" type="string">
+            The blockNumber property specifies the number of the block in which the transaction was included. It is encoded as a hexadecimal string.
+        </ResponseField>
+
+        <ResponseField name="data" type="string">
+            Contains one or more 32 Bytes non-indexed arguments of the log.
+        </ResponseField>
+
+        <ResponseField name="logIndex" type="string">
+            The logIndex property specifies the index or position of the log entry within the block. It is encoded as a hexadecimal string.
+        </ResponseField>
+
+        <ResponseField name="topics" type="string">
+            The topics property is an array of 0 to 4 32 bytes topic hashes of indexed log arguments.
+        </ResponseField>
+
+        <ResponseField name="transactionHash" type="string">
+            The transactionHash property specifies the hash of the transaction.
+        </ResponseField>
+
+        <ResponseField name="transactionIndex" type="string">
+            The transactionIndex property specifies the index or position of the transaction within the block. It is encoded as a hexadecimal string.
+        </ResponseField>
+
+
+    </Expandable>
+
+
+
+  </Expandable>
+
+
+
+
+</ResponseField>
+
+
+
+
+<RequestExample>
+
+```bash Example Request
+
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "eth_subscribe",
+  "params": [
+    "logs",
+    {
+      "address": "0xCcC0024cA56670E2c4149B658015dC8D1753CCc7",
+      "topics": ["0x2b570ce470e27ef2de4c22e8f2345f2426cea348f782b3d37fc6c6a2c2d3f0e3"]
+    }
+  ]
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x4a9255477727e67f1fb4ad67daac9af3"
+}
+
+{
+    "jsonrpc": "2.0",
+    "method": "eth_subscription",
+    "params": {
+        "subscription": "0x969993ad38ffa8c6039a574965fb53d0",
+        "result": {
+            "parentHash": "0xf337cec2ef21cb627e4523e40115d1ce91501ea328c6a54df94579c9cd8144d0",
+            "sha3Uncles": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "miner": "0x0000000000000000000000000000000000000000",
+            "stateRoot": "0x810c4c03c5d6fe352f0dfe2f1e012d788c4e266e2235e72afe5e1fbfc8f73735",
+            "transactionsRoot": "0x9e58804240177676b3b48428cebe1df86d8b858c7c0757bba14cfe9069a9e0bd",
+            "receiptsRoot": "0xbd9833e1612c9fe85957c8e462464fce2c87e914c72f8f8e0521112680c1825f",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000100000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "difficulty": null,
+            "number": "0x2",
+            "gasLimit": "0x0",
+            "gasUsed": "0x0",
+            "timestamp": "0x64e2bc11",
+            "extraData": "0x",
+            "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "nonce": "0x0000000000000000",
+            "baseFeePerGas": null,
+            "withdrawalsRoot": null,
+            "excessDataGas": null,
+            "hash": "0x3fe7f9f07b0fc7ec6ba1749c8d52182463864051bf29c7466c7e2ae8ca23342f"
+        }
+    }
+}
+```
+
+</ResponseExample>
+
+
+
+

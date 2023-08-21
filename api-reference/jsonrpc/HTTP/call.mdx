@@ -1,0 +1,101 @@
+---
+title: "eth_call"
+api: "POST /"
+---
+
+Executes a new message call immediately without creating a transaction on the block chain
+
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_call">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+
+  <Expandable title="TRANSACTION CALL ARGS">
+     <ParamField body="from" type="string">
+        20 Bytes - The address the transaction is sent from
+     </ParamField>
+
+     <ParamField body="to" type="string">
+        20 Bytes - The address the transaction is directed to
+     </ParamField>
+
+     <ParamField body="gas" type="string">
+       hexadecimal value of the gas provided for the transaction execution
+     </ParamField>
+
+     <ParamField body="gasPrice" type="string">
+        hexadecimal value of the gasPrice used for each paid gas
+     </ParamField>
+
+     <ParamField body="value" type="string">
+        hexadecimal value of the value sent with this transaction
+     </ParamField>
+
+     <ParamField body="data" type="string">
+        Hash of the method signature and encoded parameters
+     </ParamField>
+
+
+  </Expandable>
+
+   <Expandable title="Block">
+        <ParamField body="Block" type="string">
+        a hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
+     </ParamField>
+   </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  returns unique identifier for the request 
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="Return VALUE" type="string">
+  the return value of the executed contract method
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [{"from": "0x2299E9B1a4e08b5d67017E19d75d3a24bb1074Df","to": "0xc7f999b83af6df9e67d0a37ee7e900bf38b3d013","value": "0x5f5e100"}, "latest"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x"
+}
+```
+
+</ResponseExample>

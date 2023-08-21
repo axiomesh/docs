@@ -1,0 +1,71 @@
+---
+title: "eth_uninstallFilter"
+api: "POST /"
+---
+
+卸载具有给定id的筛选器。应在不再需要监视时始终调用。此外，当在一段时间内没有使用eth_getFilterChanges请求过滤器时，过滤器会超时。
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_uninstallFilter">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+    包含传递给远程方法的参数列表
+
+    <Expandable title="params">
+        <ParamField body="FIELD ID" type="string">
+            过滤器id
+        </ParamField>
+    </Expandable>
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+    返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+    返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="success" type="boolean">
+    如果成功卸载筛选器，则为true，否则为false。
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl   'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc":"2.0",
+    "method":"eth_uninstallFilter",
+    "params":["0x16"],
+    "id":74
+}'
+    ```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "id":1,
+    "jsonrpc":"2.0",
+    "result":true
+}
+    ```
+
+</ResponseExample>

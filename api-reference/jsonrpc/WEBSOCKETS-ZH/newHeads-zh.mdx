@@ -1,0 +1,198 @@
+---
+title: "newHeads"
+---
+
+newHeads订阅类型在任何时候向链中添加新标头（块）时都会发出事件
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_subscribe">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+
+  <Expandable title="params">
+     表示用于启动订阅的方法和参数
+     <ParamField body="subscribe methods" type="string" placeholder="newHeads">
+        NewHeads代表订阅区块链中新发布的区块
+     </ParamField>
+  </Expandable>
+  
+</ParamField>
+
+
+### Response
+
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="method" type="string">
+  返回JSON-RPC调用的方法
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  订阅结果
+
+  <Expandable title="subscription result">
+
+
+    <ResponseField name="subscription" type="string">
+      订阅Id
+    </ResponseField>
+
+  <Expandable title="Block object">
+
+    <ResponseField name="number" type="string">
+        块号。当返回的块是待定的块时为空
+    </ResponseField>
+
+    <ResponseField name="hash" type="string">
+        32 字节 - 块的哈希。当返回的块是待定的块时为空
+    </ResponseField>
+
+    <ResponseField name="parentHash" type="string">
+       32 字节 - 父块的哈希
+    </ResponseField>
+
+    <ResponseField name="nonce" type="string">
+       8 字节 - 生成的工作证明的哈希。当返回的块是待定的块时为空
+    </ResponseField>
+
+
+     <ResponseField name="sha3Uncles" type="string">
+       32 字节 - 叔块数据中的SHA3。
+    </ResponseField>
+
+
+    <ResponseField name="logsBloom" type="string">
+       256 字节 - 块的日志的布隆过滤器。当返回的块是待定的块时为空
+    </ResponseField>
+
+    <ResponseField name="transactionsRoot" type="string">
+       32 字节 - 块的交易树的根
+    </ResponseField>
+
+    <ResponseField name="stateRoot" type="string">
+       32 字节 - 块的最终状态树的根
+    </ResponseField>
+
+
+    <ResponseField name="miner" type="string">
+       20 字节 - 获得挖矿奖励的受益人的地址
+    </ResponseField>
+
+    <ResponseField name="mixHash" type="string">
+       块头中的一个字段，用于证明矿工在采矿过程中完成了工作量证明（PoW）
+    </ResponseField>
+
+    <ResponseField name="difficulty" type="string">
+      该区块难度的十六进制
+    </ResponseField>
+
+    <ResponseField name="totalDifficulty" type="string">
+      直到该块的链的总难度的十六进制
+    </ResponseField>
+
+    <ResponseField name="extraData" type="string">
+      该区块之前整个区块链的总难度的十六进制表示
+    </ResponseField>
+
+    <ResponseField name="size" type="string">
+      十六进制此块的大小（以字节为单位）
+    </ResponseField>
+
+     <ResponseField name="gasLimit" type="string">
+      该区块允许的最大气体
+     </ResponseField>
+
+
+     <ResponseField name="gasUsed" type="string">
+      该区块中所有交易的气体使用总量
+     </ResponseField>
+
+     <ResponseField name="timestamp" type="string">
+      整理块时的unix时间戳
+     </ResponseField>
+
+     <ResponseField name="transactions" type="Array">
+      交易数组，或32字节事务哈希数组
+     </ResponseField>
+
+     <ResponseField name="receiptsRoot" type="string">
+      32 字节 - 块的返回树的根
+     </ResponseField>
+
+     <ResponseField name="uncles" type="array">
+       叔块哈希数组
+    </ResponseField>
+    </Expandable>
+
+  </Expandable>
+
+</ResponseField>
+
+
+
+
+
+<RequestExample>
+
+```bash Example Request
+
+{ "id": 1, "jsonrpc": "2.0", "method": "eth_subscribe", "params": ["newHeads"] }
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x969993ad38ffa8c6039a574965fb53d0"
+}
+
+{
+    "jsonrpc": "2.0",
+    "method": "eth_subscription",
+    "params": {
+        "subscription": "0x969993ad38ffa8c6039a574965fb53d0",
+        "result": {
+            "parentHash": "0xf337cec2ef21cb627e4523e40115d1ce91501ea328c6a54df94579c9cd8144d0",
+            "sha3Uncles": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "miner": "0x0000000000000000000000000000000000000000",
+            "stateRoot": "0x810c4c03c5d6fe352f0dfe2f1e012d788c4e266e2235e72afe5e1fbfc8f73735",
+            "transactionsRoot": "0x9e58804240177676b3b48428cebe1df86d8b858c7c0757bba14cfe9069a9e0bd",
+            "receiptsRoot": "0xbd9833e1612c9fe85957c8e462464fce2c87e914c72f8f8e0521112680c1825f",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000100000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "difficulty": null,
+            "number": "0x2",
+            "gasLimit": "0x0",
+            "gasUsed": "0x0",
+            "timestamp": "0x64e2bc11",
+            "extraData": "0x",
+            "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "nonce": "0x0000000000000000",
+            "baseFeePerGas": null,
+            "withdrawalsRoot": null,
+            "excessDataGas": null,
+            "hash": "0x3fe7f9f07b0fc7ec6ba1749c8d52182463864051bf29c7466c7e2ae8ca23342f"
+        }
+    }
+}
+```
+
+</ResponseExample>

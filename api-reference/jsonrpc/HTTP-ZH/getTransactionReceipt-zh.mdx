@@ -1,0 +1,146 @@
+---
+title: "eth_getTransactionReceipt"
+api: "POST /"
+---
+
+按交易哈希返回事务的收据
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+ 请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getTransactionReceipt">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+  <Expandable title="params">
+
+     <ParamField body="TRANSACTION HASH" type="string">
+        表示事务的哈希（32字节）的字符串
+     </ParamField>
+
+  </Expandable>
+
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+ 返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="TRANSACTION RECEIPT" type="object">
+  交易返回对象，或在找不到返回结果时为null
+ 
+  <Expandable title="RECEIPT object">
+    <ResponseField name="blockHash" type="string">
+        32字节-包括此交易的块的哈希。挂起时为null
+    </ResponseField>
+
+    <ResponseField name="blockNumber" type="string">
+       包括此交易的块的编号。挂起时为null
+    </ResponseField>
+
+     <ResponseField name="cumulativeGasUsed" type="string">
+        区块中执行此交易时使用的gas总量
+    </ResponseField>
+
+    <ResponseField name="from" type="string">
+        20字节-发送人地址
+    </ResponseField>
+
+    <ResponseField name="gasUsed" type="string">
+        仅此特定交易使用的gas量
+    </ResponseField>
+
+    <ResponseField name="logs" type="array">
+       此交易生成的日志对象数组
+    </ResponseField>
+
+    <ResponseField name="logsBloom" type="string">
+      256字节-用于轻型客户端的布隆过滤器，用于快速检索相关日志
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+       1（成功）或0（失败）
+    </ResponseField>
+
+    <ResponseField name="to" type="string">
+        20字节-接收者的地址。当交易是合约创建交易时为null
+    </ResponseField>
+
+    <ResponseField name="transactionHash" type="string">
+       32字节-交易的哈希
+    </ResponseField>
+
+    <ResponseField name="transactionIndex" type="string">
+        块中交易索引位置的十六进制
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+        交易类型
+    </ResponseField>
+
+  
+
+  </Expandable>
+
+
+
+</ResponseField>
+
+
+
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getTransactionReceipt",
+    "params": ["0x04307b5f0882c6665a847b87bba2ea65e002dc7e0fcc62dfba49c4c7b7f15b62"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "blockHash": "0xf5abf88eca668507fbf7d65ef76bebcb30fb4354943682d8a0e97c9da2275a11",
+        "blockNumber": "0x3",
+        "cumulativeGasUsed": "0xac4c",
+        "from": "0xc7f999b83af6df9e67d0a37ee7e900bf38b3d013",
+        "gasUsed": "0xac4c",
+        "logs": [],
+        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "status": "0x1",
+        "to": "0x4cd8ee4fc57c51d8af5b6b6a08cc441f2b4fcbfe",
+        "transactionHash": "0x04307b5f0882c6665a847b87bba2ea65e002dc7e0fcc62dfba49c4c7b7f15b62",
+        "transactionIndex": "0x0",
+        "type": "0x0"
+    }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,152 @@
+---
+title: "eth_getLogs"
+api: "POST /"
+---
+
+返回与给定筛选器对象匹配的所有日志的数组。
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getLogs">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="object">
+    包含传递给远程方法的参数列表
+
+    <Expandable title="params">
+
+        <ParamField body="fromBlock" type="string or number">
+            整数块号，或“latest”表示最后挖掘的块，或“pending”，“earliest”表示尚未挖掘的交易。
+        </ParamField>
+
+        <ParamField body="toBlock" type="string or number">
+            整数块号，或“latest”表示最后挖掘的块，或“pending”，“earliest”表示尚未挖掘的交易。
+        </ParamField>
+
+        <ParamField body="address" type="string or array">
+            20 字节 - （可选）合约地址或日志来源的地址列表。
+        </ParamField>
+
+        <ParamField body="topics" type="array">
+            (可选) 32 字节 DATA主题的数组。主题取决于顺序。每个主题也可以是带有“or”选项的DATA数组。
+        </ParamField>
+
+        <ParamField body="blockhash" type="string">
+            32 字节 - （可选）随着EIP-234的加入，blockHash将成为一个新的过滤器选项，它将返回的日志限制为32字节的hash blockHash的单个块。使用blockHash相当于fromBlock=toBlock=使用hash blockHash的块号。如果筛选条件中存在blockHash，则不允许使用fromBlock和toBlock。
+        </ParamField>
+
+    </Expandable>
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+    返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+    返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="result" type="array">
+    对于使用eth_newBlockFilter创建的筛选器，返回的是块哈希（DATA，32字节），例如[“0x345456634534…”]
+
+    对于使用eth_newPendingTransactionFilter创建的筛选器，返回的是事务哈希（DATA，32字节），例如[“0x634534345645…”]
+
+    对于使用eth_newFilter创建的筛选器，日志是具有以下参数的对象：
+    <Expandable title="Log objects">
+
+        <ResponseField body="logIndex" type="string">
+            区块中日志索引位置的整型数。当其挂起日志时为空
+        </ResponseField>
+
+        <ResponseField body="removed" type="bool">
+            由于链重组，删除日志时为true。如果是有效日志，则为false
+        </ResponseField>
+
+        <ResponseField body="transactionIndex" type="string">
+            交易索引位置日志的整数是从创建的。当其挂起日志时为空
+        </ResponseField>
+
+        <ResponseField body="transactionHash" type="string">
+            32 字节 - 创建此日志的交易的哈希。当其挂起日志时为空
+        </ResponseField>
+
+        <ResponseField body="blockHash" type="string">
+            32 字节 - 此日志所在块的哈希。待定时为空。当其挂起日志时为空。
+        </ResponseField>
+
+        <ResponseField body="blockNumber" type="string">
+            此日志所在的块号。待定时为空。当其待定日志时为空。
+        </ResponseField>
+
+        <ResponseField body="address" type="string">
+            20 字节 - 此日志源自的地址。
+        </ResponseField>
+
+        <ResponseField body="data" type="string">
+            包含日志的一个或多个32字节非索引参数。
+        </ResponseField>
+
+        <ResponseField body="topics" type="array">
+            索引日志参数的0到4个32字节DATA的数组。（在solidity中：第一个主题是事件签名的哈希（例如Deposit（address，bytes32，uint256）），除非您使用匿名说明符声明了事件。）
+        </ResponseField>
+
+    </Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl - 'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc":"2.0",
+    "method":"eth_getLogs",
+    "params":[
+        {
+            "topics":[
+                "0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b"
+            ]
+        }
+    ],
+    "id":74
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+    ```json Response
+    {
+        "id":1,
+        "jsonrpc":"2.0",
+        "result": [{
+        "logIndex": "0x1", // 1
+        "blockNumber":"0x1b4", // 436
+        "blockHash": "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+        "transactionHash":  "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+        "transactionIndex": "0x0", // 0
+        "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+        "data":"0x0000000000000000000000000000000000000000000000000000000000000000",
+        "topics": ["0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"]
+    },{
+        ...
+    }]
+    }
+    ```
+
+</ResponseExample>

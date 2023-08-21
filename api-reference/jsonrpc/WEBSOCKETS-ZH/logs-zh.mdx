@@ -1,0 +1,174 @@
+---
+title: "logs"
+---
+
+日志订阅类型发出与指定主题筛选器匹配的日志，这些日志包含在新添加的块中
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  日志订阅类型发出与指定主题筛选器匹配的日志，这些日志包含在新添加的块中
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_subscribe">
+  进行调用的远程方法名称(订阅时统一为eth_subscribe)
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+
+  <Expandable title="params">
+     表示用于启动订阅的方法和参数
+     <ParamField body="subscribe methods" type="string" placeholder="logs">
+        logs-subscribe返回包含在新导入的块中并符合给定筛选条件的日志
+     </ParamField>
+
+    <Expandable title="logs params">
+        <ParamField body="logs subscribe address" type="string">
+            单一地址或地址数组。只有从其中一个地址创建的日志才会发出
+        </ParamField>
+
+        <ParamField body="logs subscribe topics" type="array">
+            主题说明符数组
+        </ParamField>
+    </Expandable>
+
+
+  </Expandable>
+  
+</ParamField>
+
+
+
+### Response
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="method" type="string">
+  返回JSON-RPC调用的方法
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  订阅结果
+
+  <Expandable title="subscription result">
+
+    <ResponseField name="subscription" type="string">
+      订阅Id
+    </ResponseField>
+
+    <Expandable title="result">
+        <ResponseField name="address" type="string">
+            address属性指定此日志的来源地址。
+        </ResponseField>
+
+        <ResponseField name="blockHash" type="string">
+            The blockHash property specifies the hash of the block in which the transaction was included.
+        </ResponseField>
+
+        <ResponseField name="blockNumber" type="string">
+            blockNumber属性指定包含事务的块的编号。它被编码为十六进制字符串。
+        </ResponseField>
+
+        <ResponseField name="data" type="string">
+            包含日志的一个或多个32字节非索引参数。
+        </ResponseField>
+
+        <ResponseField name="logIndex" type="string">
+            logIndex属性指定块中日志项的索引或位置。它被编码为十六进制字符串。
+        </ResponseField>
+
+        <ResponseField name="topics" type="string">
+            topics属性是索引日志参数的0到4个32字节主题哈希的数组。
+        </ResponseField>
+
+        <ResponseField name="transactionHash" type="string">
+            transactionHash属性指定交易的哈希。
+        </ResponseField>
+
+        <ResponseField name="transactionIndex" type="string">
+            transactionIndex属性指定块中事务的索引或位置。它被编码为十六进制字符串。
+        </ResponseField>
+
+
+    </Expandable>
+
+
+
+  </Expandable>
+
+</ResponseField>
+
+
+
+
+<RequestExample>
+
+```bash Example Request
+
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "eth_subscribe",
+  "params": [
+    "logs",
+    {
+      "address": "0xCcC0024cA56670E2c4149B658015dC8D1753CCc7",
+      "topics": ["0x2b570ce470e27ef2de4c22e8f2345f2426cea348f782b3d37fc6c6a2c2d3f0e3"]
+    }
+  ]
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x4a9255477727e67f1fb4ad67daac9af3"
+}
+
+{
+    "jsonrpc": "2.0",
+    "method": "eth_subscription",
+    "params": {
+        "subscription": "0x969993ad38ffa8c6039a574965fb53d0",
+        "result": {
+            "parentHash": "0xf337cec2ef21cb627e4523e40115d1ce91501ea328c6a54df94579c9cd8144d0",
+            "sha3Uncles": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "miner": "0x0000000000000000000000000000000000000000",
+            "stateRoot": "0x810c4c03c5d6fe352f0dfe2f1e012d788c4e266e2235e72afe5e1fbfc8f73735",
+            "transactionsRoot": "0x9e58804240177676b3b48428cebe1df86d8b858c7c0757bba14cfe9069a9e0bd",
+            "receiptsRoot": "0xbd9833e1612c9fe85957c8e462464fce2c87e914c72f8f8e0521112680c1825f",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000100000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "difficulty": null,
+            "number": "0x2",
+            "gasLimit": "0x0",
+            "gasUsed": "0x0",
+            "timestamp": "0x64e2bc11",
+            "extraData": "0x",
+            "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "nonce": "0x0000000000000000",
+            "baseFeePerGas": null,
+            "withdrawalsRoot": null,
+            "excessDataGas": null,
+            "hash": "0x3fe7f9f07b0fc7ec6ba1749c8d52182463864051bf29c7466c7e2ae8ca23342f"
+        }
+    }
+}
+```
+
+</ResponseExample>
+
+
+
+

@@ -1,0 +1,175 @@
+---
+title: "eth_getBlockByHash"
+api: "POST /"
+---
+
+根据区块编号返回有关块的信息
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getBlockByHash">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+
+  <Expandable title="params">
+     <ParamField body="BLOCK HASH" type="string">
+        表示块的哈希(32字节)的字符串
+     </ParamField>
+
+     <ParamField body="TRANSACTION DETAILS FLAG" type="bool">
+        如果为true，则返回完整的交易对象，如果为false，则仅返回交易的哈希
+     </ParamField>
+
+  </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符 
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="result" type="object">
+  区块对象
+
+  <Expandable title="Block object">
+
+    <ResponseField name="number" type="string">
+        块号。当返回的块是待定的块时为空
+    </ResponseField>
+
+    <ResponseField name="hash" type="string">
+        32 字节 - 块的哈希。当返回的块是待定的块时为空
+    </ResponseField>
+
+    <ResponseField name="parentHash" type="string">
+       32 字节 - 父块的哈希.
+    </ResponseField>
+
+     <ResponseField name="nonce" type="string">
+       8 字节 - 生成的工作证明的哈希。当返回的块是待定的块时为空
+    </ResponseField>
+
+    <ResponseField name="logsBloom" type="string">
+       256 字节 - 块的日志的布隆过滤器。当返回的块是待定的块时为空
+    </ResponseField>
+
+    <ResponseField name="transactionsRoot" type="string">
+       32 字节 - 块的交易树的根
+    </ResponseField>
+
+    <ResponseField name="stateRoot" type="string">
+       32 字节 - 块的最终状态树的根
+    </ResponseField>
+
+    <ResponseField name="miner" type="string">
+       20 字节 - 获得挖矿奖励的受益人的地址
+    </ResponseField>
+
+    <ResponseField name="mixHash" type="string">
+       块头中的一个字段，用于证明矿工在采矿过程中完成了工作量证明（PoW）
+    </ResponseField>
+
+    <ResponseField name="difficulty" type="string">
+      该区块难度的十六进制
+    </ResponseField>
+
+    <ResponseField name="totalDifficulty" type="string">
+      直到该块的链的总难度的十六进制
+    </ResponseField>
+
+    <ResponseField name="extraData" type="string">
+      该区块之前整个区块链的总难度的十六进制表示
+    </ResponseField>
+
+    <ResponseField name="size" type="string">
+      十六进制此块的大小（以字节为单位）
+    </ResponseField>
+
+     <ResponseField name="gasLimit" type="string">
+      该区块允许的最大气体
+     </ResponseField>
+
+
+     <ResponseField name="gasUsed" type="string">
+      该区块中所有交易的气体使用总量
+     </ResponseField>
+
+     <ResponseField name="timestamp" type="string">
+      整理块时的unix时间戳
+     </ResponseField>
+
+     <ResponseField name="transactions" type="Array">
+      交易数组，或32字节事务哈希数组
+     </ResponseField>
+
+     <ResponseField name="receiptsRoot" type="string">
+      32 字节 - 块的返回树的根
+     </ResponseField>
+
+
+    </Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getBlockByHash",
+    "params": ["0xfB041b3D98d317C209d9782e97E873B24f42c3D0C93B24feDA94f6A244e73fEb",false],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "difficulty": "0x0",
+        "extraData": "",
+        "gasLimit": "0x5f5e100",
+        "gasUsed": "0x0",
+        "hash": "0xfB041b3D98d317C209d9782e97E873B24f42c3D0C93B24feDA94f6A244e73fEb",
+        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "miner": "0x0000000000000000000000000000000000000000",
+        "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x0000000000000000",
+        "number": "0x1",
+        "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "receiptsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "size": "0x1fd",
+        "stateRoot": "0xaa3ac2e5127e4F3aCAC9d2fceE82f3A621c15b673849BCedFbBd359C3B00052c",
+        "timestamp": "0x64b8d101",
+        "totalDifficulty": "0x0",
+        "transactions": [],
+        "transactionsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    }
+}
+```
+
+</ResponseExample>

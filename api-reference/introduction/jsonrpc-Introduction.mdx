@@ -1,0 +1,18 @@
+---
+title: "JSON-RPC Introduction"
+---
+
+Interacting with Axiom requires sending requests to specific JSON-RPC API methods. Axiom supports all standard JSON-RPC API endpoints. The RPC requests must be sent to the node and the response returned to the client using some transport protocol. 
+
+### Introduction
+
+Axiom JSON-RPC APIs use a name-space system. RPC methods are grouped into several categories depending on their purpose. All method names are composed of the namespace, an underscore, and the actual method name within the namespace. For example, the eth_call method resides in the eth namespace.In order to maximize compatibility with the Ethereum ecosystem, Axiom currently uses eth as the namespace for most interfaces.
+
+Access to RPC methods can be enabled on a per-namespace basis. 
+
+### Convenience Libraries
+While opting to directly engage Axiom through the JSON-RPC API is a possibility, there are frequently more convenient avenues available for dapp developers. Numerous JavaScript and backend API libraries have emerged to furnish a layer of abstraction over the JSON-RPC API. By leveraging these libraries, developers can craft straightforward, concise methods in the programming language they prefer, which effectively underpin JSON-RPC requests. These requests seamlessly interface with Axiom, streamlining the development process.
+
+
+### Compatibility
+The current Axiom extends support to the Jsonrpc interfaces of the majority of Ethereum specifications. However, due to disparities in the underlying implementation logic, certain interface responses may diverge from Ethereum's conventions. Should any compatibility concerns arise, it is recommended to consult the specifications and usage examples of the specific interfaces in the left sidebar for resolution.
