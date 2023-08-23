@@ -17,7 +17,9 @@
     "light": "#81D7F7",
     "dark": "#004E7A"
   },
-  "versions": ["v1"],
+  "versions": [
+    "v1"
+  ],
   "anchors": [
     {
       "name": "API Reference",
@@ -45,7 +47,7 @@
       "group": "Getting Started",
       "pages": [
         "documentation/getting-started/overview",
-        "documentation/getting-started/introduction/document",
+        "documentation/getting-started/introduction/document.en",
         {
           "group": "Quick Start",
           "pages": [
@@ -67,8 +69,7 @@
       "pages": [
         "documentation/core-concepts/accounts",
         "documentation/core-concepts/transactions",
-        "documentation/core-concepts/blocks",
-        "documentation/core-concepts/staking"
+        "documentation/core-concepts/blocks"
       ]
     },
     {
@@ -91,16 +92,9 @@
     {
       "group": "Economics",
       "pages": [
-        "documentation/economics/overview",
-        "documentation/economics/gas",
-        "documentation/economics/rewards",
-        {
-          "group": "Tokenomics",
-          "pages": [
-            "documentation/economics/tokenomics/token-allocations",
-            "documentation/economics/tokenomics/inflation-deflation"
-          ]
-        }
+        "documentation/economics/overview.en",
+        "documentation/economics/gas.en",
+        "documentation/economics/stablecoin.en"
       ]
     },
     {
@@ -165,7 +159,8 @@
     {
       "group": "SDKs",
       "pages": [
-        "sdks/sdks/java-sdk"
+        "sdks/sdks/java-sdk",
+        "sdks/sdks/js-sdk.en"
       ]
     },
     {
