@@ -44,8 +44,10 @@
     {
       "group": "Getting Started",
       "pages": [
-        "documentation/getting-started/overview",
-        "documentation/getting-started/introduction/document.en",
+        "documentation/getting-started/overview.en",
+        "documentation/getting-started/overview.zh",
+        "documentation/getting-started/introduction/introduction.en",
+        "documentation/getting-started/introduction/introduction.zh",
         {
           "group": "Quick Start",
           "pages": [
@@ -75,11 +77,15 @@
     {
       "group": "System Design",
       "pages": [
-        "documentation/system-design/architecture",
         "documentation/system-design/architecture-en",
+<<<<<<< HEAD
+        "documentation/system-design/architecture-zh",
+=======
         "documentation/system-design/virtual-machine.en",
         "documentation/system-design/transaction-flow",
+>>>>>>> main
         "documentation/system-design/transaction-flow-en",
+        "documentation/system-design/transaction-flow-zh",
         "documentation/system-design/virtual-machine",
         "documentation/system-design/consensus",
         "documentation/system-design/crossChain"
