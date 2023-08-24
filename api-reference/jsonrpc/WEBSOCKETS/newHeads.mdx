@@ -1,0 +1,203 @@
+---
+title: "newHeads"
+---
+
+The newHeads subscription type emits an event any time a new header (block) is added to the chain, including during a chain reorganization.
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_subscribe">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+
+  <Expandable title="params">
+     Represents the method and parameters for initiating subscriptions
+     <ParamField body="subscribe methods" type="string" placeholder="newHeads">
+        NewHeads represents subscribing to newly released blocks in the blockchain
+     </ParamField>
+  </Expandable>
+  
+</ParamField>
+
+
+### Response
+
+
+<ResponseField name="jsonrpc" type="string">
+  Returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="method" type="string">
+  Returns the method of JSON-RPC call
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  Subscription result
+
+  <Expandable title="subscription result">
+
+    <ResponseField name="subscription" type="string">
+      Subscription id
+    </ResponseField>
+
+  <Expandable title="blockObject">
+
+    <ResponseField name="number" type="string">
+        The block number. Null when the returned block is the pending block
+    </ResponseField>
+
+    <ResponseField name="hash" type="string">
+        32 Bytes - hash of the block. Null when the returned block is the pending block
+    </ResponseField>
+
+    <ResponseField name="parentHash" type="string">
+       32 Bytes - hash of the parent block.
+    </ResponseField>
+
+    <ResponseField name="nonce" type="string">
+       8 Bytes - hash of the generated proof-of-work. Null when the returned block is the pending block
+    </ResponseField>
+
+
+     <ResponseField name="sha3Uncles" type="string">
+       32 Bytes - SHA3 of the uncles data in the block.
+    </ResponseField>
+
+
+    <ResponseField name="logsBloom" type="string">
+       256 Bytes - the bloom filter for the logs of the block. Null when the returned block is the pending block
+    </ResponseField>
+
+    <ResponseField name="transactionsRoot" type="string">
+       32 Bytes - the root of the transaction trie of the block
+    </ResponseField>
+
+    <ResponseField name="stateRoot" type="string">
+       32 Bytes - the root of the final state trie of the block
+    </ResponseField>
+
+
+    <ResponseField name="miner" type="string">
+       20 Bytes - the address of the beneficiary to whom the mining rewards were given
+    </ResponseField>
+
+    <ResponseField name="mixHash" type="string">
+       A field in the block head, which is used to prove that the miner has completed the Proof of work (PoW) in the mining process
+    </ResponseField>
+
+    <ResponseField name="difficulty" type="string">
+      Hexadecimal of the difficulty for this block
+    </ResponseField>
+
+    <ResponseField name="totalDifficulty" type="string">
+      Hexadecimal of the total difficulty of the chain until this block
+    </ResponseField>
+
+    <ResponseField name="extraData" type="string">
+      The "extra data" field of this block
+    </ResponseField>
+
+    <ResponseField name="size" type="string">
+      Hexadecimal the size of this block in bytes
+    </ResponseField>
+
+     <ResponseField name="gasLimit" type="string">
+      The maximum gas allowed in this block
+     </ResponseField>
+
+
+     <ResponseField name="gasUsed" type="string">
+      The total used gas by all transactions in this block
+     </ResponseField>
+
+     <ResponseField name="timestamp" type="string">
+      The unix timestamp for when the block was collated
+     </ResponseField>
+
+     <ResponseField name="transactions" type="Array">
+      Array of transaction objects, or 32 Bytes transaction hashes
+     </ResponseField>
+
+     <ResponseField name="receiptsRoot" type="string">
+      32 Bytes - the root of the receipts trie of the block
+     </ResponseField>
+
+     <ResponseField name="uncles" type="array">
+       Array of uncle hashes
+    </ResponseField>
+
+
+    </Expandable>
+
+
+
+
+  </Expandable>
+
+</ResponseField>
+
+
+
+
+
+<RequestExample>
+
+```bash Example Request
+
+{ "id": 1, "jsonrpc": "2.0", "method": "eth_subscribe", "params": ["newHeads"] }
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x969993ad38ffa8c6039a574965fb53d0"
+}
+
+{
+    "jsonrpc": "2.0",
+    "method": "eth_subscription",
+    "params": {
+        "subscription": "0x969993ad38ffa8c6039a574965fb53d0",
+        "result": {
+            "parentHash": "0xf337cec2ef21cb627e4523e40115d1ce91501ea328c6a54df94579c9cd8144d0",
+            "sha3Uncles": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "miner": "0x0000000000000000000000000000000000000000",
+            "stateRoot": "0x810c4c03c5d6fe352f0dfe2f1e012d788c4e266e2235e72afe5e1fbfc8f73735",
+            "transactionsRoot": "0x9e58804240177676b3b48428cebe1df86d8b858c7c0757bba14cfe9069a9e0bd",
+            "receiptsRoot": "0xbd9833e1612c9fe85957c8e462464fce2c87e914c72f8f8e0521112680c1825f",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000100000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "difficulty": null,
+            "number": "0x2",
+            "gasLimit": "0x0",
+            "gasUsed": "0x0",
+            "timestamp": "0x64e2bc11",
+            "extraData": "0x",
+            "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "nonce": "0x0000000000000000",
+            "baseFeePerGas": null,
+            "withdrawalsRoot": null,
+            "excessDataGas": null,
+            "hash": "0x3fe7f9f07b0fc7ec6ba1749c8d52182463864051bf29c7466c7e2ae8ca23342f"
+        }
+    }
+}
+```
+
+</ResponseExample>

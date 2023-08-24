@@ -1,0 +1,65 @@
+---
+title: "eth_newPendingTransactionFilter"
+api: "POST /"
+---
+
+Creates a filter in the node, to notify when new pending transactions arrive. To check if the state has changed, call eth_getFilterChanges.
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_newPendingTransactionFilter">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  None
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  Returns unique identifier for the request
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  Returns the version of JSON-RPC being used.
+</ResponseField>
+
+<ResponseField name="filterId" type="string">
+  A filter id
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl   'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc":"2.0",
+    "method":"eth_newPendingTransactionFilter",
+    "params":[],
+    "id":73
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "id":1,
+    "jsonrpc":  "2.0",
+    "result": "0x1" // 1
+}
+```
+
+</ResponseExample>

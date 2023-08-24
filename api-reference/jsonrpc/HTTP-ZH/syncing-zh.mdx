@@ -1,0 +1,95 @@
+---
+title: "eth_syncing"
+api: "POST /"
+---
+
+返回一个对象，该对象包含有关同步状态的数据或false
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_syncing">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="result" type="object">
+  <Expandable title="sync result">
+    <ResponseField name="syncStatus" type="bool">
+        布尔值仅在不同步时为false
+    </ResponseField>
+
+    or
+
+    <ResponseField name="syncBlocks" type="object">
+        <Expandable title="syncBlocks">
+            <ResponseField name="currentBlock" type="string">
+                表示当前块的整型数的六进制代码，与eth_blockNumber相同
+            </ResponseField>
+
+            <ResponseField name="highestBlock" type="string">
+                表示最高块的整型数的十六进制代码
+            </ResponseField>
+
+            <ResponseField name="startingBlock" type="string">
+                整型数的十六进制代码，指示导入开始的块（只有在同步到达他的头部后才会重置）
+            </ResponseField>
+
+            
+        </Expandable>
+    </ResponseField>
+
+
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_syncing",
+    "params": [],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "currentBlock": "3",
+        "highestBlock": "3",
+        "startingBlock": "1"
+    }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,80 @@
+---
+title: "eth_getStorageAt"
+api: "POST /"
+---
+
+返回给定地址的存储位置的值
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getStorageAt">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+
+  <Expandable title="params">
+     <ParamField body="address" type="string">
+       表示代码地址（20字节）的字符串
+     </ParamField>
+
+     <ParamField body="storagePosition" type="string">
+       存储器中位置的十六进制代码
+     </ParamField>
+
+     <ParamField body="block" type="string">
+        十六进制块号，或字符串“latest”、“earliest”或“pending”，或块的哈希（32字节）
+     </ParamField>
+
+  </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="storageValue" type="string">
+  此存储中的值
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getStorageAt",
+    "params": ["0x4cd8ee4fc57c51d8af5b6b6a08cc441f2b4fcbfe","0x0","latest"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x"
+}
+```
+
+</ResponseExample>

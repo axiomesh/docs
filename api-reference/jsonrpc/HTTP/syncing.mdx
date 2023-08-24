@@ -1,0 +1,95 @@
+---
+title: "eth_syncing"
+api: "POST /"
+---
+
+Returns an object with data about the sync status or false
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_syncing">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  Returns unique identifier for the request 
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  Returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="result" type="object">
+  <Expandable title="sync result">
+    <ResponseField name="syncStatus" type="bool">
+        A boolean as false only when not syncing
+    </ResponseField>
+
+    or
+
+    <ResponseField name="syncBlocks" type="object">
+        <Expandable title="syncBlocks">
+            <ResponseField name="currentBlock" type="string">
+                A hexcode of the integer indicating the current block, same as eth_blockNumber
+            </ResponseField>
+
+            <ResponseField name="highestBlock" type="string">
+                A hexcode of the integer indicating the highest block
+            </ResponseField>
+
+            <ResponseField name="startingBlock" type="string">
+                A hexcode of the integer indicating the block at which the import started (will only be reset, after the sync reached his head)
+            </ResponseField>
+
+            
+        </Expandable>
+    </ResponseField>
+
+
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_syncing",
+    "params": [],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "currentBlock": "3",
+        "highestBlock": "3",
+        "startingBlock": "1"
+    }
+}
+```
+
+</ResponseExample>
