@@ -1,5 +1,5 @@
 ---
-title: "Cross-Chain"
+title: 'Cross-Chain'
 ---
 
 Axiom's cross-chain mechanism is applicable to all EVM-compatible blockchains. Axiom's cross-chain mechanism ensures not only the cross-chain transmission of messages but also guarantees the transactions' integrity when Axiom interacts with other chains or when other chains interact with Axiom for asset exchanges.
@@ -35,7 +35,7 @@ The entire process of cross-chain messaging is as follows:
 5. The cross-chain manager contracts on destination chain get the transaction and unpack the cross-chain message;
 6. The cross-chain manager contracts invoke the destination contracts and finish the cross-chain message process.
 
-## Message Cross-Chain Process
+## Asset Cross-Chain Process
 
 Cross-chain asset transfers are relatively more complex. To ensure the atomicity of cross-chain asset transfers, the messages for asset cross-chain need to wait for receipts sent by the destination chain. Only upon receiving a successful receipt, the assets from the source chain will be effectively locked. In case of a failed receipt or if the acknowledgment is not received within the timeout, the assets from the source chain will be returned to the user or on-chain application.
 

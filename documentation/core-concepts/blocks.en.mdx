@@ -6,7 +6,7 @@ A block refers to a collection of transactions and includes the hash of the prev
 
 # Why need block?
 
-To ensure that all participants on the Ethereum network maintain a synchronized state and reach consensus on the exact history of transactions, we divide transactions into multiple blocks. This means that there are simultaneously dozens (or even hundreds) of transactions being submitted, agreed upon, and synchronized.
+To ensure that all participants on the Axiom network maintain a synchronized state and reach consensus on the exact history of transactions, we divide transactions into multiple blocks. This means that there are simultaneously dozens (or even hundreds) of transactions being submitted, agreed upon, and synchronized.
 
 # How block works?
 
@@ -29,6 +29,8 @@ A block contains a lot of information. Among them, the block header includes the
 | Version     | Blockchain version                   |
 | Bloom       | Data structure containing event logs |
 | GasPrice    | Block gas price                      |
+
+In addition, a block also contains all the transactions and receipts of that block, as well as the current block hash.
 
 # Block size
 
