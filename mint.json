@@ -51,13 +51,8 @@
         {
           "group": "Quick Start",
           "pages": [
-            "documentation/getting-started/quick-start/wallet-configuration",
-            "documentation/getting-started/quick-start/generating",
-            "documentation/getting-started/quick-start/minting-coin",
-            "documentation/getting-started/quick-start/transferring-coin",
-            "documentation/getting-started/quick-start/using",
-            "documentation/getting-started/quick-start/testing",
-            "documentation/getting-started/quick-start/dapp"
+            "documentation/getting-started/quick-start/quick_start_zh",
+            "documentation/getting-started/quick-start/quick_start_en"
           ]
         },
         "documentation/getting-started/faqs/document",
