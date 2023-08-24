@@ -100,8 +100,11 @@
       "group": "Economics",
       "pages": [
         "documentation/economics/overview.en",
+        "documentation/economics/overview.zh",
         "documentation/economics/gas.en",
-        "documentation/economics/stablecoin.en"
+        "documentation/economics/gas.zh",
+        "documentation/economics/stablecoin.en",
+        "documentation/economics/stablecoin.zh"
       ]
     },
     {
@@ -167,7 +170,8 @@
       "group": "SDKs",
       "pages": [
         "sdks/sdks/java-sdk",
-        "sdks/sdks/js-sdk.en"
+        "sdks/sdks/js-sdk.en",
+        "sdks/sdks/js-sdk.zh"
       ]
     },
     {
