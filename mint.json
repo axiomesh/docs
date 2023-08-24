@@ -45,7 +45,7 @@
       "group": "Getting Started",
       "pages": [
         "documentation/getting-started/overview",
-        "documentation/getting-started/introduction/document",
+        "documentation/getting-started/introduction/document.en",
         {
           "group": "Quick Start",
           "pages": [
@@ -68,15 +68,19 @@
         "documentation/core-concepts/accounts",
         "documentation/core-concepts/transactions",
         "documentation/core-concepts/blocks",
-        "documentation/core-concepts/staking"
+        "documentation/core-concepts/system-contract.en",
+        "documentation/core-concepts/upgrade.en"
       ]
     },
     {
       "group": "System Design",
       "pages": [
         "documentation/system-design/architecture",
-        "documentation/system-design/virtual-machine",
+        "documentation/system-design/architecture-en",
+        "documentation/system-design/virtual-machine.en",
         "documentation/system-design/transaction-flow",
+        "documentation/system-design/transaction-flow-en",
+        "documentation/system-design/virtual-machine",
         "documentation/system-design/consensus",
         "documentation/system-design/crossChain"
       ]
@@ -84,23 +88,17 @@
     {
       "group": "Governance",
       "pages": [
-        "documentation/governance/overview",
-        "documentation/governance/submitting-proposals"
+        "documentation/governance/committee.en",
+        "documentation/governance/post-proposals.en",
+        "documentation/governance/vote-proposals.en"
       ]
     },
     {
       "group": "Economics",
       "pages": [
-        "documentation/economics/overview",
-        "documentation/economics/gas",
-        "documentation/economics/rewards",
-        {
-          "group": "Tokenomics",
-          "pages": [
-            "documentation/economics/tokenomics/token-allocations",
-            "documentation/economics/tokenomics/inflation-deflation"
-          ]
-        }
+        "documentation/economics/overview.en",
+        "documentation/economics/gas.en",
+        "documentation/economics/stablecoin.en"
       ]
     },
     {
@@ -165,7 +163,8 @@
     {
       "group": "SDKs",
       "pages": [
-        "sdks/sdks/java-sdk"
+        "sdks/sdks/java-sdk",
+        "sdks/sdks/js-sdk.en"
       ]
     },
     {

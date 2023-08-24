@@ -1,0 +1,11 @@
+---
+title: "Vote Proposals"
+---
+
+After the proposal is submitted, the committee members will vote on the proposal. Currently, each member has a weight of 1. In the future, different weights will be assigned to members according to the actual situation.
+
+The current voting strategy is relatively simple. Each member can only vote to pass or reject. When the number of passed votes exceeds half of the total votes, the proposal is accepted and the proposal will be executed on the chain. When the number of rejected votes exceeds half of the total votes, the proposal is rejected and the proposal will not be executed on the chain.
+
+Generally speaking, the proposal will be executed immediately after it is accepted, and it will be executed through the governance contract. When the proposal sets the effective block height, the chain will be upgraded only when the newly generated block height exceeds the effective block height, ensuring that the chain The consistency of the version avoids the occurrence of forks.
+
+![vote-proposal](../../images/governance_vote_en.png)
