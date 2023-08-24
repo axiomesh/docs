@@ -16,13 +16,13 @@ JDK 17
 
 ### 配置仓库
 
-目前 Jar 包发布在 GitHub Packages。下载需要在 Maven settings.xml 设置仓库源，如下所示
+目前 Jar 包发布在 GitHub Packages。下载需要在 Maven settings.xml 设置仓库源。具体配置如下所示，需要配置 GitHub 用户名以及相关的访问令牌（注：在 GitHub 设置界面的开发者设置中生成并获取）
 ```
 <servers>
     <server>
-      <id>github</id> <!-- 这应该与上面在repositories标签中设置的ID匹配 -->
-      <username>heyifeng</username>
-      <password>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</password>
+      <id>github</id>
+      <username>YOUR_GITHUB_USERNAME</username>
+      <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
     </server>
 </servers>
 ```
@@ -33,7 +33,7 @@ JDK 17
 ```
 <dependencies>
     <dependency>
-        <groupId>org.axiomesh</groupId>
+        <groupId>io.axiomesh</groupId>
         <artifactId>core</artifactId>
         <version>0.0.1</version>
     </dependency>

@@ -16,14 +16,14 @@ JDK 17
 
 ### Configure Repo
 
-Currently, the Jar package is published on GitHub Packages. To download, you need to set the repository source in Maven's `settings.xml`, as shown below.
+Currently, the Jar package is published on GitHub Packages. To download, you need to get `PERSONAL_ACCESS_TOKEN` from GitHub `Developer settings` and set the repository source in Maven's `settings.xml`, as shown below.
 
 ```
 <servers>
     <server>
       <id>github</id>
-      <username>heyifeng</username>
-      <password>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</password>
+      <username>YOUR_GITHUB_USERNAME</username>
+      <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
     </server>
 </servers>
 ```
@@ -34,7 +34,7 @@ Configure in the `pom.xml` file of the Maven project as shown below.
 ```
 <dependencies>
     <dependency>
-        <groupId>org.axiomesh</groupId>
+        <groupId>io.axiomesh</groupId>
         <artifactId>core</artifactId>
         <version>0.0.1</version>
     </dependency>
