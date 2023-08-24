@@ -1,0 +1,35 @@
+---
+title: 'Blocks'
+---
+
+A block refers to a collection of transactions and includes the hash of the previous block in the chain. This links blocks together, forming a chain, as the hash is derived through encryption from the block's data. This prevents fraud, as any alteration in any previous block would invalidate all subsequent blocks, causing all hashes to change, which would be noticed by all participants running the blockchain.
+
+# Why need block?
+
+To ensure that all participants on the Ethereum network maintain a synchronized state and reach consensus on the exact history of transactions, we divide transactions into multiple blocks. This means that there are simultaneously dozens (or even hundreds) of transactions being submitted, agreed upon, and synchronized.
+
+# How block works?
+
+To preserve the transaction history, blocks are strictly ordered (each newly created block contains a reference to its parent block), and transactions within a block are also strictly ordered. With few exceptions, at any given time, all participants on the network agree on the exact number and history of blocks and are actively working to batch the current pending transaction requests into the next block.
+
+After randomly selected validators construct a block on the network, the block is propagated throughout the network; all nodes append the block to the end of their blockchain and then select new validators to create the next block. Currently, the exact block construction process and submission/consensus process are governed by dBFT protocol.
+
+# What a block contains
+
+A block contains a lot of information. Among them, the block header includes the following fields:
+
+| Fields      | Introduction                         |
+| ----------- | ------------------------------------ |
+| Number      | Block height                         |
+| StateRoot   | Root hash of the state object        |
+| TxRoot      | Root hash of the transactions        |
+| ReceiptRoot | Root hash of the receipts            |
+| ParentHash  | Hash of the parent block             |
+| Timestamp   | Timestamp of the block               |
+| Version     | Blockchain version                   |
+| Bloom       | Data structure containing event logs |
+| GasPrice    | Block gas price                      |
+
+# Block size
+
+The final important note is that the size of a block is bounded. Each block can contain a maximum of 500 transactions. The gas target size for each transaction in a block needs to be less than one hundred million. This is crucial as it ensures that the execution time of transactions within a block doesn't become excessively large. If the number of transactions in a block or the gas limit per transaction could expand limitlessly, performance-limited full nodes would gradually become unable to keep up with the network due to space and speed constraints. The larger the blocks, the more computational power is needed to process them promptly in the next time slot. This is a centralizing factor that can be countered by limiting the block size.
