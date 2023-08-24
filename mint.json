@@ -71,7 +71,9 @@
         "documentation/core-concepts/transactions",
         "documentation/core-concepts/blocks",
         "documentation/core-concepts/system-contract.en",
-        "documentation/core-concepts/upgrade.en"
+        "documentation/core-concepts/system-contract.zh",
+        "documentation/core-concepts/upgrade.en",
+        "documentation/core-concepts/upgrade.zh"
       ]
     },
     {
@@ -80,10 +82,9 @@
         "documentation/system-design/architecture-en",
         "documentation/system-design/architecture-zh",
         "documentation/system-design/virtual-machine.en",
-        "documentation/system-design/transaction-flow",
+        "documentation/system-design/virtual-machine.zh",
         "documentation/system-design/transaction-flow-en",
         "documentation/system-design/transaction-flow-zh",
-        "documentation/system-design/virtual-machine.zh",
         "documentation/system-design/consensus",
         "documentation/system-design/crossChain"
       ]
@@ -92,8 +93,11 @@
       "group": "Governance",
       "pages": [
         "documentation/governance/committee.en",
+        "documentation/governance/committee.zh",
         "documentation/governance/post-proposals.en",
-        "documentation/governance/vote-proposals.en"
+        "documentation/governance/post-proposals.zh",
+        "documentation/governance/vote-proposals.en",
+        "documentation/governance/vote-proposals.zh"
       ]
     },
     {
