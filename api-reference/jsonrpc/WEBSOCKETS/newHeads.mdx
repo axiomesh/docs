@@ -36,26 +36,26 @@ The newHeads subscription type emits an event any time a new header (block) is a
 
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
 <ResponseField name="method" type="string">
-  returns the method of JSON-RPC call
+  Returns the method of JSON-RPC call
 </ResponseField>
 
 <ResponseField name="params" type="object">
-  subscription result
+  Subscription result
 
   <Expandable title="subscription result">
 
     <ResponseField name="subscription" type="string">
-      subscription id
+      Subscription id
     </ResponseField>
 
-  <Expandable title="Block object">
+  <Expandable title="blockObject">
 
     <ResponseField name="number" type="string">
-        the block number. Null when the returned block is the pending block
+        The block number. Null when the returned block is the pending block
     </ResponseField>
 
     <ResponseField name="hash" type="string">
@@ -94,36 +94,36 @@ The newHeads subscription type emits an event any time a new header (block) is a
     </ResponseField>
 
     <ResponseField name="mixHash" type="string">
-       a field in the block head, which is used to prove that the miner has completed the Proof of work (PoW) in the mining process
+       A field in the block head, which is used to prove that the miner has completed the Proof of work (PoW) in the mining process
     </ResponseField>
 
     <ResponseField name="difficulty" type="string">
-      hexadecimal of the difficulty for this block
+      Hexadecimal of the difficulty for this block
     </ResponseField>
 
     <ResponseField name="totalDifficulty" type="string">
-      hexadecimal of the total difficulty of the chain until this block
+      Hexadecimal of the total difficulty of the chain until this block
     </ResponseField>
 
     <ResponseField name="extraData" type="string">
-      the "extra data" field of this block
+      The "extra data" field of this block
     </ResponseField>
 
     <ResponseField name="size" type="string">
-      hexadecimal the size of this block in bytes
+      Hexadecimal the size of this block in bytes
     </ResponseField>
 
      <ResponseField name="gasLimit" type="string">
-      the maximum gas allowed in this block
+      The maximum gas allowed in this block
      </ResponseField>
 
 
      <ResponseField name="gasUsed" type="string">
-      the total used gas by all transactions in this block
+      The total used gas by all transactions in this block
      </ResponseField>
 
      <ResponseField name="timestamp" type="string">
-      the unix timestamp for when the block was collated
+      The unix timestamp for when the block was collated
      </ResponseField>
 
      <ResponseField name="transactions" type="Array">

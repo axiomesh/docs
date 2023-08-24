@@ -2,7 +2,7 @@
 title: "newPendingTransactions"
 ---
 
-newPendingTransactions订阅类型通过WebSockets订阅所有挂起的事务（无论您是否发送它们），并返回它们的事务哈希。
+newPendingTransactions订阅类型通过WebSockets订阅所有待定的交易（无论您是否发送它们），并返回它们的交易哈希。
 
 
 ### Body
@@ -57,15 +57,15 @@ newPendingTransactions订阅类型通过WebSockets订阅所有挂起的事务（
     </ResponseField>
 
     <ResponseField name="TRANSACTION" type="object">
-  交易对象，或未找到交易时为null
+  交易对象，或未找到交易时为空
  
   <Expandable title="TRANSACTION object">
     <ResponseField name="blockHash" type="string">
-        32字节-包括此交易的块的哈希。待定时为null
+        32字节-包括此交易的块的哈希。待定时为空
     </ResponseField>
 
     <ResponseField name="blockNumber" type="string">
-        包括此交易的块的编号。待定时为null
+        包括此交易的块的编号。待定时为空
     </ResponseField>
 
     <ResponseField name="from" type="string">
@@ -73,19 +73,19 @@ newPendingTransactions订阅类型通过WebSockets订阅所有挂起的事务（
     </ResponseField>
 
     <ResponseField name="gas" type="string">
-        发送者提供的气体
+        发送者提供的gas
     </ResponseField>
 
     <ResponseField name="gasPrice" type="string">
-        发送者在wei提供的gas价格
+        发送者在Mol提供的gas价格
     </ResponseField>
 
     <ResponseField name="gasFeeCap" type="string">
-        maxFeePerGas，最高费用，以wei为单位，发送者愿意支付高于基本费用的gas
+        maxFeePerGas，最高费用，以Mol为单位，发送者愿意支付高于基本费用的gas
     </ResponseField>
 
     <ResponseField name="gasTipCap" type="string">
-        maxPriorityFeePerGas，最高总费用（基本费用+优先费用），以Wei为单位，发送方愿意支付每份gas
+        maxPriorityFeePerGas，最高总费用（基本费用+优先费用），以Mol为单位，发送方愿意支付每份gas
     </ResponseField>
 
     <ResponseField name="hash" type="string">
@@ -101,15 +101,15 @@ newPendingTransactions订阅类型通过WebSockets订阅所有挂起的事务（
     </ResponseField>
 
     <ResponseField name="to" type="string">
-        20字节-接收者的地址。当是合约创建交易时为null
+        20字节-接收者的地址。当是合约创建交易时为空
     </ResponseField>
 
     <ResponseField name="transactionIndex" type="string">
-        块中交易索引位置的整数。待定时为null
+        块中交易索引位置的整数。待定时为空
     </ResponseField>
 
     <ResponseField name="value" type="string">
-        以wei为单位的价值转入
+        以Mol为单位的价值转入
     </ResponseField>
 
     <ResponseField name="type" type="string">

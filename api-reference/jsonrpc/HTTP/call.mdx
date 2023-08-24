@@ -34,15 +34,15 @@ Executes a new message call immediately without creating a transaction on the bl
      </ParamField>
 
      <ParamField body="gas" type="string">
-       hexadecimal value of the gas provided for the transaction execution
+       Hexadecimal value of the gas provided for the transaction execution
      </ParamField>
 
      <ParamField body="gasPrice" type="string">
-        hexadecimal value of the gasPrice used for each paid gas
+        Hexadecimal value of the gasPrice used for each paid gas
      </ParamField>
 
      <ParamField body="value" type="string">
-        hexadecimal value of the value sent with this transaction
+        Hexadecimal value of the value sent with this transaction
      </ParamField>
 
      <ParamField body="data" type="string">
@@ -53,8 +53,8 @@ Executes a new message call immediately without creating a transaction on the bl
   </Expandable>
 
    <Expandable title="Block">
-        <ParamField body="Block" type="string">
-        a hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
+        <ParamField body="block" type="string">
+        A hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
      </ParamField>
    </Expandable>
 </ParamField>
@@ -62,15 +62,15 @@ Executes a new message call immediately without creating a transaction on the bl
 ### Response
 
 <ResponseField name="id" type="number">
-  returns unique identifier for the request 
+  Returns unique identifier for the request 
 </ResponseField>
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
-<ResponseField name="Return VALUE" type="string">
-  the return value of the executed contract method
+<ResponseField name="value" type="string">
+  Return value of the executed contract method
 </ResponseField>
 
 <RequestExample>

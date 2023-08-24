@@ -23,7 +23,7 @@ api: "POST /"
   包含传递给远程方法的参数列表
   <Expandable title="params">
 
-     <ParamField body="TRANSACTION DATA" type="string">
+     <ParamField body="transactionData" type="string">
         签名的交易数据
      </ParamField>
 
@@ -43,8 +43,8 @@ api: "POST /"
 </ResponseField>
 
 
-<ResponseField name="TRANSACTION HASH" type="string">
-  32字节-事务哈希，如果交易还不可用，则为零哈希
+<ResponseField name="transactionHash" type="string">
+  32字节-交易哈希，如果交易还不可用，则为零哈希
 </ResponseField>
 
 <RequestExample>

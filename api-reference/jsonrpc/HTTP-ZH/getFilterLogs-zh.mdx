@@ -23,7 +23,7 @@ api: "POST /"
     包含传递给远程方法的参数列表
 
     <Expandable title="params">
-        <ParamField body="FIELD ID" type="string">
+        <ParamField body="filterId" type="string">
             过滤器id
         </ParamField>
     </Expandable>
@@ -42,13 +42,13 @@ api: "POST /"
 <ResponseField name="result" type="array">
     对于使用eth_newBlockFilter创建的筛选器，返回的是块哈希（DATA，32字节），例如[“0x345456634534…”]
 
-    对于使用eth_newPendingTransactionFilter创建的筛选器，返回的是事务哈希（DATA，32字节），例如[“0x634534345645…”]
+    对于使用eth_newPendingTransactionFilter创建的筛选器，返回的是交易哈希（DATA，32字节），例如[“0x634534345645…”]
 
     对于使用eth_newFilter创建的筛选器，日志是具有以下参数的对象：
     <Expandable title="Log objects">
 
         <ResponseField body="logIndex" type="string">
-            区块中日志索引位置的整型数。当其挂起日志时为空
+            区块中日志索引位置的整型数。当其待定日志时为空
         </ResponseField>
 
         <ResponseField body="removed" type="bool">
@@ -56,15 +56,15 @@ api: "POST /"
         </ResponseField>
 
         <ResponseField body="transactionIndex" type="string">
-            交易索引位置日志的整数是从创建的。当其挂起日志时为空
+            交易索引位置日志的整数是从创建的。当其待定日志时为空
         </ResponseField>
 
         <ResponseField body="transactionHash" type="string">
-            32 字节 - 创建此日志的交易的哈希。当其挂起日志时为空
+            32 字节 - 创建此日志的交易的哈希。当其待定日志时为空
         </ResponseField>
 
         <ResponseField body="blockHash" type="string">
-            32 字节 - 此日志所在块的哈希。待定时为空。当其挂起日志时为空。
+            32 字节 - 此日志所在块的哈希。待定时为空。当其待定日志时为空。
         </ResponseField>
 
         <ResponseField body="blockNumber" type="string">

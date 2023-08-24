@@ -24,11 +24,11 @@ api: "POST /"
   包含传递给远程方法的参数列表
 
   <Expandable title="params">
-     <ParamField body="BLOCK HASH" type="string">
+     <ParamField body="blockHash" type="string">
         表示块的哈希(32字节)的字符串
      </ParamField>
 
-     <ParamField body="TRANSACTION DETAILS FLAG" type="bool">
+     <ParamField body="transactionDetailsFlag" type="bool">
         如果为true，则返回完整的交易对象，如果为false，则仅返回交易的哈希
      </ParamField>
 
@@ -48,7 +48,7 @@ api: "POST /"
 <ResponseField name="result" type="object">
   区块对象
 
-  <Expandable title="Block object">
+  <Expandable title="blockObject">
 
     <ResponseField name="number" type="string">
         块号。当返回的块是待定的块时为空
@@ -103,12 +103,12 @@ api: "POST /"
     </ResponseField>
 
      <ResponseField name="gasLimit" type="string">
-      该区块允许的最大气体
+      该区块允许的最大gas
      </ResponseField>
 
 
      <ResponseField name="gasUsed" type="string">
-      该区块中所有交易的气体使用总量
+      该区块中所有交易的gas使用总量
      </ResponseField>
 
      <ResponseField name="timestamp" type="string">
@@ -116,7 +116,7 @@ api: "POST /"
      </ResponseField>
 
      <ResponseField name="transactions" type="Array">
-      交易数组，或32字节事务哈希数组
+      交易数组，或32字节交易哈希数组
      </ResponseField>
 
      <ResponseField name="receiptsRoot" type="string">

@@ -3,7 +3,7 @@ title: "eth_gasPrice"
 api: "POST /"
 ---
 
-Returns the current price per gas in wei
+Returns the current price per gas in Mol
 
 
 ### Body
@@ -27,15 +27,15 @@ Returns the current price per gas in wei
 ### Response
 
 <ResponseField name="id" type="number">
-  returns unique identifier for the request 
+  Returns unique identifier for the request 
 </ResponseField>
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
-<ResponseField name="GAS PRICE" type="string">
-  a hex code of an integer representing the current gas price in wei
+<ResponseField name="gasPrice" type="string">
+  A hex code of an integer representing the current gas price in Mol
 </ResponseField>
 
 <RequestExample>

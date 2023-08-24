@@ -3,7 +3,7 @@ title: "eth_estimateGas"
 api: "POST /"
 ---
 
-生成并返回完成交易所需的天然气量估计值。该交易不会添加到区块链中。请注意，由于包括EVM机制和节点性能在内的多种原因，估计值可能远高于交易实际使用的天然气量
+生成并返回完成交易所需的gas量估计值。该交易不会添加到区块链中。请注意，由于包括EVM机制和节点性能在内的多种原因，估计值可能远高于交易实际使用的gas量
 
 ### Body
 
@@ -50,7 +50,7 @@ api: "POST /"
   </Expandable>
 
    <Expandable title="Block">
-        <ParamField body="Block" type="string">
+        <ParamField body="block" type="string">
        十六进制块号，或字符串“latest”、“earliest”、“pending”或块的哈希（32字节）
      </ParamField>
    </Expandable>
@@ -66,8 +66,8 @@ api: "POST /"
   返回正在使用的JSON-RPC版本
 </ResponseField>
 
-<ResponseField name="Return VALUE" type="string">
-  给定交易的气体估计值的十六进制。
+<ResponseField name="gasUsed" type="string">
+  给定交易的gas估计值的十六进制。
 </ResponseField>
 
 <RequestExample>

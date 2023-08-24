@@ -23,11 +23,11 @@ api: "POST /"
   包含传递给远程方法的参数列表
   <Expandable title="params">
 
-     <ParamField body="ADDRESS" type="string">
+     <ParamField body="address" type="string">
         表示要检查其交易计数的地址（20字节）的字符串
      </ParamField>
 
-     <ParamField body="Block" type="string">
+     <ParamField body="block" type="string">
         十六进制块号，或字符串“latest”、“earliest”或“pending”，或块的哈希（32字节）
      </ParamField>
 
@@ -46,8 +46,8 @@ api: "POST /"
   返回正在使用的JSON-RPC版本
 </ResponseField>
 
-<ResponseField name="TRANSACTION COUNT" type="string">
-  整数的十六进制代码，表示从此地址发送的交易数
+<ResponseField name="transactionCount" type="string">
+  整型数的十六进制代码，表示从此地址发送的交易数
 </ResponseField>
 
 <RequestExample>

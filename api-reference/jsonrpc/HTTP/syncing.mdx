@@ -26,33 +26,33 @@ Returns an object with data about the sync status or false
 ### Response
 
 <ResponseField name="id" type="number">
-  returns unique identifier for the request 
+  Returns unique identifier for the request 
 </ResponseField>
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
 <ResponseField name="result" type="object">
   <Expandable title="sync result">
-    <ResponseField name="SYNC STATUS" type="bool">
-        a boolean as false only when not syncing
+    <ResponseField name="syncStatus" type="bool">
+        A boolean as false only when not syncing
     </ResponseField>
 
     or
 
-    <ResponseField name="SYNC BLOCKS" type="object">
-        <Expandable title="SYNC BLOCKS">
+    <ResponseField name="syncBlocks" type="object">
+        <Expandable title="syncBlocks">
             <ResponseField name="currentBlock" type="string">
-                a hexcode of the integer indicating the current block, same as eth_blockNumber
+                A hexcode of the integer indicating the current block, same as eth_blockNumber
             </ResponseField>
 
             <ResponseField name="highestBlock" type="string">
-                a hexcode of the integer indicating the highest block
+                A hexcode of the integer indicating the highest block
             </ResponseField>
 
             <ResponseField name="startingBlock" type="string">
-                a hexcode of the integer indicating the block at which the import started (will only be reset, after the sync reached his head)
+                A hexcode of the integer indicating the block at which the import started (will only be reset, after the sync reached his head)
             </ResponseField>
 
             

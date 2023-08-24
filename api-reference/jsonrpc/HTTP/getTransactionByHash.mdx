@@ -23,8 +23,8 @@ Returns information about a transaction for a given hash
   Contains the list of parameters passed to the remote method
   <Expandable title="params">
 
-     <ParamField body="TRANSACTION HASH" type="string">
-        a string representing the hash (32 bytes) of a transaction
+     <ParamField body="transactionHash" type="string">
+        A string representing the hash (32 bytes) of a transaction
      </ParamField>
 
   </Expandable>
@@ -35,11 +35,11 @@ Returns information about a transaction for a given hash
 ### Response
 
 <ResponseField name="id" type="number">
-  returns unique identifier for the request 
+  Returns unique identifier for the request 
 </ResponseField>
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
 <ResponseField name="TRANSACTION" type="object">
@@ -51,7 +51,7 @@ Returns information about a transaction for a given hash
     </ResponseField>
 
     <ResponseField name="blockNumber" type="string">
-        number of the block including this transaction. null when it's pending
+        Number of the block including this transaction. null when it's pending
     </ResponseField>
 
     <ResponseField name="from" type="string">
@@ -59,19 +59,19 @@ Returns information about a transaction for a given hash
     </ResponseField>
 
     <ResponseField name="gas" type="string">
-        gas provided by the sender
+        Gas provided by the sender
     </ResponseField>
 
     <ResponseField name="gasPrice" type="string">
-        gas price provided by the sender in Wei
+        Gas price provided by the sender in Mol
     </ResponseField>
 
     <ResponseField name="gasFeeCap" type="string">
-        maxFeePerGas,Maximum fee, in Wei, the sender is willing to pay per gas above the base fee
+        MaxFeePerGas,Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
     </ResponseField>
 
     <ResponseField name="gasTipCap" type="string">
-        maxPriorityFeePerGas,Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas
+        MaxPriorityFeePerGas,Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
     </ResponseField>
 
     <ResponseField name="hash" type="string">
@@ -79,11 +79,11 @@ Returns information about a transaction for a given hash
     </ResponseField>
 
     <ResponseField name="input" type="string">
-        the data sent along with the transaction
+        The data sent along with the transaction
     </ResponseField>
 
     <ResponseField name="nonce" type="string">
-        the number of transactions made by the sender prior to this one
+        The number of transactions made by the sender prior to this one
     </ResponseField>
 
     <ResponseField name="to" type="string">
@@ -91,23 +91,23 @@ Returns information about a transaction for a given hash
     </ResponseField>
 
     <ResponseField name="transactionIndex" type="string">
-        integer of the transactions index position in the block. null when its pending
+        Integer of the transactions index position in the block. null when its pending
     </ResponseField>
 
     <ResponseField name="value" type="string">
-        value transferred in Wei
+        Value transferred in Mol
     </ResponseField>
 
     <ResponseField name="type" type="string">
-        the transaction type
+        The transaction type
     </ResponseField>
 
     <ResponseField name="Accesses" type="array">
-        list of addresses and storage keys the transaction plans to access
+        List of addresses and storage keys the transaction plans to access
     </ResponseField>
 
     <ResponseField name="chainID" type="string">
-        chain ID specifying the network. Returned only for EIP-1559 transactions
+        Chain ID specifying the network. Returned only for EIP-1559 transactions
     </ResponseField>
 
     <ResponseField name="v" type="string">

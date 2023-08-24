@@ -35,24 +35,24 @@ api: "POST /"
 
 <ResponseField name="result" type="object">
   <Expandable title="sync result">
-    <ResponseField name="SYNC STATUS" type="bool">
+    <ResponseField name="syncStatus" type="bool">
         布尔值仅在不同步时为false
     </ResponseField>
 
     or
 
-    <ResponseField name="SYNC BLOCKS" type="object">
-        <Expandable title="SYNC BLOCKS">
+    <ResponseField name="syncBlocks" type="object">
+        <Expandable title="syncBlocks">
             <ResponseField name="currentBlock" type="string">
-                表示当前块的整数的六进制代码，与eth_blockNumber相同
+                表示当前块的整型数的六进制代码，与eth_blockNumber相同
             </ResponseField>
 
             <ResponseField name="highestBlock" type="string">
-                表示最高块的整数的十六进制代码
+                表示最高块的整型数的十六进制代码
             </ResponseField>
 
             <ResponseField name="startingBlock" type="string">
-                整数的十六进制代码，指示导入开始的块（只有在同步到达他的头部后才会重置）
+                整型数的十六进制代码，指示导入开始的块（只有在同步到达他的头部后才会重置）
             </ResponseField>
 
             

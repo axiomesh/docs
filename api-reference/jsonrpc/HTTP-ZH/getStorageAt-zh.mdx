@@ -23,15 +23,15 @@ api: "POST /"
   包含传递给远程方法的参数列表
 
   <Expandable title="params">
-     <ParamField body="Address" type="string">
+     <ParamField body="address" type="string">
        表示代码地址（20字节）的字符串
      </ParamField>
 
-     <ParamField body="STORAGE POSITION" type="string">
+     <ParamField body="storagePosition" type="string">
        存储器中位置的十六进制代码
      </ParamField>
 
-     <ParamField body="Block" type="string">
+     <ParamField body="block" type="string">
         十六进制块号，或字符串“latest”、“earliest”或“pending”，或块的哈希（32字节）
      </ParamField>
 
@@ -48,7 +48,7 @@ api: "POST /"
   返回正在使用的JSON-RPC版本
 </ResponseField>
 
-<ResponseField name="STORAGE VALUE" type="string">
+<ResponseField name="storageValue" type="string">
   此存储中的值
 </ResponseField>
 

@@ -34,23 +34,23 @@ Generates and returns an estimate of how much gas is necessary to allow the tran
      </ParamField>
 
      <ParamField body="gas" type="string">
-       hexadecimal value of the gas provided for the transaction execution
+       Hexadecimal value of the gas provided for the transaction execution
      </ParamField>
 
      <ParamField body="gasPrice" type="string">
-        hexadecimal value of the gasPrice used for each paid gas
+        Hexadecimal value of the gasPrice used for each paid gas
      </ParamField>
 
      <ParamField body="maxFeePerGas" type="string">
-        Maximum fee, in Wei, the sender is willing to pay per gas above the base fee
+        Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
      </ParamField>
 
      <ParamField body="maxPriorityFeePerGas" type="string">
-        Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas
+        Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
      </ParamField>
 
      <ParamField body="value" type="string">
-        hexadecimal value of the value sent with this transaction
+        Hexadecimal value of the value sent with this transaction
      </ParamField>
 
      <ParamField body="nonce" type="string">
@@ -62,23 +62,23 @@ Generates and returns an estimate of how much gas is necessary to allow the tran
      </ParamField>
 
      <ParamField body="input" type="string">
-        "input" is the newer name and should be preferred by clients
+        Input is the newer name and should be preferred by clients
      </ParamField>
 
      <ParamField body="accessList" type="array">
-        array of EIP-2930 access list
+        Array of EIP-2930 access list
      </ParamField>
 
 
      <ParamField body="chainId" type="string">
-        chain ID that this transaction is valid on
+        Chain ID that this transaction is valid on
      </ParamField>
 
   </Expandable>
 
    <Expandable title="Block">
-        <ParamField body="Block" type="string">
-        a hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
+        <ParamField body="block" type="string">
+        A hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
      </ParamField>
    </Expandable>
 </ParamField>
@@ -86,14 +86,14 @@ Generates and returns an estimate of how much gas is necessary to allow the tran
 ### Response
 
 <ResponseField name="id" type="number">
-  returns unique identifier for the request 
+  Returns unique identifier for the request 
 </ResponseField>
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
-<ResponseField name="Return VALUE" type="string">
+<ResponseField name="gasUsed" type="string">
   A hexadecimal of the estimate of the gas for the given transaction.
 </ResponseField>
 

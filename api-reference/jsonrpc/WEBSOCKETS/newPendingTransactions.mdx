@@ -26,7 +26,7 @@ The newPendingTransactions subscription type subscribes to all pending transacti
   <Expandable title="params">
      Represents the method and parameters for initiating subscriptions
      <ParamField body="subscribe methods" type="string" placeholder="newPendingTransactions">
-        newPendingTransactions returns the hash for all transactions that are added to the pending state and are signed with a key that's available in the node.
+        NewPendingTransactions returns the hash for all transactions that are added to the pending state and are signed with a key that's available in the node.
      </ParamField>
 
      <ParamField body="newPendingTransactions flag" type="bool">
@@ -41,20 +41,20 @@ The newPendingTransactions subscription type subscribes to all pending transacti
 
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
 <ResponseField name="method" type="string">
-  returns the method of JSON-RPC call
+  Returns the method of JSON-RPC call
 </ResponseField>
 
 <ResponseField name="params" type="object">
-  subscription result
+  Subscription result
 
   <Expandable title="subscription result">
 
     <ResponseField name="subscription" type="string">
-      subscription id
+      Subscription id
     </ResponseField>
 
     <ResponseField name="TRANSACTION" type="object">
@@ -66,7 +66,7 @@ The newPendingTransactions subscription type subscribes to all pending transacti
     </ResponseField>
 
     <ResponseField name="blockNumber" type="string">
-        number of the block including this transaction. null when it's pending
+        Number of the block including this transaction. null when it's pending
     </ResponseField>
 
     <ResponseField name="from" type="string">
@@ -74,19 +74,19 @@ The newPendingTransactions subscription type subscribes to all pending transacti
     </ResponseField>
 
     <ResponseField name="gas" type="string">
-        gas provided by the sender
+        Gas provided by the sender
     </ResponseField>
 
     <ResponseField name="gasPrice" type="string">
-        gas price provided by the sender in Wei
+        Gas price provided by the sender in Mol
     </ResponseField>
 
     <ResponseField name="gasFeeCap" type="string">
-        maxFeePerGas,Maximum fee, in Wei, the sender is willing to pay per gas above the base fee
+        MaxFeePerGas,Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
     </ResponseField>
 
     <ResponseField name="gasTipCap" type="string">
-        maxPriorityFeePerGas,Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas
+        MaxPriorityFeePerGas,Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
     </ResponseField>
 
     <ResponseField name="hash" type="string">
@@ -94,11 +94,11 @@ The newPendingTransactions subscription type subscribes to all pending transacti
     </ResponseField>
 
     <ResponseField name="input" type="string">
-        the data sent along with the transaction
+        The data sent along with the transaction
     </ResponseField>
 
     <ResponseField name="nonce" type="string">
-        the number of transactions made by the sender prior to this one
+        The number of transactions made by the sender prior to this one
     </ResponseField>
 
     <ResponseField name="to" type="string">
@@ -106,23 +106,23 @@ The newPendingTransactions subscription type subscribes to all pending transacti
     </ResponseField>
 
     <ResponseField name="transactionIndex" type="string">
-        integer of the transactions index position in the block. null when its pending
+        Integer of the transactions index position in the block. null when its pending
     </ResponseField>
 
     <ResponseField name="value" type="string">
-        value transferred in Wei
+        Value transferred in Mol
     </ResponseField>
 
     <ResponseField name="type" type="string">
-        the transaction type
+        The transaction type
     </ResponseField>
 
     <ResponseField name="Accesses" type="array">
-        list of addresses and storage keys the transaction plans to access
+        List of addresses and storage keys the transaction plans to access
     </ResponseField>
 
     <ResponseField name="chainID" type="string">
-        chain ID specifying the network. Returned only for EIP-1559 transactions
+        Chain ID specifying the network. Returned only for EIP-1559 transactions
     </ResponseField>
 
     <ResponseField name="v" type="string">

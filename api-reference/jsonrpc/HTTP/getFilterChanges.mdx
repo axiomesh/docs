@@ -23,8 +23,8 @@ Polling method for a filter, which returns an array of logs which occurred since
     Contains the list of parameters passed to the remote method.
 
     <Expandable title="params">
-        <ParamField body="FIELD ID" type="string">
-            the filter id.
+        <ParamField body="filterId" type="string">
+            The filter id.
         </ParamField>
     </Expandable>
 </ParamField>
@@ -32,11 +32,11 @@ Polling method for a filter, which returns an array of logs which occurred since
 ### Response
 
 <ResponseField name="id" type="number">
-    returns unique identifier for the request
+    Returns unique identifier for the request
 </ResponseField>
 
 <ResponseField name="jsonrpc" type="string">
-    returns the version of JSON-RPC being used.
+    Returns the version of JSON-RPC being used.
 </ResponseField>
 
 <ResponseField name="result" type="array">
@@ -49,15 +49,15 @@ Polling method for a filter, which returns an array of logs which occurred since
     <Expandable title="Log objects">
 
         <ResponseField body="logIndex" type="string">
-            integer of the log index position in the block. null when its pending log.
+            Integer of the log index position in the block. null when its pending log.
         </ResponseField>
 
         <ResponseField body="removed" type="bool">
-            true when the log was removed, due to a chain reorganization. false if its a valid log.
+            True when the log was removed, due to a chain reorganization. false if its a valid log.
         </ResponseField>
 
         <ResponseField body="transactionIndex" type="string">
-            integer of the transactions index position log was created from. null when its pending log.
+            Integer of the transactions index position log was created from. null when its pending log.
         </ResponseField>
 
         <ResponseField body="transactionHash" type="string">
@@ -69,7 +69,7 @@ Polling method for a filter, which returns an array of logs which occurred since
         </ResponseField>
 
         <ResponseField body="blockNumber" type="string">
-            the block number where this log was in. null when its pending. null when its pending log.
+            The block number where this log was in. null when its pending. null when its pending log.
         </ResponseField>
 
         <ResponseField body="address" type="string">
@@ -77,7 +77,7 @@ Polling method for a filter, which returns an array of logs which occurred since
         </ResponseField>
 
         <ResponseField body="data" type="string">
-            contains one or more 32 Bytes non-indexed arguments of the log.
+            Contains one or more 32 Bytes non-indexed arguments of the log.
         </ResponseField>
 
         <ResponseField body="topics" type="array">

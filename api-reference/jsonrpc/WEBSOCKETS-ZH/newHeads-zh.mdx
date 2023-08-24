@@ -52,7 +52,7 @@ newHeads订阅类型在任何时候向链中添加新标头（块）时都会发
       订阅Id
     </ResponseField>
 
-  <Expandable title="Block object">
+  <Expandable title="blockObject">
 
     <ResponseField name="number" type="string">
         块号。当返回的块是待定的块时为空
@@ -114,12 +114,12 @@ newHeads订阅类型在任何时候向链中添加新标头（块）时都会发
     </ResponseField>
 
      <ResponseField name="gasLimit" type="string">
-      该区块允许的最大气体
+      该区块允许的最大gas
      </ResponseField>
 
 
      <ResponseField name="gasUsed" type="string">
-      该区块中所有交易的气体使用总量
+      该区块中所有交易的gas使用总量
      </ResponseField>
 
      <ResponseField name="timestamp" type="string">
@@ -127,7 +127,7 @@ newHeads订阅类型在任何时候向链中添加新标头（块）时都会发
      </ResponseField>
 
      <ResponseField name="transactions" type="Array">
-      交易数组，或32字节事务哈希数组
+      交易数组，或32字节交易哈希数组
      </ResponseField>
 
      <ResponseField name="receiptsRoot" type="string">

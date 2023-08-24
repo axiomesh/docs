@@ -23,12 +23,12 @@ Returns the balance of the account of given address
   Contains the list of parameters passed to the remote method
 
   <Expandable title="params">
-     <ParamField body="Address" type="string">
-        a string representing the address (20 bytes) to check for balance
+     <ParamField body="address" type="string">
+        A string representing the address (20 bytes) to check for balance
      </ParamField>
 
-     <ParamField body="Block" type="string">
-        a hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
+     <ParamField body="block" type="string">
+        A hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
      </ParamField>
 
   </Expandable>
@@ -37,15 +37,15 @@ Returns the balance of the account of given address
 ### Response
 
 <ResponseField name="id" type="number">
-  returns unique identifier for the request 
+  Returns unique identifier for the request 
 </ResponseField>
 
 <ResponseField name="jsonrpc" type="string">
-  returns the version of JSON-RPC being used
+  Returns the version of JSON-RPC being used
 </ResponseField>
 
-<ResponseField name="BALANCE" type="number">
-  hexadecimal of the current balance
+<ResponseField name="balance" type="string">
+  Hexadecimal of the current balance
 </ResponseField>
 
 <RequestExample>

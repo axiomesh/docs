@@ -3,7 +3,7 @@ title: "eth_getTransactionReceipt"
 api: "POST /"
 ---
 
-按交易哈希返回事务的收据
+按交易哈希返回交易的收据
 
 ### Body
 
@@ -23,8 +23,8 @@ api: "POST /"
   包含传递给远程方法的参数列表
   <Expandable title="params">
 
-     <ParamField body="TRANSACTION HASH" type="string">
-        表示事务的哈希（32字节）的字符串
+     <ParamField body="transactionHash" type="string">
+        表示交易的哈希（32字节）的字符串
      </ParamField>
 
   </Expandable>
@@ -42,16 +42,16 @@ api: "POST /"
  返回正在使用的JSON-RPC版本
 </ResponseField>
 
-<ResponseField name="TRANSACTION RECEIPT" type="object">
-  交易返回对象，或在找不到返回结果时为null
+<ResponseField name="transactionReceipt" type="object">
+  交易返回对象，或在找不到返回结果时为空
  
-  <Expandable title="RECEIPT object">
+  <Expandable title="receiptObject">
     <ResponseField name="blockHash" type="string">
-        32字节-包括此交易的块的哈希。挂起时为null
+        32字节-包括此交易的块的哈希。待定时为空
     </ResponseField>
 
     <ResponseField name="blockNumber" type="string">
-       包括此交易的块的编号。挂起时为null
+       包括此交易的块的编号。待定时为空
     </ResponseField>
 
      <ResponseField name="cumulativeGasUsed" type="string">
@@ -79,7 +79,7 @@ api: "POST /"
     </ResponseField>
 
     <ResponseField name="to" type="string">
-        20字节-接收者的地址。当交易是合约创建交易时为null
+        20字节-接收者的地址。当交易是合约创建交易时为空
     </ResponseField>
 
     <ResponseField name="transactionHash" type="string">
