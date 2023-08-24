@@ -164,14 +164,17 @@
     {
       "group": "Overview",
       "pages": [
-        "sdks/introduction"
+        "sdks/introduction.en",
+        "sdks/introduction.zh"
       ]
     },
     {
       "group": "SDKs",
       "pages": [
-        "sdks/sdks/java-sdk",
-        "sdks/sdks/js-sdk.en"
+        "sdks/sdks/java-sdk.en",
+        "sdks/sdks/java-sdk.zh",
+        "sdks/sdks/js-sdk.en",
+        "sdks/sdks/js-sdk.zh"
       ]
     },
     {
