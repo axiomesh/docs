@@ -1,0 +1,64 @@
+---
+title: "eth_newBlockFilter"
+api: "POST /"
+---
+
+在节点中创建一个过滤器，以便在新块到达时发出通知。要检查状态是否已更改，请调用eth_getFilterChanges。
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_newBlockFilter">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+    返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+    返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="filterId" type="string">
+    过滤器id
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc":"2.0",
+    "method":"eth_newBlockFilter",
+    "params":[],
+    "id":73
+}'
+    ```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "id":1,
+    "jsonrpc": "2.0",
+    "result": "0x1" // 1
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,206 @@
+---
+title: "newPendingTransactions"
+---
+
+The newPendingTransactions subscription type subscribes to all pending transactions via WebSockets (regardless if you sent them or not), and returns their transaction hashes.
+
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_subscribe">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+
+  <Expandable title="params">
+     Represents the method and parameters for initiating subscriptions
+     <ParamField body="subscribe methods" type="string" placeholder="newPendingTransactions">
+        NewPendingTransactions returns the hash for all transactions that are added to the pending state and are signed with a key that's available in the node.
+     </ParamField>
+
+     <ParamField body="newPendingTransactions flag" type="bool">
+        If true it returns the full transaction objects,if false only the hashes of the transactions
+     </ParamField>
+  </Expandable>
+  
+</ParamField>
+
+
+### Response
+
+
+<ResponseField name="jsonrpc" type="string">
+  Returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="method" type="string">
+  Returns the method of JSON-RPC call
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  Subscription result
+
+  <Expandable title="subscription result">
+
+    <ResponseField name="subscription" type="string">
+      Subscription id
+    </ResponseField>
+
+    <ResponseField name="TRANSACTION" type="object">
+  A transaction object, or null when no transaction was found
+ 
+  <Expandable title="TRANSACTION object">
+    <ResponseField name="blockHash" type="string">
+        32 Bytes - hash of the block including this transaction. null when it's pending
+    </ResponseField>
+
+    <ResponseField name="blockNumber" type="string">
+        Number of the block including this transaction. null when it's pending
+    </ResponseField>
+
+    <ResponseField name="from" type="string">
+        20 Bytes - address of the sender
+    </ResponseField>
+
+    <ResponseField name="gas" type="string">
+        Gas provided by the sender
+    </ResponseField>
+
+    <ResponseField name="gasPrice" type="string">
+        Gas price provided by the sender in Mol
+    </ResponseField>
+
+    <ResponseField name="gasFeeCap" type="string">
+        MaxFeePerGas,Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
+    </ResponseField>
+
+    <ResponseField name="gasTipCap" type="string">
+        MaxPriorityFeePerGas,Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
+    </ResponseField>
+
+    <ResponseField name="hash" type="string">
+        32 Bytes - hash of the transaction
+    </ResponseField>
+
+    <ResponseField name="input" type="string">
+        The data sent along with the transaction
+    </ResponseField>
+
+    <ResponseField name="nonce" type="string">
+        The number of transactions made by the sender prior to this one
+    </ResponseField>
+
+    <ResponseField name="to" type="string">
+        20 Bytes - address of the receiver. null when its a contract creation transaction
+    </ResponseField>
+
+    <ResponseField name="transactionIndex" type="string">
+        Integer of the transactions index position in the block. null when its pending
+    </ResponseField>
+
+    <ResponseField name="value" type="string">
+        Value transferred in Mol
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+        The transaction type
+    </ResponseField>
+
+    <ResponseField name="Accesses" type="array">
+        List of addresses and storage keys the transaction plans to access
+    </ResponseField>
+
+    <ResponseField name="chainID" type="string">
+        Chain ID specifying the network. Returned only for EIP-1559 transactions
+    </ResponseField>
+
+    <ResponseField name="v" type="string">
+        ECDSA recovery ID
+    </ResponseField>
+
+    <ResponseField name="r" type="string">
+        32 Bytes - ECDSA signature r
+    </ResponseField>
+
+    <ResponseField name="s" type="string">
+        32 Bytes - ECDSA signature s
+    </ResponseField>
+
+    </Expandable>
+
+
+
+</ResponseField>
+
+
+
+
+  </Expandable>
+
+</ResponseField>
+
+
+
+<RequestExample>
+
+```bash Example Request
+
+{ "id": 1, "jsonrpc": "2.0", "method": "eth_subscribe", "params": ["newPendingTransactions",true] }
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x925a14235998941c9dc326b2ba0f12f5"
+}
+
+{
+    "jsonrpc": "2.0",
+    "method": "eth_subscription",
+    "params": {
+        "subscription": "0x925a14235998941c9dc326b2ba0f12f5",
+        "result": {
+            "blockHash": null,
+            "blockNumber": null,
+            "from": "0xc7f999b83af6df9e67d0a37ee7e900bf38b3d013",
+            "gas": "0x67c8",
+            "gasPrice": "0x61a260b3eac",
+            "maxFeePerGas": "0x61a260b3eac",
+            "maxPriorityFeePerGas": "0x9502f900",
+            "hash": "0x3284042db190b888ac3610f83dde7d8c53afe8b7482dc0d2ef5058bc72a82b83",
+            "input": "0x174714cd",
+            "nonce": "0x4",
+            "to": "0xccc0024ca56670e2c4149b658015dc8d1753ccc7",
+            "transactionIndex": null,
+            "value": "0x0",
+            "type": "0x2",
+            "accessList": [],
+            "chainId": "0x54c",
+            "v": "0x0",
+            "r": "0x2fed359b2c10d11326cafa90f269267004657696377e09a61ff74d40372b446a",
+            "s": "0x1ecaf4f0051396f9c9879e58c4000fed9cfa2a67da90c9610c367d26b9be7f70"
+        }
+    }
+}
+
+
+
+```
+
+</ResponseExample>

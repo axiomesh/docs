@@ -1,0 +1,72 @@
+---
+title: "eth_uninstallFilter"
+api: "POST /"
+---
+
+Uninstalls a filter with given id. Should always be called when watch is no longer needed. Additionally Filters timeout when they aren't requested with eth_getFilterChanges for a period of time.
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_uninstallFilter">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+    Contains the list of parameters passed to the remote method.
+
+    <Expandable title="params">
+        <ParamField body="filterId" type="string">
+            The filter id.
+        </ParamField>
+    </Expandable>
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+    Returns unique identifier for the request
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+    Returns the version of JSON-RPC being used.
+</ResponseField>
+
+<ResponseField name="success" type="boolean">
+    True if the filter is successfully uninstalled, otherwise false.
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl   'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc":"2.0",
+    "method":"eth_uninstallFilter",
+    "params":["0x16"],
+    "id":74
+}'
+    ```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "id":1,
+    "jsonrpc":"2.0",
+    "result":true
+}
+    ```
+
+</ResponseExample>

@@ -1,0 +1,125 @@
+---
+title: "eth_estimateGas"
+api: "POST /"
+---
+
+Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance
+
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  Serves as a unique identifier for the request
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_estimateGas">
+  Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+  Contains the list of parameters passed to the remote method
+
+  <Expandable title="TRANSACTION CALL ARGS">
+  
+     <ParamField body="from" type="string">
+        20 Bytes - The address the transaction is sent from
+     </ParamField>
+
+     <ParamField body="to" type="string">
+        20 Bytes - The address the transaction is directed to
+     </ParamField>
+
+     <ParamField body="gas" type="string">
+       Hexadecimal value of the gas provided for the transaction execution
+     </ParamField>
+
+     <ParamField body="gasPrice" type="string">
+        Hexadecimal value of the gasPrice used for each paid gas
+     </ParamField>
+
+     <ParamField body="maxFeePerGas" type="string">
+        Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
+     </ParamField>
+
+     <ParamField body="maxPriorityFeePerGas" type="string">
+        Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
+     </ParamField>
+
+     <ParamField body="value" type="string">
+        Hexadecimal value of the value sent with this transaction
+     </ParamField>
+
+     <ParamField body="nonce" type="string">
+        20 Bytes - The address the transaction is directed to
+     </ParamField>
+
+     <ParamField body="data" type="string">
+        Hash of the method signature and encoded parameters
+     </ParamField>
+
+     <ParamField body="input" type="string">
+        Input is the newer name and should be preferred by clients
+     </ParamField>
+
+     <ParamField body="accessList" type="array">
+        Array of EIP-2930 access list
+     </ParamField>
+
+
+     <ParamField body="chainId" type="string">
+        Chain ID that this transaction is valid on
+     </ParamField>
+
+  </Expandable>
+
+   <Expandable title="Block">
+        <ParamField body="block" type="string">
+        A hexadecimal block number, or the string "latest", "earliest" or "pending" or the hash (32 bytes) of a block
+     </ParamField>
+   </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  Returns unique identifier for the request 
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  Returns the version of JSON-RPC being used
+</ResponseField>
+
+<ResponseField name="gasUsed" type="string">
+  A hexadecimal of the estimate of the gas for the given transaction.
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_estimateGas",
+    "params": [{"from": "0x2299E9B1a4e08b5d67017E19d75d3a24bb1074Df","to": "0xc7f999b83af6df9e67d0a37ee7e900bf38b3d013","value": "0x5f5e100"}, "latest"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x5208"
+}
+```
+
+</ResponseExample>

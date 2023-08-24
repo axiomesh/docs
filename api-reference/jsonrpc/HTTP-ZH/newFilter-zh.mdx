@@ -1,0 +1,93 @@
+---
+title: "eth_newFilter"
+api: "POST /"
+---
+
+根据过滤器选项创建一个过滤器对象，以在状态更改时发出通知（日志）。要检查状态是否已更改，请调用eth_getFilterChanges。
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_newFilter">
+  进行调用的远程方法名称
+</ParamField>
+
+
+<ParamField body="params" type="array">
+    包含传递给远程方法的参数列表
+
+    <Expandable title="params">
+
+        <ParamField body="fromBlock" type="string or number">
+            整数块号，或“latest”表示最后挖掘的块，或“pending”，“earliest”表示尚未挖掘的交易。
+        </ParamField>
+
+        <ParamField body="toBlock" type="string or number">
+            整数块号，或“latest”表示最后挖掘的块，或“pending”，“earliest”表示尚未挖掘的交易。
+        </ParamField>
+
+        <ParamField body="address" type="string or array">
+            20字节-（可选）合约地址或日志应源自的地址列表。
+        </ParamField>
+
+        <ParamField body="topics" type="array">
+           （可选）32字节数据主题的数组。主题取决于顺序。每个主题也可以是带有“或”选项的数据数组。
+        </ParamField>
+
+    </Expandable>
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+    返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+    返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="filterId" type="string">
+    过滤器id
+</ResponseField>    
+
+<RequestExample>
+
+```bash Example Request
+curl   'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc":"2.0",
+    "method":"eth_newFilter",
+    "params":[
+        {
+            "fromBlock": "0x0",
+            "toBlock": "0x0",
+            "address": "0x0",
+            "topics":["0x12341234"]
+        }
+    ],
+    "id":73
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "id":1,
+    "jsonrpc": "2.0",
+    "result": "0x1" // 1
+}
+```
+
+</ResponseExample>

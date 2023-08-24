@@ -1,0 +1,74 @@
+---
+title: "eth_getBlockTransactionCountByHash"
+api: "POST /"
+---
+
+返回块中与给定区块哈希匹配的交易数
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="eth_getBlockTransactionCountByHash">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表 
+  <Expandable title="params">
+
+     <ParamField body="blockHash" type="string">
+        表示区块的哈希（32字节）的字符串
+     </ParamField>
+
+  </Expandable>
+
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+<ResponseField name="blockTransactionCount" type="string">
+  整型数的十六进制，表示所提供区块中的交易数
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl  --request GET 'https://<testnetwork>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getBlockTransactionCountByHash",
+    "params": ["0xF5Abf88ecA668507FbF7D65Ef76bebCB30fb4354943682D8a0E97C9dA2275a11"],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x1"
+}
+```
+
+</ResponseExample>
