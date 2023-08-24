@@ -1,0 +1,19 @@
+---
+title: "Virtual Machine"
+---
+
+## System Contract
+
+The system contract execution process is shown in the figure below, and the main steps are as follows:
+
+1. The transaction enters the executor and executes the transaction;
+
+2. Determine whether the To address of the transaction is the system contract address, if so, execute the next step, otherwise execute the transaction in the EVM and return the execution result;
+
+3. Read the object instance corresponding to the system contract address;
+
+4. Parse the execution parameters and call the execution function of the object instance;
+
+5. Return the execution result.
+
+![vm-system-contract](../../images/vm_system_contract_en.png)

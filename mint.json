@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "OpenHub",
+  "name": "Axiomesh",
   "api": {
     "baseUrl": [
       "http://10.1.40.26:8881",
@@ -17,12 +17,7 @@
     "light": "#81D7F7",
     "dark": "#004E7A"
   },
-  "primaryTab": {
-    "name": "首页"
-  },
-  "versions": [
-    "v1"
-  ],
+  "versions": ["v1"],
   "anchors": [
     {
       "name": "API Reference",
@@ -49,8 +44,10 @@
     {
       "group": "Getting Started",
       "pages": [
-        "documentation/getting-started/overview",
-        "documentation/getting-started/introduction/document.en",
+        "documentation/getting-started/overview.en",
+        "documentation/getting-started/overview.zh",
+        "documentation/getting-started/introduction/introduction.en",
+        "documentation/getting-started/introduction/introduction.zh",
         {
           "group": "Quick Start",
           "pages": [
@@ -67,15 +64,22 @@
       "pages": [
         "documentation/core-concepts/accounts",
         "documentation/core-concepts/transactions",
-        "documentation/core-concepts/blocks"
+        "documentation/core-concepts/blocks",
+        "documentation/core-concepts/system-contract.en",
+        "documentation/core-concepts/system-contract.zh",
+        "documentation/core-concepts/upgrade.en",
+        "documentation/core-concepts/upgrade.zh"
       ]
     },
     {
       "group": "System Design",
       "pages": [
-        "documentation/system-design/architecture",
-        "documentation/system-design/virtual-machine",
-        "documentation/system-design/transaction-flow",
+        "documentation/system-design/architecture-en",
+        "documentation/system-design/architecture-zh",
+        "documentation/system-design/virtual-machine.en",
+        "documentation/system-design/virtual-machine.zh",
+        "documentation/system-design/transaction-flow-en",
+        "documentation/system-design/transaction-flow-zh",
         "documentation/system-design/consensus",
         "documentation/system-design/crossChain"
       ]
@@ -83,8 +87,12 @@
     {
       "group": "Governance",
       "pages": [
-        "documentation/governance/overview",
-        "documentation/governance/submitting-proposals"
+        "documentation/governance/committee.en",
+        "documentation/governance/committee.zh",
+        "documentation/governance/post-proposals.en",
+        "documentation/governance/post-proposals.zh",
+        "documentation/governance/vote-proposals.en",
+        "documentation/governance/vote-proposals.zh"
       ]
     },
     {
@@ -207,7 +215,7 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/TaiChiChain"
+    "github": "https://github.com/axiomesh"
   },
   "backgroundImage": "/background.png"
 }

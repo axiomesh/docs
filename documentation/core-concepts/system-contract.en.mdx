@@ -1,0 +1,15 @@
+---
+title: "System Contract"
+---
+
+The system contract is a built-in contract of AxiomLedger. The contract does not need to be deployed and can be called directly. The calling method of the system contract is compatible with the EVM.
+
+The system contract is a specific address, and the reserved address segment is 0x1000-0xffff. It is mainly a governance contract at present, and other types of contracts will be expanded in the future. Currently, the system contracts mainly include the following types:
+
+
+| Contract Address | Name                                        | Description                                                                            |
+| ---------------- | ------------------------------------------- | -------------------------------------------------------------------------------------- |
+| 0x1000           | Governance Proposal ID Generation Contract  | ID used to generate governance proposals, keeps incrementing                           |
+| 0x1001           | Node Management Contract                    | Used to manage functions such as node addition, removal, and upgrade                   |
+| 0x1002           | Committee Management Contract               | Used to elect members of the Governance Committee, which is responsible for governance | 
+
