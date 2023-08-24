@@ -62,6 +62,7 @@
     {
       "group": "Core Concepts",
       "pages": [
+        "documentation/core-concepts/chains",
         "documentation/core-concepts/accounts",
         "documentation/core-concepts/transactions",
         "documentation/core-concepts/blocks",
@@ -81,7 +82,7 @@
         "documentation/system-design/transaction-flow-en",
         "documentation/system-design/transaction-flow-zh",
         "documentation/system-design/consensus",
-        "documentation/system-design/crossChain"
+        "documentation/system-design/cross-chain.en"
       ]
     },
     {

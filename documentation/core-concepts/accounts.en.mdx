@@ -1,0 +1,57 @@
+---
+title: 'Accounts'
+---
+
+Axiom uses an account model. The address is the unique identifier of an account, and a private key is required to generate an account. An account has many attributes, including token balances, voting power, Etc. An account can:
+
+1. Send transactions to transfer its token,
+2. Raise up a proposal,
+3. Vote for the proposal,
+4. Deploy smart contracts
+5. Trigger the smart contracts released by itself or others.
+
+All activities on Axiom are based on accounts.
+
+# Account Type
+
+Axiom has two account types:
+
+- General account - that is to say, externally-owned account (EOA), controlled by anyone with the private key
+- Contract account - a smart contract deployed on the Axiom network and controlled by code. No one owns the private key of the contract accounts.
+
+Both account types have the ability to::
+
+- Receive, hold, and send AXM or tokens
+- Interact with deployed smart contracts
+
+# Account & Key Pair
+
+An account consists of a cryptographic pair of keys: a public key and a private key. The public key can be mapped to an address, while the private key is used to sign transactions. This key pair help prove that a transaction was actually signed by the sender and prevents malicious attack.
+
+This prevents malicious actors from broadcasting fake transactions because you can always verify the sender of a transaction.
+
+For example, if Alice wants to send AXM from her account to Bob's, she must create and sign a transaction and send it to the Axiom network for verification. With the public key, Alice can prove that she originally initiated the transaction request. Without the encryption mechanism, malicious attacker Cathy might be able to publicly broadcast a similar request, "send 5 AXM from Alice's account to Cathy's account", while no one can validate whether or not the transaction is exactly requested by Alice herself.
+
+# External-Owned Account(EOA) Creation
+
+Axiom’s key pair generation algorithm is exactly the same as that of Ethereum, which uses the elliptic curve digital signature algorithm ECDSA-secp256k1. The process of key pair generation is:
+
+1. First, generate a random private key, which consists of 64 hexadecimal characters.
+2. Then, a public key is generated from the private key according to the Elliptic Curve Digital Signature Algorithm.
+3. Finally, take the last 20 bytes of the Keccak-256 result of the public key.
+
+### Account Address Format
+
+The Axiom address in Hex format generated is exactly the same as the Ethereum address by the same private key.
+
+```
+0x8219e5E23396587Bf1969eFd1B211F379aa29494
+```
+
+# Contract Account
+
+When the smart contract is deployed to the Axiom network, the corresponding contract account address is returned, which is calculated from the ID of the deployed contract transaction and the sender's account address. The format of the contract account address is the same as that of external accounts. For example,
+
+```
+0x8219e5E23396587Bf1969eFd1B211F379aa29494
+```

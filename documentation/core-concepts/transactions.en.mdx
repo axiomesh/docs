@@ -1,0 +1,108 @@
+---
+title: 'Transactions'
+---
+
+Transactions are cryptographically signed instructions from accounts. An account will initiate a transaction to update the state of the Axiom network. The simplest transaction is transferring Axiom from one account to another.
+
+Transactions, which change the state of the chain, need to be broadcast to the whole network. Any node can broadcast a request for a transaction. After the validator node receives the transaction, it executes the transaction and includes it in a block, then propagates the block to the whole network.
+
+Only after the transaction is packed into a block by the validator node, and the block is confirmed, the transaction is finally confirmed.
+
+The transaction includes following information:
+
+- `from`- Sender address，the address will sign the transaction。This should be an EOA, because contract account cannot send transaction.
+- `recipient`– Receiver address (If address is EOA, transaction will transfer value. If address is contract address, transaction will execute contract code).
+- `signature`– The identify of sender. When the sender using private key sends the transaction, generating the signature.
+- `nonce`- An orderly increasing counter representing the number of transactions from an account.
+- `value`– The amount of AXO transferred from the sender to the receiver.
+- `data`– Optional field capable of containing arbitrary data.
+- `gasLimit`–The maximum quantity of fuel units a transaction can consume, specifying the fuel units required for each computable step
+
+The transaction object appears as follows:
+
+```
+{
+  from: "0x8219e5E23396587Bf1969eFd1B211F379aa29494",
+  to: "0x44D848b5DC373dafDde447c158876579C50c34dF",
+  gasLimit: "21000",
+  maxFeePerGas: "300"
+  maxPriorityFeePerGas: "10"
+  nonce: "0",
+  value: "10000000000",
+}
+```
+
+But the transaction object needs to be signed using the sender's private key. This proves that the transaction can only originate from the sender, ensuring it's not fraudulent.
+
+Axiom is compatible with Ethereum clients like Geth, and the signing process can be handled through Ethereum clients compatible with Geth.
+
+Example JSON-RPC call:
+```
+{
+  "id": 2,
+  "jsonrpc": "2.0",
+  "method": "account_signTransaction",
+  "params": [
+    {
+      "from": "0x1923f626bb8dc025849e00f99c25fe2b2f7fb0db",
+      "gas": "0x55555",
+      "maxFeePerGas": "0x1234",
+      "maxPriorityFeePerGas": "0x1234",
+      "input": "0xabcd",
+      "nonce": "0x0",
+      "to": "0x07a565b7ed7d7a678680a4c162885bedbb695fe0",
+      "value": "0x1234"
+    }
+  ]
+}
+```
+Example response:
+```
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "raw": "0xf88380018203339407a565b7ed7d7a678680a4c162885bedbb695fe080a44401a6e4000000000000000000000000000000000000000000000000000000000000001226a0223a7c9bcf5531c99be5ea7082183816eb20cfe0bbc322e97cc5c7f71ab8b20ea02aadee6b34b45bb15bc42d9c09de4a6754e7000908da72d48cc7704971491663",
+    "tx": {
+      "nonce": "0x0",
+      "maxFeePerGas": "0x1234",
+      "maxPriorityFeePerGas": "0x1234",
+      "gas": "0x55555",
+      "to": "0x07a565b7ed7d7a678680a4c162885bedbb695fe0",
+      "value": "0x1234",
+      "input": "0xabcd",
+      "v": "0x26",
+      "r": "0x223a7c9bcf5531c99be5ea7082183816eb20cfe0bbc322e97cc5c7f71ab8b20e",
+      "s": "0x2aadee6b34b45bb15bc42d9c09de4a6754e7000908da72d48cc7704971491663",
+      "hash": "0xeba2df809e7a612a0a0d444ccfa5c839624bdc00dd29e3340d46df3870f8a30e"
+    }
+  }
+}
+```
+
+- "raw" is the signature transaction in Recursive Length Prefix (RLP) encoding format.
+- "tx" is the JSON representation of the signed transaction.
+
+If a signed hash is present, it can be used in cryptographic techniques to prove the transaction's origin from the sender and broadcast it to the network.
+
+# Types of Transaction
+
+Axiom has four different types of transactions:
+
+- Regular Transactions: Transactions sent from one account to another. This type of transaction involves transferring AXM from one address to another and can include an optional data field for additional information.
+
+- System Execution Transaction: These transactions are used to interact with system contracts that are natively integrated by Axiom network. In this case, the "to" address of the transaction is the address of the system contract, and the transaction data field contains the function call and parameters to be executed within the contract.
+
+- Contract Deployment Transactions: These transactions don't have a "to" address; instead, they include code and initialization parameters for deploying a smart contract. In this type of transaction, the transaction data field contains the bytecode of the contract and constructor parameters.
+
+- Contract Execution Transactions: These transactions are used to interact with smart contracts that are already deployed on the Ethereum network. In this case, the "to" address of the transaction is the address of the smart contract, and the transaction data field contains the function call and parameters to be executed within the contract.
+
+These different types of transactions allow for fund transfers, deployment of smart contracts, and interaction with smart contracts and system contracts on the Axiom network.
+
+
+
+
+
+
+
+
