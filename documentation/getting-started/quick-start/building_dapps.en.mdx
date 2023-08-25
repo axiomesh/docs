@@ -1,0 +1,182 @@
+---
+title: "Building DApps"
+---
+
+This guide will introduce you to how to set up development tools and develop DApps on `AxiomLedger`, using the well-known decentralized exchange `Uniswap@V2` as an example.
+
+### Development Environment Configuration
+
+First, you need a `node.js` environment.
+
+Create a new directory, and within that directory, install and initialize a `HardHat` project.
+
+```
+mkdir hardhat_uniswap
+cd hardhat_uniswap
+npm install --save-dev hardhat
+npx hardhat
+```
+
+At this point, we will see that HardHat has created a standardized directory structure for us.
+
+```
+contracts/
+test/
+scripts/
+hardhat.config.js
+```
+
+Next, we need to configure the test network and test accounts in `hardhat.config.js`
+
+```
+module.exports = {
+  defaultNetwork: "mychain",
+  networks: {
+    mychain: {
+      url: 'YOUR_CHAIN_RPC_URL',
+      accounts: ['YOUR_PRIVATE_KEY'],
+      chainId: YOUR_CHAIN_ID,
+      gasPrice: YOUR_GAS_PRICE,
+    }
+  },
+  solidity: '0.8.0',
+};
+```
+
+AxiomLedger is an EVM-compatible blockchain, and any Ethereum tools you are familiar with can be used on AxiomLedger, such as Truffle, Remix, ether.js. You only need to have an account address based on Ethereum, and you can connect to AxiomLedger's main network and test network through mainstream wallets (such as Metamask ) or SDK. The RPC address of AxiomLedger’s Mainnet is: `rpc.mainnet.axiomesh.io`, and the chain ID is: `9771`; the RPC address of AxiomLedger’s Testnet is: `rpc.aries.axiomesh.io`, and the chain ID is: `23411`, The token symbol for both is `AXM`.
+
+If you are using Metamask to connect to the AxiomLedger network for the first time, you need to add the above network address, chain ID, token symbol and other information to the network list. After connecting to the AxiomLedger network, generally speaking, your account balance is 0 AXM. At this time, you can visit the AxiomLedger test network faucet and fill in your account address on the page to obtain `0.5` AXM. The address of the faucet is: `faucet.aries.axiomesh.io`. ***Please note: within 24 hours, an account can only get AXM once on the faucet!***
+
+### Download Uniswap@V2
+
+Download the components needed for DApps, using `Uniswap@V2` as an example.
+
+You need to download `v2-core` (which includes its core factory contracts), and `v2-periphery` (the peripheral contracts that interact with the core), as well as the related `lib` packages required for the `v2-periphery` contracts.
+
+```
+npm i --save-dev @uniswap/v2-core
+npm i --save-dev @uniswap/v2-periphery
+npm i --save-dev @uniswap/lib
+```
+
+For testing purposes, we also need to write two `ERC-20` contracts to create liquidity pools. The implementation of the contract can refer to `openzeppelin`'s `ERC-20` implementation.
+
+The contract writing can be referred to as follows:
+
+```
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract myCoinA is ERC20 {
+    constructor() ERC20("myCoinA", "MCA") {
+    }
+
+    // mint token
+    function mint(address recipient, uint256 amount) public {
+        _mint(recipient, amount);
+    }
+
+    // burn token
+    function burn(address from, uint256 amount) public {
+        _burn(from, amount);
+    }
+}
+```
+
+### Compile Contract
+
+using`npx hardhat compile`
+
+### Deploy Contract
+
+Create a deployment script, for example, `scripts/deploy.js`.
+
+The reference for deploying the contract is as follows:
+
+```
+const {hre, artifacts, ethers} = require("hardhat");
+
+async function main() {
+    const [owner] = await ethers.getSigners();
+
+    // deploy factory contract
+    const UniswapV2Factory = await ethers.getContractFactory("UniswapV2Factory");
+    uniswapV2Factory = await UniswapV2Factory.deploy(owner.address);
+    const factoryAddr = uniswapV2Factory.target
+
+    // deploy weth contract
+    const WETH9 = await ethers.getContractFactory("WETH9");
+    weth9 = await WETH9.deploy();
+    const weth9Addr = weth9.target
+
+    // deploy periphery contract
+    const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
+    router = await UniswapV2Router02.deploy(factoryAddr, weth9Addr);
+}
+
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});
+```
+
+Use `Hardhat`'s runtime environment and the contract factory from `ethers.js` to deploy contracts.
+
+Run the deployment script with the command `npx hardhat run --network mychain scripts/deploy.js`
+
+### Verification Deployment
+
+Verify the deployment success by querying the contract address and reading public functions.
+
+AxiomLedger provides an official blockchain explorers, the address of the Mainnet blockchain explorers is `explorer.mainnet.axiomesh.io`, and the address of the Testnet blockchain explorers is `explorer.aries.axiomesh.io`. During the process of interacting with the AxiomLedger, you can view the block/transaction information of the Mainnet or Testnet at any time.
+
+### DApp Usage
+
+After the above processes, we can now use the on-chain DApps!
+
+For example, we can use the previously compiled token contract to create a liquidity pool on `Uniswap`.
+
+```
+// acquire account
+const [owner] = await ethers.getSigners();
+
+// deploy erc-20 token pair
+const myCoinA = await ethers.getContractFactory("myCoinA");
+coinA = await myCoinA.deploy();
+const myCoinB = await ethers.getContractFactory("myCoinB");
+coinB = await myCoinB.deploy();
+
+// mint token
+const mintAmount = ethers.getUint("200000000000000000000");
+await coinA.mint(owner.address, mintAmount);
+await coinB.mint(owner.address, mintAmount);
+
+// aporove token transfer
+await coinA.approve(router.target, mintAmount)
+await coinB.approve(router.target, mintAmount)
+
+// add liquidity
+const addMin = ethers.getUint("1000000000000000000")
+const deadline = Math.floor(Date.now() / 1000) + 1000;
+res = await router.addLiquidity(
+    coinA.target,
+    coinB.target,
+    mintAmount,
+    mintAmount,
+    addMin,
+    addMin,
+    owner.address,
+    deadline);
+```
+
+### Miscellaneous
+
+Using `Remix` to build DApps on `AxiomLedger` is a more convenient choice!
+
+For instance, deploying the aforementioned `Uniswap@v2`.
+
+Import the factory contract and the routing contract into `Remix`, and select the appropriate Solidity version in the compiler.
+
+During the deployment phase, selecting `ENVIRONMENT` as `Injected Provider - MetaMask` allows for easy connection and deployment to AxiomLedger via `MetaMask`.
+

@@ -1,0 +1,52 @@
+---
+title: "Java SDK"
+---
+
+Axiom-web3j 基于 [web3j](https://github.com/web3j/web3j) 开发，功能强大且易于使用。
+
+## 特性
+
+- 完全兼容 web3j，让开发做到无缝切换
+
+## MAVEN 项目
+
+### 配置 JDK
+
+JDK 17
+
+### 配置仓库
+
+目前 Jar 包发布在 GitHub Packages。下载需要在 Maven settings.xml 设置仓库源。具体配置如下所示，需要配置 GitHub 用户名以及相关的访问令牌（注：在 GitHub 设置界面的开发者设置中生成并获取）
+```
+<servers>
+    <server>
+      <id>github</id>
+      <username>YOUR_GITHUB_USERNAME</username>
+      <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
+    </server>
+</servers>
+```
+
+### 配置 POM.XML
+
+在 Maven 项目的 pom.xml 文件中进行配置，如下所示
+```
+<dependencies>
+    <dependency>
+        <groupId>io.axiomesh</groupId>
+        <artifactId>core</artifactId>
+        <version>0.0.1</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+    <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/axiomesh/axiom-web3j</url>
+    </repository>
+</repositories>
+```
+
+## 许可
+
+Apache 2.0
