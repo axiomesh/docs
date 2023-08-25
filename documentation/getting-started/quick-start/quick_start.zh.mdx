@@ -5,8 +5,8 @@ title: "快速上手Axiom"
 这份指南将向您介绍如何快速接入和使用 Axiom区块链，您可以十分方便地在Axiom区块链上发起交易、铸造代币，发布Dapps，也可以通过Axiom的区块链浏览器查看区块和交易的信息，相信这将对您后续在Axiom上进行开发有一定的帮助作用。
 
 ### 使用钱包连接Axiom网络
-Axiom是兼容EVM的区块链，任何您熟悉的以太坊工具都可以在Axiom上使用，例如Truffle、Remix和ether.js等。您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask等）或SDK连接到Axiom的主网和测试网，其中主网的RPC地址为：`rpc.mainnet.axiomesh.io`，链ID为：`9771`；测试网的RPC地址为：`rpc.${testnet_name}.axiomesh.io`，链ID为：`23411`。两者的代币符号均为 `AXM`。
-如果您是第一次使用Metamask连接Axiom网络，您需要将上面的网络地址、链ID、代币符号等信息新增到网络列表，连接到Axiom后，一般来说您的账户余额是 `0` AXM，此时您可以访问Axiom测试网水龙头，在页面上填入您的账户地址来获取`0.5`AXM，水龙头的地址为：`faucet.${testnet_name}.axiomesh.io`，***请注意：在24小时内，一个账户只能在水龙头获取一次AXM！***
+Axiom是兼容EVM的区块链，任何您熟悉的以太坊工具都可以在Axiom上使用，例如Truffle、Remix和ether.js等。您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask等）或SDK连接到Axiom的主网和测试网，其中主网的RPC地址为：`rpc.mainnet.axiomesh.io`，链ID为：`9771`；测试网的RPC地址为：`rpc.aries.axiomesh.io`，链ID为：`23411`。两者的代币符号均为 `AXM`。
+如果您是第一次使用Metamask连接Axiom网络，您需要将上面的网络地址、链ID、代币符号等信息新增到网络列表，连接到Axiom后，一般来说您的账户余额是 `0` AXM，此时您可以访问Axiom测试网水龙头，在页面上填入您的账户地址来获取`0.5`AXM，水龙头的地址为：`faucet.aries.axiomesh.io`，***请注意：在24小时内，一个账户只能在水龙头获取一次AXM！***
 
 ### 构造和发起您的第一笔交易
 如果您需要深入了解Axiom，想获取更多链上信息或发起链上交易，推荐您使用Axiom提供的官方SDK （axiom.js），它的用法与ether.js类似。
@@ -181,4 +181,4 @@ contract TAXMToken is ERC20Interface, SafeMath {
 ![MetaMask确认](../../images/getting-started/quick-start/check-balance.png)
 
 ### 体验Axiom区块链浏览器
-Axiom提供了官方的区块链浏览器，主网的区块链浏览器地址为`explorer.mainnet.axiomesh.io`，测试网区块链浏览器地址为`explorer.${testnet_name}.axiomesh.io`.您在与Axiom区块链交互的过程中，可以随时查看主网或测试网的区块/交易信息。
+Axiom提供了官方的区块链浏览器，主网的区块链浏览器地址为`explorer.mainnet.axiomesh.io`，测试网区块链浏览器地址为`explorer.aries.axiomesh.io`.您在与Axiom区块链交互的过程中，可以随时查看主网或测试网的区块/交易信息。
