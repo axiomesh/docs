@@ -83,7 +83,9 @@
         "documentation/system-design/transaction-flow-en",
         "documentation/system-design/transaction-flow-zh",
         "documentation/system-design/consensus",
-        "documentation/system-design/crossChain"
+        "documentation/system-design/cross-chain.en",
+        "documentation/system-design/storage-cn",
+        "documentation/system-design/storage-en"
       ]
     },
     {
