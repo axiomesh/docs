@@ -93,7 +93,7 @@
         "documentation/system-design/cross-chain.cn",
         "documentation/system-design/storage-en",
         "documentation/system-design/storage-cn"
-        
+
       ]
     },
     {
@@ -121,10 +121,12 @@
     {
       "group": "Nodes",
       "pages": [
-        "documentation/nodes/about",
-        "documentation/nodes/environment",
-        "documentation/nodes/run-node",
-        "documentation/nodes/run-validator"
+        "documentation/nodes/about_zh",
+        "documentation/nodes/about_en",
+        "documentation/nodes/node_requirements_zh",
+        "documentation/nodes/node_requirements_en",
+        "documentation/nodes/run_node_zh",
+        "documentation/nodes/run_node_en"
       ]
     },
     {
@@ -134,7 +136,7 @@
         "api-reference/introduction/jsonrpc-Introduction-zh",
         "api-reference/introduction/eventsSubscription",
         "api-reference/introduction/eventsSubscription-zh"
-        
+
       ]
     },
     {
@@ -239,7 +241,8 @@
     {
       "group": "Overview",
       "pages": [
-        "changelog/introduction"
+        "changelog/changelog_zh",
+        "changelog/changelog_en"
       ]
     },
     {

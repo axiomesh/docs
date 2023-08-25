@@ -1,0 +1,42 @@
+---
+title: "Node Requirements"
+---
+
+To ensure a smooth deployment of `AxiomLedger` nodes, please make sure you have the resources specified in this document before actual deployment.
+
+# Hardware Requirements
+
+To run `AxiomLedger` nodes, we recommend the following hardware resources:
+
+- CPU:
+- 8 Cores 16 Threads
+- 2.8GHz or higher
+- Memory: 32GB
+- Storage: 2T SSD, at least 40K IOPS and 200MiB/s bandwidth
+- Network Bandwidth: 1Gbps
+
+The above is the recommended optimal configuration. The minimum hardware requirements are:
+
+- CPU:
+- 4 Cores 8 Threads
+- Memory: 8GB
+- Storage: 500G SSD
+- Network Bandwidth: 100Mbps
+
+## Why These Hardware Requirements
+
+The hardware requirements depend on the transaction speed and storage requirements. The amount of data stored on the `AxiomLedger` blockchain depends on the amount of `transaction` data and `on-chain state` data (such as account data and contract storage data). The current requirements are derived based on a certain amount of usage on the blockchain.
+
+# Network
+
+When running AxiomLedger nodes, you need to open network ports on the nodes to allow other nodes to connect.
+
+Open the following ports:
+
+- 4001: P2P port for connecting to other nodes to transmit messages.
+- 8881: JSON RPC http port for providing services externally. This port is optional to open.
+- 9991: JSON RPC http port for providing services externally. This port is optional to open.
+
+Close the following ports:
+
+- 53121/40011: Node metrics exposure ports. Close to prevent unauthorized node metrics inspection.
