@@ -2,7 +2,7 @@
 title: "Gas与费用"
 ---
 
-为防止DDoS攻击，所有改变账本状态（非只读）的交易执行都需要消耗一些gas。gas的计算与以太坊的计算方式类似。
+为防止DDoS（Distributed Denial of Service）攻击，所有改变区块链账本状态（非只读）的交易执行都需要消耗一定数量的gas。gas的计算与以太坊的计算方式类似。
 
 ## 基本概念
 
@@ -10,13 +10,13 @@ Gas是一个区块链中常见的模式。gas设置的初衷是防止用户对�
 
 $$\text{Gas Fee}=\text{Gas Used} \times \text{Gas Price}$$
 
-这里，`Gas Fee`是一个用户需要为一笔交易支付的总费用，`Gas`是执行用户交易时消耗的计算资源，`Gas Price`是每个计算资源单位的价格。
+这里，`Gas Fee`是一个用户需要为一笔交易支付的总费用，`Gas Used`是执行用户交易时消耗的计算资源，`Gas Price`是每个计算资源单位的价格。
 
 ## Gas限制
 
 一些智能合约因为编写不当，可能会存在死循环。为了防止此类死循环消耗过多的gas，用户可以手动设置一笔交易执行的gas上限，否则`AxiomLedger`将会自动设置gas上限为100000000。
 
-<Note> 重要提示：用户如果手动设置gas上线超过$10^8$，那么这个设置会被忽略，gas上线仍然以$10^8$记。</Note>
+<Note> 重要提示：用户如果手动设置gas上限超过$10^8$，那么这个设置会被忽略，gas上限仍然以$10^8$记录。</Note>
 
 ## 自动调节的gas费机制
 
@@ -26,7 +26,7 @@ $$\text{Gas Fee}=\text{Gas Used} \times \text{Gas Price}$$
 
 ![dynamic_gas_price](../../images/dynamic_gas_price.png)
 
-## gas费边界
+## gas价格边界
 
 为了保证gas价格在一个合理的区间内浮动，我们会设置gas价格的上下界。在测试网中，上界为10000 `GMol`，而下界为1000 `GMol`。
 
