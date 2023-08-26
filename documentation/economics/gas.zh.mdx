@@ -26,6 +26,9 @@ $$\text{Gas Fee}=\text{Gas Used} \times \text{Gas Price}$$
 
 ![dynamic_gas_price](../../images/dynamic_gas_price.png)
 
+这个算法的基本想法是，当前区块的gas price会随着父区块的情况进行变化，具体地，会随着父区块打包的交易数占区块允许交易数上线的比重进行线性浮动，
+最大浮动12.5%。
+
 ## gas价格边界
 
 为了保证gas价格在一个合理的区间内浮动，我们会设置gas价格的上下界。在测试网中，上界为10000 `GMol`，而下界为1000 `GMol`。

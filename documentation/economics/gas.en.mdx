@@ -32,6 +32,10 @@ The dynamic algorithm is as following:
 
 ![dynamic_gas_price](../../images/dynamic_gas_price.png)
 
+Gas price of the current block will vary based on the parent block's conditions.
+Specifically, based on the ratio of the number of transactions packed in the parent block versus the total
+transaction limit per block, the gas price of the new block will float up or down linearly by up to 12.5%.
+
 ## Gas Price Bound
 
 To keep the gas price fluctuating within a reasonable range, we have set upper and lower bounds for the gas price. In
