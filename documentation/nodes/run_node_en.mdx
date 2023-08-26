@@ -1,8 +1,7 @@
 ---
 title: "Run Node"
+description: "Learn how to run an `AxiomLedger` node."
 ---
-
-Learn how to run an `AxiomLedger` node.
 
 The steps to run an `AxiomLedger` node include:
 
@@ -14,15 +13,18 @@ The steps to run an `AxiomLedger` node include:
 # Environment Requirements
 `AxiomLedger` supports the following operating systems:
 - Linux:
-- Ubuntu 20.04
-- Centos 8
+    - Ubuntu 20.04
+    - Centos 8
 - macOS: Ventura
 
 # Obtain Node Binary
-Note that the `AxiomLedger` binary contains a hidden `secret` to ensure that only nodes with the same `secret` can connect to each other. The `secret` is injected into the binary during compilation. To connect to mainnet/testnet you need to download the official binary released on GitHub.
+Note that the `AxiomLedger` binary contains a hidden `secret` to ensure that only nodes with the same `secret` can
+connect to each other. The `secret` is injected into the binary during compilation. To connect to mainnet/testnet
+you need to download the official binary released on GitHub.
 
 ## Download from GitHub
-Go to the [Releases page](https://github.com/axiomesh/axiom/releases) of the `AxiomLedger` code repository, download the latest version binary zip file for your operating system and CPU architecture, and unzip it in the deployment environment to get the AxiomLedger binary.
+Go to the [Releases page](https://github.com/axiomesh/axiom/releases) of the `AxiomLedger` code repository, download the latest version binary zip file
+for your operating system and CPU architecture, and unzip it in the deployment environment to get the AxiomLedger binary.
 
 ## Compile from Source
 ### Prepare Compilation Environment
@@ -32,69 +34,71 @@ Go to the [Releases page](https://github.com/axiomesh/axiom/releases) of the `Ax
 ### Get `AxiomLedger` Code
 1. Use the following commands to download the [repository code](https://github.com/axiomesh/axiom) and switch to the latest stable version tag.
 
-```shell
-git clone https://github.com/axiomesh/axiom.git
-cd axiom
-git checkout ${latest_tag}
-```
+    ```shell
+    git clone https://github.com/axiomesh/axiom.git
+    cd axiom
+    git checkout ${latest_tag}
+    ```
 
 2. Download dependencies.
 
-Use the following command to download dependency libraries.
-```shell
-go mod download
-```
+    Use the following command to download dependency libraries.
+    ```shell
+    go mod download
+    ```
 
 3. Compile the binary.
 
-Use the following command to compile the binary. Note that `secret` can be omitted. `net` can specify mainnet/testnet configs, if not specified it defaults to 4-node local config.
-```shell
-make build secret=${secret} net=${net_name}
-```
-The compiled binary is located at `./bin/axiom`.
+    Use the following command to compile the binary. Note that `secret` can be omitted. `net` can specify
+    mainnet/testnet configs, if not specified it defaults to 4-node local config.
+    ```shell
+    make build secret=${secret} net=${net_name}
+    ```
+    The compiled binary is located at `./bin/axiom`.
 
 
 # Deploy and Start Node
 1. Generate related config files to specified directory.
 
-```shell
-axiom --repo=$WORKSPACE config generate
-```
+    ```shell
+    axiom --repo=$WORKSPACE config generate
+    ```
 
 2. Modify config file.
 
-Config files are located at `$WORKSPACE/axiom.toml`. You mainly need to modify ports and genesis validator configs. Nodes connect via P2P DHT, so you only need to configure genesis seed node P2P addresses. For quick start you can use solo node mode, see [Config Docs]() for details.
-TODO: Link to config docs
+    Config files are located at `$WORKSPACE/axiom.toml`. You mainly need to modify ports and genesis validator configs.
+    Nodes connect via P2P DHT, so you only need to configure genesis seed node P2P addresses. For quick start you can
+    use solo node mode, see [Config Docs]() for details.
 
 3. Start node.
 
-```shell
-axiom --repo=$WORKSPACE start
-```
-To easily manage nodes, you can register `AxiomLedger` as a `systemctl` service:
-```shell
-[Unit]
-Description=AxiomLedger Node Service
+    ```shell
+    axiom --repo=$WORKSPACE start
+    ```
+    To easily manage nodes, you can register `AxiomLedger` as a `systemctl` service:
+    ```shell
+    [Unit]
+    Description=AxiomLedger Node Service
 
-[Service]
-User=nodeuser
-Group=nodeuser
+    [Service]
+    User=nodeuser
+    Group=nodeuser
 
-LimitNOFILE=500000
+    LimitNOFILE=500000
 
-WorkingDirectory=$WORKSPACE
-ExecStart=/usr/local/bin/AxiomLedger --repo=$WORKSPACE start
+    WorkingDirectory=$WORKSPACE
+    ExecStart=/usr/local/bin/AxiomLedger --repo=$WORKSPACE start
 
-Restart=on-failure
-RestartSec=3s
+    Restart=on-failure
+    RestartSec=3s
 
-StandardOutput=journal
-StandardError=journal
-SyslogIdentifier=AxiomLedger
+    StandardOutput=journal
+    StandardError=journal
+    SyslogIdentifier=AxiomLedger
 
-[Install]
-WantedBy=multi-user.target
-```
+    [Install]
+    WantedBy=multi-user.target
+    ```
 
 # Connect to Mainnet/Testnet
 The default config generated from the official binary downloaded from GitHub already contains mainnet/testnet P2P seed node information. So after startup it will automatically connect to mainnet/testnet. However, before the governance proposal to add the node is approved, other nodes will reject this node's connection requests. The node can only join the network after the governance proposal is passed.
