@@ -22,7 +22,7 @@ component level.
 The AxiomLedger network consists of the following main components (as shown in the figure below):
 
 - `Blockchain nodes`: Connected via P2P networks, using consensus algorithms to maintain a common ledger. 
-Node roles are divided into new nodes, candidate nodes and validation nodes, according to their degree of 
+Node roles are divided into new nodes, candidate nodes and validation nodes(including special block proposer node), according to their degree of 
 participation in consensus. Node roles can be converted to each other, please refer to (TODO: Consensus XX section) 
 for details.
 - `Wallet services`: The bridge for users/DApps to interact with the blockchain, responsible for constructing and 
@@ -31,7 +31,7 @@ forwarding transactions.
 o blockchain data for users. 
 
 Specifically, new nodes are nodes that have not yet obtained network access permission through governance voting, 
-candidate nodes are currently not participating in consensus block production, and validation nodes are elected to participate in block production.
+candidate nodes are currently not participating in consensus block production, validation nodes are elected to participate in block production, and block proposer nodes are validator node that proposer blocks.
 
 ![AxiomLedger network topology](../../images/system-design/axiomledger-topology-en.png)
 
@@ -71,7 +71,7 @@ node upgrades, etc.
 The transaction pool component is mainly used to cache and manage transactions submitted to blockchain nodes that have 
 not yet been packaged and executed. The data in the transaction pool is only fully synchronized between validator nodes. 
 Transactions in the transaction pool come from two sources, one is transactions submitted by applications received directly 
-through the RPC service of the node itself, and the other is transactions forwarded from other validator nodes through the network 
+through the RPC service of the node itself, and the other is transactions forwarded from other validator/candidate nodes through the network 
 service. When the current node is the block producer node in the consensus algorithm, the consensus algorithm will pull a certain 
 number of transactions from the transaction pool to form a block, and broadcast this block to other validator nodes in the
  network. After this block is consented by the consensus network, each validator node executes the transactions in the block and 
@@ -82,11 +82,11 @@ number of transactions from the transaction pool to form a block, and broadcast 
 The executor component is the core component that executes transaction logic in blockchain nodes. The executor receives 
 a list of transactions ordered by consensus, executes specific transactions by invoking the underlying contract execution 
 engine, and generates temporary ledger changes. After the execution results are consented, the changed data is written 
-to persistent ledger state data through the ledger. The executor invokes different contract execution engines depending
+to persistent ledger state database through the ledger. The executor invokes different contract execution engines depending
  on the transaction type. AxiomLedger contains built-in contract execution engines and equivalent EVM contract 
  execution engines:
 
-* `Built-in contract execution engine`: Used to execute built-in system contracts, including governance contracts, upgrade contracts, economic management contracts and other blockchain system management contracts.
+* `Built-in contract execution engine`: Used to execute built-in system contracts, including governance contracts, upgrade contracts, economic management contracts, epoch management contracts and other blockchain system management contracts.
 * `EVM equivalent execution engine`: Used to execute contracts submitted by external users, including various DApp business logic contracts such as ERC20, ERC721, DEX.
 
 
