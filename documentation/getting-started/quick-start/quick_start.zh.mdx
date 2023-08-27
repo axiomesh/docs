@@ -1,15 +1,15 @@
 ---
-title: "快速上手Axiom"
+title: "第一笔交易"
 ---
 
-这份指南将向您介绍如何快速接入和使用 Axiom区块链，您可以十分方便地在Axiom区块链上发起交易、铸造代币，发布Dapps，也可以通过Axiom的区块链浏览器查看区块和交易的信息，相信这将对您后续在Axiom上进行开发有一定的帮助作用。
+这份指南将向您介绍如何快速接入和使用 AxiomLedger区块链，您可以十分方便地在AxiomLedger区块链上发起交易、铸造代币，发布Dapps，也可以通过AxiomLedger的区块链浏览器查看区块和交易的信息，相信这将对您后续在AxiomLedger上进行开发有一定的帮助作用。
 
-### 使用钱包连接Axiom网络
-Axiom是兼容EVM的区块链，任何您熟悉的以太坊工具都可以在Axiom上使用，例如Truffle、Remix和ether.js等。您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask等）或SDK连接到Axiom的主网和测试网，其中主网的RPC地址为：`rpc.mainnet.axiomesh.io`，链ID为：`9771`；测试网的RPC地址为：`rpc.aries.axiomesh.io`，链ID为：`23411`。两者的代币符号均为 `AXM`。
-如果您是第一次使用Metamask连接Axiom网络，您需要将上面的网络地址、链ID、代币符号等信息新增到网络列表，连接到Axiom后，一般来说您的账户余额是 `0` AXM，此时您可以访问Axiom测试网水龙头，在页面上填入您的账户地址来获取`0.5`AXM，水龙头的地址为：`faucet.aries.axiomesh.io`，***请注意：在24小时内，一个账户只能在水龙头获取一次AXM！***
+### 使用钱包连接AxiomLedger
+AxiomLedger是兼容EVM的区块链，任何您熟悉的以太坊工具都可以在AxiomLedger上使用，例如Truffle、Remix和ether.js等。您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask等）或SDK连接到AxiomLedger的测试网，其中测试网的RPC地址为：`rpc.aries.axiomesh.io`，链ID为：`23411`，代币符号为 `AXM`。
+如果您是第一次使用Metamask连接AxiomLedger，您需要将上面的RPC地址、链ID、代币符号等信息新增到网络列表，连接到xiomLedger后，一般来说您的账户余额是 `0` AXM，此时您可以访问AxiomLedger测试网水龙头，在页面上填入您的账户地址来获取`0.5`AXM，水龙头的地址为：`faucet.aries.axiomesh.io`，***请注意：在24小时内，一个账户只能在水龙头获取一次AXM！***
 
 ### 构造和发起您的第一笔交易
-如果您需要深入了解Axiom，想获取更多链上信息或发起链上交易，推荐您使用Axiom提供的官方SDK （axiom.js），它的用法与ether.js类似。
+如果您需要深入了解AxiomLedger，想获取更多链上信息或发起链上交易，推荐您使用Axiom提供的官方SDK （axiom.js），它的用法与[ether.js](https://github.com/ethers-io/ethers.js)类似。
 
 ```
 // Javascript
@@ -46,8 +46,8 @@ main();
 ```
 
 ### 铸造一个Token
-相信您在之前的步骤中成功连接到了Axiom区块链网络，也体验了Axiom官方SDK的基本用法，接下来可以探索在Axiom区块链上铸造您自己的Token。一般来说，这需要您提前编写或准备好一个符合ERC20标准的智能合约，并将它成功部署到Axiom区块链上，然后在钱包软件（例如Metamask）上添加合约地址，就可以查看到您新铸造的Token了。
-为了降低您的使用难度，Axiom提供了一份简单的智能合约样本，您只需要修改其中的Token名称和账户地址即可。当然，您也可以参考此合约开发更符合您需要的智能合约。
+相信您在之前的步骤中成功连接到了AxiomLedger，也体验了AxiomLedger官方SDK的基本用法，接下来可以探索在AxiomLedger上铸造您自己的Token。一般来说，这需要您提前编写或准备好一个符合ERC20标准的智能合约，并将它成功部署到AxiomLedger上，然后在钱包软件（例如Metamask）上添加合约地址，就可以查看到您新铸造的Token了。
+为了降低您的使用难度，AxiomLedger提供了一份简单的智能合约样本(代币符号)，您只需要修改其中的Token名称（样本中TAXM为例）和账户地址即可。当然，您也可以参考此合约开发更符合您需要的智能合约。
 ```
 pragma solidity ^0.4.24;
 
@@ -163,7 +163,7 @@ contract TAXMToken is ERC20Interface, SafeMath {
     }
 }
 ```
-如果您已经对以太坊有一定的了解，可以通过Remix编译并部署此智能合约，***请注意：1. 编译合约时请选择合适的Solidity版本；2. 通过injected Provider - MetaMask的方式部署，请确认网络已经切换到Axiom测试网并且账户地址符合您的选择。***
+如果您已经对以太坊有一定的了解，可以通过Remix编译并部署此智能合约，***请注意：1. 编译合约时请选择合适的Solidity版本；2. 通过injected Provider - MetaMask的方式部署，请确认网络已经切换到AxiomLedger测试网并且账户地址符合您的选择。***
 ![通过Remix编译&部署智能合约1](../../images/getting-started/quick-start/compile-and-deploy-ERC20-contract.png)
 点击页面上的`Deploy`按钮，在MetaMask弹框内检查交易详情后，点击`确认`，发出部署智能合约的交易请求。
 ![MetaMask确认](../../images/getting-started/quick-start/MetaMask-confirm.png)
@@ -171,7 +171,7 @@ contract TAXMToken is ERC20Interface, SafeMath {
 智能合约部署完成后，可以在Remix上看到合约的地址、调用方法等信息，将合约的地址复制下来，在MetaMask上选择增加Token后粘贴，然后点击下一步，就可以查看到这个地址上您铸造Token的余额了。
 ![MetaMask确认](../../images/getting-started/quick-start/add-token.png)
 
-至此，您成功在Axiom区块链上部署了ERC20标准的智能合约，并铸造了属于您的Token！当然，您也可以通过SDK完成智能合约的部署，具体的操作可以参考ether.js。
+至此，您成功在AxiomLedger上部署了ERC20标准的智能合约，并铸造了属于您的Token！当然，您也可以通过SDK完成智能合约的部署，具体的操作可以参考ether.js。
 
 ### 完成一笔Token转账
 在上一步您已经完成了铸造Token，现在可以试试Token转账的操作。同样，为了更直观地完成和展示操作，推荐您选择Remix+MetaMask的方式去转账。首先创建一个新的账户，其地址用来接收Token，然后在刚才部署合约的页面下方，调用`transfer`方法（需要传入新账户的地址和转账的金额），在MetaMask弹框中确认发出交易。
@@ -180,5 +180,5 @@ contract TAXMToken is ERC20Interface, SafeMath {
 转账完成后，可以在MetaMask上切换到新账户，查看其余额变化
 ![MetaMask确认](../../images/getting-started/quick-start/check-balance.png)
 
-### 体验Axiom区块链浏览器
-Axiom提供了官方的区块链浏览器，主网的区块链浏览器地址为`explorer.mainnet.axiomesh.io`，测试网区块链浏览器地址为`explorer.aries.axiomesh.io`.您在与Axiom区块链交互的过程中，可以随时查看主网或测试网的区块/交易信息。
+### 体验AxiomLedger区块链浏览器
+AxiomLedger提供了官方的区块链浏览器，测试网区块链浏览器地址为`explorer.aries.axiomesh.io`.您在与AxiomLedger交互的过程中，可以随时查看测试网的区块/交易信息。
