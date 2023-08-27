@@ -22,11 +22,11 @@ import { ethers } from '@axiomesh/axiom'
 const provider = new ethers.JsonRpcProvider("http://rpc.mainnet.axiomesh.io");
 
 async function main() {
-  // query the BlockNumber on Axiom
+  // query the BlockNumber on AxiomLedger
   const latestBlock = await alchemy.core.getBlockNumber();
   console.log("The latest block number is", latestBlock);
 
-  // send transaction to Axiom : transfer AXM
+  // send transaction to AxiomLedger : transfer AXM
   // step1. Create account variables
   const account_from = {
     privateKey: 'YOUR-PRIVATE-KEY-HERE',

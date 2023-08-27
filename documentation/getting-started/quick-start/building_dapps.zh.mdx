@@ -1,8 +1,8 @@
 ---
-title: "构建 DApps"
+title: "构建 Dapps"
 ---
 
-这份指南将向您介绍如何配置开发工具并在 AxiomLedger 上开发 DApps，这里我们以知名去中心化交易所 Uniswap@V2 为例。
+这份指南将向您介绍如何配置开发工具并在 AxiomLedger 上开发 Dapps，这里我们以知名去中心化交易所 Uniswap@V2 为例。
 
 ### 设置开发环境
 
@@ -50,7 +50,7 @@ module.exports = {
 
 ### 下载 Uniswap@V2 智能合约
 
-下载 DApps 所需要的组件，这里我们以 Uniswap@V2 为例。
+下载 Dapps 所需要的组件，这里我们以 Uniswap@V2 为例。
 需要下载`v2-core`（包含其核心工厂合约），并下载`v2-periphery`（与核心交互的外围合约），以及外围合约所需要的相关`lib`包
 
 ```
@@ -130,9 +130,9 @@ main().catch((error) => {
 
 Axiom提供了官方的区块链浏览器，主网的区块链浏览器地址为`explorer.mainnet.axiomesh.io`，测试网区块链浏览器地址为`explorer.aries.axiomesh.io`.您在与Axiom区块链交互的过程中，可以随时查看主网或测试网的区块/交易信息。
 
-### DApp 使用
+### Dapp 使用
 
-经过上述流程之后，我们就可以使用链上的 DApps 了！
+经过上述流程之后，我们就可以使用链上的 Dapps 了！
 
 例如，我们可以使用上述编译的代币合约在 `Uniswap` 上生成流动性池
 
@@ -171,7 +171,7 @@ res = await router.addLiquidity(
 
 ### 其他
 
-使用 `Remix` 在 AxiomLedger 上构建 DApps 是更方便的选择！
+使用 `Remix` 在 AxiomLedger 上构建 Dapps 是更方便的选择！
 
 例如部署上述的 `Uniswap@v2`。
 
