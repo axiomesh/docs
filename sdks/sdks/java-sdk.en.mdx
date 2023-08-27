@@ -2,7 +2,7 @@
 title: "Java SDK"
 ---
 
-Axiom-web3j is a comprehensive and easy-to-use AxiomLedger interaction tool developed forked from [web3j](https://github.com/web3j/web3j).
+Axiom-web3j is a comprehensive and easy-to-use AxiomLedger interaction tool forked from [web3j](https://github.com/web3j/web3j).
 
 ## Features
 
@@ -16,7 +16,8 @@ JDK 17
 
 ### Configure Repo
 
-Currently, the Jar package is published on GitHub Packages. To download, you need to get `PERSONAL_ACCESS_TOKEN` from GitHub `Developer settings` and set the repository source in Maven's `settings.xml`, as shown below.
+Currently, the Jar package is published on GitHub Packages. To download, you need to get `PERSONAL_ACCESS_TOKEN`
+from GitHub `Developer settings` and set the repository source in Maven's `settings.xml`, as shown below.
 
 ```
 <servers>
@@ -47,6 +48,64 @@ Configure in the `pom.xml` file of the Maven project as shown below.
     </repository>
 </repositories>
 ```
+
+### Simple Example
+
+Here, we import give an example to send transaction via `SendRawTransaction` function.
+
+```java
+public class SendRawTransactionTest {
+    public final String AXIOM_LEDGER = "http://localhost:8881";
+    public final Web3j web3j = Web3j.build(new HttpService(AXIOM_LEDGER));
+    String testAddrFrom = "YOUR_FIRST_ACCOUNT_ADDR";
+    String testPk = "YOUR_FIRST_ACCOUNT_PK";
+    String testAddrTo = "YOUR_SECOND_ACCOUNT_ADDR";
+
+    @Test
+    @DisplayName("Using SendRawTransaction to send 100 axm")
+    public void testRawTransaction() throws Exception {
+
+        BigInteger axmMol = new BigInteger("100000000000000000000"); // send 100 axm
+        String from = testAddrFrom;
+        String fromPrivateKey = testPk;
+        String to = testAddrTo;
+
+        // build Credentials object
+        ECKeyPair keyPair = ECKeyPair.create(Numeric.hexStringToByteArray(fromPrivateKey));
+        // use ECKeyPair create Credentials
+        Credentials credentials = Credentials.create(keyPair);
+
+        // send tx
+        BigInteger nonce = web3j.ethGetTransactionCount(from, DefaultBlockParameterName.LATEST).send().getTransactionCount();
+        EthBlock.Block block = web3j.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, true).send().getBlock();
+        BigInteger gasPrice = web3j.ethGasPrice().send().getGasPrice();
+
+        RawTransaction rawTransaction = RawTransaction.createEtherTransaction(nonce, gasPrice, block.getGasLimit(), to, axmMol);
+        String rawTransactionData = Numeric.toHexString(TransactionEncoder.signMessage(rawTransaction, credentials));
+        String transactionHash = web3j.ethSendRawTransaction(rawTransactionData).sendAsync().get().getTransactionHash();
+
+        // wait for 5 seconds
+        Thread.sleep(5000);
+        assertTrue(transactionHash != null);
+
+        Optional<org.web3j.protocol.core.methods.response.Transaction> transaction = web3j.ethGetTransactionByHash(transactionHash).send().getTransaction();
+        BigInteger blockNumber = null;
+        String blockHash = null;
+        BigInteger blockIndex = null;
+        if (transaction.isPresent()) {
+            org.web3j.protocol.core.methods.response.Transaction tx = transaction.get();
+            blockNumber = tx.getBlockNumber();
+            blockHash = tx.getBlockHash();
+            blockIndex = tx.getTransactionIndex();
+        }
+        assertTrue(blockNumber != null);
+        assertTrue(blockHash != null);
+        assertTrue(blockIndex != null);
+    }
+}
+```
+
+If all goes well, you can find through the wallet tool that the on-chain assets have been successfully transferred!
 
 ## License
 Apache 2.0
