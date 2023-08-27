@@ -3,7 +3,7 @@ title: "Consensus"
 ---
 
 # Key Concepts
-Consensus algorithm is a mechanism to ensure that multiple nodes in a blockchain network reach an agreement. Byzantine Fault Tolerance (BFT) is one of the important algorithms suitable for public blockchain environments. BFT-based algorithms achieve consensus through multi-round voting or message exchanges, ensuring the liveness and security of blockchain systems even in the presence of a small number of faulty or malicious nodes.
+Consensus algorithm is a mechanism to ensure that multiple nodes in a blockchain network reach an agreement. Byzantine Fault Tolerance (BFT) algorithms are one of the important consensus algorithms widely adopted in the blockchain industry. BFT-based algorithms achieve consensus through multi-round voting or message exchanges, ensuring the liveness and security of blockchain systems even in the presence of a small number of faulty or malicious nodes.
 
 # Overview of dBFT
 Practical Byzantine Fault Tolerance (PBFT) is a consensus algorithm based on BFT principles. PBFT enables fast and secure confirmation of transactions and is widely used in public blockchains. However, native PBFT suffers from issues such as predictable primary nodes and poor scalability. To address these concerns, AxiomLedger has optimized and improved PBFT, implementing the **Delegated Byzantine Fault Tolerant (dBFT)** algorithm.
@@ -23,7 +23,7 @@ The transaction process within the consensus module of AxiomLedger is outlined a
     For performance reasons, Validators/Proposer do not execute transactions within the current block during block consensus. After consensus is achieved, the executor handles transaction execution. Consensus on post-execution state consistency is ensured through the state checkpoint mechanism.
 </Tip>
 
-![basic consensus](../../images/system-design/consensus-architecture-en.png)
+![consensus architecture diagram](../../images/system-design/consensus-architecture-en.png)
 
 
 ## State Checkpoint Mechanism
@@ -32,13 +32,13 @@ After the executor completes the execution of transactions within a block, the b
 
 Moreover, to prevent delayed block heights from reaching checkpoint, Validators will set a timeout mechanism. When the timer triggers, Validators actively consensus on the latest block information.
 
-The state checkpoint mechanism guarantees eventual ledger consistency. Validators do not need to start consensus on block execution results during the block packaging process, effectively improving consensus performance.
+The state checkpoint mechanism guarantees eventual ledger consistency. Validators do not need to start consensus on every block execution results during the block packaging process, effectively improving consensus performance.
 
 ## Node Types
 
 The native PBFT algorithm considers all network nodes as Validators. However, as the number of network nodes increases, consensus performance is limited by O($n^2$) communication complexity, leading to performance degradation.
 
-To address this issue, AxiomLedger introduces distinct node types:
+To address this issue, AxiomLedger introduces three different node roles:
 
     - **Proposer** : Possesses all the functionalities of a Validator and is responsible for packaging blocks within the current term.
     - **Validator** : Participates in consensus and can verify and vote on packaging proposals presented by Proposers.
