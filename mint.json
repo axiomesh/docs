@@ -22,39 +22,17 @@
     {
       "name": "API Reference",
       "icon": "code",
-      "url": "api-reference",
-      "version": "English"
-    },
-    {
-      "name": "API 手册",
-      "icon": "code",
-      "url": "api-reference",
-      "version": "简体中文"
+      "url": "api-reference"
     },
     {
       "name": "SDKS",
       "icon": "shield-halved",
-      "url": "sdks",
-      "version": "English"
-    },
-    {
-      "name": "SDK 文档",
-      "icon": "shield-halved",
-      "url": "sdks",
-      "version": "简体中文"
-
+      "url": "sdks"
     },
     {
       "name": "Changelog",
       "icon": "puzzle-piece",
-      "url": "changelog",
-      "version": "English"
-    },
-    {
-      "name": "更新记录",
-      "icon": "puzzle-piece",
-      "url": "changelog",
-      "version": "简体中文"
+      "url": "changelog"
     }
   ],
   "navigation": [
@@ -62,99 +40,93 @@
       "group": "Getting Started",
       "pages": [
         "documentation/getting-started/overview.en",
-        "documentation/getting-started/overview.zh",
         "documentation/getting-started/introduction/introduction.en",
-        "documentation/getting-started/introduction/introduction.zh",
         "documentation/getting-started/resources/resources.en",
-        "documentation/getting-started/resources/resources.zh",
         {
           "group": "Quick Start",
           "pages": [
             "documentation/getting-started/quick-start/quick_start.en",
-            "documentation/getting-started/quick-start/quick_start.zh",
-            "documentation/getting-started/quick-start/building_dapps.zh",
             "documentation/getting-started/quick-start/building_dapps.en"
           ]
         },
-        "documentation/getting-started/faqs/document",
-        "documentation/getting-started/glossary/document"
-      ]
+        "documentation/getting-started/glossary/glossary.en"
+      ],
+      "version": "English"
     },
     {
       "group": "Core Concepts",
       "pages": [
         "documentation/core-concepts/accounts.en",
-        "documentation/core-concepts/accounts.zh",
+
         "documentation/core-concepts/blocks.en",
-        "documentation/core-concepts/blocks.zh",
+
         "documentation/core-concepts/transactions.en",
-        "documentation/core-concepts/transactions.zh",
+
         "documentation/core-concepts/system-contract.en",
-        "documentation/core-concepts/system-contract.zh",
-        "documentation/core-concepts/upgrade.en",
-        "documentation/core-concepts/upgrade.zh"
-      ]
-    },
+
+        "documentation/core-concepts/upgrade.en"
+
+      ],
+      "version": "English"
+    },   
     {
       "group": "System Design",
       "pages": [
         "documentation/system-design/architecture-en",
-        "documentation/system-design/architecture-zh",
         "documentation/system-design/transaction-flow-en",
-        "documentation/system-design/transaction-flow-zh",
         "documentation/system-design/virtual-machine.en",
-        "documentation/system-design/virtual-machine.zh",
         "documentation/system-design/consensus-en",
-        "documentation/system-design/consensus-zh",
         "documentation/system-design/cross-chain.en",
-        "documentation/system-design/cross-chain.cn",
-        "documentation/system-design/storage-en",
-        "documentation/system-design/storage-cn"
-
-      ]
+        "documentation/system-design/storage-en"
+      ],
+      "version": "English"
     },
     {
       "group": "Governance",
       "pages": [
         "documentation/governance/committee.en",
-        "documentation/governance/committee.zh",
+        
         "documentation/governance/post-proposals.en",
-        "documentation/governance/post-proposals.zh",
-        "documentation/governance/vote-proposals.en",
-        "documentation/governance/vote-proposals.zh"
-      ]
+        
+        "documentation/governance/vote-proposals.en"
+        
+      ],
+      "version": "English"
     },
     {
       "group": "Economics",
       "pages": [
         "documentation/economics/overview.en",
-        "documentation/economics/overview.zh",
+        
         "documentation/economics/gas.en",
-        "documentation/economics/gas.zh",
-        "documentation/economics/stablecoin.en",
-        "documentation/economics/stablecoin.zh"
-      ]
+        
+        "documentation/economics/stablecoin.en"
+        
+      ],
+      "version": "English"
     },
     {
       "group": "Nodes",
       "pages": [
-        "documentation/nodes/about_zh",
+        
         "documentation/nodes/about_en",
-        "documentation/nodes/node_requirements_zh",
+        
         "documentation/nodes/node_requirements_en",
-        "documentation/nodes/run_node_zh",
+        
         "documentation/nodes/run_node_en"
-      ]
+      ],
+      "version": "English"
     },
     {
       "group": "Introduction",
       "pages": [
         "api-reference/introduction/jsonrpc-Introduction",
-        "api-reference/introduction/jsonrpc-Introduction-zh",
-        "api-reference/introduction/eventsSubscription",
-        "api-reference/introduction/eventsSubscription-zh"
+        
+        "api-reference/introduction/eventsSubscription"
+        
 
-      ]
+      ],
+      "version": "English"
     },
     {
       "group": "JSON RPC",
@@ -188,10 +160,143 @@
             "api-reference/jsonrpc/HTTP/uninstallFilter",
             "api-reference/jsonrpc/HTTP/getFilterLogs",
             "api-reference/jsonrpc/HTTP/getFilterChanges"
-          ]
+          ],
+          "version": "English"
         },
         {
-          "group": "HTTP-zh",
+          "group": "WEBSOCKETS",
+          "pages": [
+            "api-reference/jsonrpc/WEBSOCKETS/logs",
+            "api-reference/jsonrpc/WEBSOCKETS/newHeads",
+            "api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions"
+          ],
+          "version": "English"
+        }
+      ]
+    },
+    {
+      "group": "Overview",
+      "pages": [
+        "sdks/introduction.en"
+      ],
+      "version": "English"
+    },
+    {
+      "group": "SDKs",
+      "pages": [
+        "sdks/sdks/java-sdk.en",
+        
+        "sdks/sdks/js-sdk.en"
+        
+      ],
+      "version": "English"
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        
+        "changelog/changelog_en"
+      ],
+      "version": "English"
+    },
+    {
+      "group": "快速开始",
+      "pages": [ 
+        "documentation/getting-started/overview.zh",
+        "documentation/getting-started/introduction/introduction.zh",
+        "documentation/getting-started/resources/resources.zh",
+        {
+          "group": "快速开始",
+          "pages": [
+            "documentation/getting-started/quick-start/quick_start.zh",
+            "documentation/getting-started/quick-start/building_dapps.zh"
+          ]
+        },
+        "documentation/getting-started/glossary/glossary.zh"
+      ],
+      "version": "简体中文"
+    },
+    {
+      "group": "核心概念",
+      "pages": [
+
+        "documentation/core-concepts/accounts.zh",
+
+        "documentation/core-concepts/blocks.zh",
+
+        "documentation/core-concepts/transactions.zh",
+
+        "documentation/core-concepts/system-contract.zh",
+
+        "documentation/core-concepts/upgrade.zh"
+      ],
+      "version": "简体中文"
+    },
+    {
+      "group": "系统设计",
+      "pages": [
+        "documentation/system-design/architecture-zh",
+        "documentation/system-design/transaction-flow-zh",
+        "documentation/system-design/virtual-machine.zh",
+        "documentation/system-design/consensus-zh",
+        "documentation/system-design/cross-chain.cn",
+        "documentation/system-design/storage-cn"
+      ],
+      "version": "简体中文"
+
+    },
+    {
+      "group": "治理",
+      "pages": [
+        
+        "documentation/governance/committee.zh",
+        
+        "documentation/governance/post-proposals.zh",
+        
+        "documentation/governance/vote-proposals.zh"
+      ],
+      "version": "简体中文"
+    },
+    {
+      "group": "经济学",
+      "pages": [
+        
+        "documentation/economics/overview.zh",
+        
+        "documentation/economics/gas.zh",
+        
+        "documentation/economics/stablecoin.zh"
+      ],
+      "version": "简体中文"
+    },
+    {
+      "group": "节点",
+      "pages": [
+        "documentation/nodes/about_zh",
+        
+        "documentation/nodes/node_requirements_zh",
+        
+        "documentation/nodes/run_node_zh"
+        
+      ],
+      "version": "简体中文"
+    },
+    {
+      "group": "简介",
+      "pages": [
+        
+        "api-reference/introduction/jsonrpc-Introduction-zh",
+        
+        "api-reference/introduction/eventsSubscription-zh"
+
+      ],
+      "version": "简体中文"
+    },
+    {
+      "group": "JSON RPC",
+      "pages": [
+        {
+          "group": "HTTP接口",
           "pages": [
             "api-reference/jsonrpc/HTTP-ZH/chainId-zh",
             "api-reference/jsonrpc/HTTP-ZH/blockNumber-zh",
@@ -219,87 +324,47 @@
             "api-reference/jsonrpc/HTTP-ZH/uninstallFilter-zh",
             "api-reference/jsonrpc/HTTP-ZH/getFilterLogs-zh",
             "api-reference/jsonrpc/HTTP-ZH/getFilterChanges-zh"
-          ]
+          ],
+          "version": "简体中文"
         },
         {
           "group": "WEBSOCKETS",
           "pages": [
-            "api-reference/jsonrpc/WEBSOCKETS/logs",
-            "api-reference/jsonrpc/WEBSOCKETS/newHeads",
-            "api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions"
-          ]
-        },
-        {
-          "group": "WEBSOCKETS-ZH",
-          "pages": [
             "api-reference/jsonrpc/WEBSOCKETS-ZH/logs-zh",
             "api-reference/jsonrpc/WEBSOCKETS-ZH/newHeads-zh",
             "api-reference/jsonrpc/WEBSOCKETS-ZH/newPendingTransactions-zh"
-          ]
+          ],
+          "version": "简体中文"
         }
       ]
     },
     {
-      "group": "Overview",
+      "group": "概览",
       "pages": [
-        "sdks/introduction.en",
+        
         "sdks/introduction.zh"
-      ]
+      ],
+      "version": "简体中文"
     },
     {
       "group": "SDKs",
       "pages": [
-        "sdks/sdks/java-sdk.en",
+        
         "sdks/sdks/java-sdk.zh",
-        "sdks/sdks/js-sdk.en",
+        
         "sdks/sdks/js-sdk.zh"
-      ]
+      ],
+      "version": "简体中文"
     },
     {
-      "group": "Overview",
+      "group": "更新记录",
       "pages": [
-        "changelog/changelog_zh",
-        "changelog/changelog_en"
-      ]
-    },
-    {
-      "group": "Writing Content",
-      "pages": [
-        "content/component-library",
-        "content/text",
-        "content/image-embeds",
-        "content/list-table",
-        "content/code",
-        "content/reusable-snippets"
-      ]
-    },
-    {
-      "group": "Organization Components",
-      "pages": [
-        "content/components/accordion",
-        "content/components/accordion-group",
-        "content/components/card",
-        "content/components/card-group",
-        "content/components/tabs"
-      ]
-    },
-    {
-      "group": "Context Components",
-      "pages": [
-        "content/components/callouts",
-        "content/components/code",
-        "content/components/code-group",
-        "content/components/frame",
-        "content/components/tooltip",
-        "content/api-components"
-      ]
-    },
-    {
-      "group": "API Components",
-      "pages": [
-        "content/api/configuration"
-      ]
+        "changelog/changelog_zh"
+        
+      ],
+      "version": "简体中文"
     }
+    
   ],
   "footerSocials": {
     "github": "https://github.com/axiomesh"
