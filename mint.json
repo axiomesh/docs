@@ -65,17 +65,17 @@
       "group": "Core Concepts",
       "pages": [
         "documentation/core-concepts/accounts.en",
-        "documentation/core-concepts/accounts.cn",
+        "documentation/core-concepts/accounts.zh",
         "documentation/core-concepts/transactions.en",
-        "documentation/core-concepts/transactions.cn",
+        "documentation/core-concepts/transactions.zh",
         "documentation/core-concepts/blocks.en",
-        "documentation/core-concepts/blocks.cn",
+        "documentation/core-concepts/blocks.zh",
         "documentation/core-concepts/system-contract.en",
         "documentation/core-concepts/system-contract.zh",
         "documentation/core-concepts/upgrade.en",
         "documentation/core-concepts/upgrade.zh",
         "documentation/core-concepts/chains.en",
-        "documentation/core-concepts/chains.cn"
+        "documentation/core-concepts/chains.zh"
       ]
     },
     {
