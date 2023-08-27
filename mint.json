@@ -17,27 +17,44 @@
     "light": "#81D7F7",
     "dark": "#004E7A"
   },
-  "versions": ["v1"],
+  "versions": ["English","简体中文"],
   "anchors": [
     {
       "name": "API Reference",
       "icon": "code",
-      "url": "api-reference"
+      "url": "api-reference",
+      "version": "English"
+    },
+    {
+      "name": "API 手册",
+      "icon": "code",
+      "url": "api-reference",
+      "version": "简体中文"
     },
     {
       "name": "SDKS",
       "icon": "shield-halved",
-      "url": "sdks"
+      "url": "sdks",
+      "version": "English"
+    },
+    {
+      "name": "SDK 文档",
+      "icon": "shield-halved",
+      "url": "sdks",
+      "version": "简体中文"
+
     },
     {
       "name": "Changelog",
       "icon": "puzzle-piece",
-      "url": "changelog"
+      "url": "changelog",
+      "version": "English"
     },
     {
-      "name": "Example",
-      "icon": "newspaper",
-      "url": "content"
+      "name": "更新记录",
+      "icon": "puzzle-piece",
+      "url": "changelog",
+      "version": "简体中文"
     }
   ],
   "navigation": [
@@ -48,6 +65,8 @@
         "documentation/getting-started/overview.zh",
         "documentation/getting-started/introduction/introduction.en",
         "documentation/getting-started/introduction/introduction.zh",
+        "documentation/getting-started/resources/resources.en",
+        "documentation/getting-started/resources/resources.zh",
         {
           "group": "Quick Start",
           "pages": [
@@ -66,16 +85,14 @@
       "pages": [
         "documentation/core-concepts/accounts.en",
         "documentation/core-concepts/accounts.zh",
-        "documentation/core-concepts/transactions.en",
-        "documentation/core-concepts/transactions.zh",
         "documentation/core-concepts/blocks.en",
         "documentation/core-concepts/blocks.zh",
+        "documentation/core-concepts/transactions.en",
+        "documentation/core-concepts/transactions.zh",
         "documentation/core-concepts/system-contract.en",
         "documentation/core-concepts/system-contract.zh",
         "documentation/core-concepts/upgrade.en",
-        "documentation/core-concepts/upgrade.zh",
-        "documentation/core-concepts/chains.en",
-        "documentation/core-concepts/chains.zh"
+        "documentation/core-concepts/upgrade.zh"
       ]
     },
     {
@@ -83,10 +100,10 @@
       "pages": [
         "documentation/system-design/architecture-en",
         "documentation/system-design/architecture-zh",
-        "documentation/system-design/virtual-machine.en",
-        "documentation/system-design/virtual-machine.zh",
         "documentation/system-design/transaction-flow-en",
         "documentation/system-design/transaction-flow-zh",
+        "documentation/system-design/virtual-machine.en",
+        "documentation/system-design/virtual-machine.zh",
         "documentation/system-design/consensus-en",
         "documentation/system-design/consensus-zh",
         "documentation/system-design/cross-chain.en",
@@ -215,9 +232,9 @@
         {
           "group": "WEBSOCKETS-ZH",
           "pages": [
-            "api-reference/jsonrpc/WEBSOCKETS/logs-zh",
-            "api-reference/jsonrpc/WEBSOCKETS/newHeads-zh",
-            "api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions-zh"
+            "api-reference/jsonrpc/WEBSOCKETS-ZH/logs-zh",
+            "api-reference/jsonrpc/WEBSOCKETS-ZH/newHeads-zh",
+            "api-reference/jsonrpc/WEBSOCKETS-ZH/newPendingTransactions-zh"
           ]
         }
       ]
