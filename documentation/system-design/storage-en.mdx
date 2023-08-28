@@ -22,7 +22,7 @@ AxiomLedger uses Pebble as the default KV storage engine. Pebble is a new genera
 
 # SPV
 
-The Axiomesh supports SPV (Simplified Payment Verification). Lightweight clients (such as wallets) can request Merkle proof from Axiomesh full nodes through the SPV protocol without maintaining a complete blockchain ledger, and use this Merkle proof to verify the correctness of the account state and contract state. The main steps of SPV are as follows:
+The AxiomLedger supports SPV (Simplified Payment Verification). Lightweight clients (such as wallets) can request Merkle proof from AxiomLedger full nodes through the SPV protocol without maintaining a complete blockchain ledger, and use this Merkle proof to verify the correctness of the account state and contract state. The main steps of SPV are as follows:
 1. The client downloads block headers from a trusted data source
 2. The client requests the Merkle proof from the full node
 3. The client verifies the Merkle path of the account state tree
@@ -32,5 +32,5 @@ The Axiomesh supports SPV (Simplified Payment Verification). Lightweight clients
 
 The following figure shows the main steps of SPV:
 
-![SPV steps in Axiomesh](../../images/system-design/spv-en.png)
+![SPV steps in AxiomLedger](../../images/system-design/spv-en.png)
 
