@@ -53,24 +53,24 @@ JDK 17
 
 ```java
 public class SendRawTransactionTest {
-    public final String AXIOM_LEDGER = "http://localhost:8881";
-    public final Web3j web3j = Web3j.build(new HttpService(AXIOM_LEDGER));
-    String testAddrFrom = "YOUR_FIRST_ACCOUNT_ADDR";
-    String testPk = "YOUR_FIRST_ACCOUNT_PK";
-    String testAddrTo = "YOUR_SECOND_ACCOUNT_ADDR";
+    final String AXIOM_LEDGER_TEST_URL = "http://localhost:8881";
+    final String PRIVATE_KEY = "YOUR_PRIVATE_KEY";
+    final String ADDRESS_TO = "ANOTHER_ADDRESS";
+
+    Web3j web3j = Web3j.build(new HttpService(AXIOM_LEDGER_TEST_URL));
 
     @Test
     @DisplayName("Using SendRawTransaction to send 100 axm")
     public void testRawTransaction() throws Exception {
 
         BigInteger axmMol = new BigInteger("100000000000000000000"); // 发送 100 axm
-        String from = testAddrFrom;
-        String fromPrivateKey = testPk;
-        String to = testAddrTo;
+        String fromPrivateKey = PRIVATE_KEY;
+        String to = ADDRESS_TO;
 
         // 构建 Credentials
         ECKeyPair keyPair = ECKeyPair.create(Numeric.hexStringToByteArray(fromPrivateKey));
         Credentials credentials = Credentials.create(keyPair);
+        String from = credentials.getAddress();
 
         // 发送交易
         BigInteger nonce = web3j.ethGetTransactionCount(from, DefaultBlockParameterName.LATEST).send().getTransactionCount();
@@ -79,26 +79,34 @@ public class SendRawTransactionTest {
 
         RawTransaction rawTransaction = RawTransaction.createEtherTransaction(nonce, gasPrice, block.getGasLimit(), to, axmMol);
         String rawTransactionData = Numeric.toHexString(TransactionEncoder.signMessage(rawTransaction, credentials));
-        String transactionHash = web3j.ethSendRawTransaction(rawTransactionData).sendAsync().get().getTransactionHash();
 
-        // 由于链的出块时间设定，这里等候 5 秒钟
-        Thread.sleep(5000);
-        assertTrue(transactionHash != null);
+        web3j.ethSendRawTransaction(rawTransactionData)
+            .sendAsync()
+            .thenAccept(transactionReceipt -> {
+                String transactionHash = transactionReceipt.getTransactionHash();
 
-        // 验证交易参数
-        Optional<org.web3j.protocol.core.methods.response.Transaction> transaction = web3j.ethGetTransactionByHash(transactionHash).send().getTransaction();
-        BigInteger blockNumber = null;
-        String blockHash = null;
-        BigInteger blockIndex = null;
-        if (transaction.isPresent()) {
-            org.web3j.protocol.core.methods.response.Transaction tx = transaction.get();
-            blockNumber = tx.getBlockNumber();
-            blockHash = tx.getBlockHash();
-            blockIndex = tx.getTransactionIndex();
-        }
-        assertTrue(blockNumber != null);
-        assertTrue(blockHash != null);
-        assertTrue(blockIndex != null);
+                // 处理交易回执
+                Optional<org.web3j.protocol.core.methods.response.Transaction> transaction = null;
+                try {
+                    transaction = web3j.ethGetTransactionByHash(transactionHash).send().getTransaction();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                BigInteger blockNumber = null;
+                String blockHash = null;
+                BigInteger blockIndex = null;
+                if (transaction.isPresent()) {
+                    org.web3j.protocol.core.methods.response.Transaction tx = transaction.get();
+
+                    blockNumber = tx.getBlockNumber();
+                    blockHash = tx.getBlockHash();
+                    blockIndex = tx.getTransactionIndex();
+                }
+                assertTrue(blockNumber != null);
+                assertTrue(blockHash != null);
+                assertTrue(blockIndex != null);
+            });
     }
 }
 ```
