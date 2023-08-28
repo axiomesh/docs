@@ -5,7 +5,7 @@ title: "存储"
 本章我们将详细介绍账本组件的可认证数据结构与KV存储引擎，以及SPV节点的验证流程。
 
 
-# SMT
+## SMT
 账本组件使用稀疏默克尔树（Sparse Merkle Tree，SMT）作为可认证数据结构。SMT是一种优化过的默克尔树，通过递归合并单叶子树来减少树中节点数量，从而加速寻址速度，减少存储空间浪费。同时，我们基于区块号来构造SMT节点的键，当使用基于LSM树的KV存储引擎时，这种方案可以显著减少存储引擎的压缩开销。
 
 SMT在AxiomLedger中作为账户状态树和合约状态树的默认实现。账户状态树记录了当前区块下所有账户的状态，其根哈希包含在每个区块的区块头内。合约状态树记录了合约状态变量的值，其根哈希包含在账户实体内。
@@ -16,11 +16,11 @@ SMT在AxiomLedger中作为账户状态树和合约状态树的默认实现。账
 
 
 
-# KV存储引擎
+## KV存储引擎
 
 AxiomLedger使用Pebble作为默认的KV存储引擎。Pebble是新一代高性能KV存储引擎，相对LevelDB和RocksDB具有更高的读写性能。AxiomLedger也支持配置LevelDB为KV存储引擎。
 
-# SPV
+## SPV
 
 AxiomLedger支持SPV（Simplified Payment Verification）。轻量级客户端（如钱包）在不存储完整的区块链账本的前提下，可以通过SPV协议向AxiomLedger全节点请求默克尔证明，并以此验证账户状态与合约状态的正确性。SPV主要步骤如下：
 1. 客户端从可信数据源下载区块头列表

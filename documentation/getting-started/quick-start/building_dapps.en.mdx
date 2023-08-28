@@ -4,7 +4,7 @@ title: "Building Dapps"
 
 This guide will introduce you to how to set up development tools and develop Dapps on `AxiomLedger`, using the well-known decentralized exchange `Uniswap@V2` as an example.
 
-### Development Environment Configuration
+## Development Environment Configuration
 
 First, you need a `node.js` environment.
 
@@ -47,7 +47,7 @@ AxiomLedger is an EVM-compatible blockchain, and any Ethereum tools you are fami
 
 If you are using Metamask to connect to the AxiomLedger network for the first time, you need to add the above network address, chain ID, token symbol and other information to the network list. After connecting to the AxiomLedger network, generally speaking, your account balance is 0 AXM. At this time, you can visit the AxiomLedger test network faucet and fill in your account address on the page to obtain `0.5` AXM. The address of the faucet is: `faucet.aries.axiomesh.io`. ***Please note: within 24 hours, an account can only get AXM once on the faucet!***
 
-### Download Uniswap@V2
+## Download Uniswap@V2
 
 Download the components needed for Dapps, using `Uniswap@V2` as an example.
 
@@ -84,11 +84,11 @@ contract myCoinA is ERC20 {
 }
 ```
 
-### Compile Contract
+## Compile Contract
 
 using`npx hardhat compile`
 
-### Deploy Contract
+## Deploy Contract
 
 Create a deployment script, for example, `scripts/deploy.js`.
 
@@ -125,13 +125,13 @@ Use `Hardhat`'s runtime environment and the contract factory from `ethers.js` to
 
 Run the deployment script with the command `npx hardhat run --network mychain scripts/deploy.js`
 
-### Verification Deployment
+## Verification Deployment
 
 Verify the deployment success by querying the contract address and reading public functions.
 
 AxiomLedger provides an official blockchain explorers, the address of the Mainnet blockchain explorers is `explorer.mainnet.axiomesh.io`, and the address of the Testnet blockchain explorers is `explorer.aries.axiomesh.io`. During the process of interacting with the AxiomLedger, you can view the block/transaction information of the Mainnet or Testnet at any time.
 
-### Dapp Usage
+## Dapp Usage
 
 After the above processes, we can now use the on-chain Dapps!
 
@@ -170,7 +170,7 @@ res = await router.addLiquidity(
     deadline);
 ```
 
-### Miscellaneous
+## Miscellaneous
 
 Using `Remix` to build Dapps on `AxiomLedger` is a more convenient choice!
 
