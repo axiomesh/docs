@@ -4,7 +4,7 @@ title: "构建 Dapps"
 
 这份指南将向您介绍如何配置开发工具并在 AxiomLedger 上开发 Dapps，这里我们以知名去中心化交易所 Uniswap@V2 为例。
 
-### 设置开发环境
+## 设置开发环境
 
 首先，您需要一个 node.js 环境。
 
@@ -48,7 +48,7 @@ module.exports = {
 
 如果您是第一次使用 Metamask 连接 AxiomLedger 网络，您需要将上面的网络地址、链 ID、代币符号等信息新增到网络列表，连接到 AxiomLedger 后，一般来说您的账户余额是 `0` AXM，此时您可以访问 AxiomLedger 测试网水龙头，在页面上填入您的账户地址来获取`0.5`AXM，水龙头的地址为：`faucet.aries.axiomesh.io`，***请注意：在24小时内，一个账户只能在水龙头获取一次AXM！***
 
-### 下载 Uniswap@V2 智能合约
+## 下载 Uniswap@V2 智能合约
 
 下载 Dapps 所需要的组件，这里我们以 Uniswap@V2 为例。
 需要下载`v2-core`（包含其核心工厂合约），并下载`v2-periphery`（与核心交互的外围合约），以及外围合约所需要的相关`lib`包
@@ -83,11 +83,11 @@ contract myCoinA is ERC20 {
 }
 ```
 
-### 编译合约
+## 编译合约
 
 使用命令`npx hardhat compile`
 
-### 部署合约
+## 部署合约
 
 创建一个部署脚本，比如`scripts/deploy.js`。
 
@@ -124,13 +124,13 @@ main().catch((error) => {
 
 使用命令`npx hardhat run --network mychain scripts/deploy.js`运行部署脚本。
 
-### 验证部署
+## 验证部署
 
 通过查询合约地址和读取公开函数来验证部署是否成功。
 
 Axiom提供了官方的区块链浏览器，主网的区块链浏览器地址为`explorer.mainnet.axiomesh.io`，测试网区块链浏览器地址为`explorer.aries.axiomesh.io`.您在与Axiom区块链交互的过程中，可以随时查看主网或测试网的区块/交易信息。
 
-### Dapp 使用
+## Dapp 使用
 
 经过上述流程之后，我们就可以使用链上的 Dapps 了！
 
@@ -169,7 +169,7 @@ res = await router.addLiquidity(
     deadline);
 ```
 
-### 其他
+## 其他
 
 使用 `Remix` 在 AxiomLedger 上构建 Dapps 是更方便的选择！
 

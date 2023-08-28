@@ -2,7 +2,7 @@
 title: "Architecture"
 ---
 
-# Introduction
+## Introduction
 
 To enable readers to fully understand the AxiomLedger architecture, this chapter will introduce it in detail from a macro t
 o micro perspective.
@@ -17,7 +17,7 @@ Finally, we will analyze each core component in detail, including its responsibi
 This will present a comprehensive system architecture spanning from the overall network, individual nodes to the 
 component level.
 
-# Network topology
+## Network topology
 
 The AxiomLedger network consists of the following main components (as shown in the figure below):
 
@@ -35,7 +35,7 @@ candidate nodes are currently not participating in consensus block production, v
 
 ![AxiomLedger network topology](../../images/system-design/axiomledger-topology-en.png)
 
-# Node Architecture
+## Node Architecture
 
 In order to facilitate the reuse of decentralized node core services, the Axiomesh ecosystem adopts 
 a "kernel + system + application" modular design pattern. The kernel layer is responsible for the 
@@ -52,13 +52,13 @@ access control logic.
 
 ![AxiomLedger Node Architecture](../../images/system-design/axiomledger-architecture-en.png)
 
-# Core components
+## Core components
 
 AxiomLedger nodes are responsible for core business operations of the blockchain network such as 
 ledger data storage, transaction execution, state services, etc. Each blockchain node consists of 
 multiple related logical components:
 
-## RPC
+### RPC
 
 In order to be compatible with EVM ecosystem tools, AxiomLedger's interface services adopt `Ethereum-compatible 
 JSON RPC` services. The core interfaces for accessing EVM are implemented to be compatible, including contract deployment, 
@@ -66,7 +66,7 @@ invocation, basic chain information query, etc. In addition, the Axiomesh blockc
 with native governance services on the blockchain, including proposal management, governance member management, 
 node upgrades, etc.
 
-## TxPool
+### TxPool
 
 The transaction pool component is mainly used to cache and manage transactions submitted to blockchain nodes that have 
 not yet been packaged and executed. The data in the transaction pool is only fully synchronized between validator nodes. 
@@ -77,7 +77,7 @@ number of transactions from the transaction pool to form a block, and broadcast 
  network. After this block is consented by the consensus network, each validator node executes the transactions in the block and 
  updates the ledger records.
 
-## Executor
+### Executor
 
 The executor component is the core component that executes transaction logic in blockchain nodes. The executor receives 
 a list of transactions ordered by consensus, executes specific transactions by invoking the underlying contract execution 
@@ -90,7 +90,7 @@ to persistent ledger state database through the ledger. The executor invokes dif
 * `EVM equivalent execution engine`: Used to execute contracts submitted by external users, including various DApp business logic contracts such as ERC20, ERC721, DEX.
 
 
-## Consensus
+### Consensus
 
 The consensus component is responsible for determining the order of blockchain transactions and verifying the consistency of 
 the blockchain ledger state. AxiomLedger adopts the `dBFT` (delegated Byzantine Fault Tolerance) consensus algorithm, balancing
@@ -98,7 +98,7 @@ the blockchain ledger state. AxiomLedger adopts the `dBFT` (delegated Byzantine 
  At the beginning of each epoch, the `dBFT` algorithm uses a randomly verifiable function to elect a fixed number of new validator node sets 
  from the node set consisting of validator nodes and candidate nodes. These new validator nodes will continue to work until the beginning of the next epoch.
 
-## Ledger
+### Ledger
 
 The ledger component provides the ability to manage blockchain world state data and block data. The state data includes account related information such as 
 balance, permissions, nonce value, etc. For special accounts such as contract accounts, it also contains the contract bytecode and all related changed states 
@@ -117,12 +117,12 @@ The ledger component targets state and block data, using data structures suitabl
  component to meet the blockchain's demands for state changes, historical records, data proofs and more.
 
 
-## Bridge
+### Bridge
 
 The cross-chain bridge component is responsible for managing AxiomLedger's cross-chain related services, including ingress and egress channels 
 for cross-chain transactions, relay routing for cross-chain transactions, and oracles for cross-chain services.
 
-## Admission Control
+### Admission Control
 
 The admission control component provides the capability of secure validation for transactions. This component provides basic transaction validity 
 check services, including transaction format, signature information, Gas fees, etc.

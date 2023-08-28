@@ -9,26 +9,26 @@ description: "了解如何运行一个`AxiomLedger`节点。"
 3. 部署并启动节点
 4. 连接到主网/测试网
 
-# 环境要求
+## 环境要求
 `AxiomLedger`支持以下操作系统：
 - Linux：
     - Ubuntu 20.04
     - Centos 8
 - macOS：Ventura
 
-# 获取节点二进制文件
+## 获取节点二进制文件
 注意`AxiomLedger`二进制中包含了一个隐藏起来的`secret`，以保证只有相同`secret`的节点才能互相连接，而`secret`是在编译时打入二进制的，
 要连接到主网/测试网只能下载github上官方发布的二进制。
 
-## 从github下载
+### 从github下载
 进入到`AxiomLedger`代码仓库的[发布页面](https://github.com/axiomesh/axiom/releases)，按照操作系统和CPU架构下载对应的最新版本二进制压缩包，并在部署环境中解压出来AxiomLedger二进制。
 
-## 从源码编译
-### 准备编译环境
+### 从源码编译
+#### 准备编译环境
 - 安装git。
 - 从源码编译需要提前安装Golang环境，需要1.20以上版本，具体参考[Golang安装文档](https://go.dev/doc/install)。
 
-### 获取`AxiomLedger`代码
+#### 获取`AxiomLedger`代码
 1. 使用以下命令下载[仓库代码](https://github.com/axiomesh/axiom)，并切换到最新稳定版本。
 
     ```shell
@@ -53,7 +53,7 @@ description: "了解如何运行一个`AxiomLedger`节点。"
     编译出的二进制位于`./bin/axiom`。
 
 
-# 部署并启动节点
+## 部署并启动节点
 1. 生成相关配置文件到指定目录。
 
     ```shell
@@ -96,5 +96,5 @@ description: "了解如何运行一个`AxiomLedger`节点。"
     WantedBy=multi-user.target
     ```
 
-# 连接到主网/测试网
+## 连接到主网/测试网
 从官方github下载的二进制生成的默认配置已包含主网/测试网P2P种子节点的信息，因此启动后会自动连接到主网/测试网，但是未通过治理节点加入提案前，其他节点会拒绝本节点的连接请求，当治理提案通过后，节点才能加入到网络中。

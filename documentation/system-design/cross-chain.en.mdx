@@ -4,13 +4,13 @@ title: 'Cross-Chain'
 
 Axiom's cross-chain mechanism is applicable to all EVM-compatible blockchains. Axiom's cross-chain mechanism ensures not only the cross-chain transmission of messages but also guarantees the transactions' integrity when Axiom interacts with other chains or when other chains interact with Axiom for asset exchanges.
 
-# Cross-Chain Relayer
+## Cross-Chain Relayer
 
 The cross-chain relayer is a crucial component within Axiom's cross-chain system. Its primary function is to relay cross-chain messages from one chain to another. The cross-chain relayer consists of two parts, each with distinct roles. Only when both parts are committed can the cross-chain message be effectively executed on the target chain. This mechanism prevents the possibility of malicious behavior from a single point.
 
 Axiom has its own officially maintained cross-chain relayers. Axiom recommends users or applications to use the official cross-chain relayers to ensure the security of asset cross-chain operations and the accuracy of messages.
 
-# Cross-Chain Manager Contracts
+## Cross-Chain Manager Contracts
 
 The cross-chain management contract serves as the engine within Axiom's cross-chain system. When a user or an on-chain application initiates a blockchain cross-chain request, it must go through the cross-chain management contract.
 
@@ -18,9 +18,9 @@ The source chain's cross-chain management contract encompasses the management of
 
 The cross-chain management contract on the destination chain includes checks for the target of cross-chain messages, decoding of encapsulated cross-chain messages, and invocation of the destination contract.
 
-# Detailed Explanation of Cross-Chain Process.
+## Detailed Explanation of Cross-Chain Process.
 
-## Message Cross-Chain Process
+### Message Cross-Chain Process
 
 Cross-chain message delivery is relatively straightforward. Users and applications only need to send the message they want to deliver to the cross-chain management contract. Axiom's cross-chain system will then relay the message to the corresponding contract on the destination chain.
 
@@ -35,7 +35,7 @@ The entire process of cross-chain messaging is as follows:
 5. The cross-chain manager contracts on destination chain get the transaction and unpack the cross-chain message;
 6. The cross-chain manager contracts invoke the destination contracts and finish the cross-chain message process.
 
-## Asset Cross-Chain Process
+### Asset Cross-Chain Process
 
 Cross-chain asset transfers are relatively more complex. To ensure the atomicity of cross-chain asset transfers, the messages for asset cross-chain need to wait for receipts sent by the destination chain. Only upon receiving a successful receipt, the assets from the source chain will be effectively locked. In case of a failed receipt or if the acknowledgment is not received within the timeout, the assets from the source chain will be returned to the user or on-chain application.
 
@@ -53,7 +53,7 @@ The entire process of cross-chain messaging is as follows:
 8. The relayer captures the receipt and returns the receipt to the source chain;
 9. The source chain contract evaluates the receipt and executes instructions to either lock the assets or return the assets.
 
-# Deep in Assets Cross-chain
+## Deep in Assets Cross-chain
 
 In cross-chain asset transfers, the most critical aspect to be concerned about is the status of the assets at each stage.
 

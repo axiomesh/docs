@@ -10,28 +10,28 @@ The steps to run an `AxiomLedger` node include:
 3. Deploy and start the node
 4. Connect to mainnet/testnet
 
-# Environment Requirements
+## Environment Requirements
 `AxiomLedger` supports the following operating systems:
 - Linux:
     - Ubuntu 20.04
     - Centos 8
 - macOS: Ventura
 
-# Obtain Node Binary
+## Obtain Node Binary
 Note that the `AxiomLedger` binary contains a hidden `secret` to ensure that only nodes with the same `secret` can
 connect to each other. The `secret` is injected into the binary during compilation. To connect to mainnet/testnet
 you need to download the official binary released on GitHub.
 
-## Download from GitHub
+### Download from GitHub
 Go to the [Releases page](https://github.com/axiomesh/axiom/releases) of the `AxiomLedger` code repository, download the latest version binary zip file
 for your operating system and CPU architecture, and unzip it in the deployment environment to get the AxiomLedger binary.
 
-## Compile from Source
-### Prepare Compilation Environment
+### Compile from Source
+#### Prepare Compilation Environment
 - Install git.
 - Compiling from source requires Golang environment above version 1.20, see [Golang Installation Docs](https://go.dev/doc/install) for details.
 
-### Get `AxiomLedger` Code
+#### Get `AxiomLedger` Code
 1. Use the following commands to download the [repository code](https://github.com/axiomesh/axiom) and switch to the latest stable version tag.
 
     ```shell
@@ -57,7 +57,7 @@ for your operating system and CPU architecture, and unzip it in the deployment e
     The compiled binary is located at `./bin/axiom`.
 
 
-# Deploy and Start Node
+## Deploy and Start Node
 1. Generate related config files to specified directory.
 
     ```shell
@@ -100,5 +100,5 @@ for your operating system and CPU architecture, and unzip it in the deployment e
     WantedBy=multi-user.target
     ```
 
-# Connect to Mainnet/Testnet
+## Connect to Mainnet/Testnet
 The default config generated from the official binary downloaded from GitHub already contains mainnet/testnet P2P seed node information. So after startup it will automatically connect to mainnet/testnet. However, before the governance proposal to add the node is approved, other nodes will reject this node's connection requests. The node can only join the network after the governance proposal is passed.
