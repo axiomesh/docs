@@ -2,17 +2,17 @@
 title: 'Cross-Chain'
 ---
 
-Axiom's cross-chain mechanism is applicable to all EVM-compatible blockchains. Axiom's cross-chain mechanism ensures not only the cross-chain transmission of messages but also guarantees the transactions' integrity when Axiom interacts with other chains or when other chains interact with Axiom for asset exchanges.
+Axiomesh's cross-chain mechanism is applicable to all EVM-compatible blockchains. Axiomesh's cross-chain mechanism ensures not only the cross-chain transmission of messages but also guarantees the transactions' integrity when Axiomesh interacts with other chains or when other chains interact with Axiomesh for asset exchanges.
 
 # Cross-Chain Relayer
 
-The cross-chain relayer is a crucial component within Axiom's cross-chain system. Its primary function is to relay cross-chain messages from one chain to another. The cross-chain relayer consists of two parts, each with distinct roles. Only when both parts are committed can the cross-chain message be effectively executed on the target chain. This mechanism prevents the possibility of malicious behavior from a single point.
+The cross-chain relayer is a crucial component within Axiomesh's cross-chain system. Its primary function is to relay cross-chain messages from one chain to another. The cross-chain relayer consists of two parts, each with distinct roles. Only when both parts are committed can the cross-chain message be effectively executed on the target chain. This mechanism prevents the possibility of malicious behavior from a single point.
 
-Axiom has its own officially maintained cross-chain relayers. Axiom recommends users or applications to use the official cross-chain relayers to ensure the security of asset cross-chain operations and the accuracy of messages.
+Axiomesh has its own officially maintained cross-chain relayers. Axiomesh recommends users or applications to use the official cross-chain relayers to ensure the security of asset cross-chain operations and the accuracy of messages.
 
 # Cross-Chain Manager Contracts
 
-The cross-chain management contract serves as the engine within Axiom's cross-chain system. When a user or an on-chain application initiates a blockchain cross-chain request, it must go through the cross-chain management contract.
+The cross-chain management contract serves as the engine within Axiome sh's cross-chain system. When a user or an on-chain application initiates a blockchain cross-chain request, it must go through the cross-chain management contract.
 
 The source chain's cross-chain management contract encompasses the management of cross-chain entities, routing for cross-chain types, encapsulation of cross-chain messages, and the propagation of cross-chain events."
 
@@ -22,7 +22,7 @@ The cross-chain management contract on the destination chain includes checks for
 
 ## Message Cross-Chain Process
 
-Cross-chain message delivery is relatively straightforward. Users and applications only need to send the message they want to deliver to the cross-chain management contract. Axiom's cross-chain system will then relay the message to the corresponding contract on the destination chain.
+Cross-chain message delivery is relatively straightforward. Users and applications only need to send the message they want to deliver to the cross-chain management contract. Axiomesh's cross-chain system will then relay the message to the corresponding contract on the destination chain.
 
 ![Message_Cross-Chain](../../images/message_cross_chain_en.png)
 
@@ -61,8 +61,8 @@ Below is the state diagram of assets in cross-chain asset transfers:
 
 ![Message_Cross-Chain](../../images/asset_cross_chain_state_en.png)
 
-When a user initiates a cross-chain asset transfer, the assets will enter a semi-locked state. In this state, the assets are recorded in Axiom's cross-chain contract but not fully locked. The next steps of the process require waiting for the acknowledgment receipt from the cross-chain message before proceeding.
+When a user initiates a cross-chain asset transfer, the assets will enter a semi-locked state. In this state, the assets are recorded in Axiomesh's cross-chain contract but not fully locked. The next steps of the process require waiting for the acknowledgment receipt from the cross-chain message before proceeding.
 
 When the source chain receives a successful receipt, the assets will be locked on the source chain. If a failure receipt is received, the assets will be returned to the original user or contract.
 
-Axiom's cross-chain system also incorporates a timeout mechanism for transactions. When the assets in a semi-locked state on the source chain do not receive an acknowledgment receipt from the destination chain within a certain time frame, users or on-chain contracts can manually trigger a timeout rollback. This process will return the semi-locked assets back to the original user or contract.
+Axiomesh's cross-chain system also incorporates a timeout mechanism for transactions. When the assets in a semi-locked state on the source chain do not receive an acknowledgment receipt from the destination chain within a certain time frame, users or on-chain contracts can manually trigger a timeout rollback. This process will return the semi-locked assets back to the original user or contract.
