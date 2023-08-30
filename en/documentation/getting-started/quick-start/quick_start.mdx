@@ -173,21 +173,20 @@ If you already have a certain understanding of Ethereum, you can compile and dep
 ![通过Remix编译&部署智能合约1](../../images/getting-started/quick-start/compile-and-deploy-ERC20-contract.png)
 
 Click the `Deploy` button on the page, check the transaction details in the MetaMask pop-up box, and click `Confirm` to send a transaction request to deploy the smart contract.
-![MetaMask确认](../../images/getting-started/quick-start/MetaMask-confirm.png)
+<img src="../../images/getting-started/quick-start/MetaMask-confirm.png" width="300" />
 
 After the deployment of the smart contract is completed, you can see the address of the smart contract, the calling method and other information on Remix. Copy the address of the contract, and select `Add Token` on MetaMask and paste it, and then click Nextto view the balance of your minted Token on this address.
-![MetaMask确认](../../images/getting-started/quick-start/add-token.png)
-
+<img src="../../images/getting-started/quick-start/add-token.png" width="300" />
 So far, you have successfully deployed the ERC20 standard smart contract on the AxiomLedger and minted your own Token! Of course, you can also complete the deployment of smart contracts through the SDK. For specific operations, please refer to ether.js.
 
 ## Transferring  token
 
 You have completed the minting of Token in the previous step, now you can try transfer your token. Similarly, in order to complete and display the operation more intuitively, it is recommended that you choose the Remix+MetaMask to transfer your token. First create a new account whose address is used to receive the token, then call the `transfer` method at the bottom of the page where the contract was deployed just now (you need to pass in the address of the new account and the transfer amount), and confirm the transaction in the MetaMask pop-up box.
-![MetaMask确认](../../images/getting-started/quick-start/transfer-token.png)
+![Metamask确认](../../images/getting-started/quick-start/transfer-token.png)
 
 After the transfer is completed, you can switch to the new account address on MetaMask to check its balance, and verify that it has received the token
-![MetaMask确认](../../images/getting-started/quick-start/check-balance.png)
+<img src="../../images/getting-started/quick-start/check-balance.png" width="300" />
 
 ## Using Blockchain Explorers
 
-AxiomLedger provides an official blockchain explorers - [AXMScan](). During the process of interacting with the AxiomLedger blockchain, you can view the block or transaction information of the Testnet at any time. You can learn more about how to use AXMScan [here](../../getting-started/resources/resources.en#axmscan).
+AxiomLedger provides an official blockchain explorers - [AXMScan](https://explorer.aries.axiomesh.io). During the process of interacting with the AxiomLedger blockchain, you can view the block or transaction information of the Testnet at any time. You can learn more about how to use AXMScan [here](/en/documentation/getting-started/resources/resources#axmscan).

@@ -8,18 +8,20 @@
     ]
   },
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/white.svg",
+    "light": "/logo/yellow.svg"
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#a1b659",
-    "light": "#81D7F7",
-    "dark": "#004E7A"
+    "primary": "#ECC94B",
+    "light": "#ECC94B",
+    "dark": "#ECC94B"
   },
   "versions": ["English","简体中文"],
   "topAnchor": {
-    "name": "Axiomesh"
+    "name": "Axiomesh",
+    "icon": "house",
+    "iconType": "duotone"
   },
   "anchors": [
     {
@@ -366,7 +368,8 @@
     
   ],
   "footerSocials": {
-    "github": "https://github.com/axiomesh"
+    "github": "https://github.com/axiomesh",
+    "twitter":"https://twitter.com/axiomesh?s=20"
   },
-  "backgroundImage": "/background.png"
+  "backgroundImage": "./images/background1.png"
 }
