@@ -23,7 +23,7 @@ The transaction process within the consensus module of AxiomLedger is outlined a
     For performance reasons, Validators/Proposer do not execute transactions within the current block during block consensus. After consensus is achieved, the executor handles transaction execution. Consensus on post-execution state consistency is ensured through the state checkpoint mechanism.
 </Warning>
 
-![consensus architecture diagram](/en/images/system-design/consensus-architecture-en.png)
+![consensus architecture diagram](/en/images/system-design/consensus-architecture.png)
 
 
 ### State Checkpoint Mechanism
@@ -44,7 +44,7 @@ To address this issue, AxiomLedger introduces three different node roles:
     - **Validator** : Participates in consensus and can verify and vote on packaging proposals presented by Proposers.
     - **Candidate** : Joins the network, does not participate in consensus, only synchronizes blocks.
 
-![node state machine](/en/images/system-design/node-state-machine-en.png)
+<img src="/en/images/system-design/node-state-machine.png" width="500" />
 
 This differentiation keeps the consensus node scale relatively stable, preventing it from growing with an increasing number of nodes and contributing to improved efficiency and scalability. Node role transitions are detailed in the next section.
 
@@ -81,7 +81,7 @@ Epoch changes are executed through the built-in epoch management contract, which
     Each WRF process selects one Validator, thus the number of WRF rounds is related to the number of Validator sets.
 </Warning>
 
-![epoch change process](/en/images/system-design/epoch-change-en.png)
+![epoch change process](/en/images/system-design/epoch-change.png)
 
 Each term interval corresponds to a checkpoint interval. Within this interval, a Proposer is assigned. If a Proposer encounters abnormal states such as downtime during this interval, an exceptional term transition will be triggered. It is important to note that after an exceptional term transition, the term interval is not a checkpoint interval; rather, it is the checkpoint interval minus the previous exceptional term interval (e.g., term 3 + term 4 = term interval).
 
