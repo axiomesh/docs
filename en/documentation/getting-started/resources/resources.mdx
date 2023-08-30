@@ -1,0 +1,60 @@
+---
+title: "Resources"
+---
+
+## Network
+Chains refer to various distinct AxiomLedger environments in which development, testing, or production use cases can be undertaken.
+
+AxiomLedgers accounts can be used across different chains, but the account balances and transaction histories won't carry over outside of the AxiomLedger mainnet. Understanding which networks are available and how to obtain testnet AXM for experimentation can be useful when conducting tests. Generally, for security reasons, it's not recommended to reuse mainnet accounts on testnets, and vice versa.
+
+### Mainnet
+The mainnet refers to the primary AxiomLedger blockchain within the broader ecosystem, where all transactions with real value take place on its decentralized ledger.
+
+The AXM price that the general public and exchanges deal with corresponds to the AXM on the mainnet. Currently AxiomLedger is still in beta and has not released its mainnet.
+
+### Testnet
+Public testnet is a network that simulate the ecosystem environment, where protocol developers or smart contract developers can use them to test protocol upgrades and smart contracts that haven't been deployed to the mainnet yet. You can think of them as a simulation of the production and assembly servers.
+Before deploying to the mainnet, you should test any contract code you've written on a testnet. In decentralized applications that integrate with existing smart contracts, most projects deploy replicas to a testnet.
+
+Interacting with AxiomLedger requires AXM in reality. If you are interested in experimenting with AxiomLedger, you can obtain free testnet `AXM` on [faucet](https://faucet.aries.axiomesh.io), a web applications where you request for AXM to be sent to an address, to explore the platform without any risks. 
+
+AXM on the testnet has no real value, they are only meant for experimentation purposes on the AxiomLedger Testnet.
+
+### Connect to the Testnet
+AxiomLedger is an EVM-compatible blockchain, once you have an Ethereum address, you can connect to AxiomLedger testnet using mainstream wallets (such as Metamask ) or SDK. 
+If you are using Metamask to connect to the AxiomLedger for the first time, you need to add RPC address, chain ID, token symbol and other information to the network list. 
+- RPC address of AxiomLedger testnet: `rpc.aries.axiomesh.io`
+- Chain ID: `23411`
+- Token symbol: `AXM`
+
+## Faucet
+A faucet is a blockchain tool that drips testnet tokens to anyone that requests them for free. 
+
+### Get Free Tokens
+Testnet tokens are a test currency that allows you to test your application before going live on mainnet. Testnet tokens can be used in place of mainnet tokens on testnets like Aries. You can use these tokens for creating test transactions on the associated blockchain, such as contract deployments, transferring funds and debugging failed transactions. Request testnet tokens [here](https://faucet.aries.axiomesh.io).
+
+### Faucet Limitation
+You can only obtain 0.5 test tokens in every 24 hours.If the current token balance of the account is greater than 3, the faucet request will be rejected.
+
+
+
+## AXMScan
+The [AXMScan-Testnet](https://explorer.aries.axiomesh.io) lets you delve into the activity on the Axiomesh TestNet in great detail, seeing transactions, blocks, wallets, tokens, smart contracts and Statistics. 
+
+![AXMScan](/en/images/getting-started/AXMScan.png)
+
+### Submenu
+With the AXMScan, you can check the details of **Transactions**, **Blocks**,**Top Accounts** and **Verified Contracts** on each submenu.
+
+![Submenu](/en/images/getting-started/SubMenu.png)
+
+### Search Bar
+
+![SearchBar](/en/images/getting-started/SearchBar.png)
+
+Use the search bar on all pages to access data by:
+- **Address**: The address of an EOA (Externally Owned Account).
+- **Contract address**: The callable address of a smart Contract deployed on AxiomLedger.
+- **Transaction hash**: The unique 66 character identifiers of an executed transaction.
+- **Blcok**: Blocks generated on AxiomLedger.
+- **Token**: ERC20, ERC721, ERC1155 assets deployed on AxiomLedger.
