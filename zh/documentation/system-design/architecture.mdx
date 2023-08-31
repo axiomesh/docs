@@ -19,7 +19,7 @@ AxiomLedger 网络由以下主要组成部分构成(如下图所示):
 
 具体而言，新节点是尚未通过治理投票获取入网许可的节点，候选节点是当前未参与共识出块的节点，验证节点是通过选举参与出块的节点，出块节点是验证节点中打包出块的节点。
 
-![AxiomLedger 网络拓扑图](../../images/system-design/axiomledger-topology-cn.png)
+![AxiomLedger 网络拓扑图](/zh/images/system-design/axiomledger-topology.png)
 
 
 ## 节点架构
@@ -30,7 +30,8 @@ P2P、存储、监控、配置等）；系统层可以利用内核层服务来�
 
 本章将重点介绍系统层区块链 `AxiomLedger` 验证节点的组件架构，包括EVM 兼容的RPC 服务、交易执行器、区块链账本服务、交易内存池、共识算法、跨链桥以及访问控制逻辑；
 
-![AxiomLedger 验证节点架构图](../../images/system-design/axiomledger-architecture-cn.png)
+![AxiomLedger 验证节点架构图](/zh/images/system-design/axiomledger-architecture.png)
+
 
 ## AxiomLedger 节点核心组件
 

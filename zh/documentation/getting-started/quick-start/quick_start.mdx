@@ -164,21 +164,21 @@ contract TAXMToken is ERC20Interface, SafeMath {
 }
 ```
 如果您已经对以太坊有一定的了解，可以通过Remix编译并部署此智能合约，***请注意：1. 编译合约时请选择合适的Solidity版本；2. 通过injected Provider - MetaMask的方式部署，请确认网络已经切换到AxiomLedger测试网并且账户地址符合您的选择。***
-![通过Remix编译&部署智能合约1](../../images/getting-started/quick-start/compile-and-deploy-ERC20-contract.png)
+![通过Remix编译&部署智能合约1](/zh/images/getting-started/quick-start/compile-and-deploy-ERC20-contract.png)
 点击页面上的`Deploy`按钮，在MetaMask弹框内检查交易详情后，点击`确认`，发出部署智能合约的交易请求。
-<img src="../../images/getting-started/quick-start/MetaMask-confirm.png" width="300" />
+<img src="/zh/images/getting-started/quick-start/MetaMask-confirm.png" width="300" />
 
 智能合约部署完成后，可以在Remix上看到合约的地址、调用方法等信息，将合约的地址复制下来，在MetaMask上选择增加Token后粘贴，然后点击下一步，就可以查看到这个地址上您铸造Token的余额了。
-<img src="../../images/getting-started/quick-start/add-token.png" width="300" />
+<img src="/zh/images/getting-started/quick-start/add-token.png" width="300" />
 
 至此，您成功在AxiomLedger上部署了ERC20标准的智能合约，并铸造了属于您的Token！当然，您也可以通过SDK完成智能合约的部署，具体的操作可以参考ether.js。
 
 ## 完成一笔Token转账
 在上一步您已经完成了铸造Token，现在可以试试Token转账的操作。同样，为了更直观地完成和展示操作，推荐您选择Remix+MetaMask的方式去转账。首先创建一个新的账户，其地址用来接收Token，然后在刚才部署合约的页面下方，调用`transfer`方法（需要传入新账户的地址和转账的金额），在MetaMask弹框中确认发出交易。
-![MetaMask确认](../../images/getting-started/quick-start/transfer-token.png)
+![MetaMask确认](/zh/images/getting-started/quick-start/transfer-token.png)
 
 转账完成后，可以在MetaMask上切换到新账户，查看其余额变化
-<img src="../../images/getting-started/quick-start/check-balance.png" width="300" />
+<img src="/zh/images/getting-started/quick-start/check-balance.png" width="300" />
 
 ## 体验AxiomLedger区块链浏览器
 AxiomLedger提供了官方的[区块链浏览器](https://explorer.aries.axiomesh.io)。您在与AxiomLedger交互的过程中，可以随时查看测试网的区块/交易信息。 您可以在[此处](/zh/documentation/getting-started/resources/resources#axmscan)了解更多关于AXMScan的使用方法。

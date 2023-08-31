@@ -24,7 +24,7 @@ The cross-chain management contract on the destination chain includes checks for
 
 Cross-chain message delivery is relatively straightforward. Users and applications only need to send the message they want to deliver to the cross-chain management contract. Axiomesh's cross-chain system will then relay the message to the corresponding contract on the destination chain.
 
-![Message_Cross-Chain](../../images/message_cross_chain_en.png)
+![Message_Cross-Chain](/en/images/message_cross_chain.png)
 
 The entire process of cross-chain messaging is as follows:
 
@@ -39,7 +39,7 @@ The entire process of cross-chain messaging is as follows:
 
 Cross-chain asset transfers are relatively more complex. To ensure the atomicity of cross-chain asset transfers, the messages for asset cross-chain need to wait for receipts sent by the destination chain. Only upon receiving a successful receipt, the assets from the source chain will be effectively locked. In case of a failed receipt or if the acknowledgment is not received within the timeout, the assets from the source chain will be returned to the user or on-chain application.
 
-![Message_Cross-Chain](../../images/asset_cross_chain_en.png)
+![Message_Cross-Chain](/en/images/asset_cross_chain.png)
 
 The entire process of cross-chain messaging is as follows:
 
@@ -59,7 +59,7 @@ In cross-chain asset transfers, the most critical aspect to be concerned about i
 
 Below is the state diagram of assets in cross-chain asset transfers:
 
-![Message_Cross-Chain](../../images/asset_cross_chain_state_en.png)
+![Message_Cross-Chain](/en/images/asset_cross_chain_state.png)
 
 When a user initiates a cross-chain asset transfer, the assets will enter a semi-locked state. In this state, the assets are recorded in Axiomesh's cross-chain contract but not fully locked. The next steps of the process require waiting for the acknowledgment receipt from the cross-chain message before proceeding.
 
