@@ -8,8 +8,8 @@
     ]
   },
   "logo": {
-    "dark": "/logo/white.svg",
-    "light": "/logo/yellow.svg"
+    "dark": "/logo/dark1.svg",
+    "light": "/logo/light1.svg"
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -17,7 +17,7 @@
     "light": "#ECC94B",
     "dark": "#ECC94B"
   },
-  "versions": ["English"],
+  
   "topAnchor": {
     "name": "Axiomesh",
     "icon": "house",
@@ -27,26 +27,26 @@
     {
       "name": "Docs",
       "icon": "book-open",
-      "url": "en/documentation",
-      "version": "English"
+      "url": "en/documentation"
+      
     },
     {
       "name": "API Reference",
       "icon": "code",
-      "url": "en/api-reference",
-      "version": "English"
+      "url": "en/api-reference"
+      
     },
     {
       "name": "SDKs",
       "icon": "shield-halved",
-      "url": "en/sdks",
-      "version": "English"
+      "url": "en/sdks"
+      
     },
     {
       "name": "Changelog",
       "icon": "puzzle-piece",
-      "url": "en/changelog",
-      "version": "English"
+      "url": "en/changelog"
+      
     }
    
   ],
@@ -69,8 +69,8 @@
           ]
         },
         "en/documentation/getting-started/glossary/glossary"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "Core Concepts",
@@ -80,8 +80,8 @@
         "en/documentation/core-concepts/transactions",
         "en/documentation/core-concepts/system-contract",
         "en/documentation/core-concepts/upgrade"
-      ],
-      "version": "English"
+      ]
+      
     },   
     {
       "group": "System Design",
@@ -92,8 +92,8 @@
         "en/documentation/system-design/consensus",
         "en/documentation/system-design/cross-chain",
         "en/documentation/system-design/storage"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "Governance",
@@ -101,8 +101,8 @@
         "en/documentation/governance/committee",
         "en/documentation/governance/post-proposals",
         "en/documentation/governance/vote-proposals"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "Economics",
@@ -110,8 +110,8 @@
         "en/documentation/economics/overview",
         "en/documentation/economics/gas",
         "en/documentation/economics/stablecoin"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "Nodes",
@@ -119,16 +119,16 @@
         "en/documentation/nodes/about",
         "en/documentation/nodes/node_requirements",
         "en/documentation/nodes/run_node"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "Introduction",
       "pages": [
         "en/api-reference/introduction/jsonrpc-Introduction",
         "en/api-reference/introduction/eventsSubscription"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "JSON RPC",
@@ -162,8 +162,8 @@
             "en/api-reference/jsonrpc/HTTP/uninstallFilter",
             "en/api-reference/jsonrpc/HTTP/getFilterLogs",
             "en/api-reference/jsonrpc/HTTP/getFilterChanges"
-          ],
-          "version": "English"
+          ]
+          
         },
         {
           "group": "WEBSOCKETS",
@@ -171,8 +171,8 @@
             "en/api-reference/jsonrpc/WEBSOCKETS/logs",
             "en/api-reference/jsonrpc/WEBSOCKETS/newHeads",
             "en/api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions"
-          ],
-          "version": "English"
+          ]
+          
         }
       ]
     },
@@ -180,23 +180,23 @@
       "group": "Overview",
       "pages": [
         "en/sdks/introduction"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "SDKs",
       "pages": [
         "en/sdks/sdks/java-sdk",
         "en/sdks/sdks/js-sdk"
-      ],
-      "version": "English"
+      ]
+      
     },
     {
       "group": "Changelog",
       "pages": [
         "en/changelog/changelog"
-      ],
-      "version": "English"
+      ]
+      
     }
   ],
   "footerSocials": {
