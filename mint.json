@@ -11,7 +11,7 @@
     "dark": "/logo/dark1.svg",
     "light": "/logo/light1.svg"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/favicon1.png",
   "colors": {
     "primary": "#ECC94B",
     "light": "#ECC94B",
@@ -109,7 +109,7 @@
       "pages": [
         "en/documentation/economics/overview",
         "en/documentation/economics/gas",
-        "en/documentation/economics/stablecoin"
+        "en/documentation/economics/coin"
       ]
       
     },
