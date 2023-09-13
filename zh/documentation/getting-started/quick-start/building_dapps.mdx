@@ -10,7 +10,7 @@ title: "构建 Dapps"
 
 创建一个新目录，并在新目录中安装和初始化 [HardHat](https://hardhat.org/) 项目
 
-```
+``` shell
 mkdir hardhat_uniswap
 cd hardhat_uniswap
 npm install --save-dev hardhat
@@ -19,7 +19,7 @@ npx hardhat
 
 这时候我们会看到 HardHat 为我们创建了标准化的目录结构
 
-```
+``` shell
 contracts/
 test/
 scripts/
@@ -28,7 +28,7 @@ hardhat.config.js
 
 随后我们需要在`hardhat.config.js`中配置测试网络和测试账号。
 
-```
+``` Javascript
 module.exports = {
   defaultNetwork: "mychain", // 默认网络设置
   networks: {
@@ -53,7 +53,7 @@ module.exports = {
 下载 Dapps 所需要的组件，这里我们以 Uniswap@V2 为例。
 需要下载`v2-core`（包含其核心工厂合约），并下载`v2-periphery`（与核心交互的外围合约），以及外围合约所需要的相关`lib`包
 
-```
+``` shell
 npm i --save-dev @uniswap/v2-core
 npm i --save-dev @uniswap/v2-periphery
 npm i --save-dev @uniswap/lib
@@ -62,7 +62,7 @@ npm i --save-dev @uniswap/lib
 为了方便测试，这里我们还需要编写两个`ERC-20`合约用于创建流动性池。合约的实现可以参考`openzeppelin`的`ERC-20`实现。
 合约编写可以参考如下所示
 
-```
+``` Solidity
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -93,7 +93,7 @@ contract myCoinA is ERC20 {
 
 部署合约参考如下：
 
-```
+``` Javascript
 const {hre, artifacts, ethers} = require("hardhat");
 
 async function main() {
@@ -136,7 +136,7 @@ Axiom提供了官方的区块链浏览器，主网的区块链浏览器地址为
 
 例如，我们可以使用上述编译的代币合约在 `Uniswap` 上生成流动性池
 
-```
+``` Javascript
 // 获取部署合约的账户
 const [owner] = await ethers.getSigners();
 
