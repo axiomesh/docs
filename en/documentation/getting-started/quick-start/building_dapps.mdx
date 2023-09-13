@@ -10,7 +10,7 @@ First, you need a `node.js` environment.
 
 Create a new directory, and within that directory, install and initialize a `HardHat` project.
 
-```
+``` shell
 mkdir hardhat_uniswap
 cd hardhat_uniswap
 npm install --save-dev hardhat
@@ -19,7 +19,7 @@ npx hardhat
 
 At this point, we will see that HardHat has created a standardized directory structure for us.
 
-```
+``` shell
 contracts/
 test/
 scripts/
@@ -28,7 +28,7 @@ hardhat.config.js
 
 Next, we need to configure the test network and test accounts in `hardhat.config.js`
 
-```
+``` Javascript
 module.exports = {
   defaultNetwork: "mychain",
   networks: {
@@ -53,7 +53,7 @@ Download the components needed for Dapps, using `Uniswap@V2` as an example.
 
 You need to download `v2-core` (which includes its core factory contracts), and `v2-periphery` (the peripheral contracts that interact with the core), as well as the related `lib` packages required for the `v2-periphery` contracts.
 
-```
+``` shell
 npm i --save-dev @uniswap/v2-core
 npm i --save-dev @uniswap/v2-periphery
 npm i --save-dev @uniswap/lib
@@ -63,7 +63,7 @@ For testing purposes, we also need to write two `ERC-20` contracts to create liq
 
 The contract writing can be referred to as follows:
 
-```
+``` Solidity
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -94,7 +94,7 @@ Create a deployment script, for example, `scripts/deploy.js`.
 
 The reference for deploying the contract is as follows:
 
-```
+``` Javascript
 const {hre, artifacts, ethers} = require("hardhat");
 
 async function main() {
@@ -137,7 +137,7 @@ After the above processes, we can now use the on-chain Dapps!
 
 For example, we can use the previously compiled token contract to create a liquidity pool on `Uniswap`.
 
-```
+``` Javascript
 // acquire account
 const [owner] = await ethers.getSigners();
 

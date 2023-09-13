@@ -11,7 +11,7 @@ AxiomLedger 是兼容EVM的区块链，任何您熟悉的以太坊工具都可�
 ## 构造和发起您的第一笔交易
 如果您需要深入了解 AxiomLedger，想获取更多链上信息或发起链上交易，推荐您使用 Axiom 提供的官方SDK （axiom.js），它的用法与[ether.js](https://github.com/ethers-io/ethers.js)类似。
 
-```
+``` Solidity
 // Javascript
 // Setup: npm install @axiomesh/axiom
 import { ethers } from '@axiomesh/axiom'
@@ -48,7 +48,7 @@ main();
 ## 铸造一个Token
 相信您在之前的步骤中成功连接到了AxiomLedger，也体验了AxiomLedger官方SDK的基本用法，接下来可以探索在AxiomLedger上铸造您自己的Token。一般来说，这需要您提前编写或准备好一个符合ERC20标准的智能合约，并将它成功部署到AxiomLedger上，然后在钱包软件（例如Metamask）上添加合约地址，就可以查看到您新铸造的Token了。
 为了降低您的使用难度，AxiomLedger提供了一份简单的智能合约样本(代币符号)，您只需要修改其中的Token名称（样本中TAXM为例）和账户地址即可。当然，您也可以参考此合约开发更符合您需要的智能合约。
-```
+``` solidity
 pragma solidity ^0.4.24;
 
 //Safe Math Interface
