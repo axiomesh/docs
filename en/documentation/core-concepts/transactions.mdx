@@ -20,7 +20,7 @@ The transaction includes following information:
 
 The transaction object appears as follows:
 
-```
+``` solidity
 {
   from: "0x8219e5E23396587Bf1969eFd1B211F379aa29494",
   to: "0x44D848b5DC373dafDde447c158876579C50c34dF",
@@ -37,7 +37,8 @@ But the transaction object needs to be signed using the sender's private key. Th
 AxiomLedger is compatible with Ethereum clients like Geth, and the signing process can be handled through Ethereum clients compatible with Geth.
 
 Example JSON-RPC call:
-```
+
+``` Javascript
 {
   "id": 2,
   "jsonrpc": "2.0",
@@ -57,7 +58,7 @@ Example JSON-RPC call:
 }
 ```
 Example response:
-```
+``` JavaScript
 {
   "jsonrpc": "2.0",
   "id": 2,
