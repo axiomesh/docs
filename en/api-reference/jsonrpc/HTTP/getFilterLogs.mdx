@@ -48,39 +48,39 @@ Polling method for a filter, which returns an array of logs which occurred since
 
     <Expandable title="Log objects">
 
-        <ResponseField body="logIndex" type="string">
+        <ResponseField name="logIndex" type="string">
             Integer of the log index position in the block. null when its pending log.
         </ResponseField>
 
-        <ResponseField body="removed" type="bool">
+        <ResponseField name="removed" type="bool">
             True when the log was removed, due to a chain reorganization. false if its a valid log.
         </ResponseField>
 
-        <ResponseField body="transactionIndex" type="string">
+        <ResponseField name="transactionIndex" type="string">
             Integer of the transactions index position log was created from. null when its pending log.
         </ResponseField>
 
-        <ResponseField body="transactionHash" type="string">
+        <ResponseField name="transactionHash" type="string">
             32 Bytes - hash of the transactions this log was created from. null when its pending log.
         </ResponseField>
 
-        <ResponseField body="blockHash" type="string">
+        <ResponseField name="blockHash" type="string">
             32 Bytes - hash of the block where this log was in. null when its pending. null when its pending log.
         </ResponseField>
 
-        <ResponseField body="blockNumber" type="string">
+        <ResponseField name="blockNumber" type="string">
             the block number where this log was in. null when its pending. null when its pending log.
         </ResponseField>
 
-        <ResponseField body="address" type="string">
+        <ResponseField name="address" type="string">
             20 Bytes - address from which this log originated.
         </ResponseField>
 
-        <ResponseField body="data" type="string">
+        <ResponseField name="data" type="string">
             Contains one or more 32 Bytes non-indexed arguments of the log.
         </ResponseField>
 
-        <ResponseField body="topics" type="array">
+        <ResponseField name="topics" type="array">
             Array of 0 to 4 32 Bytes DATA of indexed log arguments. (In solidity: The first topic is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)), except you declared the event with the anonymous specifier.)
         </ResponseField>
 
@@ -96,8 +96,8 @@ curl   'https://<testnetwork>' \
 --data '{
     "jsonrpc":"2.0",
     "method":"eth_getFilterLogs",
-    "params":["0x16"],
-    "id":74
+    "params":["0xa38fb32311426baee6a6c98bb6a469d"],
+    "id":1
 }'
     ```
 
@@ -107,21 +107,24 @@ curl   'https://<testnetwork>' \
 
     ```json Response
     {
-        "id":1,
-        "jsonrpc":"2.0",
-        "result": [{
-        "logIndex": "0x1", // 1
-        "blockNumber":"0x1b4", // 436
-        "blockHash": "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
-        "transactionHash":  "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
-        "transactionIndex": "0x0", // 0
-        "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
-        "data":"0x0000000000000000000000000000000000000000000000000000000000000000",
-        "topics": ["0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"]
-    },{
-        ...
-    }]
-    }
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": [
+        {
+            "address": "0x4cd8ee4fc57c51d8af5b6b6a08cc441f2b4fcbfe",
+            "topics": [
+                "0xf9fbd55454309325ccadd998a641a1dfe7cd888eea26c0ae93b95992a13ac144"
+            ],
+            "data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000047465737400000000000000000000000000000000000000000000000000000000",
+            "blockNumber": "0x3",
+            "transactionHash": "0x8c292190c6449c5897e0b1b5ac0b7d61b76f554d3cf9aa3e7490cb84f274d844",
+            "transactionIndex": "0x0",
+            "blockHash": "0xf922bf9ef8548c06e7744b684527a0bbef1adb1617fed50a3c67251ded62e619",
+            "logIndex": "0x0",
+            "removed": false
+        }
+    ]
+}
     ```
 
 </ResponseExample>

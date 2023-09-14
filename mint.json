@@ -160,6 +160,7 @@
           "group": "HTTP",
           "pages": [
             "en/api-reference/jsonrpc/HTTP/chainId",
+            "en/api-reference/jsonrpc/HTTP/accounts",
             "en/api-reference/jsonrpc/HTTP/blockNumber",
             "en/api-reference/jsonrpc/HTTP/getBalance",
             "en/api-reference/jsonrpc/HTTP/getBlockByNumber",
@@ -304,6 +305,7 @@
           "group": "HTTP接口",
           "pages": [
             "zh/api-reference/jsonrpc/HTTP/chainId",
+            "zh/api-reference/jsonrpc/HTTP/accounts",
             "zh/api-reference/jsonrpc/HTTP/blockNumber",
             "zh/api-reference/jsonrpc/HTTP/getBalance",
             "zh/api-reference/jsonrpc/HTTP/getBlockByNumber",
