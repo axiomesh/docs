@@ -15,11 +15,11 @@ The following subscription methods are available:
 2. eth_unsubscribe - Cancel an active subscription
 
 
-## What is websockets？
-WebSockets are a communication protocol that provides full-duplex communication channels over a single, long-lived connection between a client and a server. Unlike the traditional request-response model of HTTP, WebSockets enable real-time, bidirectional data exchange, allowing both the client and server to send and receive data at any time without the overhead of repeatedly establishing new connections. 
+## What is Websocket？
+WebSocket is a communication protocol that provides full-duplex communication channels over a single, long-lived connection between a client and a server. Unlike the traditional request-response model of HTTP, WebSocket enable real-time, bidirectional data exchange, allowing both the client and server to send and receive data at any time without the overhead of repeatedly establishing new connections. 
 
-## Using JSON-RPC Requests to Access WebSockets
-The eth_subscribe and eth_unsubscribe JSON-RPC methods allow you to access WebSockets.
+## Using JSON-RPC Requests to Access WebSocket
+The eth_subscribe and eth_unsubscribe JSON-RPC methods allow you to access WebSocket.
 
 Install a command line tool for making WebSocket requests, or to make requests from your project files instead of the command line. Using wscat, you can send requests as follows:
 ```bash Example Request
@@ -38,5 +38,5 @@ Install a command line tool for making WebSocket requests, or to make requests f
 
 ```
 
-## compatibility
+## Compatibility
 Axiomesh currently supports subscription methods such as newHeads, logs, and newPendingTransactions, making it compatible with most Ethereum subscription mechanisms. However, it does not support the syncing subscription. If you require information about the synchronization status of a node, you can directly query this information through the HTTP endpoint eth_syncing instead.
