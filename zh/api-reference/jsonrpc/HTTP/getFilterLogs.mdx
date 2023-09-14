@@ -47,39 +47,39 @@ api: "POST /"
     对于使用eth_newFilter创建的筛选器，日志是具有以下参数的对象：
     <Expandable title="Log objects">
 
-        <ResponseField body="logIndex" type="string">
+        <ResponseField name="logIndex" type="string">
             区块中日志索引位置的整型数。当其待定日志时为空
         </ResponseField>
 
-        <ResponseField body="removed" type="bool">
+        <ResponseField name="removed" type="bool">
             由于链重组，删除日志时为true。如果是有效日志，则为false
         </ResponseField>
 
-        <ResponseField body="transactionIndex" type="string">
+        <ResponseField name="transactionIndex" type="string">
             交易索引位置日志的整数是从创建的。当其待定日志时为空
         </ResponseField>
 
-        <ResponseField body="transactionHash" type="string">
+        <ResponseField name="transactionHash" type="string">
             32 字节 - 创建此日志的交易的哈希。当其待定日志时为空
         </ResponseField>
 
-        <ResponseField body="blockHash" type="string">
+        <ResponseField name="blockHash" type="string">
             32 字节 - 此日志所在块的哈希。待定时为空。当其待定日志时为空。
         </ResponseField>
 
-        <ResponseField body="blockNumber" type="string">
+        <ResponseField name="blockNumber" type="string">
             此日志所在的块号。待定时为空。当其待定日志时为空。
         </ResponseField>
 
-        <ResponseField body="address" type="string">
+        <ResponseField name="address" type="string">
             20 字节 - 此日志源自的地址。
         </ResponseField>
 
-        <ResponseField body="data" type="string">
+        <ResponseField name="data" type="string">
             包含日志的一个或多个32字节非索引参数。
         </ResponseField>
 
-        <ResponseField body="topics" type="array">
+        <ResponseField name="topics" type="array">
             索引日志参数的0到4个32字节DATA的数组。（在solidity中：第一个主题是事件签名的哈希（例如Deposit（address，bytes32，uint256）），除非您使用匿名说明符声明了事件。）
         </ResponseField>
 
@@ -95,8 +95,8 @@ curl   'https://rpc1.aries.axiomesh.io' \
 --data '{
     "jsonrpc":"2.0",
     "method":"eth_getFilterLogs",
-    "params":["0x16"],
-    "id":74
+    "params":["0xa38fb32311426baee6a6c98bb6a469d"],
+    "id":1
 }'
     ```
 
@@ -105,22 +105,25 @@ curl   'https://rpc1.aries.axiomesh.io' \
 <ResponseExample>
 
     ```json Response
-    {
-        "id":1,
-        "jsonrpc":"2.0",
-        "result": [{
-        "logIndex": "0x1", // 1
-        "blockNumber":"0x1b4", // 436
-        "blockHash": "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
-        "transactionHash":  "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
-        "transactionIndex": "0x0", // 0
-        "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
-        "data":"0x0000000000000000000000000000000000000000000000000000000000000000",
-        "topics": ["0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"]
-    },{
-        ...
-    }]
-    }
+       {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": [
+        {
+            "address": "0x4cd8ee4fc57c51d8af5b6b6a08cc441f2b4fcbfe",
+            "topics": [
+                "0xf9fbd55454309325ccadd998a641a1dfe7cd888eea26c0ae93b95992a13ac144"
+            ],
+            "data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000047465737400000000000000000000000000000000000000000000000000000000",
+            "blockNumber": "0x3",
+            "transactionHash": "0x8c292190c6449c5897e0b1b5ac0b7d61b76f554d3cf9aa3e7490cb84f274d844",
+            "transactionIndex": "0x0",
+            "blockHash": "0xf922bf9ef8548c06e7744b684527a0bbef1adb1617fed50a3c67251ded62e619",
+            "logIndex": "0x0",
+            "removed": false
+        }
+    ]
+}
     ```
 
 </ResponseExample>

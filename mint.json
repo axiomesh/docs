@@ -121,6 +121,7 @@
       "group": "JSON RPC",
       "pages": [
             "en/api-reference/jsonrpc/HTTP/chainId",
+            "en/api-reference/jsonrpc/HTTP/accounts",
             "en/api-reference/jsonrpc/HTTP/blockNumber",
             "en/api-reference/jsonrpc/HTTP/getBalance",
             "en/api-reference/jsonrpc/HTTP/getBlockByNumber",
@@ -154,6 +155,7 @@
             "en/api-reference/jsonrpc/WEBSOCKETS/logs",
             "en/api-reference/jsonrpc/WEBSOCKETS/newHeads",
             "en/api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions"
+
       ]
     },
     {
