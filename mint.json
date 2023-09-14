@@ -18,18 +18,7 @@
     "dark": "#ECC94B"
   },
   
-  "topAnchor": {
-    "name": "Axiomesh",
-    "icon": "house",
-    "iconType": "duotone"
-  },
   "anchors": [
-    {
-      "name": "Docs",
-      "icon": "book-open",
-      "url": "en/documentation"
-      
-    },
     {
       "name": "API Reference",
       "icon": "code",
@@ -51,10 +40,6 @@
    
   ],
   "navigation": [
-    {
-      "group": "Home",
-      "pages": ["welcome"]
-    },
     {
       "group": "Getting Started",
       "pages": [
