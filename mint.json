@@ -3,8 +3,10 @@
   "name": "Axiomesh",
   "api": {
     "baseUrl": [
-      "http://172.16.13.130:8881",
-      "https://172.16.13.130:9902"
+      "https://rpc1.aries.axiomesh.io",
+      "https://rpc2.aries.axiomesh.io",
+      "https://rpc3.aries.axiomesh.io",
+      "https://rpc4.aries.axiomesh.io"
     ]
   },
   "logo": {
@@ -118,9 +120,6 @@
     {
       "group": "JSON RPC",
       "pages": [
-        {
-          "group": "HTTP",
-          "pages": [
             "en/api-reference/jsonrpc/HTTP/chainId",
             "en/api-reference/jsonrpc/HTTP/blockNumber",
             "en/api-reference/jsonrpc/HTTP/getBalance",
@@ -148,17 +147,13 @@
             "en/api-reference/jsonrpc/HTTP/getFilterLogs",
             "en/api-reference/jsonrpc/HTTP/getFilterChanges"
           ]
-          
-        },
-        {
-          "group": "WEBSOCKETS",
-          "pages": [
+    },
+    {
+      "group": "WEBSOCKET",
+      "pages": [
             "en/api-reference/jsonrpc/WEBSOCKETS/logs",
             "en/api-reference/jsonrpc/WEBSOCKETS/newHeads",
             "en/api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions"
-          ]
-          
-        }
       ]
     },
     {
