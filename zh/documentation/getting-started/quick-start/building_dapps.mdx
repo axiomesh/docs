@@ -2,73 +2,172 @@
 title: "构建 Dapps"
 ---
 
-这份指南将向您介绍如何配置开发工具并在 AxiomLedger 上开发 Dapps，这里我们以知名去中心化交易所 Uniswap@V2 为例。
+这份指南将向您介绍如何在 MacOS 配置开发工具并在 AxiomLedger 上开发 Dapps，这里我们以知名去中心化交易所 Uniswap@V2 为例。
 
 ## 设置开发环境
 
-首先，您需要一个 node.js 环境。
+首先我们需要安装相应的开发工具，包含 Git、NodeJs 等。
 
-创建一个新目录，并在新目录中安装和初始化 [HardHat](https://hardhat.org/) 项目
+安装 Homebrew：Homebrew 是一个 macOS 的包管理器，它可以帮助你轻松地安装和管理软件。
 
-``` shell
-mkdir hardhat_uniswap
-cd hardhat_uniswap
-npm install --save-dev hardhat
-npx hardhat
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-这时候我们会看到 HardHat 为我们创建了标准化的目录结构
+安装 git ：使用 Homebrew 安装 Git
 
-``` shell
-contracts/
-test/
-scripts/
-hardhat.config.js
+```shell
+brew install git
+git --version
 ```
 
-随后我们需要在`hardhat.config.js`中配置测试网络和测试账号。
+安装 NVM ：使用 curl 或 wget 来安装 NVM 。这里提供 curl 的安装命令
 
-``` Javascript
-module.exports = {
-  defaultNetwork: "mychain", // 默认网络设置
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+
+安装完 NVM 之后，关闭并重新打开 Terminal，或者运行以下命令以启用 NVM
+
+```shell
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm --version
+```
+
+安装 Node.js：使用 NVM 安装 Node.js v20，之后我们可能需要使用不同的 Node 版本来部署不同的 Uniswap 部件。
+
+```shell
+nvm install 20
+node --version
+```
+
+## Uniswap@V2 源码获取
+
+由于 Uniswap v2 需要多个部件，我们依次从官方仓库获取并形成如下包结构。我们已经帮你组织了完整的项目代码可以从 xxx 获取
+
+```shell
+Uniswap-v2
+  default-token-list
+  interface-2.6.5
+  uniswap-contract
+    contract
+      lib
+      v2-core
+      v2-periphery
+  uniswap-sdk
+```
+
+## Uniswap@V2 合约部署
+
+在 uniswap-contract 包下初始化 Hardhat 项目，并按照上述的包格式从官方仓库 clone 相关合约文件。
+
+其中 Hardhat config 配置如下所示，以 aries 测试网为例
+
+```typescript
+const config: HardhatUserConfig = {
+  defaultNetwork: "axiom",
   networks: {
-    mychain: {
-      url: 'YOUR_CHAIN_RPC_URL',
-      accounts: ['YOUR_PRIVATE_KEY'],
-      chainId: YOUR_CHAIN_ID,
-      gasPrice: YOUR_GAS_PRICE,
-      // 其他必要的网络配置
-    }
+    aries: {
+      url: "YOUR_JSON_RPC_URL",
+      accounts: [
+        `0x${process.env.PRIVATE_KEY}`,
+      ]
+    },
   },
-  solidity: '0.8.0',  // 根据 Uniswap 的实际 solidity 版本调整，并可以配置多个版本
 };
 ```
 
-注意，AxiomLedger 是兼容 EVM 的区块链，任何您熟悉的以太坊工具都可以在 AxiomLedger 上使用，例如 Truffle、Remix 和 ether.js 等。您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask 等）或 SDK 连接到 AxiomLedger 的主网和测试网。其中Aries 测试网的RPC地址为：`https://rpc1.aries.axiomesh.io`，链ID为：`23411`，代币符号为 `AXM`。
+在 scripts 包下编写合约部署脚本
 
-如果您是第一次使用 Metamask 连接 AxiomLedger 网络，您需要将上面的网络地址、链 ID、代币符号等信息新增到网络列表，连接到 AxiomLedger 后，一般来说您的账户余额是 `0` AXM，此时您可以访问 AxiomLedger 测试网水龙头，在页面上填入您的账户地址来获取`0.5`AXM，水龙头的地址为：`faucet.aries.axiomesh.io`，***请注意：在24小时内，一个账户只能在水龙头获取一次AXM！***
+```javascript
+const {ethers} = require("hardhat");
 
-## 下载 Uniswap@V2 智能合约
+async function main() {
 
-下载 Dapps 所需要的组件，这里我们以 Uniswap@V2 为例。
-需要下载`v2-core`（包含其核心工厂合约），并下载`v2-periphery`（与核心交互的外围合约），以及外围合约所需要的相关`lib`包
+    // 步骤 1 factory
+    const [owner] = await ethers.getSigners();
+    console.log("owner address:", owner.address)
+    // factory 中添加 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(UniswapV2Pair).creationcode));
+    const UniswapV2Factory = await ethers.getContractFactory("UniswapV2Factory");
+    uniswapV2Factory = await UniswapV2Factory.deploy(owner.address);
+    console.log(`uniswapV2Factory deployed to ${uniswapV2Factory.target}`);
+    const factoryAddr = uniswapV2Factory.target;
+    // 等待 AxiomLedger 出块获取完整回执
+    await sleep(1000);
+    // 获取 INIT_CODE_PAIR_HASH
+    const initCodePairHash = await uniswapV2Factory.INIT_CODE_PAIR_HASH();
+    console.log("INIT_CODE_PAIR_HASH:", initCodePairHash);
 
-``` shell
-npm i --save-dev @uniswap/v2-core
-npm i --save-dev @uniswap/v2-periphery
-npm i --save-dev @uniswap/lib
+    // 步骤 2 router2
+    const WETH9 = await ethers.getContractFactory("WETH9");
+    weth9 = await WETH9.deploy();
+    console.log(`weth9 deployed to ${weth9.target}`);
+
+    const weth9Addr = weth9.target
+    const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
+    router = await UniswapV2Router02.deploy(factoryAddr, weth9Addr);
+    console.log(`UniswapV2Router02 deployed to ${router.target}`);
+
+    // 步骤 3 router1
+    const UniswapV2Router01 = await ethers.getContractFactory("UniswapV2Router01");
+    router1 = await UniswapV2Router01.deploy(factoryAddr, weth9Addr);
+    console.log(`UniswapV2Router01 deployed to ${router1.target}`);
+
+    // 步骤 4 multicall
+    const MulticallForUni = await ethers.getContractFactory("MulticallForUni");
+    multicall = await MulticallForUni.deploy();
+    console.log(`MulticallForUni deployed to ${multicall.target}`);
+
+}
+
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});
+
+async function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
 ```
 
-为了方便测试，这里我们还需要编写两个`ERC-20`合约用于创建流动性池。合约的实现可以参考`openzeppelin`的`ERC-20`实现。
-合约编写可以参考如下所示
+在 scripts 包下编写 token 部署脚本
 
-``` Solidity
+```javascript
+const {ethers} = require("hardhat");
+
+async function main() {
+    // 获取部署合约的账户
+    const [owner] = await ethers.getSigners();
+    console.log(`owner address is ${owner.address}`)
+
+    const mintAmount = ethers.getUint("1000000000000000000000000"); // 1000000 10^18
+
+    const AxmToken1 = await ethers.getContractFactory("AxiomToken")
+    const axmToken1 = await AxmToken1.deploy("AxiomToken1", "AX1", mintAmount)
+    const axmToken2 = await AxmToken1.deploy("AxiomToken2", "AX2", mintAmount)
+    const axmToken3 = await AxmToken1.deploy("AxiomToken3", "AX3", mintAmount)
+    console.log(`AxmToken1 deployed to ${axmToken1.target}`);
+    console.log(`AxmToken2 deployed to ${axmToken2.target}`);
+    console.log(`AxmToken3 deployed to ${axmToken3.target}`);
+}
+
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});
+```
+
+```Solidity
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract myCoinA is ERC20 {
-    constructor() ERC20("myCoinA", "MCA") {
+contract AxiomToken is ERC20 {
+    constructor(string memory _name, string memory _symbol, uint _totalSupply) ERC20(_name, _symbol) {
+        if (_totalSupply > 0) {
+            _mint(msg.sender, _totalSupply);
+        }
     }
 
     // 铸造代币
@@ -83,90 +182,143 @@ contract myCoinA is ERC20 {
 }
 ```
 
-## 编译合约
+部署上述合约之后，可以获得合约的部署地址，这些地址用来修改前端项目中的硬编码，确保前端项目能够顺利部署。
+另外这里的 `INIT_CODE_PAIR_HASH` 其实是 UniswapV2Pair 合约的 creationCode 的哈希值，需要我们手动修改如下代码块。如果你是从 Axiomesh 项目库中获取的源码已经完成了该部分的修改。
 
-使用命令`npx hardhat compile`
-
-## 部署合约
-
-创建一个部署脚本，比如`scripts/deploy.js`。
-
-部署合约参考如下：
-
-``` Javascript
-const {hre, artifacts, ethers} = require("hardhat");
-
-async function main() {
-    // 获取部署合约的账户
-    const [owner] = await ethers.getSigners();
-
-    // 部署工厂合约
-    const UniswapV2Factory = await ethers.getContractFactory("UniswapV2Factory");
-    uniswapV2Factory = await UniswapV2Factory.deploy(owner.address);
-    const factoryAddr = uniswapV2Factory.target
-
-    // 部署weth合约
-    const WETH9 = await ethers.getContractFactory("WETH9");
-    weth9 = await WETH9.deploy();
-    const weth9Addr = weth9.target
-
-    // 部署外围路由合约
-    const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
-    router = await UniswapV2Router02.deploy(factoryAddr, weth9Addr);
+```solidity
+function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
+    (address token0, address token1) = sortTokens(tokenA, tokenB);
+    pair = address(uint(keccak256(abi.encodePacked(
+            hex'ff',
+            factory,
+            keccak256(abi.encodePacked(token0, token1)),
+            hex'INIT_CODE_PAIR_HASH'
+        ))));
 }
-
-main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-});
 ```
-使用 Hardhat 的运行环境和 ethers.js 的合约工厂来部署合约。
 
-使用命令`npx hardhat run --network mychain scripts/deploy.js`运行部署脚本。
+运行相应的部署脚本之后我们能获得相关的 Uniswap@V2 合约地址
 
-## 验证部署
+```text
+owner address: OWNER_ADDR
+uniswapV2Factory deployed to FACTORY_ADDR
+INIT_CODE_PAIR_HASH: 0xa0d4c4d350f7cfd6c7d95a457ff8f843364762e67e907544c7ec6b369852f437
+weth9 deployed to WETH9_ADDR
+UniswapV2Router02 deployed to ROUTER02_ADDR
+UniswapV2Router01 deployed to ROUTER01_ADDR
+MulticallForUni deployed to MULTICALL_ADDR
+```
 
-通过查询合约地址和读取公开函数来验证部署是否成功。
+运行相关的 ERC20 代币部署脚本之后我们能获得相关的 Token 合约地址
 
-Axiom提供了官方的区块链浏览器，测试网区块链浏览器地址为`https://scan.aries.axiomesh.io`.您在与Axiom区块链交互的过程中，可以随时查看主网或测试网的区块/交易信息。
+```text
+owner address: OWNER_ADDR
+AxmToken1 deployed to TOKEN1_ADDR
+AxmToken2 deployed to TOKEN2_ADDR
+AxmToken3 deployed to TOKEN3_ADDR
+```
 
-## Dapp 使用
+## Interface 前端部署
 
-经过上述流程之后，我们就可以使用链上的 Dapps 了！
+现在我们来修改前端项目的相关配置，来本地化部署 Uniswap@V2 的前端 Interface-2.6.5
 
-例如，我们可以使用上述编译的代币合约在 `Uniswap` 上生成流动性池
+### Uniswap-SDK 修改
 
-``` Javascript
-// 获取部署合约的账户
-const [owner] = await ethers.getSigners();
+根据前端依赖的 SDK 版本获取源码，并做相应的修改，这里我们已经在[测试仓库](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/uniswap-sdk)中集成了相关源码
 
-// 部署代币对合约
-const myCoinA = await ethers.getContractFactory("myCoinA");
-coinA = await myCoinA.deploy();
-const myCoinB = await ethers.getContractFactory("myCoinB");
-coinB = await myCoinB.deploy();
+```
+"@uniswap/sdk": "3.0.3",
+```
 
-// 铸造代币
-const mintAmount = ethers.getUint("200000000000000000000");
-await coinA.mint(owner.address, mintAmount);
-await coinB.mint(owner.address, mintAmount);
+#### 修改网络
 
-// 授权
-await coinA.approve(router.target, mintAmount)
-await coinB.approve(router.target, mintAmount)
+由于目前 Uniswap 支持 eth 主网，以及各个测试网，修改 `src/constants.ts` 中的 ChainId 为我们所需要的
 
-// 增加流动性
-const addMin = ethers.getUint("1000000000000000000")
-const deadline = Math.floor(Date.now() / 1000) + 1000;
-res = await router.addLiquidity(
-    coinA.target,
-    coinB.target,
-    mintAmount,
-    mintAmount,
-    addMin,
-    addMin,
-    owner.address,
-    deadline);
+```typescript
+export enum ChainId {
+  MAINNET = 1356,
+  TESTNET = 23411,
+}
+```
+
+#### 修改合约地址
+
+根据我们自己的部署地址来对 `src/constant.ts` 做相应的修改
+
+```typescript
+export const FACTORY_ADDRESS = 'FACTORY_ADDR'
+export const INIT_CODE_HASH = 'INIT_CODE_PAIR_HASH'
+```
+
+#### 修改WETH地址
+
+在主网和测试网上分别部署WETH合约，修改 `src/entities/token.ts` 对应的合约地址
+
+```typescript
+export const WETH = {
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether'),
+  [ChainId.TESTNET]: new Token(ChainId.TESTNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether')
+}
+```
+
+#### 构建 SDK
+
+调用 SDK 包下 package.json 中的命令来进行构建
+
+```shell
+tsdx build
+```
+
+这时候我们就生成了新的制品，在需要 SDK 的地方引用我们自己生成的 dist 包下的内容。
+
+### default-token-list 代表列表修改
+
+该库会帮我们生成相应的 token-list
+
+根据如下格式进行手动修改，以 `src/tokens/testnet.json` 为例
+
+```json
+[
+  {
+    "name": "Wrapped Ether",
+    "address": "WETH9_ADDR",
+    "symbol": "WETH",
+    "decimals": 18,
+    "chainId": 23411,
+    "logoURI": "WETH9_URL"
+  }
+]
+```
+
+### Interface 前端库修改
+
+修改 ROUTER_ADDRESS 合约地址，位于 `src/constants/index.ts`
+
+```typescript
+export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS'
+```
+
+修改多签合约地址，位于 `src/constants/multicall/index.ts`
+
+```typescript
+const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: 'MAINNET_MULTICALL_ADDR',
+  [ChainId.TESTNET]: 'MULTICALL_ADDR'
+}
+```
+
+
+修改依赖包
+
+```json
+"@uniswap/sdk": "https://github.com/cppfuns/uniswap-sdk.git",
+"@uniswap/default-token-list": "https://github.com/cppfuns/default-token-list.git"
+```
+
+修改完成之后运行如下命令即可在本地启动 Interface 前端，开始体验构建在 AxiomLedger 测试网上的 Uniswap@V2 吧！
+```shell
+react-scripts build
+react-scripts start
 ```
 
 ## 其他
