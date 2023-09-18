@@ -1,118 +1,167 @@
 ---
-title: "Building Dapps"
+title: "Build Dapps"
 ---
 
-This guide will introduce how to set up development tools and develop Dapps on `AxiomLedger`, using the well-known decentralized exchange `Uniswap@V2` as an example.
+This guide will introduce you to setting up development tools on MacOS and developing Dapps on AxiomLedger. Here, we'll use the well-known decentralized exchange [Uniswap@V2](https://uniswap.org/) as an example.
+
+Please familiarize yourself with the basic concepts of [Uniswap](https://docs.uniswap.org/) before using the following tutorial for project deployment and experience!
 
 ## Development Environment Configuration
 
-First, you need a `node.js` environment.
+First, we need to install the relevant development tools, including Git, NodeJs, etc.
 
-Create a new directory, and within that directory, install and initialize a `HardHat` project.
+Install Homebrew: Homebrew is a package manager for macOS that can help you easily install and manage software.
 
-``` shell
-mkdir hardhat_uniswap
-cd hardhat_uniswap
-npm install --save-dev hardhat
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Install Git: Install Git by Homebrew
+
+```shell
+brew install git
+git --version
+```
+
+Install NVM: Install NVM by curl or wget
+
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+
+After installing NVM, close and reopen the Terminal, or run the following command to enable NVM:
+
+```shell
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm --version
+```
+
+Install Node.js: Install Node.js v20 using NVM. Later, we may need to use different Node versions to deploy different Uniswap components.
+
+```shell
+nvm install 20
+node --version
+```
+
+## Retrieving Uniswap@V2 Source Code
+
+Since Uniswap v2 requires multiple components, we retrieve them in sequence from the official repository to form the following package structure.
+
+```text
+Uniswap-v2
+  default-token-list
+  interface-2.6.5
+  uniswap-contract
+    contract
+      lib
+      v2-core
+      v2-periphery
+  uniswap-sdk
+```
+
+We've already organized the complete project code for you, which can be obtained from the test repository. The relevant command is:
+
+```shell
+git clone https://github.com/axiomesh/embrace.git
+```
+
+## Uniswap@V2 Contract Deployment
+
+Initialize the Hardhat project under the uniswap-contract package and clone the relevant contract files from the official repository according to the package format mentioned above. If you are using our test repo, please route to the right package and run below code:
+
+```shell
+cd embrace/dapps/dexes/uniswap-v2/uniswap-contract
+npm install
 npx hardhat
 ```
 
-At this point, we will see that HardHat has created a standardized directory structure for us.
+At this point, you need to modify the networks field in the Hardhat configuration file to fit your network.
 
-``` shell
-contracts/
-test/
-scripts/
-hardhat.config.js
-```
+The Hardhat config configuration is shown below, using the aries testnet as an example:
 
-Next, we need to configure the test network and test accounts in `hardhat.config.js`
-
-``` Javascript
-module.exports = {
-  defaultNetwork: "mychain",
+```typescript
+const config: HardhatUserConfig = {
+  defaultNetwork: "aries",
   networks: {
-    mychain: {
-      url: 'YOUR_CHAIN_RPC_URL',
-      accounts: ['YOUR_PRIVATE_KEY'],
-      chainId: YOUR_CHAIN_ID,
-      gasPrice: YOUR_GAS_PRICE,
-    }
+    aries: {
+      url: "https://rpc4.aries.axiomesh.io",
+      accounts: [
+        "YOUR_PRIVATE_KEY", // please config your private key through safe ways
+      ]
+    },
   },
-  solidity: '0.8.0',
 };
 ```
 
-AxiomLedger is an EVM-compatible blockchain, and any Ethereum tools you are familiar with can be used on AxiomLedger, such as Truffle, Remix, ether.js. You only need to have an account address based on Ethereum, and you can connect to AxiomLedger's main network and test network through mainstream wallets (such as Metamask ) or SDK. The RPC address of AxiomLedger’s Aries Testnet is: `https://rpc1.aries.axiomesh.io`, and the chain ID is: `23411`, The token symbol is `AXM`.
+Write the contract deployment script in the scripts package. Below, we've already written the core contract deployment script for Uniswap@V2, named `deployUniswapV2.js`:
 
-If you are using Metamask to connect to the AxiomLedger network for the first time, you need to add the above network address, chain ID, token symbol and other information to the network list. After connecting to the AxiomLedger network, generally speaking, your account balance is 0 AXM. At this time, you can visit the AxiomLedger test network faucet and fill in your account address on the page to obtain some AXMs. The address of the faucet is: `faucet.aries.axiomesh.io`. ***Please note: within 24 hours, an account can only get AXM once on the faucet!***
+```javascript
+const {ethers} = require("hardhat");
 
-## Download Uniswap@V2
+async function main() {
 
-Download the components needed for Dapps, using `Uniswap@V2` as an example.
+    // step 1 factory
+    const [owner] = await ethers.getSigners();
+    console.log("owner address:", owner.address)
+    const UniswapV2Factory = await ethers.getContractFactory("UniswapV2Factory");
+    uniswapV2Factory = await UniswapV2Factory.deploy(owner.address);
+    console.log(`uniswapV2Factory deployed to ${uniswapV2Factory.target}`);
+    const factoryAddr = uniswapV2Factory.target;
+    await sleep(1000);
+    const initCodePairHash = await uniswapV2Factory.INIT_CODE_PAIR_HASH();
+    console.log("INIT_CODE_PAIR_HASH:", initCodePairHash);
 
-You need to download `v2-core` (which includes its core factory contracts), and `v2-periphery` (the peripheral contracts that interact with the core), as well as the related `lib` packages required for the `v2-periphery` contracts.
+    // step 2 router2
+    const WETH9 = await ethers.getContractFactory("WETH9");
+    weth9 = await WETH9.deploy();
+    console.log(`weth9 deployed to ${weth9.target}`);
 
-``` shell
-npm i --save-dev @uniswap/v2-core
-npm i --save-dev @uniswap/v2-periphery
-npm i --save-dev @uniswap/lib
-```
+    const weth9Addr = weth9.target
+    const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
+    router = await UniswapV2Router02.deploy(factoryAddr, weth9Addr);
+    console.log(`UniswapV2Router02 deployed to ${router.target}`);
 
-For testing purposes, we also need to write two `ERC-20` contracts to create liquidity pools. The implementation of the contract can refer to `openzeppelin`'s `ERC-20` implementation.
+    // step 3 router1
+    const UniswapV2Router01 = await ethers.getContractFactory("UniswapV2Router01");
+    router1 = await UniswapV2Router01.deploy(factoryAddr, weth9Addr);
+    console.log(`UniswapV2Router01 deployed to ${router1.target}`);
 
-The contract writing can be referred to as follows:
+    // step 4 multicall
+    const MulticallForUni = await ethers.getContractFactory("MulticallForUni");
+    multicall = await MulticallForUni.deploy();
+    console.log(`MulticallForUni deployed to ${multicall.target}`);
 
-``` Solidity
-pragma solidity ^0.8.20;
+}
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});
 
-contract myCoinA is ERC20 {
-    constructor() ERC20("myCoinA", "MCA") {
-    }
-
-    // mint token
-    function mint(address recipient, uint256 amount) public {
-        _mint(recipient, amount);
-    }
-
-    // burn token
-    function burn(address from, uint256 amount) public {
-        _burn(from, amount);
-    }
+async function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 ```
 
-## Compile Contract
+Write the token deployment script in the scripts package. We've already written the token contract deployment script for you, named `deployUniswapTokens.js`:
 
-using`npx hardhat compile`
-
-## Deploy Contract
-
-Create a deployment script, for example, `scripts/deploy.js`.
-
-The reference for deploying the contract is as follows:
-
-``` Javascript
-const {hre, artifacts, ethers} = require("hardhat");
+```javascript
+const {ethers} = require("hardhat");
 
 async function main() {
     const [owner] = await ethers.getSigners();
+    console.log(`owner address is ${owner.address}`)
 
-    // deploy factory contract
-    const UniswapV2Factory = await ethers.getContractFactory("UniswapV2Factory");
-    uniswapV2Factory = await UniswapV2Factory.deploy(owner.address);
-    const factoryAddr = uniswapV2Factory.target
+    const mintAmount = ethers.getUint("1000000000000000000000000"); // 1000000 10^18
 
-    // deploy weth contract
-    const WETH9 = await ethers.getContractFactory("WETH9");
-    weth9 = await WETH9.deploy();
-    const weth9Addr = weth9.target
-
-    // deploy periphery contract
-    const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
-    router = await UniswapV2Router02.deploy(factoryAddr, weth9Addr);
+    const AxmToken1 = await ethers.getContractFactory("AxiomToken")
+    const axmToken1 = await AxmToken1.deploy("AxiomToken1", "AX1", mintAmount)
+    const axmToken2 = await AxmToken1.deploy("AxiomToken2", "AX2", mintAmount)
+    const axmToken3 = await AxmToken1.deploy("AxiomToken3", "AX3", mintAmount)
+    console.log(`AxmToken1 deployed to ${axmToken1.target}`);
+    console.log(`AxmToken2 deployed to ${axmToken2.target}`);
+    console.log(`AxmToken3 deployed to ${axmToken3.target}`);
 }
 
 main().catch((error) => {
@@ -121,54 +170,210 @@ main().catch((error) => {
 });
 ```
 
-Use `Hardhat`'s runtime environment and the contract factory from `ethers.js` to deploy contracts.
+```Solidity
+pragma solidity ^0.8.20;
 
-Run the deployment script with the command `npx hardhat run --network mychain scripts/deploy.js`
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-## Verification Deployment
+contract AxiomToken is ERC20 {
+    constructor(string memory _name, string memory _symbol, uint _totalSupply) ERC20(_name, _symbol) {
+        if (_totalSupply > 0) {
+            _mint(msg.sender, _totalSupply);
+        }
+    }
 
-Verify the deployment success by querying the contract address and reading public functions.
+    // mint
+    function mint(address recipient, uint256 amount) public {
+        _mint(recipient, amount);
+    }
 
-AxiomLedger provides an official blockchain explorers, the address of the Testnet blockchain explorers is `https://scan.aries.axiomesh.io`. During the process of interacting with the AxiomLedger, you can view the block/transaction information of the Mainnet or Testnet at any time.
-
-## Dapp Usage
-
-After the above processes, we can now use the on-chain Dapps!
-
-For example, we can use the previously compiled token contract to create a liquidity pool on `Uniswap`.
-
-``` Javascript
-// acquire account
-const [owner] = await ethers.getSigners();
-
-// deploy erc-20 token pair
-const myCoinA = await ethers.getContractFactory("myCoinA");
-coinA = await myCoinA.deploy();
-const myCoinB = await ethers.getContractFactory("myCoinB");
-coinB = await myCoinB.deploy();
-
-// mint token
-const mintAmount = ethers.getUint("200000000000000000000");
-await coinA.mint(owner.address, mintAmount);
-await coinB.mint(owner.address, mintAmount);
-
-// aporove token transfer
-await coinA.approve(router.target, mintAmount)
-await coinB.approve(router.target, mintAmount)
-
-// add liquidity
-const addMin = ethers.getUint("1000000000000000000")
-const deadline = Math.floor(Date.now() / 1000) + 1000;
-res = await router.addLiquidity(
-    coinA.target,
-    coinB.target,
-    mintAmount,
-    mintAmount,
-    addMin,
-    addMin,
-    owner.address,
-    deadline);
+    // burn
+    function burn(address from, uint256 amount) public {
+        _burn(from, amount);
+    }
+}
 ```
+
+Run the following command to deploy the contract to the corresponding network. Here, we'll deploy the contract to the AxiomLedger's `aries` testnet:
+
+```shell
+npx hardhat run scripts/deployUniswapV2.js --network aries
+```
+
+After running the relevant deployment scripts, we can obtain the relevant Uniswap@V2 contract addresses:
+
+```text
+owner address: OWNER_ADDR
+uniswapV2Factory deployed to FACTORY_ADDR
+INIT_CODE_PAIR_HASH: 0xa0d4c4d350f7cfd6c7d95a457ff8f843364762e67e907544c7ec6b369852f437
+weth9 deployed to WETH9_ADDR
+UniswapV2Router02 deployed to ROUTER02_ADDR
+UniswapV2Router01 deployed to ROUTER01_ADDR
+MulticallForUni deployed to MULTICALL_ADDR
+```
+
+After running the relevant ERC20 token deployment script, we can obtain the associated Token contract addresses:
+
+```text
+owner address: OWNER_ADDR
+AxmToken1 deployed to TOKEN1_ADDR
+AxmToken2 deployed to TOKEN2_ADDR
+AxmToken3 deployed to TOKEN3_ADDR
+```
+
+After deploying the aforementioned contracts, you can obtain the contract deployment addresses. These addresses are used to modify hardcoded values in subsequent frontend projects, ensuring the smooth deployment of the frontend project. The `INIT_CODE_PAIR_HASH` in the aforementioned contract is actually the hash value of the creationCode of the `UniswapV2Pair` contract. We need to manually modify the following code block. If you have obtained the source code from the Axiomesh project repository, this part of the modification has already been completed.
+
+```solidity
+function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
+    (address token0, address token1) = sortTokens(tokenA, tokenB);
+    pair = address(uint(keccak256(abi.encodePacked(
+            hex'ff',
+            factory,
+            keccak256(abi.encodePacked(token0, token1)),
+            hex'INIT_CODE_PAIR_HASH'
+        ))));
+}
+```
+
+## Interface-2.6.5 Frontend Deployment
+
+Now, let's modify the relevant configurations of the frontend project to localize the deployment of Uniswap@V2 frontend Interface-2.6.5.
+
+### Uniswap-SDK Modification
+
+Based on the SDK version that the frontend depends on, retrieve the source code, which requires our corresponding modifications. If you are using our test repository, the related source code has already been integrated in the [test repository](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/uniswap-sdk).
+
+```
+"@uniswap/sdk": "3.0.3",
+```
+
+Enter the uniswap-sdk directory, use nvm to switch the Node.js version to `16.13.2`. Then execute the following command:
+
+```shell
+cd embrace/dapps/dexes/uniswap-v2/uniswap-sdk
+nvm install 16
+yarn install
+```
+
+#### Modify Network
+
+Since Uniswap currently supports the Ethereum mainnet and various testnets, modify the ChainId in `src/constants.ts` to what we need:
+
+```typescript
+export enum ChainId {
+  MAINNET = 1356,
+  TESTNET = 23411,
+}
+```
+#### Modify Contract Address
+
+Make the necessary changes to `src/constant.ts` based on the factory contract deployed earlier:
+
+```typescript
+export const FACTORY_ADDRESS = 'FACTORY_ADDR'
+export const INIT_CODE_HASH = 'INIT_CODE_PAIR_HASH'
+```
+
+#### Modify WETH Address
+
+Now, modify the contract address corresponding to `src/entities/token.ts`.
+
+Deploy the WETH contract on both the mainnet and testnet. Earlier, you've already deployed the relevant Token contract on the chain. Insert the address into the `WETH9_ADDR` position in the following code:
+
+```typescript
+export const WETH = {
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether'),
+  [ChainId.TESTNET]: new Token(ChainId.TESTNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether')
+}
+```
+
+#### Build SDK
+
+Invoke the command under the SDK package in package.json to build. Alternatively, enter the following command in the corresponding package's command line:
+
+```shell
+npx tsdx build
+```
+
+At this point, we have produced a new artifact that can be referenced and used wherever the SDK is needed.
+
+### Modify default-token-list Token List
+
+Retrieve the source code based on the default-token-list version that the frontend depends on, which requires our modifications. If you are using our test repository, the related source code has already been integrated in the [test repository](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/default-token-list).
+
+This library will help us generate the relevant [token-lists](https://blog.uniswap.org/token-lists).
+
+Enter the corresponding package and manually modify it according to the following format. Since WETH is a required contract for Uniswap@V2, you need to modify the address and chainId to your configuration after deployment. For instance, see `src/tokens/testnet.json`.
+
+For other tokens, please read the [token list description](https://blog.uniswap.org/token-lists) and fill in accordingly.
+
+```json
+[
+  {
+    "name": "Wrapped Ether",
+    "address": "WETH9_ADDR",
+    "symbol": "WETH",
+    "decimals": 18,
+    "chainId": 23411,
+    "logoURI": "WETH9_URL"
+  }
+]
+```
+
+Execute the following command in the current package to produce `uniswap-default.tokenlist.json`, which can be configured and used in the frontend. For instance, see the location in our test project: `uniswap-v2/interface-2.6.5/src/constants/lists.ts`.
+
+```shell
+cd embrace/dapps/dexes/uniswap-v2/default-token-list
+npm install
+npx rimraf build && mkdir -p build && node src/write.js > build/uniswap-default.tokenlist.json
+```
+
+This token list can be used in the Uniswap@V2 frontend, allowing the frontend to quickly link to the relevant tokens already deployed on the chain. This is convenient for users to view the balances of various tokens, facilitating the swift establishment of liquidity pools.
+
+### Interface Frontend Library Modification
+
+Next is the deployment and construction of the Uniswap@V2 core frontend repository.
+
+Retrieve the relevant source code from Uniswap's official repository and switch to `tag 2.6.5`. Of course, our test project has already deployed the related [source code](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/interface-2.6.5) for you.
+
+First, modify the ROUTER_ADDRESS contract address located in `src/constants/index.ts`:
+
+```typescript
+export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS'
+```
+
+Then modify the `multi-signature` contract address located in src/constants/multicall/index.ts:
+
+```typescript
+const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: 'MAINNET_MULTICALL_ADDR',
+  [ChainId.TESTNET]: 'MULTICALL_ADDR'
+}
+```
+
+Modify the dependency package:
+
+```json
+"@uniswap/default-token-list": "../default-token-list",
+"@uniswap/sdk": "../uniswap-sdk",
+```
+
+Adjust the environment configuration, using AxiomLedger's aries test network as an example:
+
+```
+REACT_APP_CHAIN_ID="23411"
+REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
+```
+
+After making the necessary modifications, execute the following commands to start the Interface frontend locally:
+
+```shell
+cd embrace/dapps/dexes/uniswap-v2/Interface
+npx react-scripts build
+npx react-scripts start
+```
+
+Now you can experience Uniswap@V2 built on AxiomLedger's aries test network. Give liquidity addition a try!
 
 ## Miscellaneous
 
@@ -179,4 +384,6 @@ For instance, deploying the aforementioned `Uniswap@v2`.
 Import the factory contract and the routing contract into `Remix`, and select the appropriate Solidity version in the compiler.
 
 During the deployment phase, selecting `ENVIRONMENT` as `Injected Provider - MetaMask` allows for easy connection and deployment to AxiomLedger via `MetaMask`.
+
+Finally, we can select the desired method from the contract method list in `Remix` to invoke.
 
