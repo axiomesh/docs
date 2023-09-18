@@ -2,7 +2,9 @@
 title: "构建 Dapps"
 ---
 
-这份指南将向您介绍如何在 MacOS 配置开发工具并在 AxiomLedger 上开发 Dapps，这里我们以知名去中心化交易所 Uniswap@V2 为例。
+这份指南将向您介绍如何在 MacOS 配置开发工具并在 AxiomLedger 上开发 Dapps，这里我们以知名去中心化交易所 [Uniswap@V2](https://uniswap.org/) 为例。
+
+请了解 [Uniswap](https://docs.uniswap.org/) 基础概念之后再使用如下教程进行项目部署和体验!
 
 ## 设置开发环境
 
@@ -44,7 +46,7 @@ node --version
 
 ## Uniswap@V2 源码获取
 
-由于 Uniswap v2 需要多个部件，我们依次从官方仓库获取并形成如下包结构。我们已经帮你组织了完整的项目代码可以从 xxx 获取
+由于 Uniswap v2 需要多个部件，我们依次从官方仓库获取并形成如下包结构。
 
 ```shell
 Uniswap-v2
@@ -58,27 +60,40 @@ Uniswap-v2
   uniswap-sdk
 ```
 
+我们已经帮你组织了完整的项目代码可以从[测试仓库](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2)获取。相关指令如下
+
+```shell
+git clone https://github.com/axiomesh/embrace.git
+```
+
 ## Uniswap@V2 合约部署
 
 在 uniswap-contract 包下初始化 Hardhat 项目，并按照上述的包格式从官方仓库 clone 相关合约文件。
+
+```shell
+npm install
+npx hardhat
+```
+
+此时您需要修改 Hardhat 配置文件中的 networks 字段以适配您的网络。
 
 其中 Hardhat config 配置如下所示，以 aries 测试网为例
 
 ```typescript
 const config: HardhatUserConfig = {
-  defaultNetwork: "axiom",
+  defaultNetwork: "aries",
   networks: {
     aries: {
-      url: "YOUR_JSON_RPC_URL",
+      url: "https://rpc4.aries.axiomesh.io",
       accounts: [
-        `0x${process.env.PRIVATE_KEY}`,
+        "YOUR_PRIVATE_KEY", // 请通过安全的方式配置您的私钥，例如使用环境变量
       ]
     },
   },
 };
 ```
 
-在 scripts 包下编写合约部署脚本
+在 scripts 包下编写合约部署脚本，下面我们已经为您写好了 Uniswap@V2 的核心合约部署脚本 deployUniswapV2.js ：
 
 ```javascript
 const {ethers} = require("hardhat");
@@ -131,7 +146,7 @@ async function sleep(ms) {
 }
 ```
 
-在 scripts 包下编写 token 部署脚本
+在 scripts 包下编写 token 部署脚本，下面我们已经为您写好了代币合约部署脚本 deployUniswapTokens.js ：
 
 ```javascript
 const {ethers} = require("hardhat");
@@ -182,19 +197,9 @@ contract AxiomToken is ERC20 {
 }
 ```
 
-部署上述合约之后，可以获得合约的部署地址，这些地址用来修改前端项目中的硬编码，确保前端项目能够顺利部署。
-另外这里的 `INIT_CODE_PAIR_HASH` 其实是 UniswapV2Pair 合约的 creationCode 的哈希值，需要我们手动修改如下代码块。如果你是从 Axiomesh 项目库中获取的源码已经完成了该部分的修改。
-
-```solidity
-function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
-    (address token0, address token1) = sortTokens(tokenA, tokenB);
-    pair = address(uint(keccak256(abi.encodePacked(
-            hex'ff',
-            factory,
-            keccak256(abi.encodePacked(token0, token1)),
-            hex'INIT_CODE_PAIR_HASH'
-        ))));
-}
+调用如下命令部署合约到对应的网络上，这里我们会将合约部署到 AxiomLedger 的 aries 测试网上。
+```shell
+npx hardhat run scripts/deployUniswapV2.js --network aries
 ```
 
 运行相应的部署脚本之后我们能获得相关的 Uniswap@V2 合约地址
@@ -218,16 +223,38 @@ AxmToken2 deployed to TOKEN2_ADDR
 AxmToken3 deployed to TOKEN3_ADDR
 ```
 
+部署上述合约之后，可以获得合约的部署地址，这些地址用来修改后续前端项目中的硬编码，确保前端项目能够顺利部署。
+上述合约中的 `INIT_CODE_PAIR_HASH` 其实是 UniswapV2Pair 合约的 creationCode 的哈希值，需要我们手动修改如下代码块。如果你是从 Axiomesh 项目库中获取的源码已经完成了该部分的修改。
+
+```solidity
+function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
+    (address token0, address token1) = sortTokens(tokenA, tokenB);
+    pair = address(uint(keccak256(abi.encodePacked(
+            hex'ff',
+            factory,
+            keccak256(abi.encodePacked(token0, token1)),
+            hex'INIT_CODE_PAIR_HASH'
+        ))));
+}
+```
+
 ## Interface 前端部署
 
 现在我们来修改前端项目的相关配置，来本地化部署 Uniswap@V2 的前端 Interface-2.6.5
 
 ### Uniswap-SDK 修改
 
-根据前端依赖的 SDK 版本获取源码，并做相应的修改，这里我们已经在[测试仓库](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/uniswap-sdk)中集成了相关源码
+根据前端依赖的 SDK 版本获取源码，需要我们做相应的修改。如果您使用我们的测试仓库，那么已经在[测试仓库](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/uniswap-sdk)中集成了相关源码
 
 ```
 "@uniswap/sdk": "3.0.3",
+```
+
+进入 uniswap-sdk 目录下，使用 nvm 切换 Node.js 版本为 16.13.2。然后调用如下命令
+
+```shell
+nvm install 16
+yarn install
 ```
 
 #### 修改网络
@@ -243,7 +270,7 @@ export enum ChainId {
 
 #### 修改合约地址
 
-根据我们自己的部署地址来对 `src/constant.ts` 做相应的修改
+根据上文部署的工厂合约来对 `src/constant.ts` 做相应的修改
 
 ```typescript
 export const FACTORY_ADDRESS = 'FACTORY_ADDR'
@@ -252,7 +279,9 @@ export const INIT_CODE_HASH = 'INIT_CODE_PAIR_HASH'
 
 #### 修改WETH地址
 
-在主网和测试网上分别部署WETH合约，修改 `src/entities/token.ts` 对应的合约地址
+现在需要修改 `src/entities/token.ts` 对应的合约地址。
+
+在主网和测试网上分别部署WETH合约，上文中您已经在链上部署了相应的 Token 合约，把地址输入到如下代码的 `WETH9_ADDR` 位置
 
 ```typescript
 export const WETH = {
@@ -263,19 +292,23 @@ export const WETH = {
 
 #### 构建 SDK
 
-调用 SDK 包下 package.json 中的命令来进行构建
+调用 SDK 包下 package.json 中的命令来进行构建，或者在对应包下的命令行中输入如下指令
 
 ```shell
-tsdx build
+npx tsdx build
 ```
 
-这时候我们就生成了新的制品，在需要 SDK 的地方引用我们自己生成的 dist 包下的内容。
+这时候我们就生成了新的制品，我们可以在需要 SDK 的地方进行引用和使用。
 
-### default-token-list 代表列表修改
+### default-token-list 代币列表修改
 
-该库会帮我们生成相应的 token-list
+根据前端依赖的 default-token-list 版本获取源码，需要我们做相应的修改。如果您使用我们的测试仓库，那么已经在[测试仓库](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/default-token-list)中集成了相关源码。
 
-根据如下格式进行手动修改，以 `src/tokens/testnet.json` 为例
+该库会帮我们生成相应的 [token-lists](https://blog.uniswap.org/token-lists)。
+
+进入相应的包，然后根据如下格式进行手动修改，WETH 是 Uniswap@V2 的必需合约，因此您部署完之后需要修改相应的 address 和 chainId 为您的相应配置，以 `src/tokens/testnet.json` 为例。
+
+其他代币请阅读[代币列表说明](https://blog.uniswap.org/token-lists)之后自主填写。
 
 ```json
 [
@@ -290,15 +323,28 @@ tsdx build
 ]
 ```
 
+在当前包下调用如下命令来构建生产`uniswap-default.tokenlist.json`，它可以在前端中进行配置和使用。例如我们的测试工程的该位置`uniswap-v2/interface-2.6.5/src/constants/lists.ts`。
+
+```shell
+npm install
+npx rimraf build && mkdir -p build && node src/write.js > build/uniswap-default.tokenlist.json
+```
+
+这个 token-list 可以在 Uniswap@V2 的前端中使用，用于前端快速链接链上已部署的相关代币，方便用户查看各种代币的余额，以便于快速建立流动性池子。
+
 ### Interface 前端库修改
 
-修改 ROUTER_ADDRESS 合约地址，位于 `src/constants/index.ts`
+接下来是 Uniswap@V2 核心前端仓库的部署和构建。
+
+从 Uniswap 的官方仓库中拉取相关的源码，并切换到 `tag 2.6.5`。当然我们的测试工程已经帮您部署了[相关源码](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/interface-2.6.5)
+
+首先修改 ROUTER_ADDRESS 合约地址，位于 `src/constants/index.ts`
 
 ```typescript
 export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS'
 ```
 
-修改多签合约地址，位于 `src/constants/multicall/index.ts`
+然后修改多签合约地址，位于 `src/constants/multicall/index.ts`
 
 ```typescript
 const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
@@ -307,28 +353,37 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
 }
 ```
 
-
 修改依赖包
 
 ```json
-"@uniswap/sdk": "https://github.com/cppfuns/uniswap-sdk.git",
-"@uniswap/default-token-list": "https://github.com/cppfuns/default-token-list.git"
+"@uniswap/default-token-list": "../default-token-list",
+"@uniswap/sdk": "../uniswap-sdk",
 ```
 
-修改完成之后运行如下命令即可在本地启动 Interface 前端，开始体验构建在 AxiomLedger 测试网上的 Uniswap@V2 吧！
-```shell
-react-scripts build
-react-scripts start
+修改环境配置，这里我们以 AxiomLedger 的 aries 测试网络为例
+
 ```
+REACT_APP_CHAIN_ID="23411"
+REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
+```
+
+修改完成之后运行如下命令即可在本地启动 Interface 前端
+
+```shell
+npx react-scripts build
+npx react-scripts start
+```
+
+现在您可以体验构建在 AxiomLedger 的 aries 测试网上的 Uniswap@V2 了，尝试一下添加流动性吧！
 
 ## 其他
 
 使用 `Remix` 在 AxiomLedger 上构建 Dapps 是更方便的选择！
 
-例如部署上述的 `Uniswap@v2`。
+例如部署上述的 `Uniswap@v2` 核心合约。
 
-将工厂合约和路由合约的导入到 `Remix` 中，在编译器中选择合适的 `Solidity` 版本进行编译。
+将工厂合约和路由合约导入到 `Remix` 中，在编译器中选择合适的 `Solidity` 版本进行编译。
 
-部署环节中，`ENVIRONMENT`选择`Injected Provider - MetaMask`可以方便的通过`MetaMask`连接和部署到 AxiomLedger 上！
+部署环节中，`ENVIRONMENT`选择`Injected Provider - MetaMask`可以方便的通过`MetaMask`连接和部署到 AxiomLedger 上！相关的区跨链配置可以查阅快速开始。
 
 
