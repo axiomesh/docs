@@ -16,13 +16,13 @@ Finally, we will analyze the details of each core component, including their res
 The AxiomLedger network consists of the following main components (as shown in the figure below):
 
 - `Blockchain nodes`: Connected via P2P networks, using consensus algorithms to maintain a common ledger. 
-Node roles are divided into new nodes, candidates and validator nodes (including special block producer nodes), according to their degree of 
+Node roles are divided into new nodes, candidate nodes and validator nodes (including special block proposer nodes), according to their degree of 
 participation in consensus. Node roles can be converted to each other, please refer to [Consensus](/en/documentation/system-design/consensus) for details.
 - `Wallet services`: The bridge for users and DApps to interact with the blockchain, responsible for constructing and 
 forwarding transactions.
 - `Blockchain browsers`: Connect to blockchain nodes, store and parse on-chain data, and provide visual access to blockchain data for users. 
 
-Specifically, new nodes are nodes that havn't obtained network access permission through a governance vote, candidate nodes are nodes that are currently not participating in consensus block production, validator nodes are nodes that participate in block production through elections, and block producer nodes are validator nodes responsible for packing blocks.
+Specifically, new nodes are nodes that havn't obtained network access permission through a governance vote, candidate nodes are nodes that are currently not participating in consensus block production, validator nodes are nodes that participate in block production through elections, and block proposer nodes are validator nodes responsible for packing blocks.
 
 ![AxiomLedger network topology](/en/images/system-design/axiomledger-topology.png)
 
@@ -54,12 +54,12 @@ The transaction pool component is mainly used to cache and manage transactions s
 not yet been packaged and executed. The data in the transaction pool is only fully synchronized between validator nodes. 
 Transactions in the transaction pool come from two sources, one is transactions submitted by applications received directly 
 through the RPC service of the node itself, and the other is transactions forwarded from other validator nodes or candidate nodes through the network 
-service. When the current node is the block producer in the consensus algorithm, the consensus algorithm will pull a certain 
+service. When the current node is the block proposer in the consensus algorithm, the consensus algorithm will pull a certain 
 number of transactions from the transaction pool to form a block, and broadcast this block to other validators in the network. After this block is consented by the consensus network, each validator node executes the transactions in the block and updates the ledger records.
 
 ### Executor
 
-The executor component is the core component that executes transaction logic in blockchain nodes. The executor receives 
+The executor component is the core component that executes transaction logics in blockchain nodes. The executor receives 
 a list of transactions ordered by consensus, executes specific transactions by invoking the underlying contract execution 
 engine, and generates temporary ledger changes. After the execution results are consented, the changed data are written 
 to persistent ledger state database through the ledger. The executor invokes different contract execution engines depending on the transaction type. AxiomLedger contains built-in contract execution engines and equivalent EVM contract execution engines:
@@ -79,7 +79,7 @@ The consensus component is responsible for determining the order of blockchain t
 
 The ledger component provides the ability to manage blockchain world state data and block data. The state data includes account related information such as 
 balance, permissions, nonce value, etc. For special accounts such as contract accounts, it also contains the contract bytecode and all related changed states 
-involved in the contract. In addition, the ledger also provides the ability to manage block data. Block data includes blocks, transactions, transaction receipts 
+involved in the contracts. In addition, the ledger also provides the ability to manage block data. Block data includes blocks, transactions, transaction receipts 
 and other persistent non-mutable data, mainly providing storage and query services for such data. In addition, the ledger module can also rely on the Merkle tree to provide the ability of Merkle proof of critical data within the ledger.
 
 The ledger component is responsible for managing the world state and block data of the blockchain:
@@ -89,9 +89,7 @@ related state changes.
 2. `Block data`: Include blocks, transactions, transaction receipts and other persistent non-state change data, providing storage and query services. 
 3. `Merkle proof`: Merkle proofs of critical data in the ledger can be generated through the Merkle tree.
 
-The ledger component targets state and block data, using data structures suitable for their access patterns respectively, which can efficiently manage
- core blockchain data. At the same time, it supports generating Merkle proofs, which is helpful for data verifiability. This design enables the ledger 
- component to meet the blockchain's demands for state changes, historical records, data proofs and more.
+The ledger component targets two types of data: state data and block data, utilizing data structures suitable for their access patterns respectively. This allows for efficient management of core blockchain data while supporting the generation of Merkle proofs, enhancing data verifiability. Such a design enables the ledger component to meet various requirements of blockchain, including state changes, historical records, and data proofs.
 
 
 ### Bridge
@@ -102,4 +100,4 @@ for cross-chain transactions, relay routing for cross-chain transactions, and or
 ### Admission Control
 
 The admission control component provides the capability of secure validation for transactions. This component provides basic transaction validity 
-check services, including transaction format, signature information, Gas fees, etc.
+check services, including transaction format, signature information, gas fees, etc.
