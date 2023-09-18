@@ -2,28 +2,21 @@
 title: "Transaction Flow"
 ---
 
-In the previous chapters, we provided an overview of the network topology, internal structure of the Validator, 
-and relationships between components in the AxiomLedger. 
-
-To further our understanding of the entire lifecycle of transactions in AxiomLedger, this chapter will track 
-in detail the flow of a transaction through various components within a validator node, analyzing the
- transaction processing logic at each component. The diagram below illustrates the workflow of a transaction 
- entering an AxiomLedger Validator:
+To further the understanding of the entire lifecycle of transactions in AxiomLedger, this section will track the flow of a transaction through various components within a validator node, analyzing the
+ transaction processing logic at each component. The diagram below illustrates the workflow of an AxiomLedger validator dealing with a transaction:
 
 
 ![AxiomLedger transaction flow](/en/images/system-design/axiomledger-tx-flow.png)
 
 By examining the transaction workflow across node components, we can clearly see the end-to-end process 
 from the transaction entering the node to being packaged into a block, including validation, ordering, 
-consensus, and other processing phases. This helps readers thoroughly understand the underlying mechanisms
- and principles of AxiomLedger transactions, as well as the role each component plays in transaction 
- processing. The logic implemented at each component will be discussed in the following sections.
+consensus, and other processing phases. The logic implemented at each component will be detailed in the following sections.
 
 
-## Submitting Transaction
+## Submit Transactions
 
-As an end user, you can directly construct raw transactions on the blockchain using a wallet (e.g. MetaMask) 
-or DApp, then sign them with your private key (typically also done through the wallet) before sending them 
+As an end user, you can directly construct blockchain raw transactions through a wallet (e.g. MetaMask) 
+or through a DApp. Then you need to sign these transactions with your private key (typically also done through a wallet) before sending them 
 to a blockchain node. 
 
 A valid transaction submitted to the blockchain must include at least:
@@ -32,7 +25,7 @@ A valid transaction submitted to the blockchain must include at least:
 * The user's public key 
 * The user's signature for the transaction
 
-## Receiving Transaction
+## Receive Transactions
 
 The RPC interface module of AxiomLedger is responsible for receiving transaction requests submitted by
  end users. To be compatible with the Ethereum ecosystem, AxiomLedger implements most Ethereum RPC interface 
@@ -40,11 +33,11 @@ The RPC interface module of AxiomLedger is responsible for receiving transaction
 
 To prevent DoS attacks, the RPC interface module has flow control capabilities. When transaction requests 
 exceed the system processing limit, the request will be rejected directly. For transactions within the 
-processing capacity scope, they will be forwarded to the internal admission control service for subsequent processing.
+processing capacity, they will be forwarded to the internal admission control service for subsequent processing.
 
 
 
-## Validating Transaction
+## Validate Transactions
 
 The admission control component will validate the security of submitted transactions, which mainly includes:
 
@@ -56,20 +49,20 @@ The admission control component will validate the security of submitted transact
 Invalid transactions that fail validation are discarded directly, while valid transactions are cached in the transaction pool.
 
 
-## Consensusing on Transaction
+## Consensus on Transactions
 
-For transactions entering the transaction pool, AxiomLedger will perform two operations:
+For transactions in the transaction pool, AxiomLedger will perform two operations:
 
 1. Broadcast the transaction to neighboring nodes on the blockchain network via P2P services. 
 
-2. If the validator node is the primary node of the consensus group, it will periodically retrieve batches of transactions from the pool and initiate a consensus proposal. 
-The consensus algorithm will then execute multiple rounds of consensus steps to have most validator nodes on the network agree on the order of the batched transactions.
+2. If the validator node is the primary node of the consensus nodes, it will periodically fetch batched transactions from the transaction pool and initiate a consensus proposal.
+The consensus algorithm will then execute rounds of consensus steps to ensure that the majority of validator nodes on the network reach consensus on the order of these batch transactions.
 
 This allows quick propagation of transactions across the network, while the consensus algorithm ensures 
-all nodes reach consensus on the transaction ordering. This guarantees consistency of transaction sequences 
-and security of blockchain data.
+all nodes reach consensus on the transaction ordering, which guarantee the consistency of transaction sequences 
+and the security of blockchain data.
 
-## Executing Transactions
+## Execute Transactions
 
 Batched transactions (blocks) confirmed by the consensus algorithm are input into the executor for execution. 
 The AxiomLedger executor calls different executors to process transactions based on transaction type. System 
@@ -80,12 +73,7 @@ After transaction execution is complete, the world state is changed. The executo
 along with the block over to the ledger module.
 
 
-## Persisting State
+## Persisting States
 
-The ledger module calls different underlying storage engines to persist data based on the data type being changed.
-World state changes are persisted in the underlying KV database, while block data is stored in the underlying 
-sequential database. This separation of storage by data type allows for optimized data access patterns, with the 
-KV store better suited for random reads/writes of world state, and the sequential store for ordered appending 
-of new blocks. The ledger module abstracts persistence operations behind standard interfaces, enabling 
-interchangeability of storage engines as improvements emerge. By leveraging mature and efficient database 
-technologies, AxiomLedger achieves scalable and reliable persistence of the blockchain state.
+The ledger module calls different storage engines for data storage based on the types of data change.
+World state changes are persisted in the underlying KV database, while block data are stored using sequential database. 
