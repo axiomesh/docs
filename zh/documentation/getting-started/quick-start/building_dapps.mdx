@@ -68,9 +68,10 @@ git clone https://github.com/axiomesh/embrace.git
 
 ## Uniswap@V2 合约部署
 
-在 uniswap-contract 包下初始化 Hardhat 项目，并按照上述的包格式从官方仓库 clone 相关合约文件。
+在 uniswap-contract 包下初始化 Hardhat 项目，并按照上述的包格式从官方仓库 clone 相关合约文件。如果您使用我们的测试工程，您需要首先路由到对应的合约目录：
 
 ```shell
+cd embrace/dapps/dexes/uniswap-v2/uniswap-contract
 npm install
 npx hardhat
 ```
@@ -92,6 +93,8 @@ const config: HardhatUserConfig = {
   },
 };
 ```
+
+
 
 在 scripts 包下编写合约部署脚本，下面我们已经为您写好了 Uniswap@V2 的核心合约部署脚本 deployUniswapV2.js ：
 
@@ -253,6 +256,7 @@ function pairFor(address factory, address tokenA, address tokenB) internal pure 
 进入 uniswap-sdk 目录下，使用 nvm 切换 Node.js 版本为 16.13.2。然后调用如下命令
 
 ```shell
+cd embrace/dapps/dexes/uniswap-v2/uniswap-sdk
 nvm install 16
 yarn install
 ```
@@ -295,6 +299,7 @@ export const WETH = {
 调用 SDK 包下 package.json 中的命令来进行构建，或者在对应包下的命令行中输入如下指令
 
 ```shell
+cd embrace/dapps/dexes/uniswap-v2/uniswap-sdk
 npx tsdx build
 ```
 
@@ -326,6 +331,7 @@ npx tsdx build
 在当前包下调用如下命令来构建生产`uniswap-default.tokenlist.json`，它可以在前端中进行配置和使用。例如我们的测试工程的该位置`uniswap-v2/interface-2.6.5/src/constants/lists.ts`。
 
 ```shell
+cd embrace/dapps/dexes/uniswap-v2/default-token-list
 npm install
 npx rimraf build && mkdir -p build && node src/write.js > build/uniswap-default.tokenlist.json
 ```
@@ -370,6 +376,7 @@ REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
 修改完成之后运行如下命令即可在本地启动 Interface 前端
 
 ```shell
+cd embrace/dapps/dexes/uniswap-v2/Interface
 npx react-scripts build
 npx react-scripts start
 ```
@@ -385,5 +392,7 @@ npx react-scripts start
 将工厂合约和路由合约导入到 `Remix` 中，在编译器中选择合适的 `Solidity` 版本进行编译。
 
 部署环节中，`ENVIRONMENT`选择`Injected Provider - MetaMask`可以方便的通过`MetaMask`连接和部署到 AxiomLedger 上！相关的区跨链配置可以查阅快速开始。
+
+最后我们在 `Remix` 合约方法列表中选择对应方法进行调用和体验！
 
 
