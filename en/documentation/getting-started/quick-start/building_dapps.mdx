@@ -194,10 +194,12 @@ contract AxiomToken is ERC20 {
 }
 ```
 
-Run the following command to deploy the contract to the corresponding network. Here, we'll deploy the contract to the AxiomLedger's `aries` testnet:
+Run the following command to deploy the contract to the corresponding network. Here, we'll deploy the contract to the AxiomLedger's `aries` testnet.
+It's important to note that the first account configured in the hardhat network will be used as the deployment account. You need to ensure that this account has sufficient tokens. For information on how to obtain tokens from the faucet for testing, please refer to the Quick Start guide.
 
 ```shell
 npx hardhat run scripts/deployUniswapV2.js --network aries
+npx hardhat run scripts/deployUniswapTokens.js --network aires
 ```
 
 After running the relevant deployment scripts, we can obtain the relevant Uniswap@V2 contract addresses:
@@ -358,17 +360,18 @@ Modify the dependency package:
 "@uniswap/sdk": "../uniswap-sdk",
 ```
 
-Adjust the environment configuration, using AxiomLedger's aries test network as an example:
+Adjust the environment configuration, using AxiomLedger's aries test network as an example。Modify the corresponding entries in the `.env` and `.env.production`files in the project directory to the following values:
 
-```
+```text
 REACT_APP_CHAIN_ID="23411"
 REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
 ```
 
-After making the necessary modifications, execute the following commands to start the Interface frontend locally:
+After making the necessary modifications, execute the following commands to start the Interface frontend locally: (using Node@16)
 
 ```shell
 cd embrace/dapps/dexes/uniswap-v2/Interface
+yarn install
 npx react-scripts build
 npx react-scripts start
 ```

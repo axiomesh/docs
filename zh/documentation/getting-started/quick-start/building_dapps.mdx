@@ -201,8 +201,11 @@ contract AxiomToken is ERC20 {
 ```
 
 调用如下命令部署合约到对应的网络上，这里我们会将合约部署到 AxiomLedger 的 aries 测试网上。
+需要注意的是，配置在 hardhat network 中的第一个账户将会成为部署账号，您需要保证该账号中有足够的令牌，如何从水管获取令牌用于测试可以参考快速开始。
+
 ```shell
 npx hardhat run scripts/deployUniswapV2.js --network aries
+npx hardhat run scripts/deployUniswapTokens.js --network aires
 ```
 
 运行相应的部署脚本之后我们能获得相关的 Uniswap@V2 合约地址
@@ -366,17 +369,18 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
 "@uniswap/sdk": "../uniswap-sdk",
 ```
 
-修改环境配置，这里我们以 AxiomLedger 的 aries 测试网络为例
+修改环境配置，这里我们以 AxiomLedger 的 aries 测试网络为例。将项目目录下的 `.env` 和 `.env.production` 文件中的相应的条目修改为如下值：
 
-```
+```text
 REACT_APP_CHAIN_ID="23411"
 REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
 ```
 
-修改完成之后运行如下命令即可在本地启动 Interface 前端
+修改完成之后运行如下命令即可在本地启动 Interface 前端，注意使用 Node@16
 
 ```shell
 cd embrace/dapps/dexes/uniswap-v2/Interface
+yarn install
 npx react-scripts build
 npx react-scripts start
 ```
