@@ -78,7 +78,7 @@ npx hardhat
 
 此时您需要修改 Hardhat 配置文件中的 networks 字段以适配您的网络。
 
-其中 Hardhat config 配置如下所示，以 aries 测试网为例
+账户私钥用于在链上部署合约，可以用环境变量的方式来安全的使用，使用 `export YOUR_PRIVATE_KEY=‘YOUR_PRIVATE_KEY’` 命令来写入环境变量。最后以 aries 测试网为例 Hardhat config 配置如下所示
 
 ```typescript
 const config: HardhatUserConfig = {

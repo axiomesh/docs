@@ -78,7 +78,7 @@ npx hardhat
 
 At this point, you need to modify the networks field in the Hardhat configuration file to fit your network.
 
-The Hardhat config configuration is shown below, using the aries testnet as an example:
+The account private key is used for deploying contracts on the chain. It can be safely used by setting it as an environment variable. Use the command `export YOUR_PRIVATE_KEY='YOUR_PRIVATE_KEY'` to write to the environment variable. Lastly, using the `Aries` testnet as an example, the `Hardhat config` is as follows:
 
 ```typescript
 const config: HardhatUserConfig = {
