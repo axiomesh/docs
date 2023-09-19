@@ -46,7 +46,7 @@ node --version
 
 ## Uniswap@V2 源码获取
 
-由于 Uniswap v2 需要多个部件，我们依次从官方仓库获取并形成如下包结构。
+由于 Uniswap@V2 需要多个部件，我们依次从官方仓库获取并形成如下包结构。
 
 ```shell
 Uniswap-v2
@@ -109,33 +109,33 @@ async function main() {
     // factory 中添加 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(UniswapV2Pair).creationcode));
     const UniswapV2Factory = await ethers.getContractFactory("UniswapV2Factory");
     uniswapV2Factory = await UniswapV2Factory.deploy(owner.address);
-    console.log(`uniswapV2Factory deployed to ${uniswapV2Factory.target}`);
+    console.log(`FACTORY_ADDR: ${uniswapV2Factory.target}`);
     const factoryAddr = uniswapV2Factory.target;
     // 等待 AxiomLedger 出块获取完整回执
     await sleep(1000);
     // 获取 INIT_CODE_PAIR_HASH
     const initCodePairHash = await uniswapV2Factory.INIT_CODE_PAIR_HASH();
-    console.log("INIT_CODE_PAIR_HASH:", initCodePairHash);
+    console.log("INIT_CODE_PAIR_HASH: ", initCodePairHash);
 
     // 步骤 2 router2
     const WETH9 = await ethers.getContractFactory("WETH9");
     weth9 = await WETH9.deploy();
-    console.log(`weth9 deployed to ${weth9.target}`);
+    console.log(`WETH_ADDR: ${weth9.target}`);
 
     const weth9Addr = weth9.target
     const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
     router = await UniswapV2Router02.deploy(factoryAddr, weth9Addr);
-    console.log(`UniswapV2Router02 deployed to ${router.target}`);
+    console.log(`Router02_ADDR: ${router.target}`);
 
     // 步骤 3 router1
     const UniswapV2Router01 = await ethers.getContractFactory("UniswapV2Router01");
     router1 = await UniswapV2Router01.deploy(factoryAddr, weth9Addr);
-    console.log(`UniswapV2Router01 deployed to ${router1.target}`);
+    console.log(`Router01_ADDR: ${router1.target}`);
 
     // 步骤 4 multicall
     const MulticallForUni = await ethers.getContractFactory("MulticallForUni");
     multicall = await MulticallForUni.deploy();
-    console.log(`MulticallForUni deployed to ${multicall.target}`);
+    console.log(`MULTICALL_ADDR: ${multicall.target}`);
 
 }
 
@@ -165,9 +165,9 @@ async function main() {
     const axmToken1 = await AxmToken1.deploy("AxiomToken1", "AX1", mintAmount)
     const axmToken2 = await AxmToken1.deploy("AxiomToken2", "AX2", mintAmount)
     const axmToken3 = await AxmToken1.deploy("AxiomToken3", "AX3", mintAmount)
-    console.log(`AxmToken1 deployed to ${axmToken1.target}`);
-    console.log(`AxmToken2 deployed to ${axmToken2.target}`);
-    console.log(`AxmToken3 deployed to ${axmToken3.target}`);
+    console.log(`AXMTOKEN1_ADDR: ${axmToken1.target}`);
+    console.log(`AXMTOKEN2_ADDR: ${axmToken2.target}`);
+    console.log(`AXMTOKEN3_ADDR: ${axmToken3.target}`);
 }
 
 main().catch((error) => {
@@ -205,28 +205,23 @@ contract AxiomToken is ERC20 {
 
 ```shell
 npx hardhat run scripts/deployUniswapV2.js --network aries
-npx hardhat run scripts/deployUniswapTokens.js --network aires
+npx hardhat run scripts/deployUniswapTokens.js --network aries
 ```
 
-运行相应的部署脚本之后我们能获得相关的 Uniswap@V2 合约地址
+运行相应的部署脚本之后我们能获得相关的 Uniswap@V2 合约地址，运行相关的 ERC20 代币部署脚本之后我们能获得相关的 Token 合约地址
 
 ```text
-owner address: OWNER_ADDR
-uniswapV2Factory deployed to FACTORY_ADDR
+OWNER_ADDR
+FACTORY_ADDR
 INIT_CODE_PAIR_HASH: 0xa0d4c4d350f7cfd6c7d95a457ff8f843364762e67e907544c7ec6b369852f437
-weth9 deployed to WETH9_ADDR
-UniswapV2Router02 deployed to ROUTER02_ADDR
-UniswapV2Router01 deployed to ROUTER01_ADDR
-MulticallForUni deployed to MULTICALL_ADDR
-```
+WETH_ADDR
+ROUTER02_ADDR
+ROUTER01_ADDR
+MULTICALL_ADDR
 
-运行相关的 ERC20 代币部署脚本之后我们能获得相关的 Token 合约地址
-
-```text
-owner address: OWNER_ADDR
-AxmToken1 deployed to TOKEN1_ADDR
-AxmToken2 deployed to TOKEN2_ADDR
-AxmToken3 deployed to TOKEN3_ADDR
+AXMTOKEN1_ADDR
+AXMTOKEN2_ADDR
+AXMTOKEN3_ADDR
 ```
 
 部署上述合约之后，可以获得合约的部署地址，这些地址用来修改后续前端项目中的硬编码，确保前端项目能够顺利部署。
@@ -239,14 +234,14 @@ function pairFor(address factory, address tokenA, address tokenB) internal pure 
             hex'ff',
             factory,
             keccak256(abi.encodePacked(token0, token1)),
-            hex'INIT_CODE_PAIR_HASH'
+            hex'INIT_CODE_PAIR_HASH' // 填写部署合约之后获取的 INIT_CODE_PAIR_HASH
         ))));
 }
 ```
 
 ## Interface 前端部署
 
-现在我们来修改前端项目的相关配置，来本地化部署 Uniswap@V2 的前端 Interface-2.6.5
+现在我们来修改前端项目的相关配置，来本地化部署 `Uniswap@V2` 的前端 `Interface-2.6.5`
 
 ### Uniswap-SDK 修改
 
@@ -256,7 +251,7 @@ function pairFor(address factory, address tokenA, address tokenB) internal pure 
 "@uniswap/sdk": "3.0.3",
 ```
 
-进入 uniswap-sdk 目录下，使用 nvm 切换 Node.js 版本为 16.13.2。然后调用如下命令
+进入 uniswap-sdk 目录下，使用 nvm 切换 Node.js 版本为 `16.13.2`。然后调用如下命令
 
 ```shell
 cd embrace/dapps/dexes/uniswap-v2/uniswap-sdk
@@ -266,11 +261,11 @@ yarn install
 
 #### 修改网络
 
-由于目前 Uniswap 支持 eth 主网，以及各个测试网，修改 `src/constants.ts` 中的 ChainId 为我们所需要的
+由于目前 Uniswap 支持 eth 主网，以及各个测试网，修改 `src/constants.ts` 中的 `ChainId[TESTNET]` 为我们所需要的 `23411`
 
 ```typescript
 export enum ChainId {
-  MAINNET = 1356,
+  MAINNET = 65524,
   TESTNET = 23411,
 }
 ```
@@ -280,20 +275,20 @@ export enum ChainId {
 根据上文部署的工厂合约来对 `src/constant.ts` 做相应的修改
 
 ```typescript
-export const FACTORY_ADDRESS = 'FACTORY_ADDR'
-export const INIT_CODE_HASH = 'INIT_CODE_PAIR_HASH'
+export const FACTORY_ADDRESS = 'FACTORY_ADDR' // 填写部署合约之后获取的 FACTORY_ADDR
+export const INIT_CODE_HASH = 'INIT_CODE_PAIR_HASH' // 填写部署合约之后获取的 INIT_CODE_PAIR_HASH
 ```
 
 #### 修改WETH地址
 
 现在需要修改 `src/entities/token.ts` 对应的合约地址。
 
-在主网和测试网上分别部署WETH合约，上文中您已经在链上部署了相应的 Token 合约，把地址输入到如下代码的 `WETH9_ADDR` 位置
+在主网和测试网上分别部署 `WETH` 合约，上文中您已经在链上部署了相应的 `wETH Token` 合约，把地址输入到如下代码的 `WETH_ADDR` 位置
 
 ```typescript
 export const WETH = {
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether'),
-  [ChainId.TESTNET]: new Token(ChainId.TESTNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether')
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'),
+  [ChainId.TESTNET]: new Token(ChainId.TESTNET, 'WETH_ADDR', 18, 'WETH', 'Wrapped Ether')
 }
 ```
 
@@ -314,7 +309,7 @@ npx tsdx build
 
 该库会帮我们生成相应的 [token-lists](https://blog.uniswap.org/token-lists)。
 
-进入相应的包，然后根据如下格式进行手动修改，WETH 是 Uniswap@V2 的必需合约，因此您部署完之后需要修改相应的 address 和 chainId 为您的相应配置，以 `src/tokens/testnet.json` 为例。
+进入相应的包，然后根据如下格式进行手动修改，WETH 是 Uniswap@V2 的必需合约，因此您部署完之后需要修改相应的 `address` 和 `chainId` 以及 `logoURI` 为您的相应配置。如下以 `src/tokens/testnet.json` 为例，请将上文部署 token 合约之后生产的 `WETH_ADDR`、`AXMTOKEN1_ADDR` 等填入相应的位置，测试令牌的 `logoURI` 可以自定义，修改 `chainId` 为 `aries` 的 `23411`。
 
 其他代币请阅读[代币列表说明](https://blog.uniswap.org/token-lists)之后自主填写。
 
@@ -322,12 +317,21 @@ npx tsdx build
 [
   {
     "name": "Wrapped Ether",
-    "address": "WETH9_ADDR",
+    "address": "WETH_ADDR",
     "symbol": "WETH",
     "decimals": 18,
     "chainId": 23411,
-    "logoURI": "WETH9_URL"
-  }
+    "logoURI": "WETH_URL"
+  },
+  {
+    "name": "AxmToken1",
+    "address": "AXMTOKEN1_ADDR",
+    "symbol": "AX1",
+    "decimals": 18,
+    "chainId": 23411,
+    "logoURI": "AXMTOKEN1_URL"
+  },
+  ...
 ]
 ```
 
@@ -347,10 +351,10 @@ npx rimraf build && mkdir -p build && node src/write.js > build/uniswap-default.
 
 从 Uniswap 的官方仓库中拉取相关的源码，并切换到 `tag 2.6.5`。当然我们的测试工程已经帮您部署了[相关源码](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/interface-2.6.5)
 
-首先修改 ROUTER_ADDRESS 合约地址，位于 `src/constants/index.ts`
+首先修改 `ROUTER_ADDRESS` 合约地址，位于 `src/constants/index.ts`
 
 ```typescript
-export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS'
+export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS' // 填写部署合约之后获取的 ROUTER02_ADDRESS
 ```
 
 然后修改多签合约地址，位于 `src/constants/multicall/index.ts`
@@ -358,7 +362,7 @@ export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS'
 ```typescript
 const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: 'MAINNET_MULTICALL_ADDR',
-  [ChainId.TESTNET]: 'MULTICALL_ADDR'
+  [ChainId.TESTNET]: 'MULTICALL_ADDR' // 填写部署合约之后获取的 MULTICALL_ADDR
 }
 ```
 
