@@ -10,20 +10,26 @@ title: "构建 Dapps"
 
 首先我们需要安装相应的开发工具，包含 Git、NodeJs 等。
 
-安装 Homebrew：Homebrew 是一个 macOS 的包管理器，它可以帮助你轻松地安装和管理软件。
+### 安装 Homebrew
+
+Homebrew 是一个 MacOS 的包管理器，它可以帮助你轻松地安装和管理软件。
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-安装 git ：使用 Homebrew 安装 Git
+### 安装 git
+
+使用 Homebrew 安装 Git
 
 ```shell
 brew install git
 git --version
 ```
 
-安装 NVM ：使用 curl 或 wget 来安装 NVM 。这里提供 curl 的安装命令
+### 安装 NVM
+
+使用 curl 或 wget 来安装 NVM 。这里提供 curl 的安装命令
 
 ```shell
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -37,9 +43,12 @@ export NVM_DIR="$HOME/.nvm"
 nvm --version
 ```
 
-安装 Node.js：使用 NVM 安装 Node.js v20，之后我们可能需要使用不同的 Node 版本来部署不同的 Uniswap 部件。
+### 安装 Node.js
+
+使用 NVM 安装 Node.js `v20` 和 `v16`，之后我们可能需要使用不同的 Node 版本来部署不同的 `Uniswap` 部件。
 
 ```shell
+nvm install 16
 nvm install 20
 node --version
 ```
@@ -68,6 +77,8 @@ git clone https://github.com/axiomesh/embrace.git
 
 ## Uniswap@V2 合约部署
 
+### Hardhat 初始化
+
 在 uniswap-contract 包下初始化 Hardhat 项目，并按照上述的包格式从官方仓库 clone 相关合约文件。如果您使用我们的测试工程，您需要首先路由到对应的合约目录：
 
 ```shell
@@ -94,9 +105,9 @@ const config: HardhatUserConfig = {
 };
 ```
 
+### 合约部署脚本编写
 
-
-在 scripts 包下编写合约部署脚本，下面我们已经为您写好了 Uniswap@V2 的核心合约部署脚本 deployUniswapV2.js ：
+在 scripts 包下编写合约部署脚本，下面我们已经为您写好了 Uniswap@V2 的核心合约部署脚本 `deployUniswapV2.js` ：
 
 ```javascript
 const {ethers} = require("hardhat");
@@ -177,10 +188,6 @@ main().catch((error) => {
 ```
 
 ```Solidity
-pragma solidity ^0.8.20;
-
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
 contract AxiomToken is ERC20 {
     constructor(string memory _name, string memory _symbol, uint _totalSupply) ERC20(_name, _symbol) {
         if (_totalSupply > 0) {
@@ -200,6 +207,8 @@ contract AxiomToken is ERC20 {
 }
 ```
 
+### 部署合约并记录部署地址
+
 调用如下命令部署合约到对应的网络上，这里我们会将合约部署到 AxiomLedger 的 aries 测试网上。
 需要注意的是，配置在 hardhat network 中的第一个账户将会成为部署账号，您需要保证该账号中有足够的令牌，如何从水管获取令牌用于测试可以参考快速开始。
 
@@ -212,8 +221,9 @@ npx hardhat run scripts/deployUniswapTokens.js --network aries
 
 ```text
 OWNER_ADDR
+INIT_CODE_PAIR_HASH
+
 FACTORY_ADDR
-INIT_CODE_PAIR_HASH: 0xa0d4c4d350f7cfd6c7d95a457ff8f843364762e67e907544c7ec6b369852f437
 WETH_ADDR
 ROUTER02_ADDR
 ROUTER01_ADDR
@@ -223,6 +233,8 @@ AXMTOKEN1_ADDR
 AXMTOKEN2_ADDR
 AXMTOKEN3_ADDR
 ```
+
+### 使用说明
 
 部署上述合约之后，可以获得合约的部署地址，这些地址用来修改后续前端项目中的硬编码，确保前端项目能够顺利部署。
 上述合约中的 `INIT_CODE_PAIR_HASH` 其实是 UniswapV2Pair 合约的 creationCode 的哈希值，需要我们手动修改如下代码块。如果你是从 Axiomesh 项目库中获取的源码已经完成了该部分的修改。
@@ -351,6 +363,8 @@ npx rimraf build && mkdir -p build && node src/write.js > build/uniswap-default.
 
 从 Uniswap 的官方仓库中拉取相关的源码，并切换到 `tag 2.6.5`。当然我们的测试工程已经帮您部署了[相关源码](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/interface-2.6.5)
 
+#### 修改合约地址
+
 首先修改 `ROUTER_ADDRESS` 合约地址，位于 `src/constants/index.ts`
 
 ```typescript
@@ -366,7 +380,7 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
 }
 ```
 
-修改依赖包
+#### 修改依赖和配置
 
 ```json
 "@uniswap/default-token-list": "../default-token-list",
@@ -379,6 +393,8 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
 REACT_APP_CHAIN_ID="23411"
 REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
 ```
+
+#### 项目构建和启动
 
 修改完成之后运行如下命令即可在本地启动 Interface 前端，注意使用 Node@16
 
