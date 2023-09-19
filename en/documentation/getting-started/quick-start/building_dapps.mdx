@@ -106,7 +106,7 @@ async function main() {
     console.log("owner address:", owner.address)
     const UniswapV2Factory = await ethers.getContractFactory("UniswapV2Factory");
     uniswapV2Factory = await UniswapV2Factory.deploy(owner.address);
-    console.log(`uniswapV2Factory deployed to ${uniswapV2Factory.target}`);
+    console.log(`FACTORY_ADDR: ${uniswapV2Factory.target}`);
     const factoryAddr = uniswapV2Factory.target;
     await sleep(1000);
     const initCodePairHash = await uniswapV2Factory.INIT_CODE_PAIR_HASH();
@@ -115,22 +115,22 @@ async function main() {
     // step 2 router2
     const WETH9 = await ethers.getContractFactory("WETH9");
     weth9 = await WETH9.deploy();
-    console.log(`weth9 deployed to ${weth9.target}`);
+    console.log(`WETH_ADDR: ${weth9.target}`);
 
     const weth9Addr = weth9.target
     const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
     router = await UniswapV2Router02.deploy(factoryAddr, weth9Addr);
-    console.log(`UniswapV2Router02 deployed to ${router.target}`);
+    console.log(`Router02_ADDR: ${router.target}`);
 
     // step 3 router1
     const UniswapV2Router01 = await ethers.getContractFactory("UniswapV2Router01");
     router1 = await UniswapV2Router01.deploy(factoryAddr, weth9Addr);
-    console.log(`UniswapV2Router01 deployed to ${router1.target}`);
+    console.log(`Router01_ADDR: ${router1.target}`);
 
     // step 4 multicall
     const MulticallForUni = await ethers.getContractFactory("MulticallForUni");
     multicall = await MulticallForUni.deploy();
-    console.log(`MulticallForUni deployed to ${multicall.target}`);
+    console.log(`MULTICALL_ADDR: ${multicall.target}`);
 
 }
 
@@ -159,9 +159,9 @@ async function main() {
     const axmToken1 = await AxmToken1.deploy("AxiomToken1", "AX1", mintAmount)
     const axmToken2 = await AxmToken1.deploy("AxiomToken2", "AX2", mintAmount)
     const axmToken3 = await AxmToken1.deploy("AxiomToken3", "AX3", mintAmount)
-    console.log(`AxmToken1 deployed to ${axmToken1.target}`);
-    console.log(`AxmToken2 deployed to ${axmToken2.target}`);
-    console.log(`AxmToken3 deployed to ${axmToken3.target}`);
+    console.log(`AXMTOKEN1_ADDR: ${axmToken1.target}`);
+    console.log(`AXMTOKEN2_ADDR: ${axmToken2.target}`);
+    console.log(`AXMTOKEN3_ADDR: ${axmToken3.target}`);
 }
 
 main().catch((error) => {
@@ -199,28 +199,23 @@ It's important to note that the first account configured in the hardhat network 
 
 ```shell
 npx hardhat run scripts/deployUniswapV2.js --network aries
-npx hardhat run scripts/deployUniswapTokens.js --network aires
+npx hardhat run scripts/deployUniswapTokens.js --network aries
 ```
 
-After running the relevant deployment scripts, we can obtain the relevant Uniswap@V2 contract addresses:
+After running the relevant deployment scripts, we can obtain the relevant Uniswap@V2 contract addresses。After running the relevant ERC20 token deployment script, we can obtain the associated Token contract addresses:
 
 ```text
-owner address: OWNER_ADDR
-uniswapV2Factory deployed to FACTORY_ADDR
+OWNER_ADDR
+FACTORY_ADDR
 INIT_CODE_PAIR_HASH: 0xa0d4c4d350f7cfd6c7d95a457ff8f843364762e67e907544c7ec6b369852f437
-weth9 deployed to WETH9_ADDR
-UniswapV2Router02 deployed to ROUTER02_ADDR
-UniswapV2Router01 deployed to ROUTER01_ADDR
-MulticallForUni deployed to MULTICALL_ADDR
-```
+WETH_ADDR
+ROUTER02_ADDR
+ROUTER01_ADDR
+MULTICALL_ADDR
 
-After running the relevant ERC20 token deployment script, we can obtain the associated Token contract addresses:
-
-```text
-owner address: OWNER_ADDR
-AxmToken1 deployed to TOKEN1_ADDR
-AxmToken2 deployed to TOKEN2_ADDR
-AxmToken3 deployed to TOKEN3_ADDR
+AXMTOKEN1_ADDR
+AXMTOKEN2_ADDR
+AXMTOKEN3_ADDR
 ```
 
 After deploying the aforementioned contracts, you can obtain the contract deployment addresses. These addresses are used to modify hardcoded values in subsequent frontend projects, ensuring the smooth deployment of the frontend project. The `INIT_CODE_PAIR_HASH` in the aforementioned contract is actually the hash value of the creationCode of the `UniswapV2Pair` contract. We need to manually modify the following code block. If you have obtained the source code from the Axiomesh project repository, this part of the modification has already been completed.
@@ -232,14 +227,14 @@ function pairFor(address factory, address tokenA, address tokenB) internal pure 
             hex'ff',
             factory,
             keccak256(abi.encodePacked(token0, token1)),
-            hex'INIT_CODE_PAIR_HASH'
+            hex'INIT_CODE_PAIR_HASH' // using INIT_CODE_PAIR_HASH produced by deploying contract
         ))));
 }
 ```
 
 ## Interface-2.6.5 Frontend Deployment
 
-Now, let's modify the relevant configurations of the frontend project to localize the deployment of Uniswap@V2 frontend Interface-2.6.5.
+Now, let's modify the relevant configurations of the frontend project to localize the deployment of `Uniswap@V2` frontend `Interface-2.6.5`.
 
 ### Uniswap-SDK Modification
 
@@ -259,11 +254,11 @@ yarn install
 
 #### Modify Network
 
-Since Uniswap currently supports the Ethereum mainnet and various testnets, modify the ChainId in `src/constants.ts` to what we need:
+Since Uniswap currently supports the Ethereum mainnet and various testnets, modify the `ChainId[TESTNET]` in `src/constants.ts` to what we need:
 
 ```typescript
 export enum ChainId {
-  MAINNET = 1356,
+  MAINNET = 65524,
   TESTNET = 23411,
 }
 ```
@@ -272,20 +267,20 @@ export enum ChainId {
 Make the necessary changes to `src/constant.ts` based on the factory contract deployed earlier:
 
 ```typescript
-export const FACTORY_ADDRESS = 'FACTORY_ADDR'
-export const INIT_CODE_HASH = 'INIT_CODE_PAIR_HASH'
+export const FACTORY_ADDRESS = 'FACTORY_ADDR' // using FACTORY_ADDR produced by deploying contract
+export const INIT_CODE_HASH = 'INIT_CODE_PAIR_HASH' // using INIT_CODE_PAIR_HASH produced by deploying contract
 ```
 
 #### Modify WETH Address
 
 Now, modify the contract address corresponding to `src/entities/token.ts`.
 
-Deploy the WETH contract on both the mainnet and testnet. Earlier, you've already deployed the relevant Token contract on the chain. Insert the address into the `WETH9_ADDR` position in the following code:
+Deploy the `WETH` contract on the testnet. Earlier, you've already deployed the relevant Token contract on the chain. Insert the address into the `WETH_ADDR` position in the following code:
 
 ```typescript
 export const WETH = {
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether'),
-  [ChainId.TESTNET]: new Token(ChainId.TESTNET, 'WETH9_ADDR', 18, 'WETH', 'Wrapped Ether')
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'),
+  [ChainId.TESTNET]: new Token(ChainId.TESTNET, 'WETH_ADDR', 18, 'WETH', 'Wrapped Ether')
 }
 ```
 
@@ -305,7 +300,7 @@ Retrieve the source code based on the default-token-list version that the fronte
 
 This library will help us generate the relevant [token-lists](https://blog.uniswap.org/token-lists).
 
-Enter the corresponding package and manually modify it according to the following format. Since WETH is a required contract for Uniswap@V2, you need to modify the address and chainId to your configuration after deployment. For instance, see `src/tokens/testnet.json`.
+Enter the corresponding package and manually modify it according to the following format. Since WETH is a required contract for Uniswap@V2, you need to modify the `address` and `chainId` to your configuration after deployment. Using `src/tokens/testnet.json` as an example, please fill in the corresponding locations with the `WETH_ADDR`, `AXMTOKEN1_ADDR`, etc., produced after deploying the token contract as mentioned above. The `logoURI` of the test token can be customized. Modify the `chainId` to aries's `23411`.
 
 For other tokens, please read the [token list description](https://blog.uniswap.org/token-lists) and fill in accordingly.
 
@@ -313,12 +308,21 @@ For other tokens, please read the [token list description](https://blog.uniswap.
 [
   {
     "name": "Wrapped Ether",
-    "address": "WETH9_ADDR",
+    "address": "WETH_ADDR",
     "symbol": "WETH",
     "decimals": 18,
     "chainId": 23411,
-    "logoURI": "WETH9_URL"
-  }
+    "logoURI": "WETH_URL"
+  },
+  {
+    "name": "AxmToken1",
+    "address": "AXMTOKEN1_ADDR",
+    "symbol": "AX1",
+    "decimals": 18,
+    "chainId": 23411,
+    "logoURI": "AXMTOKEN1_URL"
+  },
+  ...
 ]
 ```
 
@@ -338,10 +342,10 @@ Next is the deployment and construction of the Uniswap@V2 core frontend reposito
 
 Retrieve the relevant source code from Uniswap's official repository and switch to `tag 2.6.5`. Of course, our test project has already deployed the related [source code](https://github.com/axiomesh/embrace/tree/main/dapps/dexes/uniswap-v2/interface-2.6.5) for you.
 
-First, modify the ROUTER_ADDRESS contract address located in `src/constants/index.ts`:
+First, modify the `ROUTER_ADDRESS` contract address located in `src/constants/index.ts`:
 
 ```typescript
-export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS'
+export const ROUTER_ADDRESS = 'ROUTER02_ADDRESS' // using ROUTER02_ADDRESS produced by deploying contract
 ```
 
 Then modify the `multi-signature` contract address located in src/constants/multicall/index.ts:
@@ -349,7 +353,7 @@ Then modify the `multi-signature` contract address located in src/constants/mult
 ```typescript
 const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: 'MAINNET_MULTICALL_ADDR',
-  [ChainId.TESTNET]: 'MULTICALL_ADDR'
+  [ChainId.TESTNET]: 'MULTICALL_ADDR' // using MULTICALL_ADDR produced by deploying contract
 }
 ```
 
