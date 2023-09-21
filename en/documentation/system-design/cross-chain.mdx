@@ -2,23 +2,23 @@
 title: 'Cross-Chain'
 ---
 
-Axiomesh's cross-chain mechanism is applicable to all EVM-compatible blockchains. Axiomesh's cross-chain mechanism ensures not only the cross-chain transmission of messages but also guarantees the transactions' integrity when Axiomesh interacts with other chains or when other chains interact with Axiomesh for asset exchanges.
+Axiomesh's cross-chain mechanism is applicable to all EVM-compatible blockchains. It not only ensures the transmission of cross-chain messages but also guarantees transaction integrity when Axiomesh interacts with other chains or when other chains interact with Axiomesh for asset exchanges.
 
 ## Cross-Chain Relayer
 
-The cross-chain relayer is a crucial component within Axiomesh's cross-chain system. Its primary function is to relay cross-chain messages from one chain to another. The cross-chain relayer consists of two parts, each with distinct roles. Only when both parts are committed can the cross-chain message be effectively executed on the target chain. This mechanism prevents the possibility of malicious behavior from a single point.
+The cross-chain relayer is a crucial component within Axiomesh's cross-chain system. Its primary function is to relay cross-chain messages from one chain to another. The cross-chain relayer consists of two parts with different roles. Only when both parts are committed can the cross-chain message be effectively executed on the target chain. This mechanism prevents the malicious behavior from a single point.
 
-Axiomesh has its own officially maintained cross-chain relayers. Axiomesh recommends users or applications to use the official cross-chain relayers to ensure the security of asset cross-chain operations and the accuracy of messages.
+Axiomesh has its own officially maintained cross-chain relayers. We recommends users or applications to use the official cross-chain relayers to ensure the security of asset cross-chain operations and the accuracy of messages.
 
 ## Cross-Chain Manager Contracts
 
-The cross-chain management contract serves as the engine within Axiome sh's cross-chain system. When a user or an on-chain application initiates a blockchain cross-chain request, it must go through the cross-chain management contract.
+The cross-chain management contract serves as the engine within Axiomesh's cross-chain system. When a user or an on-chain application initiates a blockchain cross-chain request, it must go through the cross-chain management contract.
 
-The source chain's cross-chain management contract encompasses the management of cross-chain entities, routing for cross-chain types, encapsulation of cross-chain messages, and the propagation of cross-chain events."
+The source chain's cross-chain management contract encompasses the management of cross-chain entities, routing for cross-chain types, encapsulation of cross-chain messages, and the propagation of cross-chain events.
 
 The cross-chain management contract on the destination chain includes checks for the target of cross-chain messages, decoding of encapsulated cross-chain messages, and invocation of the destination contract.
 
-## Detailed Explanation of Cross-Chain Process.
+## Cross-Chain Process
 
 ### Message Cross-Chain Process
 
@@ -26,14 +26,14 @@ Cross-chain message delivery is relatively straightforward. Users and applicatio
 
 ![Message_Cross-Chain](/en/images/message_cross_chain.png)
 
-The entire process of cross-chain messaging is as follows:
+The process of cross-chain messaging is as follows:
 
-1. User or Application sends a transaction;
-2. The transaction invokes the cross-chain manager contracts;
-3. The contracts pack the cross-chain message and emit the cross-chain message event;
-4. The relayer captures the cross-chain message event, and both services of the relayer send cross-chain message transaction to the destination chain;
-5. The cross-chain manager contracts on destination chain get the transaction and unpack the cross-chain message;
-6. The cross-chain manager contracts invoke the destination contracts and finish the cross-chain message process.
+1. User or application sends a transaction.
+2. The transaction invokes the cross-chain manager contracts.
+3. The contracts pack the cross-chain message and emit the cross-chain message event.
+4. The relayer captures the cross-chain message event, and both services of the relayer send cross-chain message transaction to the destination chain.
+5. The cross-chain manager contracts on destination chain get the transaction and unpack the cross-chain message.
+6. The cross-chain manager contracts of the destination chain invoke application contracts and finish the cross-chain message process.
 
 ### Asset Cross-Chain Process
 
@@ -41,16 +41,16 @@ Cross-chain asset transfers are relatively more complex. To ensure the atomicity
 
 ![Message_Cross-Chain](/en/images/asset_cross_chain.png)
 
-The entire process of cross-chain messaging is as follows:
+The process of asset cross-chain is as follows:
 
-1. User or Application sends a transaction;
-2. The transaction invokes the cross-chain manager contracts;
-3. The contracts pack the cross-chain asset message and emit the cross-chain message event;
-4. The relayer captures the cross-chain asset message event, and both services of the relayer send cross-chain asset message transaction to the destination chain;
-5. The cross-chain manager contracts on destination chain get the transaction and unpack the cross-chain message;
-6. The cross-chain manager contracts invoke the destination contracts;
-7. If the destination contract execution is successful, a successful receipt will be returned; otherwise, a failure receipt will be returned;
-8. The relayer captures the receipt and returns the receipt to the source chain;
+1. User or application sends a transaction.
+2. The transaction invokes the cross-chain manager contracts.
+3. The contracts pack the cross-chain asset message and emit the cross-chain message event.
+4. The relayer captures the cross-chain asset message event, and both services of the relayer send cross-chain asset message transaction to the destination chain.
+5. The cross-chain manager contracts on destination chain get the transaction and unpack the cross-chain message.
+6. The cross-chain manager contracts on the destination invoke application contracts.
+7. If the destination contract execution is successful, a success receipt will be returned; otherwise, a failure receipt will be returned.
+8. The relayer captures the receipt and returns the receipt to the source chain.
 9. The source chain contract evaluates the receipt and executes instructions to either lock the assets or return the assets.
 
 ## Deep in Assets Cross-chain
@@ -61,8 +61,8 @@ Below is the state diagram of assets in cross-chain asset transfers:
 
 ![Message_Cross-Chain](/en/images/asset_cross_chain_state.png)
 
-When a user initiates a cross-chain asset transfer, the assets will enter a semi-locked state. In this state, the assets are recorded in Axiomesh's cross-chain contract but not fully locked. The next steps of the process require waiting for the acknowledgment receipt from the cross-chain message before proceeding.
+When a user initiates a cross-chain asset transfer, the assets will enter a semi-locked state. In this state, the assets are recorded in Axiomesh's cross-chain contract but not fully locked. Next steps require waiting for the acknowledgment receipt from the cross-chain message before.
 
-When the source chain receives a successful receipt, the assets will be locked on the source chain. If a failure receipt is received, the assets will be returned to the original user or contract.
+When the source chain receives a success receipt, the assets will be locked on the source chain. If a failure receipt is received, the assets will be returned to the original user or contract.
 
 Axiomesh's cross-chain system also incorporates a timeout mechanism for transactions. When the assets in a semi-locked state on the source chain do not receive an acknowledgment receipt from the destination chain within a certain time frame, users or on-chain contracts can manually trigger a timeout rollback. This process will return the semi-locked assets back to the original user or contract.
