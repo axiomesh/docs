@@ -242,7 +242,7 @@ AXMTOKEN3_ADDR
 
 部署上述合约之后得到的合约部署地址用于修改后续前端项目中的硬编码，确保前端项目能够顺利部署。
 
-<Warning>上述合约中的 `INIT_CODE_PAIR_HASH` 是 UniswapV2Pair 合约的 creationCode 的哈希值，需要你手动修改如下代码块。但是如果你是从 Axiomesh 项目库中获取的源码，则该部分修改已预先完成了。</Warning>
+<Warning>上述合约中的 `INIT_CODE_PAIR_HASH` 是 UniswapV2Pair 合约的 creationCode 的哈希值，需要你手动修改如下代码块。但是如果你正在使用我们提供的测试项目，则该部分修改已预先完成了。</Warning>
 
 ```solidity
 function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
@@ -278,7 +278,7 @@ yarn install
 
 #### 修改网络
 
-目前 Uniswap 支持 ETH 主网以及众多测试网，您可以任意修改 `src/constants.ts` 中的 `ChainId[TESTNET]` 为你需要的`链ID`。此处以AxiomLedger 测试网`Aries`为例，可将`链ID`修改为 `23411`：
+由于目前 Uniswap 仅支持以太坊主网以及其测试网，因此您需要修改 `src/constants.ts` 中的 `ChainId[TESTNET]` 为你需要的`链ID`。此处以AxiomLedger 测试网`Aries`为例，可将`链ID`修改为 `23411`：
 
 ```typescript
 export enum ChainId {

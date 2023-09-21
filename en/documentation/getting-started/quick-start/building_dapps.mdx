@@ -243,7 +243,7 @@ AXMTOKEN3_ADDR
 
 After deploying the aforementioned contracts, you can obtain the contract deployment addresses. These addresses are used to modify hardcoded values in subsequent frontend project, ensuring the smooth deployment of the frontend project. 
 
-<Warning>The `INIT_CODE_PAIR_HASH` in the aforementioned contract is actually the hash value of the creationCode of the `UniswapV2Pair` contract. You need to manually modify the following code block. But if you have obtained the source code from the Axiomesh project repository, this part of the modification has already been completed.</Warning>
+<Warning>The `INIT_CODE_PAIR_HASH` in the aforementioned contract is actually the hash value of the creationCode of the `UniswapV2Pair` contract. You need to manually modify the following code block. But if you are using our test repository, this part of the modification has already been completed.</Warning>
 
 ```solidity
 function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
@@ -279,7 +279,7 @@ yarn install
 
 #### Modify Network
 
-Currently, Uniswap supports the Ethereum mainnet as well as numerous testnets. You can freely modify the `ChainId[TESTNET]` in `src/constants.ts` to your desired `chain ID`. Here, we'll take the `AxiomLedger` testnet `Aries` as an example, and you can change the chain ID to `23411`.
+Since currently Uniswap only supports the Ethereum mainnet and its testnets you need to modify the `ChainId[TESTNET]` in `src/constants.ts` to your desired `chain ID`. Here, we'll take the `AxiomLedger` testnet `Aries` as an example, and you can change the chain ID to `23411`.
 
 ```typescript
 export enum ChainId {
