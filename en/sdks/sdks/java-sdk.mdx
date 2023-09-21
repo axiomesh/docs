@@ -6,20 +6,20 @@ Axiom-web3j is a comprehensive and easy-to-use AxiomLedger interaction tool fork
 
 ## Features
 
-- Fully compatible with web3j, seamless switching
+- Fully compatible with web3j, allowing development to switch seamlessly.
 
 ## Maven project
 
 ### Configure JDK
 
-JDK 17
+JDK 17 is needed.
 
 ### Configure Repo
 
 Currently, the Jar package is published on GitHub Packages. To download, you need to get `PERSONAL_ACCESS_TOKEN`
 from GitHub `Developer settings` and set the repository source in Maven's `settings.xml`, as shown below.
 
-```
+``` javascript
 <servers>
     <server>
       <id>github</id>
@@ -32,7 +32,8 @@ from GitHub `Developer settings` and set the repository source in Maven's `setti
 ### Configure POM.XML
 
 Configure in the `pom.xml` file of the Maven project as shown below.
-```
+
+``` javascript
 <dependencies>
     <dependency>
         <groupId>io.axiomesh</groupId>
