@@ -2,44 +2,40 @@
 title: "Gas and Fees"
 ---
 
-To prevent DDoS(Distributed Denial of Service) attack, all transactions that change the blockchain's state of ledger will cost some gas. The gas fee calculation
-is the same as Ethereum.
+To prevent Distributed Denial of Service (DDoS) attacks, all transactions that change the blockchain's ledger state (non-read-only) require a certain amount of Gas to be consumed. The calculation method of Gas fee on `AxiomLedger` is similar to Ethereum's.
 
 ## Basic Description
 
-Gas is a common mechanism in blockchains. The original intention of Gas design is to prevent users from DDoS attacks
-on the blockchain system. The Gas model is similar to cloud computing, except that cloud computing charges by time
-units, while Gas charges based on the computational resources consumed.
+Gas is a common mechanism in blockchains. The original intention of Gas is to prevent users from DDoS attacks on the blockchain system. The Gas model is similar to cloud computing, except that cloud computing charges by time
+units, while Gas charges based on the computational resources consumed:
 
 $$\text{Gas Fee}=\text{Gas Used} \times \text{Gas Price}$$
 
-where, `Gas Fee` is the total cost that a user need to pay for the transaction, `Gas Used` is the computational resources
+where `Gas Fee` is the total cost that a user need to pay for the transaction, `Gas Used` is the computational resources
 consumed during execution, `Gas Price` is the price per Gas unit.
 
 ## Gas Limit
 
-Some smart contract may have infinite loop by accident, to prevent cost too much gas, users can set gas limit manually,
-otherwise `AxiomLedger` will set gas limit to $10^8$.
+Some smart contracts may have infinite loop by accident. To prevent costing too much Gas, users can set Gas limit manually,
+otherwise `AxiomLedger` will automatically  set Gas limit to $10^8$.
 
-<Warning> important note: manually setting gas limit over $10^8$ will be ignored.</Warning>
+<Warning> Please note: Manually setting Gas limit over $10^8$ will be ignored.</Warning>
 
 ## Dynamic Gas Price
 
-In our system, gas can not only prevent DDoS attacks, but also dynamically adjust for network conditions. We call this
+In our system, Gas can not only prevent DDoS attacks, but also dynamically adjust for network conditions. We call this
 model the dynamic Gas price model.
 
-The dynamic algorithm is as following:
+The dynamic algorithm is as follows:
 
 ![dynamic_gas_price](/en/images/dynamic_gas_price.png)
 
-Gas price of the current block will vary based on the parent block's conditions.
-Specifically, based on the ratio of the number of transactions packed in the parent block versus the total
-transaction limit per block, the gas price of the new block will float up or down linearly by up to 12.5%.
+The basic idea of this algorithm is that the Gas price in the current block will change based on the situation of the parent block. Specifically, it will linearly fluctuate based on the proportion of transactions packed in the parent block to the maximum allowed number of transactions in the block, with a maximum fluctuation of 12.5%.
 
 ## Gas Price Bound
 
-To keep the gas price fluctuating within a reasonable range, we have set upper and lower bounds for the gas price. In
+To keep the Gas price fluctuating within a reasonable range, we have set upper and lower bounds for the Gas price. In
 testnet, the upper bound is 10000 `GMol`, and the lower bound is 1000 `GMol`.
 
-As for initial state, gas price is set to 5000 `GMol`.
+As for initial state, Gas price is set to 5000 `GMol`.
  
