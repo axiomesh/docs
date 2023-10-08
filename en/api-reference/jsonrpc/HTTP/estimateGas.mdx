@@ -26,7 +26,7 @@ Generates and returns an estimate of how much gas is necessary to allow the tran
   <Expandable title="TRANSACTION CALL ARGS">
   
      <ParamField body="from" type="string">
-        20 Bytes - The address the transaction is sent from
+        (optional) 20 Bytes - The address the transaction is sent from
      </ParamField>
 
      <ParamField body="to" type="string">
@@ -34,44 +34,44 @@ Generates and returns an estimate of how much gas is necessary to allow the tran
      </ParamField>
 
      <ParamField body="gas" type="string">
-       Hexadecimal value of the gas provided for the transaction execution
+       (optional) Hexadecimal value of the gas provided for the transaction execution
      </ParamField>
 
      <ParamField body="gasPrice" type="string">
-        Hexadecimal value of the gasPrice used for each paid gas
+        (optional) Hexadecimal value of the gasPrice used for each paid gas
      </ParamField>
 
      <ParamField body="maxFeePerGas" type="string">
-        Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
+        (optional) Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
      </ParamField>
 
      <ParamField body="maxPriorityFeePerGas" type="string">
-        Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
+        (optional) Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
      </ParamField>
 
      <ParamField body="value" type="string">
-        Hexadecimal value of the value sent with this transaction
+        (optional) Hexadecimal value of the value sent with this transaction
      </ParamField>
 
      <ParamField body="nonce" type="string">
-        20 Bytes - The address the transaction is directed to
+        (optional) 20 Bytes - The address the transaction is directed to
      </ParamField>
 
      <ParamField body="data" type="string">
-        Hash of the method signature and encoded parameters
+        (optional) Hash of the method signature and encoded parameters
      </ParamField>
 
      <ParamField body="input" type="string">
-        Input is the newer name and should be preferred by clients
+        (optional) Input is the newer name and should be preferred by clients
      </ParamField>
 
      <ParamField body="accessList" type="array">
-        Array of EIP-2930 access list
+        (optional) Array of EIP-2930 access list
      </ParamField>
 
 
      <ParamField body="chainId" type="string">
-        Chain ID that this transaction is valid on
+        (optional) Chain ID that this transaction is valid on
      </ParamField>
 
   </Expandable>
