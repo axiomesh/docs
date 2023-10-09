@@ -185,5 +185,5 @@
     "github": "https://github.com/axiomesh",
     "twitter":"https://twitter.com/axiomesh?s=20"
   },
-  "backgroundImage": "./images/background1.png"
+  "backgroundImage": "/images/background1.png"
 }
