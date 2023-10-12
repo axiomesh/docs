@@ -21,13 +21,10 @@ Returns the receipt of a transaction by transaction hash
 
 <ParamField body="params" type="array">
   Contains the list of parameters passed to the remote method
-  <Expandable title="params">
 
      <ParamField body="transactionHash" type="string">
         A string representing the hash (32 bytes) of a transaction
      </ParamField>
-
-  </Expandable>
 
 
 </ParamField>
@@ -108,7 +105,7 @@ Returns the receipt of a transaction by transaction hash
 <RequestExample>
 
 ```bash Example Request
-curl  'https://<testnetwork>' \
+curl  'https://rpc1.aries.axiomesh.io' \
 --header 'Content-Type: application/json' \
 --data '{
     "jsonrpc": "2.0",

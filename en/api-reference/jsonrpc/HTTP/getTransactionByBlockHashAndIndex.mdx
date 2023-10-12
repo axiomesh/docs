@@ -22,7 +22,6 @@ Returns information about a transaction by block hash and transaction index posi
 
 <ParamField body="params" type="array">
   Contains the list of parameters passed to the remote method
-  <Expandable title="params">
 
      <ParamField body="blockHash" type="string">
         A string representing the hash (32 bytes) of a block
@@ -31,9 +30,6 @@ Returns information about a transaction by block hash and transaction index posi
      <ParamField body="transactionIndex" type="string">
         A hex of the integer representing the position in the block
      </ParamField>
-
-  </Expandable>
-
 
 </ParamField>
 
@@ -137,7 +133,7 @@ Returns information about a transaction by block hash and transaction index posi
 <RequestExample>
 
 ```bash Example Request
-curl  'https://<testnetwork>' \
+curl  'https://rpc1.aries.axiomesh.io' \
 --header 'Content-Type: application/json' \
 --data '{
     "jsonrpc": "2.0",

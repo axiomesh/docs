@@ -21,12 +21,9 @@ Polling method for a filter, which returns an array of logs which occurred since
 
 <ParamField body="params" type="array">
     Contains the list of parameters passed to the remote method.
-
-    <Expandable title="params">
         <ParamField body="filterId" type="string">
             The filter id.
         </ParamField>
-    </Expandable>
 </ParamField>
 
 ### Response
@@ -91,7 +88,7 @@ Polling method for a filter, which returns an array of logs which occurred since
 <RequestExample>
 
     ```bash Example Request
-    curl   'https://<testnetwork>' \
+    curl   'https://rpc1.aries.axiomesh.io' \
     --header 'Content-Type: application/json' \
     --data '{
         "jsonrpc":"2.0",

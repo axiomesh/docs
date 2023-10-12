@@ -23,7 +23,7 @@ The above is the recommended optimal configuration. The minimum hardware require
 - Storage: 500G SSD
 - Network Bandwidth: 100Mbps
 
-### Why These Hardware Requirements
+### Why These Hardware Required
 
 The hardware requirements depend on the transaction speed and storage requirements. The amount of data stored on the `AxiomLedger` blockchain depends on the amount of `transaction` data and `on-chain state` data (such as account data and contract storage data). The current requirements are derived based on a certain amount of usage on the blockchain.
 
@@ -31,12 +31,12 @@ The hardware requirements depend on the transaction speed and storage requiremen
 
 When running AxiomLedger nodes, you need to open network ports on the nodes to allow other nodes to connect.
 
-Open the following ports:
+Keep the following ports open:
 
 - 4001: P2P port for connecting to other nodes to transmit messages.
 - 8881: JSON RPC http port for providing services externally. This port is optional to open.
 - 9991: JSON RPC websocket port for providing services externally. This port is optional to open.
 
-Close the following ports:
+Keep the following ports closed:
 
-- 53121/40011: Node metrics exposure ports. Close to prevent unauthorized node metrics inspection.
+- 53121/40011: Node metrics exposure ports. Keep them closed to prevent unauthorized node metrics inspection.

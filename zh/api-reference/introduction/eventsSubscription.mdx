@@ -8,7 +8,7 @@ title: "事件和订阅"
 它通过订阅特定事件来工作。节点将返回一个订阅id。对于与订阅匹配的每个事件，都会将带有相关数据的通知与订阅id一起发送。
 
 ## 订阅方法
-订阅方法仅适用于WebSocket连接，允许您等待事件，而不是轮询事件。例如，dapp可以订阅日志，并在特定事件发生时接收通知。
+订阅方法仅适用于WebSocket连接，允许您等待事件，而不是轮询事件。例如，Dapp可以订阅日志，并在特定事件发生时接收通知。
 
 以下订阅方法可用：
 
@@ -40,7 +40,7 @@ eth_subscribe和eth_unsubscribe的JSON-RPC方法允许您访问WebSocket。
 ```
 
 ## 兼容性
-Axiomesh目前支持newHeads、logs和newPendingTransactions等订阅方法，使其与以太坊订阅机制兼容。但是，它不支持syncing订阅。如果您需要有关节点同步状态的信息，您可以直接通过HTTP端点eth_syncing查询这些信息
+AxiomLedger目前支持newHeads、logs和newPendingTransactions等订阅方法，使其与以太坊订阅机制兼容。但是，它不支持syncing订阅。如果您需要有关节点同步状态的信息，您可以直接通过HTTP端点eth_syncing查询这些信息
 
 
 
