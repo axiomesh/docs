@@ -33,7 +33,7 @@ description: "了解如何运行一个`AxiomLedger`节点。"
 
     ```shell
     git clone https://github.com/axiomesh/axiom-ledger.git
-    cd axiom
+    cd axiom-ledger
     git checkout ${latest_tag}
     ```
 
@@ -50,25 +50,25 @@ description: "了解如何运行一个`AxiomLedger`节点。"
     ```shell
     make build secret=${secret} net=${net_name}
     ```
-    编译出的二进制位于`./bin/axiom`。
+    编译出的二进制位于`./bin/axiom-ledger`。
 
 
 ## 部署并启动节点
 1. 生成相关配置文件到指定目录。
 
     ```shell
-    axiom --repo=$WORKSPACE config generate
+    axiom-ledger --repo=$WORKSPACE config generate
     ```
 
 2. 修改配置文件配置。
 
-    配置文件位于`$WORKSPACE/axiom.toml`，主要需要修改对应端口以及创世验证节点配置，节点间通过P2P的DHT组网通信，因此只需配置创世种子节点的P2P地址。
+    配置文件位于`$WORKSPACE/config.toml`，主要需要修改对应端口以及创世验证节点配置，节点间通过P2P的DHT组网通信，因此只需配置创世种子节点的P2P地址。
     如果需要快速启动，可以配置为solo节点模式，具体配置参考[配置说明]()。
 
 3. 启动节点。
 
     ```shell
-    axiom --repo=$WORKSPACE start
+    axiom-ledger --repo=$WORKSPACE start
     ```
     为方便节点管理，可以将`AxiomLedger`注册为`systemctl`系统服务：
     ```shell
@@ -82,14 +82,14 @@ description: "了解如何运行一个`AxiomLedger`节点。"
     LimitNOFILE=500000
 
     WorkingDirectory=$WORKSPACE
-    ExecStart=/usr/local/bin/AxiomLedger --repo=$WORKSPACE start
+    ExecStart=/usr/local/bin/axiom-ledger --repo=$WORKSPACE start
 
     Restart=on-failure
     RestartSec=3s
 
     StandardOutput=journal
     StandardError=journal
-    SyslogIdentifier=AxiomLedger
+    SyslogIdentifier=axiom-ledger
 
     [Install]
     WantedBy=multi-user.target

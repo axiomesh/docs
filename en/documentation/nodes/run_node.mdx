@@ -36,7 +36,7 @@ for your operating system and CPU architecture, and unzip it in the deployment e
 
     ```shell
     git clone https://github.com/axiomesh/axiom-ledger.git
-    cd axiom
+    cd axiom-ledger
     git checkout ${latest_tag}
     ```
 
@@ -55,19 +55,19 @@ for your operating system and CPU architecture, and unzip it in the deployment e
     ```shell
     make build secret=${secret} net=${net_name}
     ```
-    The compiled binary is at `./bin/axiom`.
+    The compiled binary is at `./bin/axiom-ledger`.
 
 
 ## Deploy and Start Node
 1. Generate related config files to specified directory.
 
     ```shell
-    axiom --repo=$WORKSPACE config generate
+    axiom-ledger --repo=$WORKSPACE config generate
     ```
 
 2. Modify config file.
 
-    Config files are at `$WORKSPACE/axiom.toml`. You mainly need to modify ports and genesis validator configs.
+    Config files are at `$WORKSPACE/config.toml`. You mainly need to modify ports and genesis validator configs.
     Nodes connect each other via P2P DHT network, so you only need to configure the P2P addresses of the genesis seed node. 
 
     If you need to start quickly, you can configure it for solo node mode. 
@@ -75,7 +75,7 @@ for your operating system and CPU architecture, and unzip it in the deployment e
 3. Start node.
 
     ```shell
-    axiom --repo=$WORKSPACE start
+    axiom-ledger --repo=$WORKSPACE start
     ```
     To easily manage nodes, you can register `AxiomLedger` as a `systemctl` service:
     ```shell
@@ -89,7 +89,7 @@ for your operating system and CPU architecture, and unzip it in the deployment e
     LimitNOFILE=500000
 
     WorkingDirectory=$WORKSPACE
-    ExecStart=/usr/local/bin/AxiomLedger --repo=$WORKSPACE start
+    ExecStart=/usr/local/bin/axiom-ledger --repo=$WORKSPACE start
 
     Restart=on-failure
     RestartSec=3s
