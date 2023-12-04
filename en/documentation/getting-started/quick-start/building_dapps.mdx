@@ -29,7 +29,7 @@ git --version
 
 ### Install NVM
 
-Install NVM by curl or wget:
+Install NVM by curl or wget. Here we provide the curl command:
 
 ```shell
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -314,6 +314,7 @@ export const WETH = {
 Invoke the command under the SDK package in `package.json` to build SDK, or enter the following command in the corresponding package's command line:
 
 ```shell
+cd embrace/dapps/dexes/uniswap-v2/uniswap-sdk
 npx tsdx build
 ```
 
@@ -349,7 +350,7 @@ For other tokens, please read the [token list description](https://blog.uniswap.
     "chainId": 23411,
     "logoURI": "AXMTOKEN1_URL"
   },
-  ...
+  //...
 ]
 ```
 
