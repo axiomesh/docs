@@ -9,3 +9,16 @@ Initial release version, supports the following features:
 - Supports built-in system contracts for easy chain management.
 - Supports reliable message transmission between Ethereum.
 - Supports on-chain and off-chain combined governance mechanism based on proposals.
+
+# v0.2.0
+The second testnet version, Taurus, introduces the following features:
+- Ledger module adds the JMT tree and snapshot mechanism, enabling the querying and validation of historical states.
+- Supports the epoch mechanism, allowing dynamic updates of certain parameters within the chain through epoch changes.
+- dBFT consensus algorithm supports random rotation of nodes based on historical reputation and validator election during epoch changes.
+- Ledger KV storage integrates with Pebble DB, while consensus storage integrates with Minfile to enhance query performance.
+- Governance proposals enable dynamic addition and removal of nodes, changes to governance committee members, adjustments to gas price parameters, and node version upgrades.
+- Non-consensus candidate nodes only synchronize data.
+- Decoupling of the transaction pool and consensus modules results in improved performance.
+- API layer supports separate rate limiting for read and write requests.
+- P2P network switches to the gossip protocol, providing better scalability for large-scale nodes.
+- Block synchronization mechanism supports verification of the correctness of synchronized blocks.
