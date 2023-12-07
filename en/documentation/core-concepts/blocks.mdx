@@ -1,5 +1,5 @@
 ---
-title: 'Blocks'
+title: "Blocks"
 ---
 
 A block is a collection of transactions. Within a block, there is also the hash of the previous block, which links the blocks together, forming a chain. This chainlike structure can prevents fraud because the hash is derived by encrypting the block's data. Any alteration to a previous block renders all subsequent blocks invalid, causing a change in all hashes. This change will be easily noticed by all participants in the blockchain network.
@@ -14,27 +14,28 @@ To preserve the transaction history, blocks are strictly ordered meaning that ea
 
 Once randomly selected validators construct a block on the network, the block is propagated throughout the network. Other nodes append the block to the end of their blockchains and then select new validators to create the next block. Currently, the exact block construction process and submission & consensus process are governed by dBFT protocol.
 
-
 ## What a Block Contains
 
 A block contains a lot of information. Among them, the block header includes the following fields:
 
-| Fields      | Introduction                         |
-| ----------- | ------------------------------------ |
-| Number      | Block height                         |
-| StateRoot   | Root hash of the state object        |
-| TxRoot      | Root hash of the transactions        |
-| ReceiptRoot | Root hash of the receipts            |
-| ParentHash  | Hash of the parent block             |
-| Timestamp   | Timestamp of the block               |
-| Version     | Blockchain version                   |
-| Bloom       | Data structure containing event logs |
-| GasPrice    | Block gas price                      |
+| Fields          | Introduction                         |
+| --------------- | ------------------------------------ |
+| Number          | Block height                         |
+| StateRoot       | Root hash of the state object        |
+| TxRoot          | Root hash of the transactions        |
+| ReceiptRoot     | Root hash of the receipts            |
+| ParentHash      | Hash of the parent block             |
+| Timestamp       | Timestamp of the block               |
+| Epoch           | Epoch number                         |
+| Bloom           | Data structure containing event logs |
+| GasPrice        | Block gas price                      |
+| GasUsed         | Total gas block used                 |
+| ProposerAccount | Account that proposer the block      |
 
 In addition, a block also contains all the transactions and receipts of that block, as well as the current block hash.
 
 ## Block Size
 
-The size of a block is limited, with each block capable of containing a maximum of 500 transactions, and each transaction's gas target size within the block must be less than one hundred million. This mechanism ensures that the execution time for transactions within a block does not become excessively long. 
+The size of a block is limited, with each block capable of containing a maximum of 500 transactions, and each transaction's gas target size within the block must be less than one hundred million. This mechanism ensures that the execution time for transactions within a block does not become excessively long.
 
 If the number of transactions in a block or the gas limit per transaction could expand limitlessly, performance-limited full nodes would gradually fall behind the network's growth due to limitations in space and speed. The larger the blocks become, the more powerful computational capacity is required to process them promptly in the next time slot, which leads to centralization issues. Therefore, it is essential to address this problem by limiting the block size.
