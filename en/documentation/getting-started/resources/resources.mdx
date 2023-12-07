@@ -2,7 +2,7 @@
 title: "Resources"
 ---
 
-export async function addTestingNetwork() {
+export async function addTestingNetworkAries() {
   const confirmed = window.confirm(
     "Are you sure you want to add AxiomLedger-Testnet to MetaMask?"
   );
@@ -38,12 +38,58 @@ export async function addTestingNetwork() {
   }
 }
 
-| Resources         | URL                                              | Action                                                       |
-| ----------------- | ------------------------------------------------ | ------------------------------------------------------------ |
-| **Mainnet**       | https://rpc.mainnet.axiomesh.io (not yet online) | N/A                                                          |
-| **Aries Testnet** | https://rpc1.aries.axiomesh.io                   | <button onClick={addTestingNetwork}>Add to MetaMask</button> |
-| **Aries AXMScan** | https://scan.aries.axiomesh.io                   | N/A                                                          |
-| **Aries Faucet**  | https://faucet.aries.axiomesh.io                 | N/A                                                          |
+export async function addTestingNetworkTaurus() {
+  const confirmed = window.confirm(
+    "Are you sure you want to add AxiomLedger-Testnet to MetaMask?"
+  );
+  if (!confirmed) {
+    return;
+  }
+  const ethereum = window.ethereum;
+  if (!ethereum) {
+    alert("Please install MetaMask first.");
+    return;
+  }
+  const networkConfig = {
+    method: "wallet_addEthereumChain",
+    params: [
+      {
+        chainId: "0x5b73",
+        rpcUrls: ["https://rpc1.taurus.axiomesh.io"],
+        chainName: "AxiomLedger-Testnet",
+        nativeCurrency: {
+          name: "AxiomLedger",
+          symbol: "AXM",
+          decimals: 18,
+        },
+        blockExplorerUrls: ["https://scan.taurus.axiomesh.io"],
+      },
+    ],
+  };
+  try {
+    await window.ethereum.request(networkConfig);
+    alert("AxiomLedger-Testnet has been added to MetaMask.");
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+## Resources
+
+| Chains | PRC | ID | Token |Click🖱️| Remarks |
+| -------- | -------- | -------- | -------------- | -------- | -------- |
+|**Mainnet**| https://rpc.aries.axiomesh.io | 9771 | AXM | - | not yet online  |
+|**Aries**| https://rpc1.aries.axiomesh.io | 23411 | AXM |<button onClick={addTestingNetworkAries}>AddToMetaMask</button> | about to cease operation  |
+|**Taurus**| https://rpc1.taurus.axiomesh.io | 23412 | AXM |<button onClick={addTestingNetworkTaurus}>AddToMetaMaskk</button> |  - |
+
+| Tools         | URL                                              | 
+| ----------------- | ------------------------------------------------ |
+| **Aries AXMScan** | https://scan.aries.axiomesh.io （about to cease operation）|  
+| **Aries Faucet**  | https://faucet.aries.axiomesh.io （about to cease operation）|
+| **Taurus AXMScan** | https://scan.taurus.axiomesh.io                   | 
+| **Taurus Faucet**  | https://faucet.taurus.axiomesh.io                 | 
+
+
 
 ## Network
 
@@ -62,18 +108,16 @@ The AXM price that the general public and exchanges deal with corresponds to the
 The public testnets are networks that simulate the ecosystem environment, where protocol developers and smart contract developers can use them to test protocol upgrades and smart contracts that haven't been deployed to the mainnet yet. You can think of them as simulations of the production and assembly servers.
 Before deploying to the mainnet, you should test any contract code you've written on a testnet. In decentralized applications that integrate with existing smart contracts, most projects deploy replicas to a testnet.
 
-Interacting with AxiomLedger requires AXM in reality. If you are interested in experimenting with AxiomLedger, you can obtain free testnet `AXM` on [Faucet](https://faucet.aries.axiomesh.io), a web application where you can request AXM to be sent to an address, allowing you to explore the platform without any risks.
+Interacting with AxiomLedger requires AXM in reality. If you are interested in experimenting with AxiomLedger, you can obtain free testnet `AXM` on Faucet, a web application where you can request AXM to be sent to an address, allowing you to explore the platform without any risks.
 
 AXM on the testnet has no real value, it is meant only for experimentation purposes on the AxiomLedger testnet.
 
-### Connect to the Testnet
+### Connect to the AxiomLedger
 
-AxiomLedger is an EVM-compatible blockchain. Once you have an Ethereum address, you can connect to AxiomLedger testnet using popular wallets (such as Metamask ) or SDK.
-If you are using Metamask to connect to the AxiomLedger for the first time, you will need to add the RPC address, chain ID, token symbol, and the other information to the network list.
+AxiomLedger is an EVM-compatible blockchain. Once you have an Ethereum address, you can connect to AxiomLedger using popular wallets (such as Metamask ) or SDK.
+If you are using Metamask to connect to the AxiomLedger for the first time, you will need to add the RPC address, chain ID, token symbol, and the other information to the network list. For information about the mainnet and each testnet, please see the table at the top of this article.
 
-- RPC address of AxiomLedger testnet: `https://rpc1.aries.axiomesh.io`
-- Chain ID: `23411`
-- Token symbol: `AXM`
+
 
 ## Faucet
 
@@ -81,7 +125,7 @@ A faucet is a blockchain tool that drips testnet tokens for free to anyone who r
 
 ### Get Free Tokens
 
-Testnet token is a testing currency that enables you to test your application before deploying it on the mainnet. These tokens can be used in place of mainnet tokens on testnets like Aries. You can use these tokens to perform various test transactions on the associated blockchain, including contract deployments, fund transfers, and debugging failed transactions. You can request testnet tokens [here](https://faucet.aries.axiomesh.io).
+Testnet token is a testing currency that enables you to test your application before deploying it on the mainnet. These tokens can be used in place of mainnet tokens on testnets like Aries. You can use these tokens to perform various test transactions on the associated blockchain, including contract deployments, fund transfers, and debugging failed transactions. 
 
 ### Faucet Limitation
 
@@ -89,7 +133,7 @@ You can only obtain once in every 24 hours.
 
 ## AXMScan
 
-The [Aries AXMScan](https://scan.aries.axiomesh.io) allows you dive into the activity on the AxiomLedger testnet in great detail, enabling you to view transactions, blocks, wallets, tokens, smart contracts, and statistics.
+AXMScan allows you dive into the activity on the AxiomLedger network in great detail, enabling you to view transactions, blocks, wallets, tokens, smart contracts, and statistics.
 
 ![AXMScan](/en/images/getting-started/AXMScan1.png)
 
