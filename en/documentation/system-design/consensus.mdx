@@ -14,11 +14,11 @@ Practical Byzantine Fault Tolerance (PBFT) is a consensus algorithm based on BFT
 The transaction process within the consensus module of AxiomLedger is outlined as follows:
 
     1. The TxPool receives validated transactions from P2P and API sources.
-    
+
     2. The TxPool sorts transactions based on tx account nonce, categorizing them into a set of ready transactions(priorityTx) and a set of unready transactions(parkingLotTx). Transactions in the priorityTx set can be packed by proposers but are not yet included, while transactions in the parkingLotTx set cannot be included temporarily (usually storing transactions with higher nonces during high concurrency).
-    
+
     3. The proposer of the current term, based on the packaging strategy, retrieves a certain number of transactions from the priorityTx set in the TxPool, collect these transactions into a block, and propose a consensus proposal for the current block.
-    
+
     4. All validators in the node consensus network participate in multi-round voting to reach a consensus for the block proposal, and once conmmited, the block is sent to the executor for transaction execution.
 
 <Warning>
@@ -35,6 +35,10 @@ After the executor completes the execution of transactions within a block, the b
 Moreover, to prevent delayed block heights from reaching checkpoint, validators will set a timeout mechanism. When the timer triggers, validators actively consensus on the latest block information.
 
 The state checkpoint mechanism guarantees eventual ledger consistency. Validators do not need to start consensus on every block execution results during the block packaging process, effectively improving consensus performance.
+
+<Warning>
+    In AxiomLedger, the default checkpoint interval is configured as 1, meaning that for every block, a check is performed to ensure that the quorum of validator nodes have successfully persisted in local Ledger.
+</Warning>
 
 ### Node Types
 
@@ -58,6 +62,21 @@ In the AxiomLedger blockchain network, node role transitions officially take eff
     - **Candidate ↔ Validator** : During each epoch change, the epoch management contract employs the WRF algorithm to select a specified number of validators from the candidates. When epoch change conditions are met (usually at a certain checkpoint interval), all nodes in the AxiomLedger network update their validator set. WRF algorithm will be detailed in the next section.
     - **Validator ↔ Proposer** : After the epoch management contract is updated, validators determine the proposer using the WRF algorithm. The chosen proposer is responsible for packaging blocks within the current term (term interval equals checkpoint interval).
     - **Candidate/Validator ↔ Exited Node** : Once an exit proposal is approved, a node can exit the network.
+
+### Node Penalty Mechanism
+
+Performance bottlenecks of validator nodes directly impact the overall operational efficiency of the entire blockchain network. To incentive more honest nodes with robust machine performance to become validator/proposer nodes, AxiomLedger has implemented corresponding measures:
+
+    - For nodes with poor network performance or Byzantine errors, the other validator nodes will reduce the node's weight in being selected as the proposer/validator for the next block, thereby lowering the probability of their next selection.
+
+    - After a specified number of blocks have been generated, the weight of the node will gradually return to normal.
+
+
+AxiomLedger detects Byzantine nodes in terms of security and liveness:
+
+    - Security: validator nodes fail to verify the block proposal presented by the current proposer node.
+
+    - Liveness: other validator nodes(which is not proposer) observe the presence of packable transactions at the moment, yet the proposer node fails to post a proposal.
 
 ### Epoch Change
 
@@ -86,7 +105,3 @@ Epoch changes are executed through the built-in epoch management contract, which
 ![epoch change process](/en/images/system-design/epoch-change.png)
 
 Each term interval corresponds to a checkpoint interval. Within this interval, a proposer is assigned. If a proposer encounters abnormal states such as downtime during this interval, an exceptional term transition will be triggered. It is important to note that after an exceptional term transition, the term interval is not a checkpoint interval, it is the checkpoint interval minus the previous exceptional term interval (e.g., term 3 + term 4 = term interval).
-
-
-
-
