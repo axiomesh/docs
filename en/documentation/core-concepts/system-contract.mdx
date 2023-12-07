@@ -4,15 +4,17 @@ title: "System Contracts"
 
 System contracts are built-in contracts of AxiomLedger. The contracts do not need to be deployed and can be called directly. The calling method of system contracts is compatible with the EVM.
 
-System contracts use specific addresses, with the reserved addresses ranging from 0x1000 to 0xffff. Currently, these are primarily governance contracts, but in the future, other types of contracts will be expanded. 
-
-Currently, system contracts mainly include the following types:
+System contracts use specific addresses, with the reserved addresses ranging from 0x1000 to 0xffff. System contracts mainly include the following types:
 
 
 | Contract Address | Name                                        | Description                                                                            |
 | ---------------- | ------------------------------------------- | -------------------------------------------------------------------------------------- |
-| 0x1000           | Governance Proposal ID Generation Contract  | Used for generating IDs for governance proposals, maintaining an incremental sequence                           |
+| 0x1000           | Governance Proposal ID Generation Contract  | System internal contract, used for generating IDs for governance proposals, maintaining an incremental sequence                           |
 | 0x1001           | Node Management Contract                    | Used for node management such as addition, removal, and upgrade                   |
 | 0x1002           | Committee Management Contract               | Used to elect members of the Governance Committee, who are responsible for governance |
-| 0x1003           | Address Mapping Name Contract               | Used to map addresses into unique names for easy identification of addresses        |
+| 0x1003           | Address Mapping Name Contract               | System internal contract, used to map addresses into unique names for easy identification of addresses        |
+| 0x1004           | Whitelist Management Contract               | Used to manage the whitelist that can be used to access AxiomLedger for permission control        |
+| 0x1005           | Whitelist Provider Management Contract      | Used to manage whitelist providers. Only whitelist providers can call the whitelist management contract to update the whitelist        |
+| 0x1006           | Unfinished Proposal Management Contract     | System internal contract, used to manage unfinished proposals        |
 | 0x1007           | Epoch Management Contract                   | Used to manage on-chain epoch information and support query         |
+| 0x1008           | Gas Management Contract                     | Used to adjust gas related parameters, including gas price, gas price upper and lower limits, etc.         |
