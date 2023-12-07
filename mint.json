@@ -146,7 +146,8 @@
             "en/api-reference/jsonrpc/HTTP/getLogs",
             "en/api-reference/jsonrpc/HTTP/uninstallFilter",
             "en/api-reference/jsonrpc/HTTP/getFilterLogs",
-            "en/api-reference/jsonrpc/HTTP/getFilterChanges"
+            "en/api-reference/jsonrpc/HTTP/getFilterChanges",
+            "en/api-reference/jsonrpc/HTTP/traceTransaction"
           ]
     },
     {
