@@ -14,11 +14,8 @@ Practical Byzantine Fault Tolerance (PBFT) is a consensus algorithm based on BFT
 The transaction process within the consensus module of AxiomLedger is outlined as follows:
 
     1. The TxPool receives validated transactions from P2P and API sources.
-
     2. The TxPool sorts transactions based on tx account nonce, categorizing them into a set of ready transactions(priorityTx) and a set of unready transactions(parkingLotTx). Transactions in the priorityTx set can be packed by proposers but are not yet included, while transactions in the parkingLotTx set cannot be included temporarily (usually storing transactions with higher nonces during high concurrency).
-
     3. The proposer of the current term, based on the packaging strategy, retrieves a certain number of transactions from the priorityTx set in the TxPool, collect these transactions into a block, and propose a consensus proposal for the current block.
-
     4. All validators in the node consensus network participate in multi-round voting to reach a consensus for the block proposal, and once conmmited, the block is sent to the executor for transaction execution.
 
 <Warning>
@@ -66,16 +63,12 @@ In the AxiomLedger blockchain network, node role transitions officially take eff
 ### Node Penalty Mechanism
 
 Performance bottlenecks of validator nodes directly impact the overall operational efficiency of the entire blockchain network. To incentive more honest nodes with robust machine performance to become validator/proposer nodes, AxiomLedger has implemented corresponding measures:
-
     - For nodes with poor network performance or Byzantine errors, the other validator nodes will reduce the node's weight in being selected as the proposer/validator for the next block, thereby lowering the probability of their next selection.
-
     - After a specified number of blocks have been generated, the weight of the node will gradually return to normal.
 
 
 AxiomLedger detects Byzantine nodes in terms of security and liveness:
-
     - Security: validator nodes fail to verify the block proposal presented by the current proposer node.
-
     - Liveness: other validator nodes(which is not proposer) observe the presence of packable transactions at the moment, yet the proposer node fails to post a proposal.
 
 ### Epoch Change
