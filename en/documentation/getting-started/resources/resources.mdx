@@ -4,7 +4,7 @@ title: "Resources"
 
 export async function addTestingNetworkAries() {
   const confirmed = window.confirm(
-    "Are you sure you want to add AxiomLedger-Testnet to MetaMask?"
+    "Are you sure you want to add Aries Testnet to MetaMask?"
   );
   if (!confirmed) {
     return;
@@ -20,7 +20,7 @@ export async function addTestingNetworkAries() {
       {
         chainId: "0x5b73",
         rpcUrls: ["https://rpc1.aries.axiomesh.io"],
-        chainName: "AxiomLedger-Testnet",
+        chainName: "Axiomledger Aries",
         nativeCurrency: {
           name: "AxiomLedger",
           symbol: "AXM",
@@ -32,7 +32,7 @@ export async function addTestingNetworkAries() {
   };
   try {
     await window.ethereum.request(networkConfig);
-    alert("AxiomLedger-Testnet has been added to MetaMask.");
+    alert("Aries has been added to MetaMask.");
   } catch (error) {
     alert(error.message);
   }
@@ -40,7 +40,7 @@ export async function addTestingNetworkAries() {
 
 export async function addTestingNetworkTaurus() {
   const confirmed = window.confirm(
-    "Are you sure you want to add AxiomLedger-Testnet to MetaMask?"
+    "Are you sure you want to add Taurus Testnet to MetaMask?"
   );
   if (!confirmed) {
     return;
@@ -56,7 +56,7 @@ export async function addTestingNetworkTaurus() {
       {
         chainId: "0x5b74",
         rpcUrls: ["https://rpc1.taurus.axiomesh.io"],
-        chainName: "AxiomLedger-Testnet",
+        chainName: "Axiomledger Taurus",
         nativeCurrency: {
           name: "AxiomLedger",
           symbol: "AXM",
@@ -68,7 +68,7 @@ export async function addTestingNetworkTaurus() {
   };
   try {
     await window.ethereum.request(networkConfig);
-    alert("AxiomLedger-Testnet has been added to MetaMask.");
+    alert("Taurus has been added to MetaMask.");
   } catch (error) {
     alert(error.message);
   }
@@ -79,8 +79,8 @@ export async function addTestingNetworkTaurus() {
 | Chains | PRC | ID | Token |Click🖱️| Remarks |
 | -------- | -------- | -------- | -------------- | -------- | -------- |
 |**Mainnet**| https://rpc.aries.axiomesh.io | 9771 | AXM | - | not yet online  |
-|**Aries**| https://rpc1.aries.axiomesh.io | 23411 | AXM |<button onClick={addTestingNetworkAries}>AddToMetaMask</button> | about to cease operation  |
-|**Taurus**| https://rpc1.taurus.axiomesh.io | 23412 | AXM |<button onClick={addTestingNetworkTaurus}>AddToMetaMaskk</button> |  - |
+|**Aries Testnet**| https://rpc1.aries.axiomesh.io | 23411 | AXM |<button onClick={addTestingNetworkAries}>AddToMetaMask</button> | about to cease operation  |
+|**Taurus Testnet**| https://rpc1.taurus.axiomesh.io | 23412 | AXM |<button onClick={addTestingNetworkTaurus}>AddToMetaMask</button> |  - |
 
 | Tools         | URL                                              | 
 | ----------------- | ------------------------------------------------ |
