@@ -19,13 +19,13 @@ JDK 17 is needed.
 Currently, the Jar package is published on GitHub Packages. To download, you need to get `PERSONAL_ACCESS_TOKEN`
 from GitHub `Developer settings` and set the repository source in Maven's `settings.xml`, as shown below.
 
-``` javascript
+```javascript
 <servers>
-    <server>
-      <id>github</id>
-      <username>YOUR_GITHUB_USERNAME</username>
-      <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
-    </server>
+  <server>
+    <id>github</id>
+    <username>YOUR_GITHUB_USERNAME</username>
+    <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
+  </server>
 </servers>
 ```
 
@@ -33,7 +33,7 @@ from GitHub `Developer settings` and set the repository source in Maven's `setti
 
 Configure in the `pom.xml` file of the Maven project as shown below.
 
-``` javascript
+```javascript
 <dependencies>
     <dependency>
         <groupId>io.axiomesh</groupId>
@@ -63,10 +63,10 @@ public class SendRawTransactionTest {
     Web3j web3j = Web3j.build(new HttpService(AXIOM_LEDGER_TEST_URL));
 
     @Test
-    @DisplayName("Using SendRawTransaction to send 100 axm")
+    @DisplayName("Using SendRawTransaction to send 100 axc")
     public void testRawTransaction() throws Exception {
 
-        BigInteger axmMol = new BigInteger("100000000000000000000"); // send 100 axm
+        BigInteger axmMol = new BigInteger("100000000000000000000"); // send 100 axc
         String fromPrivateKey = PRIVATE_KEY;
         String to = ADDRESS_TO;
 
@@ -118,4 +118,5 @@ public class SendRawTransactionTest {
 If all goes well, you can find through the wallet tool that the on-chain assets have been successfully transferred!
 
 ## License
+
 Apache 2.0

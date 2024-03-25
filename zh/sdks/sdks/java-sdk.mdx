@@ -12,18 +12,19 @@ Axiom-web3j 基于 [web3j](https://github.com/web3j/web3j) 开发，功能强大
 
 ### 配置 JDK
 
-JDK 17 
+JDK 17
 
 ### 配置仓库
 
 目前 Jar 包发布在 GitHub Packages。下载需要在 Maven settings.xml 设置仓库源。具体配置如下所示，需要配置 GitHub 用户名以及相关的访问令牌（注：在 GitHub 设置界面的开发者设置中生成并获取）
-``` javascript
+
+```javascript
 <servers>
-    <server>
-      <id>github</id>
-      <username>YOUR_GITHUB_USERNAME</username>
-      <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
-    </server>
+  <server>
+    <id>github</id>
+    <username>YOUR_GITHUB_USERNAME</username>
+    <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
+  </server>
 </servers>
 ```
 
@@ -31,7 +32,7 @@ JDK 17
 
 在 Maven 项目的 pom.xml 文件中进行配置，如下所示:
 
-``` javascript
+```javascript
 <dependencies>
     <dependency>
         <groupId>io.axiomesh</groupId>
@@ -61,10 +62,10 @@ public class SendRawTransactionTest {
     Web3j web3j = Web3j.build(new HttpService(AXIOM_LEDGER_TEST_URL));
 
     @Test
-    @DisplayName("Using SendRawTransaction to send 100 axm")
+    @DisplayName("Using SendRawTransaction to send 100 axc")
     public void testRawTransaction() throws Exception {
 
-        BigInteger axmMol = new BigInteger("100000000000000000000"); // 发送 100 axm
+        BigInteger axmMol = new BigInteger("100000000000000000000"); // 发送 100 axc
         String fromPrivateKey = PRIVATE_KEY;
         String to = ADDRESS_TO;
 

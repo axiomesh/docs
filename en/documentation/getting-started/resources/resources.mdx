@@ -23,7 +23,7 @@ export async function addTestingNetworkAries() {
         chainName: "Axiomledger Aries",
         nativeCurrency: {
           name: "AxiomLedger",
-          symbol: "AXM",
+          symbol: "AXC",
           decimals: 18,
         },
         blockExplorerUrls: ["https://scan.aries.axiomesh.io"],
@@ -59,7 +59,7 @@ export async function addTestingNetworkTaurus() {
         chainName: "Axiomledger Taurus",
         nativeCurrency: {
           name: "AxiomLedger",
-          symbol: "AXM",
+          symbol: "AXC",
           decimals: 18,
         },
         blockExplorerUrls: ["https://scan.taurus.axiomesh.io"],
@@ -80,74 +80,91 @@ If you are connecting to Taurus for the first time, add the following informatio
 
 - **RPC** : https://rpc1.taurus.axiomesh.io
 - **Chain ID** :`23412`
-- **Token Symbol** : `AXM`
+- **Token Symbol** : `AXC`
 
 Or you can **click the button** to quickly add the network to your Metamask:
 
-<button style={{color:'#fff',fontWeight:600,borderRadius: 6, hight:70, width:170,background: 'linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)'}} onClick={addTestingNetworkTaurus}>AddToMetaMask</button> 
+<button
+  style={{
+    color: "#fff",
+    fontWeight: 600,
+    borderRadius: 6,
+    hight: 70,
+    width: 170,
+    background: "linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)",
+  }}
+  onClick={addTestingNetworkTaurus}
+>
+  AddToMetaMask
+</button>{" "}
 
 **Here are the tools that might be useful:**
 
-| **Tools**        | **URL**                                              | 
-| ----------------- | ------------------------------------------------ |
-| **Taurus AXMScan** | https://scan.taurus.axiomesh.io |  
+| **Tools**          | **URL**                           |
+| ------------------ | --------------------------------- |
+| **Taurus AXMScan** | https://scan.taurus.axiomesh.io   |
 | **Taurus Faucet**  | https://faucet.taurus.axiomesh.io |
 
 ## Aries Testnet(deprecated soon)
 
-
 If you are connecting to Aries for the first time, add the following information to the network list:
+
 - **RPC** : https://rpc1.aries.axiomesh.io
 - **Chain ID** :`23411`
-- **Token Symbol** : `AXM`
+- **Token Symbol** : `AXC`
 
 Or you can **click the button** below to quickly add the network to your Metamask:
 
-<button style={{color:'#fff',fontWeight:600,borderRadius: 6, hight:70, width:170,background: 'linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)'}} onClick={addTestingNetworkAries}>AddToMetaMask</button> 
-
+<button
+  style={{
+    color: "#fff",
+    fontWeight: 600,
+    borderRadius: 6,
+    hight: 70,
+    width: 170,
+    background: "linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)",
+  }}
+  onClick={addTestingNetworkAries}
+>
+  AddToMetaMask
+</button>{" "}
 
 **Here are the tools that might be useful:**
 
-| **Tools**        | **URL**                                              | 
-| ----------------- | ------------------------------------------------ |
-| **Aries AXMScan** | https://scan.aries.axiomesh.io （about to cease operation）|  
-| **Aries Faucet**  | https://faucet.aries.axiomesh.io （about to cease operation）|
-
-
+| **Tools**         | **URL**                                                       |
+| ----------------- | ------------------------------------------------------------- |
+| **Aries AXMScan** | https://scan.aries.axiomesh.io （about to cease operation）   |
+| **Aries Faucet**  | https://faucet.aries.axiomesh.io （about to cease operation） |
 
 ## Mainnet
 
 Coming soon...
 
-
-
 ## Network
 
 Chains refer to various distinct AxiomLedger environments where development, testing, or production use cases can take place.
 
-AxiomLedgers accounts can be used across different chains, but it's important to note that account balances and transaction histories do not transfer beyond the AxiomLedger mainnet. Understanding the available networks and how to obtain testnet AXM for experimentation can be useful when conducting tests. Generally, for security reasons, it's not recommended to use mainnet accounts on testnets, and vice versa.
+AxiomLedgers accounts can be used across different chains, but it's important to note that account balances and transaction histories do not transfer beyond the AxiomLedger mainnet. Understanding the available networks and how to obtain testnet AXC for experimentation can be useful when conducting tests. Generally, for security reasons, it's not recommended to use mainnet accounts on testnets, and vice versa.
 
 ### Mainnet
 
 The mainnet refers to the primary AxiomLedger blockchain within the broader ecosystem, where all transactions with real value take place on its decentralized ledger.
 
-The AXM price that the general public and exchanges deal with corresponds to the AXM on the mainnet. Currently AxiomLedger is still yet in beta and has not released its mainnet.
+The AXC price that the general public and exchanges deal with corresponds to the AXC on the mainnet. Currently AxiomLedger is still yet in beta and has not released its mainnet.
 
 ### Testnet
 
 The public testnets are networks that simulate the ecosystem environment, where protocol developers and smart contract developers can use them to test protocol upgrades and smart contracts that haven't been deployed to the mainnet yet. You can think of them as simulations of the production and assembly servers.
 Before deploying to the mainnet, you should test any contract code you've written on a testnet. In decentralized applications that integrate with existing smart contracts, most projects deploy replicas to a testnet.
 
-Interacting with AxiomLedger requires AXM in reality. If you are interested in experimenting with AxiomLedger, you can obtain free testnet `AXM` on Faucet, a web application where you can request AXM to be sent to an address, allowing you to explore the platform without any risks.
+Interacting with AxiomLedger requires AXC in reality. If you are interested in experimenting with AxiomLedger, you can obtain free testnet `AXC` on Faucet, a web application where you can request AXC to be sent to an address, allowing you to explore the platform without any risks.
 
-AXM on the testnet has no real value, it is meant only for experimentation purposes on the AxiomLedger testnet.
+AXC on the testnet has no real value, it is meant only for experimentation purposes on the AxiomLedger testnet.
 
 ### Connect to the AxiomLedger
 
 AxiomLedger is an EVM-compatible blockchain. Once you have an Ethereum address, you can connect to AxiomLedger using popular wallets (such as Metamask) or SDK.
 If you are using Metamask to connect to the AxiomLedger for the first time, you will need to add the RPC address, chain ID, token symbol, and the other information to the network list. For information about the mainnet and each testnet, please see the table at the top of this article.
-
-
 
 ## Faucet
 
@@ -155,7 +172,7 @@ A faucet is a blockchain tool that drips testnet tokens for free to anyone who r
 
 ### Get Free Tokens
 
-Testnet token is a testing currency that enables you to test your application before deploying it on the mainnet. These tokens can be used in place of mainnet tokens on testnets like Aries. You can use these tokens to perform various test transactions on the associated blockchain, including contract deployments, fund transfers, and debugging failed transactions. 
+Testnet token is a testing currency that enables you to test your application before deploying it on the mainnet. These tokens can be used in place of mainnet tokens on testnets like Aries. You can use these tokens to perform various test transactions on the associated blockchain, including contract deployments, fund transfers, and debugging failed transactions.
 
 ### Faucet Limitation
 

@@ -3,25 +3,29 @@ title: "第一笔交易"
 ---
 
 这份指南将向您介绍如何快速接入和使用 AxiomLedger 区块链，您可以十分方便地在 AxiomLedger 区块链上发起交易、铸造代币，也可以通过 AxiomLedger 的区块链浏览器查看区块和交易的信息，相信这将对您后续在 AxiomLedger 上进行开发有一定的帮助作用。
-**以下步骤都将以Aries测试网为例，如果您想在主网或其他测试网上尝试，可在[资源](/zh/documentation/getting-started/resources/resources)页查看其他链的相关资源。**
+**以下步骤都将以 Aries 测试网为例，如果您想在主网或其他测试网上尝试，可在[资源](/zh/documentation/getting-started/resources/resources)页查看其他链的相关资源。**
 
-## 使用钱包连接AxiomLedger
-AxiomLedger 是兼容EVM的区块链，任何您熟悉的以太坊工具都可以在 AxiomLedger 上使用，例如 `Truffle`、`Remix` 和 `ether.js` 等。您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask 等）或 SDK 连接到 AxiomLedger 的测试网。
+## 使用钱包连接 AxiomLedger
 
-如果您是第一次使用MetaMask，请点击[此处](https://metamask.io/download/)安装插件。如果您是第一次连接 AxiomLedger，您需要将RPC 地址、链 ID、代币符号等信息新增到网络列表。主网及测试网的链信息可在[资源](/zh/documentation/getting-started/resources/resources)页查看。
+AxiomLedger 是兼容 EVM 的区块链，任何您熟悉的以太坊工具都可以在 AxiomLedger 上使用，例如 `Truffle`、`Remix` 和 `ether.js` 等。您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask 等）或 SDK 连接到 AxiomLedger 的测试网。
 
-连接到 AxiomLedger 后，一般来说您的账户余额是 `0` AXM，此时您可以访问 AxiomLedger [测试网水龙头](https://faucet.aries.axiomesh.io)，在页面上填入您的账户地址来获取一些AXM。
+如果您是第一次使用 MetaMask，请点击[此处](https://metamask.io/download/)安装插件。如果您是第一次连接 AxiomLedger，您需要将 RPC 地址、链 ID、代币符号等信息新增到网络列表。主网及测试网的链信息可在[资源](/zh/documentation/getting-started/resources/resources)页查看。
 
-***请注意：在24小时内，一个账户只能在水龙头获取一次AXM！***
+连接到 AxiomLedger 后，一般来说您的账户余额是 `0` AXC，此时您可以访问 AxiomLedger [测试网水龙头](https://faucet.aries.axiomesh.io)，在页面上填入您的账户地址来获取一些 AXC。
+
+**_请注意：在 24 小时内，一个账户只能在水龙头获取一次 AXC！_**
 
 ## 构造和发起您的第一笔交易
-如果您需要深入了解 AxiomLedger，想获取更多链上信息或发起链上交易，推荐您使用 Axiom 提供的官方SDK （axiom.js），它的用法与[ether.js](https://github.com/ethers-io/ethers.js)类似。
 
-复制以下代码，将其保存为后缀为.mjs的文件，根据您的测试账户替换转账方的私钥以及接收方的地址（即代码中的account_from和account_to），然后执行 `node YourFileName.mjs`（请确保已提前安装Node.js）。等待终端返回交易哈希即代表交易已成功，此时可查看Metamask中的余额是否更新。若网络有延迟，可稍后查询。可以在[AXMScan](https://scan.aries.axiomesh.io/)中粘贴返回的交易哈希查看交易详情。
+如果您需要深入了解 AxiomLedger，想获取更多链上信息或发起链上交易，推荐您使用 Axiom 提供的官方 SDK （axiom.js），它的用法与[ether.js](https://github.com/ethers-io/ethers.js)类似。
 
-<Warning>需注意：若您的电脑上启动了代理服务可能导致交易失败，可关闭代理后再次尝试。</Warning>
+复制以下代码，将其保存为后缀为.mjs 的文件，根据您的测试账户替换转账方的私钥以及接收方的地址（即代码中的 account_from 和 account_to），然后执行 `node YourFileName.mjs`（请确保已提前安装 Node.js）。等待终端返回交易哈希即代表交易已成功，此时可查看 Metamask 中的余额是否更新。若网络有延迟，可稍后查询。可以在[AXMScan](https://scan.aries.axiomesh.io/)中粘贴返回的交易哈希查看交易详情。
 
-``` Solidity
+<Warning>
+  需注意：若您的电脑上启动了代理服务可能导致交易失败，可关闭代理后再次尝试。
+</Warning>
+
+```Solidity
 // Javascript
 // Setup: npm install @axiomesh/axiom
 import { ethers } from '@axiomesh/axiom'
@@ -33,7 +37,7 @@ async function main() {
   const latestBlock = await provider.getBlockNumber();
   console.log("The latest block number is", latestBlock);
 
-  // send transaction to AxiomLedger : transfer AXM
+  // send transaction to AxiomLedger : transfer AXC
   // step1. Create account variables
   const account_from = {
     privateKey: 'YOUR-PRIVATE-KEY-HERE',
@@ -58,10 +62,12 @@ async function main() {
 main();
 ```
 
-## 铸造一个Token
-相信您在之前的步骤中成功连接到了AxiomLedger，也体验了AxiomLedger官方SDK的基本用法，接下来可以探索在AxiomLedger上铸造您自己的Token。一般来说，这需要您提前编写或准备好一个符合ERC20标准的智能合约，并将它成功部署到AxiomLedger上，然后在钱包软件（例如Metamask）上添加合约地址，就可以查看到您新铸造的Token了。
-为了降低您的使用难度，AxiomLedger提供了一份简单的智能合约样本，您只需要修改其中的Token名称（样本以TAXM为例）和账户地址即可。当然，您也可以参考此合约开发更符合您需要的智能合约。
-``` solidity
+## 铸造一个 Token
+
+相信您在之前的步骤中成功连接到了 AxiomLedger，也体验了 AxiomLedger 官方 SDK 的基本用法，接下来可以探索在 AxiomLedger 上铸造您自己的 Token。一般来说，这需要您提前编写或准备好一个符合 ERC20 标准的智能合约，并将它成功部署到 AxiomLedger 上，然后在钱包软件（例如 Metamask）上添加合约地址，就可以查看到您新铸造的 Token 了。
+为了降低您的使用难度，AxiomLedger 提供了一份简单的智能合约样本，您只需要修改其中的 Token 名称（样本以 TAXM 为例）和账户地址即可。当然，您也可以参考此合约开发更符合您需要的智能合约。
+
+```solidity
 pragma solidity ^0.4.24;
 
 //Safe Math Interface
@@ -177,32 +183,42 @@ contract TAXMToken is ERC20Interface, SafeMath {
 }
 ```
 
+如果您已经对以太坊有一定的了解，可以通过 Remix 编译并部署此智能合约。请注意：
 
-如果您已经对以太坊有一定的了解，可以通过Remix编译并部署此智能合约。请注意：
-- 编译合约时请选择合适的Solidity版本(^0.4.24)
-- 通过injected Provider - MetaMask的方式部署，请确认网络已经切换到AxiomLedger测试网并且账户地址符合您的选择
-- 已选择能正确生成Token的合约(例如该例中的`TestToken`)
+- 编译合约时请选择合适的 Solidity 版本(^0.4.24)
+- 通过 injected Provider - MetaMask 的方式部署，请确认网络已经切换到 AxiomLedger 测试网并且账户地址符合您的选择
+- 已选择能正确生成 Token 的合约(例如该例中的`TestToken`)
 
 ![select solidty version](/zh/images/getting-started/quick-start/remix_select_solidty_version.png)
 ![select Metamask environment&token contract](/zh/images/getting-started/quick-start/remix_select_metamask_and_fun.png)
 
-点击页面上的`Deploy`按钮，在MetaMask弹框内检查交易详情后，点击`确认`，发出部署智能合约的交易请求。
-<img src="/zh/images/getting-started/quick-start/MetaMask-confirm.png" width="300" />
+点击页面上的`Deploy`按钮，在 MetaMask 弹框内检查交易详情后，点击`确认`，发出部署智能合约的交易请求。
 
-智能合约部署完成后，可以在Remix上看到合约的地址、调用方法等信息，将合约的地址复制下来，在MetaMask上选择增加Token后粘贴，然后点击下一步，就可以查看到这个地址上您铸造Token的余额了。
+<img
+  src="/zh/images/getting-started/quick-start/MetaMask-confirm.png"
+  width="300"
+/>
+
+智能合约部署完成后，可以在 Remix 上看到合约的地址、调用方法等信息，将合约的地址复制下来，在 MetaMask 上选择增加 Token 后粘贴，然后点击下一步，就可以查看到这个地址上您铸造 Token 的余额了。
 
 ![deployed contract](/zh/images/getting-started/quick-start/remix_deployed_contracts.png)
 
 <img src="/zh/images/getting-started/quick-start/add-token.png" width="300" />
 
-至此，您成功在AxiomLedger上部署了ERC20标准的智能合约，并铸造了属于您的Token！当然，您也可以通过SDK完成智能合约的部署，具体的操作可以参考[ether.js](https://github.com/ethers-io/ethers.js)。
+至此，您成功在 AxiomLedger 上部署了 ERC20 标准的智能合约，并铸造了属于您的 Token！当然，您也可以通过 SDK 完成智能合约的部署，具体的操作可以参考[ether.js](https://github.com/ethers-io/ethers.js)。
 
-## 完成一笔Token转账
-在上一步您已经完成了铸造Token，现在可以试试Token转账的操作。同样，为了更直观地完成和展示操作，推荐您选择Remix+MetaMask的方式去转账。首先创建一个新的账户，其地址用来接收Token，然后在刚才部署合约的页面下方，调用`transfer`方法（需要传入新账户的地址和转账的金额），在MetaMask弹框中确认发出交易。
+## 完成一笔 Token 转账
+
+在上一步您已经完成了铸造 Token，现在可以试试 Token 转账的操作。同样，为了更直观地完成和展示操作，推荐您选择 Remix+MetaMask 的方式去转账。首先创建一个新的账户，其地址用来接收 Token，然后在刚才部署合约的页面下方，调用`transfer`方法（需要传入新账户的地址和转账的金额），在 MetaMask 弹框中确认发出交易。
 ![MetaMask确认](/zh/images/getting-started/quick-start/transfer-token.png)
 
-转账完成后，可以在MetaMask上切换到新账户，查看其余额变化
-<img src="/zh/images/getting-started/quick-start/check-balance.png" width="300" />
+转账完成后，可以在 MetaMask 上切换到新账户，查看其余额变化
 
-## 体验AxiomLedger区块链浏览器
-AxiomLedger提供了官方的[区块链浏览器](https://scan.aries.axiomesh.io)。您在与AxiomLedger交互的过程中，可以随时查看测试网的区块/交易信息。 您可以在[此处](/zh/documentation/getting-started/resources/resources#axmscan)了解更多关于AXMScan的使用方法。
+<img
+  src="/zh/images/getting-started/quick-start/check-balance.png"
+  width="300"
+/>
+
+## 体验 AxiomLedger 区块链浏览器
+
+AxiomLedger 提供了官方的[区块链浏览器](https://scan.aries.axiomesh.io)。您在与 AxiomLedger 交互的过程中，可以随时查看测试网的区块/交易信息。 您可以在[此处](/zh/documentation/getting-started/resources/resources#axmscan)了解更多关于 AXMScan 的使用方法。
