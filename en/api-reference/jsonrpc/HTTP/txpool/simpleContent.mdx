@@ -1,0 +1,425 @@
+---
+title: "txpool_simpleContent"
+api: "POST /"
+---
+
+Returns all pending and queued transactions in the txpool, just return transaction hash without transaction’s full content.
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+    Serves as a unique identifier for the request
+
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+    Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="txpool_simpleContent">
+    Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+    Contains the list of parameters passed to the remote method
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+    Returns unique identifier for the request
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+    Returns the version of JSON-RPC being used
+</ResponseField>
+
+
+<ResponseField name="simpleContentResponse" type="object">
+    A list of pending and queued transactions(only transaction hash) in txpool
+
+        <Expandable title="simpleContentResponse object">
+            <ResponseField name="address" type="array">
+                The address initiating a transaction
+                <Expandable title="simpleAccountContentResponse object">
+
+                    <ResponseField name="pending" type="array">
+                        An object of transaction objects, indicating pending transactions in the txpool
+                        <Expandable title="simple pool transactions response object">
+                            <ResponseField name="nonce" type="array">
+                                The nonce of the sending address
+                                <Expandable title="transaction object">
+                                    <ResponseField name="blockHash" type="string">
+                                        32 Bytes - hash of the block including this transaction. null when it's pending
+                                    </ResponseField>
+
+                                    <ResponseField name="blockNumber" type="string">
+                                        Number of the block including this transaction. null when it's pending
+                                    </ResponseField>
+
+                                    <ResponseField name="from" type="string">
+                                        20 Bytes - address of the sender
+                                    </ResponseField>
+
+                                    <ResponseField name="gas" type="string">
+                                        Gas provided by the sender
+                                    </ResponseField>
+
+                                    <ResponseField name="gasPrice" type="string">
+                                        Gas price provided by the sender in Mol
+                                    </ResponseField>
+
+                                    <ResponseField name="gasFeeCap" type="string">
+                                        MaxFeePerGas,Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
+                                    </ResponseField>
+
+                                    <ResponseField name="gasTipCap" type="string">
+                                        MaxPriorityFeePerGas,Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
+                                    </ResponseField>
+
+                                    <ResponseField name="hash" type="string">
+                                        32 Bytes - hash of the transaction
+                                    </ResponseField>
+
+                                    <ResponseField name="input" type="string">
+                                        The data sent along with the transaction
+                                    </ResponseField>
+
+                                    <ResponseField name="nonce" type="string">
+                                        The number of transactions made by the sender prior to this one
+                                    </ResponseField>
+
+                                    <ResponseField name="to" type="string">
+                                        20 Bytes - address of the receiver. null when its a contract creation transaction
+                                    </ResponseField>
+
+                                    <ResponseField name="transactionIndex" type="string">
+                                        Integer of the transactions index position in the block. null when its pending
+                                    </ResponseField>
+
+                                    <ResponseField name="value" type="string">
+                                        Value transferred in Mol
+                                    </ResponseField>
+
+                                    <ResponseField name="type" type="string">
+                                        The transaction type
+                                    </ResponseField>
+
+                                    <ResponseField name="Accesses" type="array">
+                                        List of addresses and storage keys the transaction plans to access
+                                    </ResponseField>
+
+                                    <ResponseField name="chainID" type="string">
+                                        Chain ID specifying the network. Returned only for EIP-1559 transactions
+                                    </ResponseField>
+
+                                    <ResponseField name="v" type="string">
+                                        ECDSA recovery ID
+                                    </ResponseField>
+
+                                    <ResponseField name="r" type="string">
+                                        32 Bytes - ECDSA signature r
+                                    </ResponseField>
+
+                                    <ResponseField name="s" type="string">
+                                        32 Bytes - ECDSA signature s
+                                    </ResponseField>
+                                </Expandable>
+
+                            </ResponseField>
+                        </Expandable>
+                    </ResponseField>
+
+                    <ResponseField name="queued" type="array">
+                        An object of transaction objects, indicating queued transactions in the txpool
+                        <Expandable title="simple pool transactions response object">
+                            <ResponseField name="nonce" type="array">
+                                The nonce of the sending address
+                                <Expandable title="transaction object">
+                                    <ResponseField name="blockHash" type="string">
+                                        32 Bytes - hash of the block including this transaction. null when it's pending
+                                    </ResponseField>
+
+                                    <ResponseField name="blockNumber" type="string">
+                                        Number of the block including this transaction. null when it's pending
+                                    </ResponseField>
+
+                                    <ResponseField name="from" type="string">
+                                        20 Bytes - address of the sender
+                                    </ResponseField>
+
+                                    <ResponseField name="gas" type="string">
+                                        Gas provided by the sender
+                                    </ResponseField>
+
+                                    <ResponseField name="gasPrice" type="string">
+                                        Gas price provided by the sender in Mol
+                                    </ResponseField>
+
+                                    <ResponseField name="gasFeeCap" type="string">
+                                        MaxFeePerGas,Maximum fee, in Mol, the sender is willing to pay per gas above the base fee
+                                    </ResponseField>
+
+                                    <ResponseField name="gasTipCap" type="string">
+                                        MaxPriorityFeePerGas,Maximum total fee (base fee + priority fee), in Mol, the sender is willing to pay per gas
+                                    </ResponseField>
+
+                                    <ResponseField name="hash" type="string">
+                                        32 Bytes - hash of the transaction
+                                    </ResponseField>
+
+                                    <ResponseField name="input" type="string">
+                                        The data sent along with the transaction
+                                    </ResponseField>
+
+                                    <ResponseField name="nonce" type="string">
+                                        The number of transactions made by the sender prior to this one
+                                    </ResponseField>
+
+                                    <ResponseField name="to" type="string">
+                                        20 Bytes - address of the receiver. null when its a contract creation transaction
+                                    </ResponseField>
+
+                                    <ResponseField name="transactionIndex" type="string">
+                                        Integer of the transactions index position in the block. null when its pending
+                                    </ResponseField>
+
+                                    <ResponseField name="value" type="string">
+                                        Value transferred in Mol
+                                    </ResponseField>
+
+                                    <ResponseField name="type" type="string">
+                                        The transaction type
+                                    </ResponseField>
+
+                                    <ResponseField name="Accesses" type="array">
+                                        List of addresses and storage keys the transaction plans to access
+                                    </ResponseField>
+
+                                    <ResponseField name="chainID" type="string">
+                                        Chain ID specifying the network. Returned only for EIP-1559 transactions
+                                    </ResponseField>
+
+                                    <ResponseField name="v" type="string">
+                                        ECDSA recovery ID
+                                    </ResponseField>
+
+                                    <ResponseField name="r" type="string">
+                                        32 Bytes - ECDSA signature r
+                                    </ResponseField>
+
+                                    <ResponseField name="s" type="string">
+                                        32 Bytes - ECDSA signature s
+                                    </ResponseField>
+                                </Expandable>
+
+                            </ResponseField>
+                        </Expandable>
+                    </ResponseField>
+
+                    <ResponseField name="commitNonce" type="string">
+                        the address's nonce which persist in ledger
+                    </ResponseField>
+
+                    <ResponseField name="pendingNonce" type="string">
+                        the address's pending nonce which exists in txpool
+                    </ResponseField>
+
+                    <ResponseField name="txCount" type="string">
+                        the address's transaction count which exists in txpool
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+
+            <ResponseField name="txCountLimit" type="string">
+                The max number of transactions in the txpool
+            </ResponseField>
+
+            <ResponseField name="txCount" type="string">
+                The current number of transactions in the txpool
+            </ResponseField>
+
+            <ResponseField name="readyTxCount" type="string">
+                The current number of transactions which belong to pending list in the txpool
+            </ResponseField>
+
+            <ResponseField name="notReadyTxCount" type="string">
+                The current number of transactions which belong to queued list in the txpool
+            </ResponseField>
+        </Expandable>
+
+</ResponseField>
+
+
+<RequestExample>
+
+    ```bash Example Request
+    curl  'https://rpc1.aries.axiomesh.io' \
+    --header 'Content-Type: application/json' \
+    --data '{
+    "jsonrpc": "2.0",
+    "method": "txpool_simpleContent",
+    "params": [],
+    "id": 1
+}'
+    ```
+
+</RequestExample>
+
+<ResponseExample>
+
+    ```json Response
+    {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+        "simpleAccountContent": {
+        "0x70997970C51812dc3A010C7d01b50e0d17dc79C8": {
+        "pending": [
+    {
+        "Nonce": 149,
+        "TxHash": "0x5b441c748ff8c56385334642dcfe4f18566a3e53c27124f60860185e1f4cb54c"
+    },
+    {
+        "Nonce": 150,
+        "TxHash": "0x78d6e296c90c6a15cb5aec32f3dd182a6d9aac7b30b16dfaf9519acc266f7708"
+    },
+    {
+        "Nonce": 151,
+        "TxHash": "0x87ae18247617f473cea707f58fbee3a68b94c57d7351ee1cab5cc69e5f5699d2"
+    },
+    {
+        "Nonce": 152,
+        "TxHash": "0xcc16e83b4e527903b2943e7e1db418b58324b763f01172a7097c56705a48c6ed"
+    },
+    {
+        "Nonce": 153,
+        "TxHash": "0x1b3c673d06f1a3cb2233807ab3815713288c6296d34fc03848a4ba62e224a700"
+    },
+    {
+        "Nonce": 154,
+        "TxHash": "0xe9e42ec2e0e8c87a5c9ca3a570df1ecf8cb935c84cd06d22ccd178dfd33ce4e2"
+    },
+    {
+        "Nonce": 155,
+        "TxHash": "0x9855d2856cf4c42f4a1b26a6daa7403814b8e6f6552dc615a915112cd624501c"
+    },
+    {
+        "Nonce": 156,
+        "TxHash": "0x14eddaf56674f4b636d6f3d5bed1cbd7991968949b630fb00a70cdbf7f158e2c"
+    },
+    {
+        "Nonce": 157,
+        "TxHash": "0x35531f4a251f3c451c8aa3a1f24e50bef528c59ed574b76eabfef40e29dce520"
+    },
+    {
+        "Nonce": 158,
+        "TxHash": "0xb9a8448cc52086162a5b8dc0cb0d8a3474ab43b46e9026f69d04d328b75b1bf3"
+    },
+    {
+        "Nonce": 159,
+        "TxHash": "0x51692b28de4e7324f7797e2db437548cc5fab75d440b2c95eee0dc3b5e2c4eb5"
+    },
+    {
+        "Nonce": 160,
+        "TxHash": "0xd2e38739f1c06e91f285143ec9a142ce07c79c57d2564146962871ca8db0a68a"
+    },
+    {
+        "Nonce": 161,
+        "TxHash": "0xcef1467e540694b9e607466d1822ff2afc22a78afdd381e16392b19a3e12a2c3"
+    },
+    {
+        "Nonce": 162,
+        "TxHash": "0xec8c61a508cb04134ed4a0152d8581fb51f5d7e4a8f40fa174ab01b38917c65f"
+    },
+    {
+        "Nonce": 163,
+        "TxHash": "0x8bf9ce5dc9913eee556579cbcfef5c57c7359a30662cda89223a5d8214cf4476"
+    },
+    {
+        "Nonce": 164,
+        "TxHash": "0x33c6078791fd64cc3fd3930019d3ebefef7aa575fe3c6f2fac24e8f94eb675e7"
+    },
+    {
+        "Nonce": 165,
+        "TxHash": "0xa8e65329def81ac948bb5b098b1c98f9da5c084cbc7c526b28f36c3e4eeae0be"
+    },
+    {
+        "Nonce": 166,
+        "TxHash": "0x34c94ff7177d2001b1ad37d49c3172598732271474086d710c24449966e9c616"
+    }
+        ],
+        "queued": [],
+        "commitNonce": 149,
+        "pendingNonce": 167,
+        "txCount": 18
+    },
+        "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266": {
+        "pending": [
+    {
+        "Nonce": 251,
+        "TxHash": "0xa8936c05f325402fab3c29cc6160acbc94821053e4d76f4d72542f1978d5e04d"
+    },
+    {
+        "Nonce": 252,
+        "TxHash": "0x0112adc3874a9efd72f82cc1c95802fb34d2743135dc3ae90311526522983560"
+    },
+    {
+        "Nonce": 253,
+        "TxHash": "0x1fef693c1a9b5f5b6f8c90d14553d0dea3900ef370ebfd1b61c5071bf8afe253"
+    },
+    {
+        "Nonce": 254,
+        "TxHash": "0x9c3424d48a15c6bafcd0413dbd8fd6f47598942cf7e2c0168f99850fb9bd3199"
+    },
+    {
+        "Nonce": 255,
+        "TxHash": "0xb060f92a5edde4596f46f715144b7a77979269ac0c379690453970a448a4d4f1"
+    },
+    {
+        "Nonce": 256,
+        "TxHash": "0x5cb988cd0d54b8c2159cbdac7caa9cdaaa0239ad5d6efcac0650591274dfedc6"
+    },
+    {
+        "Nonce": 257,
+        "TxHash": "0x0e4f0c9d9f8f32a147d6d6cef66d383d5559418fb3e0f75252befab85d37314d"
+    },
+    {
+        "Nonce": 258,
+        "TxHash": "0x67c71c04efc8722d834b49558b6f02a4a691f74b5e992ba144aa920561b7031d"
+    },
+    {
+        "Nonce": 259,
+        "TxHash": "0xb03671225329774999b663d4d0152c68d4ace3111cdaade69a2b88f792b0fd9d"
+    },
+    {
+        "Nonce": 260,
+        "TxHash": "0x94712e6bde6cbe255f0cefa42f12fac3582acc0237c0754422a294cf8da351fe"
+    },
+    {
+        "Nonce": 261,
+        "TxHash": "0xd3a1fca993b104b1f0d7168c3452b83b000a239e157c37c910579f374fb7579d"
+    },
+    {
+        "Nonce": 262,
+        "TxHash": "0x1c8a5a4003ba891870be5382afccd3389d7e10fb522e9c922d231d6f0467b8b5"
+    },
+    {
+        "Nonce": 263,
+        "TxHash": "0xac40d9cf383f47f3359fce5f8ca03dd72989a17a02b5191b0cafb96d1c11316d"
+    }
+        ],
+        "queued": [],
+        "commitNonce": 251,
+        "pendingNonce": 264,
+        "txCount": 13
+    }
+    },
+        "txCountLimit": 50000,
+        "txCount": 31,
+        "readyTxCount": 21,
+        "notReadyTxCount": 0
+    }
+    }
+    ```
+
+</ResponseExample>
