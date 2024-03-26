@@ -37,39 +37,6 @@ The state checkpoint mechanism guarantees eventual ledger consistency. Validator
     In AxiomLedger, the default checkpoint interval is configured as 1, meaning that for every block, a check is performed to ensure that the quorum of validator nodes have successfully persisted in local Ledger.
 </Warning>
 
-### Node Types
-
-The native PBFT algorithm considers all network nodes as validators. However, as the number of network nodes increases, consensus performance is limited by O($n^2$) communication complexity, leading to performance degradation.
-
-To solve this issue, AxiomLedger introduces three different node roles:
-
-    - **Validators** : Nodes participating in consensus and can verify and vote on packaging proposals presented by proposers.
-    - **Proposers** : Nodes possessing all the functionalities of validators and are responsible for packaging blocks within the current term.
-    - **Candidates** : Nodes that do not participate in consensus, only synchronize blocks.
-
-<img src="/en/images/system-design/node-state-machine.png" width="500" />
-
-This differentiation keeps the consensus node scale relatively stable, preventing it from growing with an increasing number of nodes and contributing to improved efficiency and scalability.
-
-### Node Role Transitions
-
-In the AxiomLedger blockchain network, node role transitions officially take effect during epoch changes. Node role transitions are as follows:
-
-    - **New Node → Candidate** : A new node proposing to join needs to submit a proposal. Once approved by governance, the new node formally joins the network and becomes a candidate.
-    - **Candidate ↔ Validator** : During each epoch change, the epoch management contract employs the WRF algorithm to select a specified number of validators from the candidates. When epoch change conditions are met (usually at a certain checkpoint interval), all nodes in the AxiomLedger network update their validator set. WRF algorithm will be detailed in the next section.
-    - **Validator ↔ Proposer** : After the epoch management contract is updated, validators determine the proposer using the WRF algorithm. The chosen proposer is responsible for packaging blocks within the current term (term interval equals checkpoint interval).
-    - **Candidate/Validator ↔ Exited Node** : Once an exit proposal is approved, a node can exit the network.
-
-### Node Penalty Mechanism
-
-Performance bottlenecks of validator nodes directly impact the overall operational efficiency of the entire blockchain network. To incentive more honest nodes with robust machine performance to become validator/proposer nodes, AxiomLedger has implemented corresponding measures:
-    - For nodes with poor network performance or Byzantine errors, the other validator nodes will reduce the node's weight in being selected as the proposer/validator for the next block, thereby lowering the probability of their next selection.
-    - After a specified number of blocks have been generated, the weight of the node will gradually return to normal.
-
-
-AxiomLedger detects Byzantine nodes in terms of security and liveness:
-    - Security: validator nodes fail to verify the block proposal presented by the current proposer node.
-    - Liveness: other validator nodes(which is not proposer) observe the presence of packable transactions at the moment, yet the proposer node fails to post a proposal.
 
 ### Epoch Change
 
