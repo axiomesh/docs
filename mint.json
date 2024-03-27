@@ -123,7 +123,10 @@
         {
           "group": "axm",
           "pages": [
-            "en/api-reference/jsonrpc/HTTP/axm/sync"
+            "en/api-reference/jsonrpc/HTTP/axm/sync",
+            "en/api-reference/jsonrpc/HTTP/axm/status",
+            "en/api-reference/jsonrpc/HTTP/axm/getIncentiveAddress"
+
           ]
         },
         {
@@ -143,6 +146,7 @@
             "en/api-reference/jsonrpc/HTTP/eth/accounts",
             "en/api-reference/jsonrpc/HTTP/eth/blockNumber",
             "en/api-reference/jsonrpc/HTTP/eth/getBalance",
+            "en/api-reference/jsonrpc/HTTP/eth/getProof",
             "en/api-reference/jsonrpc/HTTP/eth/getBlockByNumber",
             "en/api-reference/jsonrpc/HTTP/eth/getBlockByHash",
             "en/api-reference/jsonrpc/HTTP/eth/getCode",
@@ -165,8 +169,14 @@
             "en/api-reference/jsonrpc/HTTP/eth/getLogs",
             "en/api-reference/jsonrpc/HTTP/eth/uninstallFilter",
             "en/api-reference/jsonrpc/HTTP/eth/getFilterLogs",
-            "en/api-reference/jsonrpc/HTTP/eth/getFilterChanges",
-            "en/api-reference/jsonrpc/HTTP/eth/traceTransaction"
+            "en/api-reference/jsonrpc/HTTP/eth/getFilterChanges"
+          ]
+        },
+        {
+          "group": "debug",
+          "pages": [
+            "en/api-reference/jsonrpc/HTTP/debug/traceTransaction",
+            "en/api-reference/jsonrpc/HTTP/debug/traceCall"
           ]
         }
       ]
