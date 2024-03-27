@@ -1,0 +1,240 @@
+---
+title: "debug_traceCall"
+api: "POST /"
+---
+
+在给定区块执行的上下文中运行一个 eth_call，以父区块的最终状态作为基础。
+
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+  请求标识符
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="debug_traceTransaction">
+  进行调用的远程方法名称
+</ParamField>
+
+<ParamField body="params" type="array">
+   包含传递给远程方法的参数列表
+
+  <Expandable title="TRANSACTION CALL ARGS">
+     <ParamField body="from" type="string">
+        (可选)20 字节 - 发送交易的地址
+     </ParamField>
+
+     <ParamField body="to" type="string">
+        20 字节 - 交易指向的地址
+     </ParamField>
+
+     <ParamField body="gas" type="string">
+       (可选)为交易执行提供gas(十六进制)
+     </ParamField>
+
+     <ParamField body="gasPrice" type="string">
+        (可选)每一份gas所需要支付的gas价格(十六进制)
+     </ParamField>
+
+     <ParamField body="value" type="string">
+        (可选)交易携带的值(十六进制)
+     </ParamField>
+
+     <ParamField body="data" type="string">
+        (可选)方法签名和编码参数的哈希
+     </ParamField>
+
+  </Expandable>
+
+  <Expandable title="Block">
+        <ParamField body="block" type="string">
+        十六进制块号，或字符串“latest”、“earliest”或“pending”，或块的哈希（32字节）
+     </ParamField>
+   </Expandable>
+
+
+    <Expandable title="Object">
+
+      <ParamField body="tracer" type="string">
+        追踪器的类型。 它可以是 callTracer 或 prestateTracer
+        <Expandable title="string">
+            <ParamField body="callTracer" type="string">
+               callTracer跟踪交易期间进行的所有调用帧，包括深度 0 调用
+            </ParamField>
+
+            <ParamField body="prestateTracer" type="string">
+                prestate Tracer 重放交易并跟踪交易期间发生的状态的每个部分
+            </ParamField>
+        </Expandable>
+      </ParamField>
+
+
+      <ParamField body="tracerConfig" type="Object">
+        指定跟踪器配置的对象
+
+        <Expandable title="Object">
+            <ParamField body="onlyTopCall" type="bool">
+                当设置为 true 时，这将仅跟踪主要（顶级）调用，而不跟踪任何子调用。
+            </ParamField>
+        </Expandable>
+      </ParamField>
+
+      <ParamField body="timeout" type="string">
+        覆盖基于 JavaScript 的跟踪调用的十进制整数字符串，默认超时为 5 秒
+      </ParamField>
+    </Expandable>
+
+  
+
+  
+
+
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+
+<ResponseField name="result" type="object">
+  <Expandable title="result">
+    <ResponseField name="callTracer" type="object">
+        callTracer 跟踪事务期间执行的所有调用帧，包括深度 0
+        <Expandable title="callTracer">
+            <ResponseField name="type" type="string">
+                调用或创建
+            </ResponseField>
+
+            <ResponseField name="from" type="string">
+                账户地址
+            </ResponseField>
+
+            <ResponseField name="to" type="string">
+                账户地址
+            </ResponseField>
+
+            <ResponseField name="value" type="string">
+                十六进制编码的价值转移金额
+            </ResponseField>
+
+            <ResponseField name="gas" type="string">
+                提供十六进制编码的气体供调用
+            </ResponseField>
+
+            <ResponseField name="gasUsed" type="string">
+                调用期间使用的十六进制编码的气体
+            </ResponseField>
+
+            <ResponseField name="input" type="string">
+                调用数据
+            </ResponseField>
+
+            <ResponseField name="output" type="string">
+                返回数据
+            </ResponseField>
+
+            <ResponseField name="error" type="string">
+               发生的任何错误
+            </ResponseField>
+
+            <ResponseField name="revertReason" type="string">
+                发生的任何Solidity错误 
+            </ResponseField>
+
+            <ResponseField name="calls" type="array">
+                子调用列表
+            </ResponseField>
+            
+        </Expandable>
+    </ResponseField>
+
+    or
+
+    <ResponseField name="prestateTracer" type="object">
+         
+        <Expandable title="prestateTracer">
+            执行交易需要事先的状态，包括发送方和接收方的账户、执行过程中调用的合约等。
+            <ResponseField name="prestateTracer" type="array">
+              <Expandable title="prestateTracer">
+                   <ResponseField name="prestateTracerObject" type="object">
+                      <Expandable title="prestateTracerObj">
+
+                          <ResponseField name="balance" type="string">
+                            以mol标识的余额
+                          </ResponseField>
+
+                           <ResponseField name="nonce" type="string">
+                            账户交易零时数
+                          </ResponseField>
+
+                           <ResponseField name="code" type="string">
+                            十六进制编码的字节码
+                          </ResponseField>
+
+                           <ResponseField name="storage" type="map">
+                            	合约的存储槽
+                          </ResponseField>
+
+
+                      </Expandable>
+                        
+                  </ResponseField>
+
+                 
+              </Expandable>
+            </ResponseField>
+        </Expandable>
+    </ResponseField>
+
+  </Expandable>
+
+</ResponseField>
+
+
+
+
+<RequestExample>
+
+```bash Example Request
+curl  'https://rpc1.aries.axiomesh.io' \
+--header 'Content-Type: application/json' \
+--data '{
+    "jsonrpc": "2.0",
+    "method": "debug_traceCall",
+    "params": [{"from": "0xfaE0FE655D27B5c0584479E982D5d8f7dFD057d8","to": "0x2299E9B1a4e08b5d67017E19d75d3a24bb1074Df","value": "0x5f5e100"}, "latest",{
+               "tracer": "callTracer"
+          }],
+    "id": 1
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "from": "0xfae0fe655d27b5c0584479e982d5d8f7dfd057d8",
+        "gas": "0x11e1a300",
+        "gasUsed": "0x5208",
+        "to": "0x2299e9b1a4e08b5d67017e19d75d3a24bb1074df",
+        "input": "0x",
+        "value": "0x5f5e100",
+        "type": "CALL"
+    }
+}
+```
+
+</ResponseExample>

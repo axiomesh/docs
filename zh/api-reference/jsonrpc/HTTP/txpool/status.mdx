@@ -1,0 +1,93 @@
+---
+title: "txpool_status"
+api: "POST /"
+---
+
+返回 txpool 中待处理、排队和总交易数量。
+
+### Body
+
+
+<ParamField body="id" type="number" placeholder="1">
+    请求标识符
+
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="txpool_status">
+  进行调用的远程方法名称
+</ParamField>
+
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+</ParamField>
+
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+
+<ResponseField name="statusResponse" type="object">
+    在 txpool 中的状态响应对象
+
+    <Expandable title="statusResponse object">
+        <ResponseField name="pending" type="string">
+            在十六进制格式中表示的交易池中待处理交易的总数
+        </ResponseField>
+
+        <ResponseField name="queued" type="bool">
+           在十六进制格式中表示的交易池中排队交易的总数
+        </ResponseField>
+
+        <ResponseField name="total" type="bool">
+            在十六进制格式中表示的交易池中所有交易的总数
+        </ResponseField>
+
+    </Expandable>
+
+
+
+</ResponseField>
+
+
+<RequestExample>
+
+    ```bash Example Request
+    curl  'https://rpc1.aries.axiomesh.io' \
+    --header 'Content-Type: application/json' \
+    --data '{
+    "jsonrpc": "2.0",
+    "method": "txpool_status",
+    "params": [],
+    "id": 1
+}'
+    ```
+
+</RequestExample>
+
+<ResponseExample>
+
+    ```json Response
+    {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+            "pending": 3623,
+            "queued": 3,
+            "total": 3626
+        }
+    }
+    ```
+
+</ResponseExample>

@@ -1,0 +1,131 @@
+---
+title: "txpool_inspect"
+api: "POST /"
+---
+
+
+返回所有待处理和排队交易的文本摘要
+### Body
+
+
+<ParamField body="id" type="number" placeholder="1">
+    请求标识符
+
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+  正在使用的JSON-RPC版本
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="txpool_inspect">
+  进行调用的远程方法名称
+</ParamField>
+
+
+<ParamField body="params" type="array">
+  包含传递给远程方法的参数列表
+</ParamField>
+
+
+### Response
+
+<ResponseField name="id" type="number">
+  返回请求的唯一标识符
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+  返回正在使用的JSON-RPC版本
+</ResponseField>
+
+
+<ResponseField name="inspectResponse" type="object">
+        在 txpool 中的待处理和排队交易的文本数据格式列表
+
+        <Expandable title="inspectResponse object">
+            <ResponseField name="pending" type="array">
+                一个包含文本数据的交易对象数组
+                <Expandable title="pending array">
+                    <ResponseField name="address" type="array">
+                        发起交易的地址
+                        <Expandable title="pool transactions response object">
+                            <ResponseField name="nonce" type="array">
+                                The nonce of the sending address
+                                <Expandable title="textual transaction object">
+                                    <ResponseField name="textualData" type="string">
+                                        交易的文本数据
+                                    </ResponseField>
+                                </Expandable>
+                            </ResponseField>
+                        </Expandable>
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+            <ResponseField name="queued" type="array">
+                一个包含文本数据的交易对象数组
+                <Expandable title="queued array">
+                    <ResponseField name="address" type="array">
+                        发起交易的地址
+                        <Expandable title="pool transactions response object">
+                            <ResponseField name="nonce" type="array">
+                                发送地址的nonce
+                                <Expandable title="textual transaction object">
+                                    <ResponseField name="textualData" type="string">
+                                        交易的文本数据
+                                    </ResponseField>
+                                </Expandable>
+                            </ResponseField>
+                        </Expandable>
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+        </Expandable>
+</ResponseField>
+
+
+<RequestExample>
+
+    ```bash Example Request
+    curl  'https://rpc1.aries.axiomesh.io' \
+    --header 'Content-Type: application/json' \
+    --data '{
+    "jsonrpc": "2.0",
+    "method": "txpool_inspect",
+    "params": [],
+    "id": 1
+}'
+    ```
+
+</RequestExample>
+
+<ResponseExample>
+
+    ```json Response
+    {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+        "pending": {
+        "0x70997970C51812dc3A010C7d01b50e0d17dc79C8": {
+        "2542": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2543": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2544": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2545": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2546": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+    },
+        "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266": {
+        "2801": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2802": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2803": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2804": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2805": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2806": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2807": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2808": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+    }
+    },
+        "queued": {}
+    }
+    }
+    ```
+
+</ResponseExample>
