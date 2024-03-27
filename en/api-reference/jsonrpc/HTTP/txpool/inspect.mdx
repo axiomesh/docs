@@ -1,0 +1,127 @@
+---
+title: "txpool_inspect"
+api: "POST /"
+---
+
+Returns a textual summary of all pending and queued transactions
+### Body
+
+<ParamField body="id" type="number" placeholder="1">
+    Serves as a unique identifier for the request
+
+</ParamField>
+
+<ParamField body="jsonrpc" type="string" placeholder="2.0">
+    Indicates the version of JSON-RPC being used
+</ParamField>
+
+<ParamField body="method" type="string" placeholder="txpool_inspect">
+    Represents the name of the remote procedure or method to be called
+</ParamField>
+
+<ParamField body="params" type="array">
+    Contains the list of parameters passed to the remote method
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="number">
+    Returns unique identifier for the request
+</ResponseField>
+
+<ResponseField name="jsonrpc" type="string">
+    Returns the version of JSON-RPC being used
+</ResponseField>
+
+
+<ResponseField name="inspectResponse" type="object">
+    A list of pending and queued transactions(format with textual data) in txpool
+
+        <Expandable title="inspectResponse object">
+            <ResponseField name="pending" type="array">
+                An array of transaction objects, with textual data
+                <Expandable title="pending array">
+                    <ResponseField name="address" type="array">
+                        The address initiating a transaction
+                        <Expandable title="pool transactions response object">
+                            <ResponseField name="nonce" type="array">
+                                The nonce of the sending address
+                                <Expandable title="textual transaction object">
+                                    <ResponseField name="textualData" type="string">
+                                        The textual data of the transaction
+                                    </ResponseField>
+                                </Expandable>
+                            </ResponseField>
+                        </Expandable>
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+            <ResponseField name="queued" type="array">
+                An array of transaction objects, with textual data
+                <Expandable title="queued array">
+                    <ResponseField name="address" type="array">
+                        The address initiating a transaction
+                        <Expandable title="pool transactions response object">
+                            <ResponseField name="nonce" type="array">
+                                The nonce of the sending address
+                                <Expandable title="textual transaction object">
+                                    <ResponseField name="textualData" type="string">
+                                        The textual data of the transaction
+                                    </ResponseField>
+                                </Expandable>
+                            </ResponseField>
+                        </Expandable>
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+        </Expandable>
+</ResponseField>
+
+
+<RequestExample>
+
+    ```bash Example Request
+    curl  'https://rpc1.aries.axiomesh.io' \
+    --header 'Content-Type: application/json' \
+    --data '{
+    "jsonrpc": "2.0",
+    "method": "txpool_inspect",
+    "params": [],
+    "id": 1
+}'
+    ```
+
+</RequestExample>
+
+<ResponseExample>
+
+    ```json Response
+    {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+        "pending": {
+        "0x70997970C51812dc3A010C7d01b50e0d17dc79C8": {
+        "2542": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2543": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2544": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2545": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2546": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+    },
+        "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266": {
+        "2801": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2802": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2803": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2804": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2805": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2806": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2807": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+        "2808": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8: 0x0 wei + 0x493e0 gas × 0x9184e72a000 wei",
+    }
+    },
+        "queued": {}
+    }
+    }
+    ```
+
+</ResponseExample>

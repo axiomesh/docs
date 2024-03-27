@@ -117,34 +117,65 @@
     {
       "group": "JSON RPC",
       "pages": [
-        "en/api-reference/jsonrpc/HTTP/chainId",
-        "en/api-reference/jsonrpc/HTTP/accounts",
-        "en/api-reference/jsonrpc/HTTP/blockNumber",
-        "en/api-reference/jsonrpc/HTTP/getBalance",
-        "en/api-reference/jsonrpc/HTTP/getBlockByNumber",
-        "en/api-reference/jsonrpc/HTTP/getBlockByHash",
-        "en/api-reference/jsonrpc/HTTP/getCode",
-        "en/api-reference/jsonrpc/HTTP/getStorageAt",
-        "en/api-reference/jsonrpc/HTTP/call",
-        "en/api-reference/jsonrpc/HTTP/estimateGas",
-        "en/api-reference/jsonrpc/HTTP/gasPrice",
-        "en/api-reference/jsonrpc/HTTP/syncing",
-        "en/api-reference/jsonrpc/HTTP/getBlockTransactionCountByNumber",
-        "en/api-reference/jsonrpc/HTTP/getBlockTransactionCountByHash",
-        "en/api-reference/jsonrpc/HTTP/getTransactionByBlockNumberAndIndex",
-        "en/api-reference/jsonrpc/HTTP/getTransactionByBlockHashAndIndex",
-        "en/api-reference/jsonrpc/HTTP/getTransactionCount",
-        "en/api-reference/jsonrpc/HTTP/getTransactionByHash",
-        "en/api-reference/jsonrpc/HTTP/getTransactionReceipt",
-        "en/api-reference/jsonrpc/HTTP/sendRawTransaction",
-        "en/api-reference/jsonrpc/HTTP/newPendingTransactionFilter",
-        "en/api-reference/jsonrpc/HTTP/newBlockFilter",
-        "en/api-reference/jsonrpc/HTTP/newFilter",
-        "en/api-reference/jsonrpc/HTTP/getLogs",
-        "en/api-reference/jsonrpc/HTTP/uninstallFilter",
-        "en/api-reference/jsonrpc/HTTP/getFilterLogs",
-        "en/api-reference/jsonrpc/HTTP/getFilterChanges",
-        "en/api-reference/jsonrpc/HTTP/traceTransaction"
+        {
+          "group": "axm",
+          "pages": [
+            "en/api-reference/jsonrpc/HTTP/axm/sync",
+            "en/api-reference/jsonrpc/HTTP/axm/status",
+            "en/api-reference/jsonrpc/HTTP/axm/getIncentiveAddress"
+
+          ]
+        },
+        {
+          "group": "txpool",
+          "pages": [
+            "en/api-reference/jsonrpc/HTTP/txpool/content",
+            "en/api-reference/jsonrpc/HTTP/txpool/contentFrom",
+            "en/api-reference/jsonrpc/HTTP/txpool/status",
+            "en/api-reference/jsonrpc/HTTP/txpool/simpleContent",
+            "en/api-reference/jsonrpc/HTTP/txpool/inspect"
+          ]
+        },
+        {
+          "group": "eth",
+          "pages": [
+            "en/api-reference/jsonrpc/HTTP/eth/chainId",
+            "en/api-reference/jsonrpc/HTTP/eth/accounts",
+            "en/api-reference/jsonrpc/HTTP/eth/blockNumber",
+            "en/api-reference/jsonrpc/HTTP/eth/getBalance",
+            "en/api-reference/jsonrpc/HTTP/eth/getProof",
+            "en/api-reference/jsonrpc/HTTP/eth/getBlockByNumber",
+            "en/api-reference/jsonrpc/HTTP/eth/getBlockByHash",
+            "en/api-reference/jsonrpc/HTTP/eth/getCode",
+            "en/api-reference/jsonrpc/HTTP/eth/getStorageAt",
+            "en/api-reference/jsonrpc/HTTP/eth/call",
+            "en/api-reference/jsonrpc/HTTP/eth/estimateGas",
+            "en/api-reference/jsonrpc/HTTP/eth/gasPrice",
+            "en/api-reference/jsonrpc/HTTP/eth/syncing",
+            "en/api-reference/jsonrpc/HTTP/eth/getBlockTransactionCountByNumber",
+            "en/api-reference/jsonrpc/HTTP/eth/getBlockTransactionCountByHash",
+            "en/api-reference/jsonrpc/HTTP/eth/getTransactionByBlockNumberAndIndex",
+            "en/api-reference/jsonrpc/HTTP/eth/getTransactionByBlockHashAndIndex",
+            "en/api-reference/jsonrpc/HTTP/eth/getTransactionCount",
+            "en/api-reference/jsonrpc/HTTP/eth/getTransactionByHash",
+            "en/api-reference/jsonrpc/HTTP/eth/getTransactionReceipt",
+            "en/api-reference/jsonrpc/HTTP/eth/sendRawTransaction",
+            "en/api-reference/jsonrpc/HTTP/eth/newPendingTransactionFilter",
+            "en/api-reference/jsonrpc/HTTP/eth/newBlockFilter",
+            "en/api-reference/jsonrpc/HTTP/eth/newFilter",
+            "en/api-reference/jsonrpc/HTTP/eth/getLogs",
+            "en/api-reference/jsonrpc/HTTP/eth/uninstallFilter",
+            "en/api-reference/jsonrpc/HTTP/eth/getFilterLogs",
+            "en/api-reference/jsonrpc/HTTP/eth/getFilterChanges"
+          ]
+        },
+        {
+          "group": "debug",
+          "pages": [
+            "en/api-reference/jsonrpc/HTTP/debug/traceTransaction",
+            "en/api-reference/jsonrpc/HTTP/debug/traceCall"
+          ]
+        }
       ]
     },
     {
