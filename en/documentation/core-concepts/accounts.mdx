@@ -1,14 +1,14 @@
 ---
-title: 'Accounts'
+title: "Accounts"
 ---
 
 AxiomLedger uses an account model. The address is the unique identifier of an account, and a private key is required to generate an account. An account has many attributes, including token balances, voting power, Etc. An account can:
 
 - Send transactions to transfer its token
--  Raise up a proposal
--  Vote for the proposal
--  Deploy smart contracts
--  Trigger the smart contracts released by itself or others
+- Raise up a proposal
+- Vote for the proposal
+- Deploy smart contracts
+- Trigger the smart contracts released by itself or others
 
 All activities on AxiomLedger are based on accounts.
 
@@ -21,7 +21,7 @@ AxiomLedger has two account types:
 
 Both account types have the ability to:
 
-- Receive, hold, and send AXM or tokens
+- Receive, hold, and send AXC or tokens
 - Interact with deployed smart contracts
 
 ## Account & Key Pair
@@ -30,7 +30,7 @@ An account consists of a cryptographic pair of keys - a public key and a private
 
 This prevents malicious actors from broadcasting fake transactions because you can always verify the sender of a transaction.
 
-For example, if Alice wants to send AXM from her account to Bob's, she must create and sign a transaction and send it to the AxiomLedger network for verification. With the public key, Alice can prove that she originally initiated the transaction request. Without the encryption mechanism, malicious attacker Cathy might be able to publicly broadcast a similar request, "send 5 AXM from Alice's account to Cathy's account", while no one can validate whether or not the transaction is exactly requested by Alice herself.
+For example, if Alice wants to send AXC from her account to Bob's, she must create and sign a transaction and send it to the AxiomLedger network for verification. With the public key, Alice can prove that she originally initiated the transaction request. Without the encryption mechanism, malicious attacker Cathy might be able to publicly broadcast a similar request, "send 5 AXC from Alice's account to Cathy's account", while no one can validate whether or not the transaction is exactly requested by Alice herself.
 
 ## External-Owned Account(EOA) Creation
 
@@ -44,7 +44,7 @@ AxiomLedger’s key pair generation algorithm is exactly the same as that of Eth
 
 The AxiomLedger address in Hex format generated is exactly the same as the Ethereum address by the same private key.
 
-``` solidity
+```solidity
 0x8219e5E23396587Bf1969eFd1B211F379aa29494
 ```
 
@@ -52,6 +52,6 @@ The AxiomLedger address in Hex format generated is exactly the same as the Ether
 
 When the smart contract is deployed to the AxiomLedger network, the corresponding contract account address is returned, which is calculated from the ID of the deployed contract transaction and the sender's account address. The format of the contract account address is the same as that of external accounts. For example,
 
-``` solidity
+```solidity
 0x8219e5E23396587Bf1969eFd1B211F379aa29494
 ```

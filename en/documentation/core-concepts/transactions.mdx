@@ -1,8 +1,8 @@
 ---
-title: 'Transactions'
+title: "Transactions"
 ---
 
-Transactions are cryptographically signed instructions from accounts. An account will initiate a transaction to update the state of the AxiomLedger network. The simplest transaction is transferring `AXM` from one account to another.
+Transactions are cryptographically signed instructions from accounts. An account will initiate a transaction to update the state of the AxiomLedger network. The simplest transaction is transferring `AXC` from one account to another.
 
 Transactions, which change the state of the chain, need to be broadcast to the whole network. Any node can broadcast a request for a transaction. After the validator node receives the transaction, it executes the transaction and includes it in a block, then propagates the block to the whole network.
 
@@ -14,14 +14,13 @@ The transaction includes following information:
 - `recipient`– Receiver's address (If the address is an EOA, the transaction will transfer value. If the address is a contract address, the transaction will execute contract code).
 - `signature`– The identify of the sender. This is generated when a sender use his private key to send the transaction.
 - `nonce`- An orderly increasing counter representing the number of transactions from an account.
-- `value`– The amount of AXM transferred from the sender to the receiver.
+- `value`– The amount of AXC transferred from the sender to the receiver.
 - `data`– An optional field capable of containing arbitrary data.
 - `gasLimit`–The maximum quantity of gas units a transaction can consume, specifying the gas units required for each computable step.
 
-
 The transaction object appears as follows:
 
-``` solidity
+```solidity
 {
   from: "0x8219e5E23396587Bf1969eFd1B211F379aa29494",
   to: "0x44D848b5DC373dafDde447c158876579C50c34dF",
@@ -39,7 +38,7 @@ AxiomLedger is compatible with Ethereum clients like Geth, and the signing proce
 
 Example JSON-RPC call:
 
-``` Javascript
+```Javascript
 {
   "id": 2,
   "jsonrpc": "2.0",
@@ -58,8 +57,10 @@ Example JSON-RPC call:
   ]
 }
 ```
+
 Example response:
-``` JavaScript
+
+```JavaScript
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -91,7 +92,7 @@ If a signed hash is present, it can be used in cryptographic techniques to prove
 
 AxiomLedger has four different types of transactions:
 
-- Regular Transactions: Transactions sent from one account to another. This type of transaction involves transferring AXM from one address to another and can include an optional data field for additional information.
+- Regular Transactions: Transactions sent from one account to another. This type of transaction involves transferring AXC from one address to another and can include an optional data field for additional information.
 
 - System Execution Transaction: These transactions are used to interact with system contracts that are natively integrated by AxiomLedger network. In this case, the "to" address of the transaction is the address of the system contract, and the transaction data fields contain the function call and parameters to be executed within the contract.
 
@@ -100,11 +101,3 @@ AxiomLedger has four different types of transactions:
 - Contract Execution Transactions: These transactions are used to interact with smart contracts that have already been deployed on the AxiomLedger network. In this case, the "to" address of the transaction is the address of the smart contract, and the transaction data fields contain the function call and parameters to be executed within the contract.
 
 These different types of transactions allow for fund transfers, deployment of smart contracts, and interaction with smart contracts and system contracts on the AxiomLedger network.
-
-
-
-
-
-
-
-
