@@ -19,27 +19,23 @@
     "light": "#ECC94B",
     "dark": "#ECC94B"
   },
-  
+
   "anchors": [
     {
       "name": "API Reference",
       "icon": "code",
       "url": "en/api-reference"
-      
     },
     {
       "name": "SDKs",
       "icon": "shield-halved",
       "url": "en/sdks"
-      
     },
     {
       "name": "Changelog",
       "icon": "puzzle-piece",
       "url": "en/changelog"
-      
     }
-   
   ],
   "navigation": [
     {
@@ -57,7 +53,6 @@
         },
         "en/documentation/getting-started/glossary/glossary"
       ]
-      
     },
     {
       "group": "Core Concepts",
@@ -68,8 +63,7 @@
         "en/documentation/core-concepts/system-contract",
         "en/documentation/core-concepts/upgrade"
       ]
-      
-    },   
+    },
     {
       "group": "System Design",
       "pages": [
@@ -80,7 +74,6 @@
         "en/documentation/system-design/cross-chain",
         "en/documentation/system-design/storage"
       ]
-      
     },
     {
       "group": "Governance",
@@ -89,7 +82,6 @@
         "en/documentation/governance/post-proposals",
         "en/documentation/governance/vote-proposals"
       ]
-      
     },
     {
       "group": "Economics",
@@ -98,7 +90,14 @@
         "en/documentation/economics/gas",
         "en/documentation/economics/coin"
       ]
-      
+    },
+    {
+      "group": "Privacy",
+      "pages": [
+        "en/documentation/dcpa/overview",
+        "en/documentation/dcpa/zkToken",
+        "en/documentation/dcpa/zkDID"
+      ]
     },
     {
       "group": "Nodes",
@@ -107,7 +106,6 @@
         "en/documentation/nodes/node_requirements",
         "en/documentation/nodes/run_node"
       ]
-      
     },
     {
       "group": "Introduction",
@@ -115,76 +113,64 @@
         "en/api-reference/introduction/jsonrpc-Introduction",
         "en/api-reference/introduction/eventsSubscription"
       ]
-      
     },
     {
       "group": "JSON RPC",
       "pages": [
-            "en/api-reference/jsonrpc/HTTP/chainId",
-            "en/api-reference/jsonrpc/HTTP/accounts",
-            "en/api-reference/jsonrpc/HTTP/blockNumber",
-            "en/api-reference/jsonrpc/HTTP/getBalance",
-            "en/api-reference/jsonrpc/HTTP/getBlockByNumber",
-            "en/api-reference/jsonrpc/HTTP/getBlockByHash",
-            "en/api-reference/jsonrpc/HTTP/getCode",
-            "en/api-reference/jsonrpc/HTTP/getStorageAt",
-            "en/api-reference/jsonrpc/HTTP/call",
-            "en/api-reference/jsonrpc/HTTP/estimateGas",
-            "en/api-reference/jsonrpc/HTTP/gasPrice",
-            "en/api-reference/jsonrpc/HTTP/syncing",
-            "en/api-reference/jsonrpc/HTTP/getBlockTransactionCountByNumber",
-            "en/api-reference/jsonrpc/HTTP/getBlockTransactionCountByHash",
-            "en/api-reference/jsonrpc/HTTP/getTransactionByBlockNumberAndIndex",
-            "en/api-reference/jsonrpc/HTTP/getTransactionByBlockHashAndIndex",
-            "en/api-reference/jsonrpc/HTTP/getTransactionCount",
-            "en/api-reference/jsonrpc/HTTP/getTransactionByHash",
-            "en/api-reference/jsonrpc/HTTP/getTransactionReceipt",
-            "en/api-reference/jsonrpc/HTTP/sendRawTransaction",
-            "en/api-reference/jsonrpc/HTTP/newPendingTransactionFilter",
-            "en/api-reference/jsonrpc/HTTP/newBlockFilter",
-            "en/api-reference/jsonrpc/HTTP/newFilter",
-            "en/api-reference/jsonrpc/HTTP/getLogs",
-            "en/api-reference/jsonrpc/HTTP/uninstallFilter",
-            "en/api-reference/jsonrpc/HTTP/getFilterLogs",
-            "en/api-reference/jsonrpc/HTTP/getFilterChanges",
-            "en/api-reference/jsonrpc/HTTP/traceTransaction"
-          ]
+        "en/api-reference/jsonrpc/HTTP/chainId",
+        "en/api-reference/jsonrpc/HTTP/accounts",
+        "en/api-reference/jsonrpc/HTTP/blockNumber",
+        "en/api-reference/jsonrpc/HTTP/getBalance",
+        "en/api-reference/jsonrpc/HTTP/getBlockByNumber",
+        "en/api-reference/jsonrpc/HTTP/getBlockByHash",
+        "en/api-reference/jsonrpc/HTTP/getCode",
+        "en/api-reference/jsonrpc/HTTP/getStorageAt",
+        "en/api-reference/jsonrpc/HTTP/call",
+        "en/api-reference/jsonrpc/HTTP/estimateGas",
+        "en/api-reference/jsonrpc/HTTP/gasPrice",
+        "en/api-reference/jsonrpc/HTTP/syncing",
+        "en/api-reference/jsonrpc/HTTP/getBlockTransactionCountByNumber",
+        "en/api-reference/jsonrpc/HTTP/getBlockTransactionCountByHash",
+        "en/api-reference/jsonrpc/HTTP/getTransactionByBlockNumberAndIndex",
+        "en/api-reference/jsonrpc/HTTP/getTransactionByBlockHashAndIndex",
+        "en/api-reference/jsonrpc/HTTP/getTransactionCount",
+        "en/api-reference/jsonrpc/HTTP/getTransactionByHash",
+        "en/api-reference/jsonrpc/HTTP/getTransactionReceipt",
+        "en/api-reference/jsonrpc/HTTP/sendRawTransaction",
+        "en/api-reference/jsonrpc/HTTP/newPendingTransactionFilter",
+        "en/api-reference/jsonrpc/HTTP/newBlockFilter",
+        "en/api-reference/jsonrpc/HTTP/newFilter",
+        "en/api-reference/jsonrpc/HTTP/getLogs",
+        "en/api-reference/jsonrpc/HTTP/uninstallFilter",
+        "en/api-reference/jsonrpc/HTTP/getFilterLogs",
+        "en/api-reference/jsonrpc/HTTP/getFilterChanges",
+        "en/api-reference/jsonrpc/HTTP/traceTransaction"
+      ]
     },
     {
       "group": "WEBSOCKET",
       "pages": [
-            "en/api-reference/jsonrpc/WEBSOCKETS/logs",
-            "en/api-reference/jsonrpc/WEBSOCKETS/newHeads",
-            "en/api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions"
-
+        "en/api-reference/jsonrpc/WEBSOCKETS/logs",
+        "en/api-reference/jsonrpc/WEBSOCKETS/newHeads",
+        "en/api-reference/jsonrpc/WEBSOCKETS/newPendingTransactions"
       ]
     },
     {
       "group": "Overview",
-      "pages": [
-        "en/sdks/introduction"
-      ]
-      
+      "pages": ["en/sdks/introduction"]
     },
     {
       "group": "SDKs",
-      "pages": [
-        "en/sdks/sdks/java-sdk",
-        "en/sdks/sdks/js-sdk"
-      ]
-      
+      "pages": ["en/sdks/sdks/java-sdk", "en/sdks/sdks/js-sdk"]
     },
     {
       "group": "Changelog",
-      "pages": [
-        "en/changelog/changelog"
-      ]
-      
+      "pages": ["en/changelog/changelog"]
     }
   ],
   "footerSocials": {
     "github": "https://github.com/axiomesh",
-    "twitter":"https://twitter.com/axiomesh?s=20"
+    "twitter": "https://twitter.com/axiomesh?s=20"
   },
   "backgroundImage": "/images/background1.png"
 }

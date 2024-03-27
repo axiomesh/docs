@@ -23,7 +23,7 @@ export async function addTestingNetworkAries() {
         chainName: "Axiomledger Aries",
         nativeCurrency: {
           name: "AxiomLedger",
-          symbol: "AXM",
+          symbol: "AXC",
           decimals: 18,
         },
         blockExplorerUrls: ["https://scan.aries.axiomesh.io"],
@@ -59,7 +59,7 @@ export async function addTestingNetworkTaurus() {
         chainName: "Axiomledger Taurus",
         nativeCurrency: {
           name: "AxiomLedger",
-          symbol: "AXM",
+          symbol: "AXC",
           decimals: 18,
         },
         blockExplorerUrls: ["https://scan.taurus.axiomesh.io"],
@@ -74,81 +74,103 @@ export async function addTestingNetworkTaurus() {
   }
 }
 
-
-
-
-
 ## Taurus Testnet
 
-如果您是首次添加Taurus测试网，请在钱包中填写以下信息添加网络：:
+如果您是首次添加 Taurus 测试网，请在钱包中填写以下信息添加网络：:
 
 - **RPC** : https://rpc1.taurus.axiomesh.io
 - **Chain ID** :`23412`
-- **Token Symbol** : `AXM`
+- **Token Symbol** : `AXC`
 
-或者您可以**点击下方的按钮**一键添加网络至Metamask:
+或者您可以**点击下方的按钮**一键添加网络至 Metamask:
 
-<button style={{color:'#fff',fontWeight:600,borderRadius: 6, hight:70, width:170,background: 'linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)'}} onClick={addTestingNetworkTaurus}>添加到MetaMask</button> 
+<button
+  style={{
+    color: "#fff",
+    fontWeight: 600,
+    borderRadius: 6,
+    hight: 70,
+    width: 170,
+    background: "linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)",
+  }}
+  onClick={addTestingNetworkTaurus}
+>
+  添加到MetaMask
+</button>{" "}
 
 **以下工具可能对您有用：**
 
-| **Tools**        | **URL**                                              | 
-| ----------------- | ------------------------------------------------ |
-| **Taurus AXMScan** | https://scan.taurus.axiomesh.io |  
+| **Tools**          | **URL**                           |
+| ------------------ | --------------------------------- |
+| **Taurus AXMScan** | https://scan.taurus.axiomesh.io   |
 | **Taurus Faucet**  | https://faucet.taurus.axiomesh.io |
-
-
 
 ## Aries 测试网（即将停止运营）
 
+如果您是首次添加 Aries 测试网，请在钱包中填写以下信息添加网络：
 
-如果您是首次添加Aries测试网，请在钱包中填写以下信息添加网络：
 - **RPC** : https://rpc1.aries.axiomesh.io
 - **Chain ID** :`23411`
-- **Token Symbol** : `AXM`
+- **Token Symbol** : `AXC`
 
-或者您可以**点击下方的按钮**一键添加网络至Metamask:
+或者您可以**点击下方的按钮**一键添加网络至 Metamask:
 
-<button style={{color:'#fff',fontWeight:600,borderRadius: 6, hight:70, width:170,background: 'linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)'}} onClick={addTestingNetworkAries}>添加到MetaMask</button> 
-
+<button
+  style={{
+    color: "#fff",
+    fontWeight: 600,
+    borderRadius: 6,
+    hight: 70,
+    width: 170,
+    background: "linear-gradient(91deg,#EBCF3E -26.54%,#FC9468 140.68%)",
+  }}
+  onClick={addTestingNetworkAries}
+>
+  添加到MetaMask
+</button>{" "}
 
 **以下工具可能对您有用：**
 
-| **Tools**        | **URL**                                              | 
-| ----------------- | ------------------------------------------------ |
-| **Aries AXMScan** | https://scan.aries.axiomesh.io （即将停止运营） |  
-| **Aries Faucet**  | https://faucet.aries.axiomesh.io （即将停止运营）|
-
+| **Tools**         | **URL**                                           |
+| ----------------- | ------------------------------------------------- |
+| **Aries AXMScan** | https://scan.aries.axiomesh.io （即将停止运营）   |
+| **Aries Faucet**  | https://faucet.aries.axiomesh.io （即将停止运营） |
 
 ## 网络
+
 区块链网络指的是各种不同的 AxiomLedger 环境，可以在其中进行开发、测试或生产用例。
-AxiomLedger 的账户可以跨不同的链使用，但账户余额和交易历史不会在 AxiomLedger 主网以外传递。了解可用的网络以及如何获取测试网的 AXM 进行实验，在进行测试时可能会很有用。通常出于安全考虑，不建议在测试网上重复使用主网账户，反之亦然。
+AxiomLedger 的账户可以跨不同的链使用，但账户余额和交易历史不会在 AxiomLedger 主网以外传递。了解可用的网络以及如何获取测试网的 AXC 进行实验，在进行测试时可能会很有用。通常出于安全考虑，不建议在测试网上重复使用主网账户，反之亦然。
 
 ### AxiomLedger 主网
+
 主网是指更广泛的生态系统中的主要 AxiomLedger 区块链，所有具有实际价值的交易都在主网上进行。
-用户所涉及的 AXM 价格对应于主网上的 AXM。目前 AxiomLedger 仍然处于测试阶段，尚未上线主网。
+用户所涉及的 AXC 价格对应于主网上的 AXC。目前 AxiomLedger 仍然处于测试阶段，尚未上线主网。
 
 ### AxiomLedger 测试网
+
 公共测试网是一个模拟生态系统环境的网络，协议开发者或智能合约开发者可以使用它们来测试尚未部署到主网的协议升级和智能合约。您可以将它们看作生产和组装服务器的模拟。在部署到主网之前，您应该在测试网上测试您编写的任何合约代码。在与现有智能合约集成的去中心化应用程序中，大多数项目会将副本部署到测试网。
 
-由于实际中与 AxiomLedger 进行交互时需要 AXM ，有兴趣尝试 AxiomLedger 的用户可以可以从 水龙头获取免费的测试代币 AXM 来探索 AxiomLedger。 测试网上的 AXM 没有实际价值，仅用于AxiomLedger 测试网中的实验目的。
+由于实际中与 AxiomLedger 进行交互时需要 AXC ，有兴趣尝试 AxiomLedger 的用户可以可以从 水龙头获取免费的测试代币 AXC 来探索 AxiomLedger。 测试网上的 AXC 没有实际价值，仅用于 AxiomLedger 测试网中的实验目的。
 
-### 连接 AxiomLedger 
-AxiomLedger 是兼容EVM的区块链，您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask 等）或 SDK 连接到 AxiomLedger.如果您是第一次使用 Metamask 连接 AxiomLedger，您需要将 RPC 地址、链 ID、代币符号等信息新增到网络列表。关于主网及各测试网的信息请查看本文最上方的表格。
+### 连接 AxiomLedger
+
+AxiomLedger 是兼容 EVM 的区块链，您只需要拥有一个基于以太坊的账户地址，就可以通过主流的钱包（例如 Metamask 等）或 SDK 连接到 AxiomLedger.如果您是第一次使用 Metamask 连接 AxiomLedger，您需要将 RPC 地址、链 ID、代币符号等信息新增到网络列表。关于主网及各测试网的信息请查看本文最上方的表格。
 
 ## 水龙头
+
 水龙头是一种区块链工具，可以将测试网代币免费投放给任何请求它们的人。
+
 ### 领取测试代币
-测试网代币是一种测试令牌，允许您的应用程序在主网上线之前对其进行测试。在像Aries这样的测试网上，可以使用测试网令牌来代替主网令牌。您可以使用这些代币在相关的区块链上创建测试交易，例如合同部署、资金转移和调试失败的交易。
+
+测试网代币是一种测试令牌，允许您的应用程序在主网上线之前对其进行测试。在像 Aries 这样的测试网上，可以使用测试网令牌来代替主网令牌。您可以使用这些代币在相关的区块链上创建测试交易，例如合同部署、资金转移和调试失败的交易。
+
 ### 领取限制
-**需注意，每24小时内只能请求一次测试代币。**
 
-
-
+**需注意，每 24 小时内只能请求一次测试代币。**
 
 ## 区块链浏览器 AXMScan
 
-AXMScan详细介绍了 AxiomLedger 网络上有关交易、区块、钱包、代币、智能合约和统计数据的全面数据。
+AXMScan 详细介绍了 AxiomLedger 网络上有关交易、区块、钱包、代币、智能合约和统计数据的全面数据。
 
 ![AXMScan](/zh/images/getting-started/AXMScan1.png)
 
@@ -163,8 +185,9 @@ AXMScan详细介绍了 AxiomLedger 网络上有关交易、区块、钱包、代
 ![SearchBar](/zh/images/getting-started/SearchBar1.png)
 
 使用所有页面的搜索栏可以访问的数据类型有：
+
 - **地址**： EOA（外部拥有帐户）的地址。
-- **合约地址**：部署在AxiomLedger上的智能合约的可调用地址。
+- **合约地址**：部署在 AxiomLedger 上的智能合约的可调用地址。
 - **交易哈希**： 已执行交易的唯一 66 个字符标识符。
 - **区块**：AxiomLedger 上生成的区块。
-- **代币**：部署在AxiomLedger上的ERC20、ERC721、ERC1155资产。
+- **代币**：部署在 AxiomLedger 上的 ERC20、ERC721、ERC1155 资产。

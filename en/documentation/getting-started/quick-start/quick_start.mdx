@@ -7,14 +7,13 @@ This guide will introduce how to quickly access and use the AxiomLedger blockcha
 
 ## Wallet Configuration
 
-AxiomLedger is an EVM-compatible blockchain, which means that any Ethereum tools you are familiar with can be used on AxiomLedger, including Truffle, Remix, and ether.js. All you need is an Ethereum-based account address, using popular wallets like Metamask or an SDK. 
-
+AxiomLedger is an EVM-compatible blockchain, which means that any Ethereum tools you are familiar with can be used on AxiomLedger, including Truffle, Remix, and ether.js. All you need is an Ethereum-based account address, using popular wallets like Metamask or an SDK.
 
 If you are using MetaMask for the first time, please click [here](https://metamask.io/download/) to install the plugin. If you are connecting to AxiomLedger for the first time, you need to add RPC address, chain ID, token symbol, and other required information to the network list. The chain information of the mainnet and testnets can be viewed on the [Resources](/en/documentation/getting-started/resources/resources) page.
 
- After successfully connecting to the AxiomLedger, your account balance will generally be `0` AXM. At this time, you can visit the AxiomLedger testnet [faucet](https://faucet.aries.axiomesh.io/) and enter your account address on the webpage to receive some AXMs. 
- 
- **_Please note: Within a 24-hour period, each account can only obtain AXM once from the faucet._**
+After successfully connecting to the AxiomLedger, your account balance will generally be `0` AXC. At this time, you can visit the AxiomLedger testnet [faucet](https://faucet.aries.axiomesh.io/) and enter your account address on the webpage to receive some AXMs.
+
+**_Please note: Within a 24-hour period, each account can only obtain AXC once from the faucet._**
 
 ## Generate Your First Transaction
 
@@ -22,8 +21,10 @@ If you want to learn more about AxiomLedger, such as getting more information on
 
 Copy the code below and save it as a file with the `.mjs` extension. Replace the sender's private key and the recipient's address in the code with those of your test account (i.e., replace `account_from` and `account_to`). Then, run `node YourFileName.mjs` (make sure you have `Node.js` installed beforehand). Wait for the terminal to return the transaction hash, which indicates a successful transaction. At this point, you can check whether the balance in Metamask has been updated. If there is a network delay, you can check later. You can also paste the returned transaction hash into [AXMScan](https://scan.aries.axiomesh.io) to view the transaction details.
 
-<Warning>Please note: If you have a proxy service running on your computer, it may cause transaction failures. You can try again after disabling the proxy.</Warning>
-
+<Warning>
+  Please note: If you have a proxy service running on your computer, it may
+  cause transaction failures. You can try again after disabling the proxy.
+</Warning>
 
 ```Solidity
 // Javascript
@@ -37,7 +38,7 @@ async function main() {
   const latestBlock = await provider.getBlockNumber();
   console.log("The latest block number is", latestBlock);
 
-  // send transaction to AxiomLedger : transfer AXM
+  // send transaction to AxiomLedger : transfer AXC
   // step1. Create account variables
   const account_from = {
     privateKey: 'YOUR-PRIVATE-KEY-HERE',
@@ -64,11 +65,11 @@ main();
 
 ## Mint a Token
 
-If you have successfully connected to the AxiomLedger network and have experienced the basic usage of the AxiomLedger official SDK in the previous steps, you can now mint your own Token on AxiomLedger. Generally, this requires you to write or prepare an ERC20-compliant smart contract in advance, and successfully deploy it on the AxiomLedger blockchain, add the contract address to the wallet software like  Metamask, and then you can view your newly minted Token.
+If you have successfully connected to the AxiomLedger network and have experienced the basic usage of the AxiomLedger official SDK in the previous steps, you can now mint your own Token on AxiomLedger. Generally, this requires you to write or prepare an ERC20-compliant smart contract in advance, and successfully deploy it on the AxiomLedger blockchain, add the contract address to the wallet software like Metamask, and then you can view your newly minted Token.
 
 To simplify your usage, we provide with a simple smart contract sample. You only need to modify the Token name (for example, `TAXM`) with it(the location to be modified is at lines 62-63 of the smart contract code below). Of course, you can also use this contract as a reference to develop a smart contract that better meets your needs.
 
-If you already have a basic understanding of Ethereum, you can compile and deploy this smart contract on [Remix](https://remix.ethereum.org/). 
+If you already have a basic understanding of Ethereum, you can compile and deploy this smart contract on [Remix](https://remix.ethereum.org/).
 
 ```Solidity
 pragma solidity ^0.4.24;
@@ -186,18 +187,16 @@ contract TestToken is ERC20Interface, SafeMath {
 }
 ```
 
-
-
 Please note:
- - Ensure that you select the appropriate Solidity version when compiling the contract(^0.4.24). 
- - When deploying the contract through the injected provider - MetaMask, please confirm that the network has been switched to the AxiomLedger’s network and the account address matches your selection.
- - Choose a contract that can correctly generate Token (such as `TestToken` in this case)
+
+- Ensure that you select the appropriate Solidity version when compiling the contract(^0.4.24).
+- When deploying the contract through the injected provider - MetaMask, please confirm that the network has been switched to the AxiomLedger’s network and the account address matches your selection.
+- Choose a contract that can correctly generate Token (such as `TestToken` in this case)
 
 ![select solidty version](/en/images/getting-started/quick-start/remix_select_solidty_version.png)
 ![select Metamask environment&token contract](/en/images/getting-started/quick-start/remix_select_metamask_and_fun.png)
 
 Click the `Deploy` button on the page, check the transaction details in the MetaMask pop-up box, and click `Confirm` to send a transaction request to deploy the smart contract.
-
 
 <img
   src="/en/images/getting-started/quick-start/MetaMask-confirm1.jpeg"
@@ -215,7 +214,7 @@ contracts using SDK. For specific operations, please refer to [ether.js](https:/
 
 ## Transfer Tokens
 
-You have completed the minting of Token in the previous steps. Now, you can try to transfer your Token. To make this process more intuitive and clear, it is recommended that you use the [Remix](https://remix.ethereum.org/) and MetaMask to transfer your Token. 
+You have completed the minting of Token in the previous steps. Now, you can try to transfer your Token. To make this process more intuitive and clear, it is recommended that you use the [Remix](https://remix.ethereum.org/) and MetaMask to transfer your Token.
 
 First, choose an account to receive the Token. Then, call the `transfer` method at the bottom of the page where the contract was deployed just now (you will need to provide the address of the receiving account and the transfer amount). Finally, confirm the transaction in the MetaMask pop-up box.
 ![Metamask确认](/en/images/getting-started/quick-start/transfer-token1.jpeg)

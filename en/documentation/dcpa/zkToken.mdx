@@ -1,0 +1,27 @@
+---
+title: "zkToken"
+---
+
+This chapter will introduce the zkToken protocol.
+In terms of overall architecture, zkToken utilizes a variant of Pedersen commitments,
+with its main scheme drawing inspiration from PGC, albeit with slight differences in detail.
+
+## Twin-token protocol
+
+zkToken adopts twin-token protocol, which ensures the composability of the protocol with
+popular public chain projects while supporting flexible capital flow between plaintext and
+ciphertext accounts. Existing privacy protocols mostly involve modifications to the underlying blockchain,
+which can ensure privacy but often sacrifice composability with other protocols.
+Additionally, many privacy protocols are relatively simplistic,
+treating all user data as private without distinguishing between plaintext and ciphertext,
+let alone enabling interaction between them.
+
+DCPA proposes a twin-token protocol to address these two issues effectively.
+Users register an existing ERC20 token, such as USDT, through the twin-token protocol.
+This protocol then deploys a corresponding privacy contract for the ERC20,
+ensuring that the data in this contract is ciphertext and does not affect the original ERC20 contract.
+
+In practice, if users opt for plaintext interaction, they directly interact with the original ERC20.
+For ciphertext interaction, they engage with the privacy ERC20.
+In cases requiring interaction between plaintext and ciphertext, such as transactions involving both types,
+the twin-token routing contract facilitates the transfer between the two contracts.
