@@ -1,0 +1,13 @@
+---
+title: "Account Recovery"
+---
+
+Should a user lose their private key, it is possible to reset the account through an account recovery process. Since the old private key is not saved anywhere else besides with the user, it cannot be directly retrieved and can only be restored by generating a new private key.
+
+## Guardian Mechanism
+
+With the guardian mechanism, users can set the addresses of their friends as guardians for their smart accounts. If a user loses their private key, they can notify their friends to initiate a recovery transaction. The friend's private key then signs this transaction, and after on-chain verification, the ownership of the smart account can be modified, effectively restoring ownership of the smart account.
+
+To ensure account security and prevent friends from unauthorized transactions that change the owner of the user's smart account, the user can set guardians through an MPC (Multi-Party Computation) method. Only when a certain number of friends sign simultaneously can the guardian private key be recovered to modify the owner of the smart account, greatly enhancing account security.
+
+Furthermore, when recovering an account through the guardian mechanism, the smart account must be locked for a certain period to prevent malicious attacks.

@@ -1,0 +1,14 @@
+---
+title: "Session Key"
+---
+
+用户可以生成一个短期有效的session key，授予session key一定的权限，例如只能使用多少次数，或者多少时间内自动失效，或者一定的额度，避免用户在使用游戏等需要频繁操作的dapp时频繁的签名授权，极大地提升用户体验。
+
+## Session Key 生成
+
+用户本地随机生成一个私钥作为session key，将该session key的地址发到链上并授权一定权限，例如使用有效期，使用额度等。后续session key加密保存在浏览器local storage或者session storage中，或者存储在应用本地。
+需要用户授权时，前端/客户端读取本地加密的session key并解密，对用户操作进行签名并发到链上，对于用户来说签名无感，极大地提升用户的产品体验。
+
+## Session Key 销毁
+
+为了保证安全，用户可以随时销毁session key，销毁后session key将无法使用，用户需要重新生成session key。在用户退出时，浏览器或应用也会自动删除本地加密存储的session key，避免session key被盗用。

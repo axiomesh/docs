@@ -100,6 +100,15 @@
       ]
     },
     {
+      "group": "Native Smart Account",
+      "pages": [
+        "en/documentation/native-smart-account/overview",
+        "en/documentation/native-smart-account/paymaster",
+        "en/documentation/native-smart-account/recovery",
+        "en/documentation/native-smart-account/session-key"
+      ]
+    },
+    {
       "group": "Nodes",
       "pages": [
         "en/documentation/nodes/about",

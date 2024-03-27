@@ -1,0 +1,15 @@
+---
+title: "Paymaster pay Gas for users"
+---
+
+Smart accounts natively support paying Gas for users. This means that new user can use the service without purchasing Gas themselves, as the Gas is covered by the smart account's Paymaster. Users are spared from the need to be aware of Gas costs, significantly lowering the barrier to use the platform.
+
+## Verifying Paymaster
+
+The Verifying Paymaster offers the ability to sign transactions without paying Gas. When a smart account initiates a transaction, it can be signed using the private key of an account that has been verified by the Verifying Paymaster. On-chain, the system contract implements the Verifying Paymaster to perform signature verification. If the verification is successful, the Gas cost is waived.
+
+## Token Paymaster
+
+The Token Paymaster provides the capability to deduct user fees in other types of tokens to cover Gas costs. When a smart account sends a transaction, it can designate the Paymaster as the Token Paymaster. 
+The Token Paymaster calculates the Gas cost required for the smart account's transaction and uses an on-chain Oracle to determine the equivalent amount of Tokens needed to pay Gas fee. 
+The Token Paymaster then collects the user's Tokens as Gas fee.
