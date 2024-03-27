@@ -1,0 +1,13 @@
+---
+title: "代付Gas"
+---
+
+智能账户原生提供代付Gas功能，对于新用户无需购买Gas即可使用，由智能账户的Paymaster进行Gas代付，对于用户来说无需感知Gas费用，极大地降低用户使用的门槛。
+
+## Verifying Paymaster
+
+Verifying Paymaster提供免付Gas的能力，智能账户发送交易时，可以由经过Verifying Paymaster验证的账户的私钥进行签名，链上由系统合约实现Verifying Paymaster进行签名验证，验证通过后即可免付Gas。
+
+## Token Paymaster
+
+Token Paymaster提供收取用户其他类型代币代付Gas的能力，智能账户发送交易时，可以设置Paymaster为Token Paymaster，Token Paymaster计算该智能账户需要付的Gas费用，通过预言机获取该费用的Gas对应的Token的数量，收取用户的Token从而帮用户支付Gas。

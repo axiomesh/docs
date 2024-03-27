@@ -1,0 +1,23 @@
+---
+title: "Overview"
+---
+
+A Native Smart Account is one of the key initiatives to lower the barrier for user adoption and to realize the widespread commercial application of blockchain technology.
+
+Supporting smart accounts natively on the chain ensures higher execution efficiency and more flexible authentication methods (custom signature authentication). It also directly provides practical capabilities such as gas proxy payment, Web2 login compatibility, account key recovery, and limited authorization for a certain number of sessions within a validity period, greatly reducing the entry barrier for developers and end-users.
+
+The core functionalities of a smart account are primarily implemented through the system contracts of the chain, which are written in the native programming language. This results in a significant improvement in execution efficiency compared to system contracts written in Ethereum's Solidity. Moreover, to embrace the ecosystem of Ethereum's Abstract Accounts, the system contracts for smart accounts are compatible with Ethereum's Abstract Account schemes, ensuring that tools like Bundlers for Abstract Accounts can seamlessly transition to Axiomesh, further enriching the ecosystem.
+
+A smart account consists of two parts. The first part is the system contract of the smart account, which each user creates for themselves. This account has a unique address calculated based on the user-controlled private key's address and a user-set salt. The second part is the user-controlled private key; controlling this private key gives control over the smart account, with the address derived from the private key acting as the owner of the smart account. If a user loses their private key, it can be reset through an account recovery process.
+
+<CardGroup cols={2}>
+  <Card title="Paymaster pay Gas for users" icon="square-1" href="./paymaster">
+    Paymaster pay Gas for users
+  </Card>
+  <Card title="Account Recovery" icon="square-2" href="./recovery">
+    Account Recovery Mechanism
+  </Card>
+  <Card title="Session Key" icon="square-3" href="./session-key">
+    Temporary Session Key
+  </Card>
+</CardGroup>

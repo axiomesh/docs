@@ -1,0 +1,14 @@
+---
+title: "Session Key"
+---
+
+Users can generate a session key that is valid for a short period, granting it certain privileges such as the number of times it can be used, the time after which it automatically expires, or a specific limit. This prevents users from having to frequently sign authorizations when using dapps that require frequent operations, like games, greatly enhancing the user experience.
+
+## Session Key Generation
+
+The user locally generates a private key as the session key and sends its address to the blockchain along with certain permissions, such as validity period and usage limits. The session key is then encrypted and saved in the browser's local storage or session storage, or stored locally within the application.
+When user authorization is needed, the frontend/client reads the locally encrypted session key, decrypts it, signs the user's operation, and sends it to the blockchain. The signing process is seamless for the user, significantly improving their product experience.
+
+## Session Key Destruction
+
+For security reasons, users can destroy the session key at any time, rendering it unusable and requiring the user to generate a new one. Upon user logout, the browser or application will also automatically delete the locally encrypted session key to prevent its misuse.

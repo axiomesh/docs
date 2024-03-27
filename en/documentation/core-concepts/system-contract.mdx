@@ -7,14 +7,17 @@ System contracts are built-in contracts of AxiomLedger. The contracts do not nee
 System contracts use specific addresses, with the reserved addresses ranging from 0x1000 to 0xffff. System contracts mainly include the following types:
 
 
-| Contract Address | Name                                        | Description                                                                            |
-| ---------------- | ------------------------------------------- | -------------------------------------------------------------------------------------- |
-| 0x1000           | Governance Proposal ID Generation Contract  | System internal contract, used for generating IDs for governance proposals, maintaining an incremental sequence                           |
-| 0x1001           | Node Management Contract                    | Used for node management such as addition, removal, and upgrade                   |
-| 0x1002           | Committee Management Contract               | Used to elect members of the Governance Committee, who are responsible for governance |
-| 0x1003           | Address Mapping Name Contract               | System internal contract, used to map addresses into unique names for easy identification of addresses        |
-| 0x1004           | Whitelist Management Contract               | Used to manage the whitelist that can be used to access AxiomLedger for permission control        |
-| 0x1005           | Whitelist Provider Management Contract      | Used to manage whitelist providers. Only whitelist providers can call the whitelist management contract to update the whitelist        |
-| 0x1006           | Unfinished Proposal Management Contract     | System internal contract, used to manage unfinished proposals        |
-| 0x1007           | Epoch Management Contract                   | Used to manage on-chain epoch information and support query         |
-| 0x1008           | Gas Management Contract                     | Used to adjust gas related parameters, including gas price, gas price upper and lower limits, etc.         |
+| Contract Address | Name                   | Description                                                 |
+| ------------| -------------------|-------------------------------------------------------|
+| 0x1000      | Governance Proposal ID Generation Contract | An internal system contract used for generating IDs for governance proposals, ensuring they are incremental. |
+| 0x1001      | Governance Contract | Used for governing AxiomLedger, primarily including proposal and voting functions. The types of proposals include node management, committee management, whitelist provider management, Gas management, etc. |
+| 0x1002      | AXM Management Contract | This contract has been deprecated. |
+| 0x1003      | Address Mapping Name Contract | An internal system contract used for mapping addresses to unique names, facilitating the identification of addresses. |
+| 0x1004      | Whitelist Management Contract | Used for managing the whitelist that can access AxiomLedger, serving as a permission control. |
+| 0x1005      | Unfinished Proposal Management Contract | An internal system contract used for managing unfinished proposals. |
+| 0x1006      | Epoch Management Contract | Used for managing on-chain epoch information, supporting query operations, etc. |
+| 0x1007      | AXC Management Contract | Managing the shares, distribution, and transfer of AXC. |
+| 0x1008      | EntryPoint Contract | Smart account-related contract, the entry point for calling smart accounts, fully compatible with the Ethereum abstract account standard. |
+| 0x1009      | Smart Account Factory Contract | Responsible for generating smart accounts and obtaining smart account addresses. |
+| 0x1010      | Verifying Paymaster Contract | Responsible for verifying the partial signature of the smart account's Paymaster. Accounts verified can pay Gas free, with the Paymaster pay Gas for it. |
+| 0x1011      | Token Paymaster Contract | Supports smart accounts in paying Gas with other types of Tokens. The Paymaster collects these Tokens and pays Gas for the account. |
