@@ -11,9 +11,9 @@ AxiomLedger 是兼容 EVM 的区块链，任何您熟悉的以太坊工具都可
 
 如果您是第一次使用 MetaMask，请点击[此处](https://metamask.io/download/)安装插件。如果您是第一次连接 AxiomLedger，您需要将 RPC 地址、链 ID、代币符号等信息新增到网络列表。主网及测试网的链信息可在[资源](/zh/documentation/getting-started/resources/resources)页查看。
 
-连接到 AxiomLedger 后，一般来说您的账户余额是 `0` AXC，此时您可以访问 AxiomLedger [测试网水龙头](https://faucet.aries.axiomesh.io)，在页面上填入您的账户地址来获取一些 AXC。
+连接到 AxiomLedger 后，一般来说您的账户余额是 `0` AXM，此时您可以访问 AxiomLedger [测试网水龙头](https://faucet.aries.axiomesh.io)，在页面上填入您的账户地址来获取一些 AXM。
 
-**_请注意：在 24 小时内，一个账户只能在水龙头获取一次 AXC！_**
+**_请注意：在 24 小时内，一个账户只能在水龙头获取一次 AXM！_**
 
 ## 构造和发起您的第一笔交易
 
@@ -37,7 +37,7 @@ async function main() {
   const latestBlock = await provider.getBlockNumber();
   console.log("The latest block number is", latestBlock);
 
-  // send transaction to AxiomLedger : transfer AXC
+  // send transaction to AxiomLedger : transfer AXM
   // step1. Create account variables
   const account_from = {
     privateKey: 'YOUR-PRIVATE-KEY-HERE',
