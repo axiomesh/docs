@@ -112,6 +112,7 @@
       "group": "Nodes",
       "pages": [
         "en/documentation/nodes/about",
+        "en/documentation/nodes/synchronization",
         "en/documentation/nodes/node_requirements",
         "en/documentation/nodes/run_node",
         "en/documentation/nodes/add_node",

@@ -1,0 +1,15 @@
+---
+title: "Synchronization"
+---
+Nodes in the AxiomLedger network must catches up to the latest block and state. Nodes in the network will periodically check for state consistency. When a node receiving state updates from other nodes, it compares it's own block height with the quorum of nodes' block heights. It will start block synchronization when the node is behind. Additionally, block synchronization occurs when a node restarts or when a new node joins the network.
+
+AxiomLedger provides different synchronization modes, each with differences in synchronization speed, storage requirements, and security. Nodes can choose specific synchronization modes for block synchronization based on different synchronization scenarios.
+
+### full sync
+
+Full synchronization starts from the node's current latest block and sequentially downloads block data, execute all the transactions, and verifies until reaching the latest block height in the network. This mode requires the node's virtual machine to execute all transaction data. **the node supports to regeneration of historical state trie because of complete state data**. Therefore, it takes the most time to complete the synchronization and consumes a significant amount of network bandwidth and storage space. Typically used for data node synchronization.
+
+### snap sync
+<img src="/en/images/nodes/snap-sync.png" width="700" />
+
+Snap synchronization does not require the execution of all transaction data. The node downloads a state snapshot at a specified height from the network. Using the snapshot height as a checkpoint, it synchronizes block data after that checkpoint height through full synchronization. Block data and transaction receipt data before that checkpoint height are downloaded and stored only from a specified trusted node set. This mode does not require executing transactions before the checkpoint on the node's virtual machine, thus saving significant time and storage space. However, its security depends on the trustworthiness and integrity of the snapshot state. Therefore, careful selection of a trusted node set is necessary. Additionally, this mode does not support regeneration historical state trie before the checkpoint, so data node cannot use this mode for synchronization. Typically used for full node synchronization.

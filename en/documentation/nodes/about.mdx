@@ -2,13 +2,50 @@
 title: "Learn About Nodes"
 ---
 
-`AxiomLedger` network consists of three types of nodes: `Validator`, `Proposer` and `Candidate`.
-The main difference between them is the role in consensus:
+### Node Types
 
-- `Validators` participate in consensus voting.
-- `Proposers` are special Validator nodes that propose blocks in consensus.
-- `Candidates` do not participate in consensus but only synchronize the latest block data in the network
-(they also forward transactions).
 
-However, there is no difference in deployment and installation between them. This chapter will introduce
-how to deploy a separate development environment network and how to deploy nodes to participate in the mainnet or testnet.
+In the AxiomLedger network, different roles are assigned to blockchain nodes, depending on the consensus and ledger storage perspectives. From a consensus perspective, AxiomLedger introduces three different node roles:
+
+<img src="/en/images/nodes/nodes-network.png" width="700" />
+
+    - **Validators** : Nodes participating in consensus and can verify and vote on packaging proposals presented by proposers.
+    - **Proposers** : Nodes possessing all the functionalities of validators and are responsible for packaging blocks within the current term.
+    - **Candidates** : Nodes that do not participate in consensus, only synchronize blocks.During turnning into new epoch, there is a probability for candidates to transition to Validators.
+
+From a ledger storage perspective, nodes are categorized into two types:
+
+    - **Data Syncer Nodes** : Not participating in consensus, synchronizing blocks, possessing complete state data. Typically utilized for data queries, resembling Ethereum's archive nodes.
+    - **Full Nodes** : Capable of participating in consensus, synchronizing blocks, possessing state data for the most recent time period. These nodes prune their state data, resembling Ethereum's full nodes.
+
+As the number of consensus network nodes increases, the performance of consensus is limited by the O($n^2$) communication complexity, resulting in performance degradation. Different node roles lead to a relatively fixed size of the consensus nodes, which does not increase with the scale of the node count. This helps improve the efficiency and scalability of the consensus.
+
+### Node Role Transitions
+
+In the AxiomLedger blockchain network, node role transitions officially take effect during epoch changes. Node role transitions are as follows:
+
+<img src="/en/images/nodes/node-state-machine.png" width="700" />
+
+    - **New Node → Candidate** : A new node proposing to join needs to submit a proposal. Once approved by governance, the new node formally joins the network and becomes a candidate.
+    - **Candidate ↔ Validator** : During each epoch change, the epoch management contract employs the WRF algorithm to select a specified number of validators from the candidates. When epoch change conditions are met (usually at a certain checkpoint interval), all nodes in the AxiomLedger network update their validator set. WRF algorithm will be detailed in the next section.
+    - **Validator ↔ Proposer** : After the epoch management contract is updated, validators determine the proposer using the WRF algorithm. The chosen proposer is responsible for packaging blocks within the current term (term interval equals checkpoint interval).
+    - **Candidate/Validator ↔ Exited Node** : Once an exit proposal is approved, a node can exit the network.
+
+
+### Node Penalty Mechanism
+
+Performance bottlenecks of validator nodes directly impact the overall operational efficiency of the entire blockchain network. To incentive more honest nodes with robust machine performance to become validator/proposer nodes, AxiomLedger has implemented corresponding measures:
+- For nodes with poor network performance or Byzantine errors, the other validator nodes will reduce the node's weight in being selected as the proposer/validator for the next block, thereby lowering the probability of their next selection.
+- After a specified number of blocks have been generated, the weight of the node will gradually return to normal.
+
+
+AxiomLedger detects Byzantine nodes in terms of security and liveness:
+- Security: validator nodes fail to verify the block proposal presented by the current proposer node.
+- Liveness: other validator nodes(which is not proposer) observe the presence of packable transactions at the moment, yet the proposer node fails to post a proposal.
+
+
+there is no difference in deployment and installation between them. This chapter will introduce how to deploy a separate development environment network and how to deploy nodes to participate in the mainnet or testnet，Additionally, it briefly introduces the node synchronization mechanism.
+
+
+
+
