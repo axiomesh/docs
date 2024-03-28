@@ -80,7 +80,7 @@ The consensus component is responsible for determining the order of blockchain t
 The ledger component provides the ability to manage blockchain world state data and block data. The state data includes account related information such as 
 balance, permissions, nonce value, etc. For special accounts such as contract accounts, it also contains the contract bytecode and all related changed states 
 involved in the contracts. In addition, the ledger also provides the ability to manage block data. Block data includes blocks, transactions, transaction receipts 
-and other persistent non-mutable data, mainly providing storage and query services for such data. In addition, the ledger module can also rely on the Merkle tree to provide the ability of Merkle proof of critical data within the ledger.
+and other persistent non-mutable data, mainly providing storage and query services for such data. Additionally, the ledger module can rely on JMT to provide the capability of proving historical data within the ledger.
 
 The ledger component is responsible for managing the world state and block data of the blockchain:
 
@@ -101,3 +101,45 @@ for cross-chain transactions, relay routing for cross-chain transactions, and or
 
 The admission control component provides the capability of secure validation for transactions. This component provides basic transaction validity 
 check services, including transaction format, signature information, gas fees, etc.
+
+## Core Capabilities
+
+### Native Smart Account
+
+The Native Smart Account (NSA) is one of the key initiatives to lower the entry barrier for users and realize large-scale blockchain commercial applications. Axiomesh ensures higher execution efficiency and more flexible authentication methods (such as ZK authentication, aggregate signature authentication) through chain-native support for smart accounts. It also directly provides practical capabilities such as gas fee payment, compatibility with Web2 login, account key recovery, limited authorization within a validity period, etc., greatly reducing the entry barriers for developers and end-users.
+
+<Card
+    href="/en/documentation/native-smart-account/overview"
+    title="Native Smart Account"
+    icon="book-open"
+    iconType="duotone"
+>
+    Learn about Native Smart Account
+</Card>
+
+
+### Decentralized Confidential Protocol with Auditability
+
+The absence of privacy protection on public chains is one of the core factors hindering users, especially enterprise users, from using and building blockchain business applications. Therefore, Axiomesh needs to provide users with powerful privacy protection capabilities. Combining design principles, Axiomesh proposes a compliance-compliant and privacy-compatible protection protocol called Decentralized Confidential Protocol with Auditability (DCPA). DCPA adopts a twin token model in its overall architecture to ensure the composability and flexibility of the protocol. Based on cutting-edge cryptographic technology, it ensures the security and privacy of transaction content and identity under the premise of regulatory compliance.
+
+<Card
+    href="/en/documentation/dcpa/overview"
+    title="Decentralized Confidential Protocol with Auditability"
+    icon="book-open"
+    iconType="duotone"
+>
+    Learn about Decentralized Confidential Protocol with Auditability
+</Card>
+
+### Trusted Inter-Module Communication Protocol
+
+The Trusted Inter-Module Communication Protocol (TIMC) is a protocol similar in purpose to Cosmos' IBC and Polkadot's XCMP. It is used for secure and trusted communication between modules within Axiomesh (settlement layer, execution layer, data custody layer) to transfer data and value. In addition, it provides additional powerful capabilities such as unified liquidity of AXM tokens among various modules within Axiomesh.
+
+<Card
+    href="/en/documentation/timc/overview"
+    title="Trusted Inter-Module Communication Protocol"
+    icon="book-open"
+    iconType="duotone"
+>
+    Learn about Trusted Inter-Module Communication Protocol
+</Card>

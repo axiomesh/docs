@@ -22,3 +22,16 @@ The second testnet version **Taurus** introduces the following features:
 - API layer supports separate rate limiting for read and write requests.
 - P2P network switches to the gossip protocol, providing better scalability for large-scale nodes.
 - Block synchronization mechanism supports verification of the correctness of synchronized blocks.
+
+# v0.3.0
+Contains the following features:
+- Transaction pool supports price-priority block packing
+- Optimizes interoperability between system contracts and EVM contracts
+- Reduces the amount of data broadcast in P2P message broadcasting through data compression
+- JSON-RPC interface supports trace and txpool
+- Supports ledger management command line
+- Optimizes the performance of query-type api
+- supports synchronization mode based on state snapshots
+- Refactors node key management
+- Ledger module supports pruning mechanism, which can prune ledger historical states outside the pruning window at node runtime, thereby reducing the disk space required to run a full node and improving ledger read and write performance
+- Ledger module supports generating and verifying state snapshots of specified blocks

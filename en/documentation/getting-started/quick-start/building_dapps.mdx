@@ -6,7 +6,7 @@ This guide will introduce how to set up development tools on MacOS and develop D
 
 Please familiarize yourself with the basic concepts of [Uniswap](https://docs.uniswap.org/) before using the following tutorial for project deployment and experience!
 
-The following steps will take the Aries testnet as an example. If you want to try it on the mainnet or other testnets, you can view related resources on the [Resources](/en/documentation/getting-started/resources/resources) page.
+The following steps will take the Taurus testnet as an example. If you want to try it on the mainnet or other testnets, you can view related resources on the [Resources](/en/documentation/getting-started/resources/resources) page.
 
 ## Development Environment Configuration
 
@@ -91,14 +91,14 @@ npx hardhat
 
 At this point, you need to modify the `networks` field in the Hardhat configuration file to fit your network.
 
-The account private key is used for deploying contracts on the chain. It can be safely used by setting it as an environment variable. Use the command `export YOUR_PRIVATE_KEY = 'YOUR_PRIVATE_KEY'` to write it to the environment variable. Use the `Aries` testnet as an example, the `Hardhat config` is as follows:
+The account private key is used for deploying contracts on the chain. It can be safely used by setting it as an environment variable. Use the command `export YOUR_PRIVATE_KEY = 'YOUR_PRIVATE_KEY'` to write it to the environment variable. Use the `Taurus` testnet as an example, the `Hardhat config` is as follows:
 
 ```typescript
 const config: HardhatUserConfig = {
-  defaultNetwork: "aries",
+  defaultNetwork: "taurus",
   networks: {
-    aries: {
-      url: "https://rpc4.aries.axiomesh.io",
+    taurus: {
+      url: "https://rpc4.taurus.axiomesh.io",
       accounts: [
         "YOUR_PRIVATE_KEY", // please config your private key through safe ways
       ]
@@ -212,13 +212,13 @@ contract AxiomToken is ERC20 {
 
 ### Deploy Contracts & Record Contract Address
 
-Run the following command to deploy the contracts to the corresponding network. Here, we'll deploy the contracts to the `Aries` testnet as an example.
+Run the following command to deploy the contracts to the corresponding network. Here, we'll deploy the contracts to the `Taurus` testnet as an example.
 
 <Warning>Please note: The first account configured in the hardhat network will be used as the deployment account. You need to ensure that this account has sufficient tokens. For information on how to obtain tokens from the faucet for testing, please refer to the [Resources](/en/documentation/getting-started/resources/resources).</Warning>
 
 ```shell
-npx hardhat run scripts/deployUniswapV2.js --network aries
-npx hardhat run scripts/deployUniswapTokens.js --network aries
+npx hardhat run scripts/deployUniswapV2.js --network taurus
+npx hardhat run scripts/deployUniswapTokens.js --network taurus
 ```
 
 After running the relevant deployment scripts, we can obtain the relevant Uniswap@V2 contract addresses。After running the relevant ERC20 token deployment script, we can obtain the associated Token contract addresses:
@@ -281,12 +281,12 @@ yarn install
 
 #### Modify Network
 
-Since currently Uniswap only supports the Ethereum mainnet and its testnets you need to modify the `ChainId[TESTNET]` in `src/constants.ts` to your desired `chain ID`. Here, we'll take the `AxiomLedger` testnet `Aries` as an example, and you can change the chain ID to `23411`.
+Since currently Uniswap only supports the Ethereum mainnet and its testnets you need to modify the `ChainId[TESTNET]` in `src/constants.ts` to your desired `chain ID`. Here, we'll take the `AxiomLedger` testnet `Taurus` as an example, and you can change the chain ID to `23412`.
 
 ```typescript
 export enum ChainId {
   MAINNET = 65524,
-  TESTNET = 23411,
+  TESTNET = 23412,
 }
 ```
 #### Modify Contract Address
@@ -330,7 +330,7 @@ This library will help you generate the relevant [token-lists](https://blog.unis
 
 Find the corresponding package and manually modify it according to the following format. Since `WETH` is the required contract for `Uniswap@V2`, you need to modify the `address` and `chainId` to your configuration after deployment. 
 
-Using `src/tokens/testnet.json` as an example, please fill in the corresponding fields with the `WETH_ADDR`, `AXMTOKEN1_ADDR`, etc., produced after deploying the token contract as mentioned above. The `logoURI` of the test token can be customized. Take `Aries testnet` as an example, you can modify the `chainId` to `23411`.
+Using `src/tokens/testnet.json` as an example, please fill in the corresponding fields with the `WETH_ADDR`, `AXMTOKEN1_ADDR`, etc., produced after deploying the token contract as mentioned above. The `logoURI` of the test token can be customized. Take `Taurus testnet` as an example, you can modify the `chainId` to `23412`.
 
 For other tokens, please read the [token list description](https://blog.uniswap.org/token-lists) and fill in accordingly.
 
@@ -341,7 +341,7 @@ For other tokens, please read the [token list description](https://blog.uniswap.
     "address": "WETH_ADDR",
     "symbol": "WETH",
     "decimals": 18,
-    "chainId": 23411,
+    "chainId": 23412,
     "logoURI": "WETH_URL"
   },
   {
@@ -349,7 +349,7 @@ For other tokens, please read the [token list description](https://blog.uniswap.
     "address": "AXMTOKEN1_ADDR",
     "symbol": "AX1",
     "decimals": 18,
-    "chainId": 23411,
+    "chainId": 23412,
     "logoURI": "AXMTOKEN1_URL"
   },
   //...
@@ -398,11 +398,11 @@ Modify the dependency package:
 "@uniswap/sdk": "../uniswap-sdk",
 ```
 
-Adjust the environment configuration. Taking `AxiomLedger` `Aries` testnet as an example, modify the corresponding entries in the `.env` and `.env.production`files to the following values:
+Adjust the environment configuration. Taking `AxiomLedger` `Taurus` testnet as an example, modify the corresponding entries in the `.env` and `.env.production`files to the following values:
 
 ```text
-REACT_APP_CHAIN_ID="23411"
-REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
+REACT_APP_CHAIN_ID="23412"
+REACT_APP_NETWORK_URL="https://rpc4.taurus.axiomesh.io"
 ```
 
 #### Build and Launch
@@ -416,7 +416,7 @@ npx react-scripts build
 npx react-scripts start
 ```
 
-Now you can experience Uniswap@V2 built on `AxiomLedger` `Aries` testnet.
+Now you can experience Uniswap@V2 built on `AxiomLedger` `Taurus` testnet.
 
 ## Miscellaneous - Build by Remix
 
