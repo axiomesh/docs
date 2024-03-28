@@ -2,10 +2,10 @@
 title: "Storage"
 ---
 
-This section will introduce the authenticated data structure and KV storage engine in ledger components, as well as the verification process of SPV nodes.
+This section will introduce the authenticated data structure and pruning scheme in ledger components, as well as the verification process of SPV nodes.
 
 ## SMT
-The ledger component uses Sparse Merkle Tree (SMT) as an authenticated data structure. SMT is an optimized Merkle tree, which reduces the number of nodes in the tree by recursively merging single-leaf subtrees, thereby speeding up addressing and reducing waste of storage space. 
+The ledger component uses Sparse Merkle Tree (SMT) as an authenticated data structure. SMT is an optimized Merkle tree, which reduces the number of nodes in the tree by recursively merging single-leaf subtrees, thereby speeding up addressing and reducing waste of storage space.
 
 At the same time, we construct the key of the SMT node based on the block number. When using the KV storage engine based on the LSM tree, this scheme can significantly reduce the compression overhead of the storage engine.
 
@@ -16,6 +16,13 @@ The following figure shows the history ledger architecture of AxiomLedger:
 
 ![AxiomLedger history ledger architecture](/en/images/system-design/smt.png)
 
+## Pruning Scheme
+
+Pruning scheme can prune the blockchain ledger history, reduce the amount of disk space that running a node requires, and improve the read and write performance of ledger.
+
+AxiomLedger supports pruning scheme, in which the prunner will prune the ledger history that out of pruning window in node runtime.
+
+By configuring different pruning window, an AxiomLedger node could be an archival node (which maintains the ledger history of all blocks), or a full node (which only maintains the ledger history of several recent blocks).
 
 
 ## KV Storage Engine
