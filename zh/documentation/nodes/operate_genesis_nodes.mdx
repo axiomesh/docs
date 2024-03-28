@@ -1,0 +1,74 @@
+---
+title: "运营创世节点"
+description: "掌握如何开启属于创世成员的`AxiomLedger`节点网络。"
+---
+
+<Warning>启动`AxiomLedger`节点网络的创世成员需提前进行沟通协调，确保在创世阶段通过电子邮件或即时通讯工具交流，以保证配置的一致性，否则可能会导致共识机制的失败。</Warning>
+
+## 获取安装包
+
+进入[GitHub Release](https://github.com/axiomesh/axiom-ledger/releases)页面，根据您的操作系统类型下载最新版本的`AxiomLedger`安装包。
+以`MacOS M1`版本为例，在页面中选择名为`axiom-ledger-v0.0.2-arm64-darwin.tar.gz`的安装包，并下载至`~/Downloads`目录。
+请注意，所有参与创世的成员都必须下载相同版本号的安装包。
+
+使用以下命令解压安装包至指定目录：
+```shell
+mkdir ~/axiom-ledger
+tar -zxvf ~/Downloads/axiom-ledger-dev-arm64-darwin.tar.gz -C ~/axiom-ledger
+cd ~/axiom-ledger
+```
+
+## 参数配置
+
+### 初始化节点
+
+执行附带的脚本以生成节点的初始配置：
+
+```shell
+./init.sh
+```
+
+该脚本执行完毕后，会创建出节点的`account-addr`，`p2p-id`以及`p2p-addr`信息。
+
+```shell
+AxiomLedger-repo: /Users/axiomesh/axiom-ledger
+account-addr: 0xedA8681d5d6578304e4e486E1CA43ca2B87d359C
+p2p-id: 16Uiu2HAmKbtgGizXRh7F6Vp9Mep33GZfUAk2J4qXozQaXoETD8Mw
+p2p-addr: /ip4/0.0.0.0/tcp/4001/p2p/16Uiu2HAmKbtgGizXRh7F6Vp9Mep33GZfUAk2J4qXozQaXoETD8Mw
+```
+
+随后，将您的机器的完整`p2p-addr`分享给其他节点运维人员。假设以四个节点启动为例，您需要获取其他三个节点的`p2p-addr`并进行以下配置：
+
+```shell
+# 节点1
+p2p-addr: /ip4/2.56.91.200/tcp/4001/p2p/16Uiu2HAmQdYy2LSjynNjBpTTUNsd6mMTmPYmMfdLfaFscgWrM7mt
+# 节点2
+p2p-addr: /ip4/2.56.91.201/tcp/4001/p2p/16Uiu2HAkv3w3pp7VSDrC2woRdeWphL1mxDMrWJjgMwZdiHbfa6Ss
+# 节点3
+p2p-addr: /ip4/2.56.91.202/tcp/4001/p2p/16Uiu2HAmRGXHpdH9nJqqSbhyXaPVsZzCyxtNrXofcrkDn1UBjvzH
+```
+
+并在`config.toml`文件中更新以下字段后保存：
+
+```shell
+p2p_bootstrap_node_addresses = [
+  '/ip4/2.56.91.200/tcp/4001/p2p/16Uiu2HAmQdYy2LSjynNjBpTTUNsd6mMTmPYmMfdLfaFscgWrM7mt',
+  '/ip4/2.56.91.201/tcp/4001/p2p/16Uiu2HAkv3w3pp7VSDrC2woRdeWphL1mxDMrWJjgMwZdiHbfa6Ss',
+  '/ip4/2.56.91.202/tcp/4001/p2p/16Uiu2HAmRGXHpdH9nJqqSbhyXaPVsZzCyxtNrXofcrkDn1UBjvzH',
+  '/ip4/2.56.91.204/tcp/4001/p2p/16Uiu2HAmKbtgGizXRh7F6Vp9Mep33GZfUAk2J4qXozQaXoETD8Mw'
+]
+```
+
+### 其他参数
+
+根据客制化要求修改创世配置`genesis.toml`和共识配置`consensus.toml`，并将修改的内容通知其他运营方完成同步修改。
+
+## 启动节点
+
+调用如下命令启动本机节点，观察节点日志判断创世节点是否正常启动并连接成功。其中节点日志记录在`./logs`目录下，节点数据保存在`./storage`目录下。
+
+```shell
+./axiom-ledger start
+```
+
+

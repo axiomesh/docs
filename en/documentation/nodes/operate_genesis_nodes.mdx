@@ -1,0 +1,76 @@
+---
+title: "Operate Genesis Nodes"
+description: "Learn how to start genesis members `AxiomLedger` network."
+---
+
+<Warning>Genesis members should communicate in advance when initiating the `AxiomLedger` network. It is necessary to ensure consistent configuration during the genesis by means of email or instant messaging software; otherwise, it may lead to a consensus failure. </Warning>
+
+## Obtaining the Installation Package
+
+Visit the [GitHub Release](https://github.com/axiomesh/axiom-ledger/releases) page and download the latest AxiomLedger package suitable for your system type.
+As an example for `MacOS M1`, download the package named `axiom-ledger-v0.0.1-arm64-darwin.tar.gz` to the `~/Downloads` directory.
+Note that all genesis members must download the installation package with the same version number.
+
+Use the following command to extract the package to the desired location.
+
+```shell
+mkdir ~/axiom-ledger
+tar -zxvf ~/Downloads/axiom-ledger-dev-arm64-darwin.tar.gz -C ~/axiom-ledger
+cd ~/axiom-ledger
+```
+
+## Parameter Configuration
+
+### Initialize Node Configuration
+
+Invoke the provided script to generate the initial configuration for the node.
+
+```shell
+./init.sh
+```
+
+After running the script, it will produce the node’s `account-addr`，`p2p-id`, and `p2p-addr`.
+
+```shell
+AxiomLedger-repo: /Users/axiomesh/axiom-ledger
+account-addr: 0xedA8681d5d6578304e4e486E1CA43ca2B87d359C
+p2p-id: 16Uiu2HAmKbtgGizXRh7F6Vp9Mep33GZfUAk2J4qXozQaXoETD8Mw
+p2p-addr: /ip4/0.0.0.0/tcp/4001/p2p/16Uiu2HAmKbtgGizXRh7F6Vp9Mep33GZfUAk2J4qXozQaXoETD8Mw
+```
+
+Then, combine the local machine’s `ip` to send the complete `p2p-addr` to other node operators. For instance, if we are starting with four nodes, obtain the `p2p-addr` configuration from the other three parties as follows:
+
+```shell
+# node 1
+p2p-addr: /ip4/2.56.91.200/tcp/4001/p2p/16Uiu2HAmQdYy2LSjynNjBpTTUNsd6mMTmPYmMfdLfaFscgWrM7mt
+# node 2
+p2p-addr: /ip4/2.56.91.201/tcp/4001/p2p/16Uiu2HAkv3w3pp7VSDrC2woRdeWphL1mxDMrWJjgMwZdiHbfa6Ss
+# node 3
+p2p-addr: /ip4/2.56.91.202/tcp/4001/p2p/16Uiu2HAmRGXHpdH9nJqqSbhyXaPVsZzCyxtNrXofcrkDn1UBjvzH
+```
+
+Modify the following fields in config.toml and save:
+
+```shell
+p2p_bootstrap_node_addresses = [
+  '/ip4/2.56.91.200/tcp/4001/p2p/16Uiu2HAmQdYy2LSjynNjBpTTUNsd6mMTmPYmMfdLfaFscgWrM7mt',
+  '/ip4/2.56.91.201/tcp/4001/p2p/16Uiu2HAkv3w3pp7VSDrC2woRdeWphL1mxDMrWJjgMwZdiHbfa6Ss',
+  '/ip4/2.56.91.202/tcp/4001/p2p/16Uiu2HAmRGXHpdH9nJqqSbhyXaPVsZzCyxtNrXofcrkDn1UBjvzH',
+  '/ip4/2.56.91.204/tcp/4001/p2p/16Uiu2HAmKbtgGizXRh7F6Vp9Mep33GZfUAk2J4qXozQaXoETD8Mw'
+]
+```
+
+### Additional Parameters
+
+Modify the genesis configuration `genesis.toml` and consensus configuration `consensus.toml` according to custom requirements, and notify other operators to make synchronized modifications.
+
+## Starting the Node
+
+Invoke the following command to start the local node and observe the node logs to determine whether the genesis node has started properly and connected successfully.
+The node logs are recorded in the `./logs` directory, and the node data is stored in the `./storage` directory.
+
+```shell
+./axiom-ledger start
+```
+
+

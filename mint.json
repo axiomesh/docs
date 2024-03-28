@@ -113,7 +113,9 @@
       "pages": [
         "en/documentation/nodes/about",
         "en/documentation/nodes/node_requirements",
-        "en/documentation/nodes/run_node"
+        "en/documentation/nodes/run_node",
+        "en/documentation/nodes/add_node",
+        "en/documentation/nodes/operate_genesis_nodes"
       ]
     },
     {
