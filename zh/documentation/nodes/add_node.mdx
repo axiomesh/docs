@@ -1,0 +1,32 @@
+---
+title: "增加节点"
+description: "了解如何增加一个 `AxiomLedger` 节点。"
+---
+
+完成上一节内容之后，我们已经运行了一个 `AxiomLedger` 节点。这里我们会描述如何将该节点真正的加入网络。
+
+## 准备提案
+
+进入[区块链浏览器](https://scan.taurus.axiomesh.io)的治理页面，治理委员会成员可以发表新增节点的提案。
+点击下图右上角的`post a proposal`来创建新的提案。
+
+![Governance](/en/images/nodes/governance.png)
+
+## 节点配置
+
+上一节中使用 `axiom-ledger --repo=$WORKSPACE config generate` 命令会产生本节点的配置，该配置可用于节点治理提案填写数据。配置如下所示
+
+```shell
+account-addr: YOUR_NODE_ACOUNT_ADDR
+p2p-id: YOUR_NODE_P2P_ID
+```
+
+## 编写提案
+
+选择相应的提案类型 `Proposal Type=Add Blockchain Node`，并根据自有节点的配置填写关键的两个信息，其中`p2p-id` 对应 `Node ID` ，`account-addr` 对应 `Address`。
+
+填写完成后点击 `submit`。
+
+![add_blockchain_node](/en/images/nodes/add_blockchain_node.png)
+
+投票通过后，该节点可以被网络接纳。

@@ -1,0 +1,35 @@
+---
+title: "Add a Node"
+description: "Learn how to add an extra `AxiomLedger` node."
+---
+
+After completing the content of the previous section, we have already run an `AxiomLedger` node. Here, we will describe how to truly integrate this node into the network.
+
+## Preparing a Proposal
+
+Enter the governance page of the [blockchain explorer](https://scan.taurus.axiomesh.io),
+where members of the governance committee can post proposals to add new nodes.
+Click `post a proposal` in the top right corner of the image below to create a new proposal.
+
+![Governance](/en/images/nodes/governance.png)
+
+## Node Configuration
+
+The command `axiom-ledger --repo=$WORKSPACE config generate` used in the previous section will generate the configuration for this node,
+which can be used to fill in the data for the node governance proposal. The configuration is as follows:
+
+```shell
+account-addr: YOUR_NODE_ACOUNT_ADDR
+p2p-id: YOUR_NODE_P2P_ID
+```
+
+## Writing a Proposal
+
+Select the appropriate proposal type `Proposal Type=Add Blockchain Node`, and fill in two key pieces of information according to your own node's configuration.
+The `p2p-id` corresponds to `Node ID`, and `account-addr` corresponds to `Address`.
+
+After completing the form, click `submit`.
+
+![add_blockchain_node](/en/images/nodes/add_blockchain_node.png)
+
+Once the vote passes, the node can be accepted by the network.
