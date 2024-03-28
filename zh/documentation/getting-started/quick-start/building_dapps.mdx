@@ -6,7 +6,7 @@ title: "构建 Dapps"
 
 请了解 [Uniswap](https://docs.uniswap.org/) 基础概念之后再使用如下教程进行项目部署和体验!
 
-以下步骤都将以Aries测试网为例，如果您想在主网或其他测试网上尝试，可在[资源](/zh/documentation/getting-started/resources/resources)页查看其他链的相关资源。
+以下步骤都将以Taurus测试网为例，如果您想在主网或其他测试网上尝试，可在[资源](/zh/documentation/getting-started/resources/resources)页查看其他链的相关资源。
 
 ## 设置开发环境
 首先您需要安装一些必要的开发工具，包含 Git、NodeJs 等。
@@ -92,14 +92,14 @@ npx hardhat
 
 账户私钥用于在链上部署合约，可以用环境变量的方式来安全的使用，使用 `export YOUR_PRIVATE_KEY=‘YOUR_PRIVATE_KEY’` 命令来写入环境变量。
 
-以 Aries 测试网为例, Hardhat config 配置如下所示:
+以 Taurus 测试网为例, Hardhat config 配置如下所示:
 
 ```typescript
 const config: HardhatUserConfig = {
-  defaultNetwork: "aries",
+  defaultNetwork: "taurus",
   networks: {
-    aries: {
-      url: "https://rpc4.aries.axiomesh.io",
+    taurus: {
+      url: "https://rpc4.taurus.axiomesh.io",
       accounts: [
         "YOUR_PRIVATE_KEY", // 请通过安全的方式配置您的私钥，例如使用环境变量
       ]
@@ -214,13 +214,13 @@ contract AxiomToken is ERC20 {
 
 ### 部署合约并记录部署地址
 
-调用如下命令部署合约到对应的网络上，这里我们将合约部署到 AxiomLedger 的 aries 测试网上作为示范。
+调用如下命令部署合约到对应的网络上，这里我们将合约部署到 AxiomLedger 的 taurus 测试网上作为示范。
 
 <Warning>需要注意，配置在 hardhat network 中的第一个账户将会成为部署账号，您需要保证该账号中有足够的令牌，如何从水管获取令牌用于测试可以参考[资源](/zh/documentation/getting-started/resources/resources)。</Warning>
 
 ```shell
-npx hardhat run scripts/deployUniswapV2.js --network aries
-npx hardhat run scripts/deployUniswapTokens.js --network aries
+npx hardhat run scripts/deployUniswapV2.js --network taurus
+npx hardhat run scripts/deployUniswapTokens.js --network taurus
 ```
 
 运行`合约部署脚本`和` ERC20 代币部署脚本`之后，你将获得` Uniswap@V2 合约地址`以及` Token 合约地址`，这些地址将在下一步骤中用到。
@@ -280,12 +280,12 @@ yarn install
 
 #### 修改网络
 
-由于目前 Uniswap 仅支持以太坊主网以及其测试网，因此您需要修改 `src/constants.ts` 中的 `ChainId[TESTNET]` 为你需要的`链ID`。此处以AxiomLedger 测试网`Aries`为例，可将`链ID`修改为 `23411`：
+由于目前 Uniswap 仅支持以太坊主网以及其测试网，因此您需要修改 `src/constants.ts` 中的 `ChainId[TESTNET]` 为你需要的`链ID`。此处以AxiomLedger 测试网`Taurus`为例，可将`链ID`修改为 `23412`：
 
 ```typescript
 export enum ChainId {
   MAINNET = 65524,
-  TESTNET = 23411,
+  TESTNET = 23412,
 }
 ```
 
@@ -330,7 +330,7 @@ npx tsdx build
 
 进入相应的包，然后根据如下格式进行手动修改，`WETH `是 `Uniswap@V2` 的必需合约，因此您部署完之后需要修改相应的 `address` 和 `chainId` 以及 `logoURI` 为您的相应配置。
 
-如下以 `src/tokens/testnet.json` 为例，请将上文部署 token 合约之后生产的 `WETH_ADDR`、`AXMTOKEN1_ADDR` 等填入相应的位置，测试令牌的 `logoURI` 可以自定义，以`Aries测试网为例`，您可以修改 `chainId` 为 `23411`。
+如下以 `src/tokens/testnet.json` 为例，请将上文部署 token 合约之后生产的 `WETH_ADDR`、`AXMTOKEN1_ADDR` 等填入相应的位置，测试令牌的 `logoURI` 可以自定义，以`Taurus`测试网为例，您可以修改 `chainId` 为 `23412`。
 
 其他代币请阅读[代币列表说明](https://blog.uniswap.org/token-lists)之后自主填写。
 
@@ -341,7 +341,7 @@ npx tsdx build
     "address": "WETH_ADDR",
     "symbol": "WETH",
     "decimals": 18,
-    "chainId": 23411,
+    "chainId": 23412,
     "logoURI": "WETH_URL"
   },
   {
@@ -349,7 +349,7 @@ npx tsdx build
     "address": "AXMTOKEN1_ADDR",
     "symbol": "AX1",
     "decimals": 18,
-    "chainId": 23411,
+    "chainId": 23412,
     "logoURI": "AXMTOKEN1_URL"
   },
   //...
@@ -397,11 +397,11 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
 "@uniswap/sdk": "../uniswap-sdk",
 ```
 
-修改环境配置。这里以 AxiomLedger 的 Aries 测试网络为例，将项目目录下的 `.env` 和 `.env.production` 文件中的相应的条目修改为如下值：
+修改环境配置。这里以 AxiomLedger 的 Taurus 测试网络为例，将项目目录下的 `.env` 和 `.env.production` 文件中的相应的条目修改为如下值：
 
 ```text
-REACT_APP_CHAIN_ID="23411"
-REACT_APP_NETWORK_URL="https://rpc4.aries.axiomesh.io"
+REACT_APP_CHAIN_ID="23412"
+REACT_APP_NETWORK_URL="https://rpc4.taurus.axiomesh.io"
 ```
 
 #### 项目构建和启动
@@ -415,7 +415,7 @@ npx react-scripts build
 npx react-scripts start
 ```
 
-现在您可以体验构建在 AxiomLedger 的 aries 测试网上的 Uniswap@V2 了，尝试一下添加流动性吧！
+现在您可以体验构建在 AxiomLedger 的 taurus 测试网上的 Uniswap@V2 了，尝试一下添加流动性吧！
 
 ## 其他-使用Remix构建Dapp
 

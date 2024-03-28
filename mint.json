@@ -3,10 +3,10 @@
   "name": "Axiomesh",
   "api": {
     "baseUrl": [
-      "https://rpc1.aries.axiomesh.io",
-      "https://rpc2.aries.axiomesh.io",
-      "https://rpc3.aries.axiomesh.io",
-      "https://rpc4.aries.axiomesh.io"
+      "https://rpc1.taurus.axiomesh.io",
+      "https://rpc2.taurus.axiomesh.io",
+      "https://rpc3.taurus.axiomesh.io",
+      "https://rpc4.taurus.axiomesh.io"
     ]
   },
   "logo": {
@@ -106,6 +106,12 @@
         "en/documentation/native-smart-account/paymaster",
         "en/documentation/native-smart-account/recovery",
         "en/documentation/native-smart-account/session-key"
+      ]
+    },
+    {
+      "group": "TIMC",
+      "pages": [
+        "en/documentation/timc/overview"
       ]
     },
     {

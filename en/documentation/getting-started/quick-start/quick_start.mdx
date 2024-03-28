@@ -3,7 +3,7 @@ title: "Your First Transaction"
 ---
 
 This guide will introduce how to quickly access and use the AxiomLedger blockchain. You can easily initiate transactions, mint tokens through our guides and view block and transaction information through AXMScan.
-**The following steps will take the Aries testnet as an example. If you want to try it on the mainnet or other testnets, you can view related resources on the [Resources](/en/documentation/getting-started/resources/resources) page.**
+**The following steps will take the Taurus testnet as an example. If you want to try it on the mainnet or other testnets, you can view related resources on the [Resources](/en/documentation/getting-started/resources/resources) page.**
 
 ## Wallet Configuration
 
@@ -11,7 +11,7 @@ AxiomLedger is an EVM-compatible blockchain, which means that any Ethereum tools
 
 If you are using MetaMask for the first time, please click [here](https://metamask.io/download/) to install the plugin. If you are connecting to AxiomLedger for the first time, you need to add RPC address, chain ID, token symbol, and other required information to the network list. The chain information of the mainnet and testnets can be viewed on the [Resources](/en/documentation/getting-started/resources/resources) page.
 
-After successfully connecting to the AxiomLedger, your account balance will generally be `0` AXM. At this time, you can visit the AxiomLedger testnet [faucet](https://faucet.aries.axiomesh.io/) and enter your account address on the webpage to receive some AXMs.
+After successfully connecting to the AxiomLedger, your account balance will generally be `0` AXM. At this time, you can visit the AxiomLedger testnet [faucet](https://faucet.taurus.axiomesh.io/) and enter your account address on the webpage to receive some AXMs.
 
 **_Please note: Within a 24-hour period, each account can only obtain AXM once from the faucet._**
 
@@ -19,7 +19,7 @@ After successfully connecting to the AxiomLedger, your account balance will gene
 
 If you want to learn more about AxiomLedger, such as getting more information on the chain or initiating transactions on the chain, it is recommended that you use the official SDK ([axiom.js](https://github.com/axiomesh/axiom.js)). This SDK is similar in usage to [ether.js](https://github.com/ethers-io/ethers.js).
 
-Copy the code below and save it as a file with the `.mjs` extension. Replace the sender's private key and the recipient's address in the code with those of your test account (i.e., replace `account_from` and `account_to`). Then, run `node YourFileName.mjs` (make sure you have `Node.js` installed beforehand). Wait for the terminal to return the transaction hash, which indicates a successful transaction. At this point, you can check whether the balance in Metamask has been updated. If there is a network delay, you can check later. You can also paste the returned transaction hash into [AXMScan](https://scan.aries.axiomesh.io) to view the transaction details.
+Copy the code below and save it as a file with the `.mjs` extension. Replace the sender's private key and the recipient's address in the code with those of your test account (i.e., replace `account_from` and `account_to`). Then, run `node YourFileName.mjs` (make sure you have `Node.js` installed beforehand). Wait for the terminal to return the transaction hash, which indicates a successful transaction. At this point, you can check whether the balance in Metamask has been updated. If there is a network delay, you can check later. You can also paste the returned transaction hash into [AXMScan](https://scan.taurus.axiomesh.io) to view the transaction details.
 
 <Warning>
   Please note: If you have a proxy service running on your computer, it may
@@ -31,7 +31,7 @@ Copy the code below and save it as a file with the `.mjs` extension. Replace the
 // Setup: npm install @axiomesh/axiom
 import { ethers } from '@axiomesh/axiom'
 
-const provider = new ethers.JsonRpcProvider("https://rpc1.aries.axiomesh.io");
+const provider = new ethers.JsonRpcProvider("https://rpc1.taurus.axiomesh.io");
 
 async function main() {
   // query the BlockNumber on AxiomLedger
@@ -228,4 +228,4 @@ After the transfer is completed, you can switch to the receiving account address
 
 ## Use Blockchain Explorers
 
-AxiomLedger offers an official blockchain explorers - [AXMScan](https://scan.aries.axiomesh.io). While interacting with the AxiomLedger blockchain, you can access block and transaction information from the testnet at any time. You can find more about how to use AXMScan [here](/en/documentation/getting-started/resources/resources#axmscan).
+AxiomLedger offers an official blockchain explorers - [AXMScan](https://scan.taurus.axiomesh.io). While interacting with the AxiomLedger blockchain, you can access block and transaction information from the testnet at any time. You can find more about how to use AXMScan [here](/en/documentation/getting-started/resources/resources#axmscan).
