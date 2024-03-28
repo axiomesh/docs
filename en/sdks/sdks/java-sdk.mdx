@@ -63,10 +63,10 @@ public class SendRawTransactionTest {
     Web3j web3j = Web3j.build(new HttpService(AXIOM_LEDGER_TEST_URL));
 
     @Test
-    @DisplayName("Using SendRawTransaction to send 100 axc")
+    @DisplayName("Using SendRawTransaction to send 100 axm")
     public void testRawTransaction() throws Exception {
 
-        BigInteger axmMol = new BigInteger("100000000000000000000"); // send 100 axc
+        BigInteger axmMol = new BigInteger("100000000000000000000"); // send 100 axm
         String fromPrivateKey = PRIVATE_KEY;
         String to = ADDRESS_TO;
 
